@@ -14,18 +14,22 @@ cd "C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
 *===============================================================================
 *Recovering the mapping of edlev in the SES
-do "./code/reconstructionEdlev.do"
+do "code/reconstructionEdlev.do"
+
+do "code/saveOccupationCrossWalks.do"
 
 
-do "code/1_handlingLFS/processLFSdatabase.do" `borderDefinition' `borderThreshold' ///
+*Process Labor Force Surveys
+do "code/process_LFS/processLFSdatabase.do" `borderDefinition' `borderThreshold' ///
 	`aggregateSOC' 	`occupation' `educationType' `twoWayBorder' `chosen_def' `fixed_def'
 
 
+
+/*
 *===============================================================================
 *WORKING WITH LFS DATA
 *===============================================================================
 
-*do "./codeFiles/saveOccupationCrossWalks.do"
 
 *do "./codeFiles/checkingCrossWalkConsistency.do"
 
