@@ -42,10 +42,11 @@ di "Appending LFS databases"
 *Then I create the append all the LFS
 do "code/process_LFS/append_LFS.do" edlevLFS 
 
+*I create quick education graphs to evaluate the definitions
+do "code/process_LFS/create_education_graphs.do"
 
-
-do "code/process_LFS/choose_number_ed_levels.do"
-
+*Classifying jobs into jobs that 
+do "code/process_LFS/classify_jobs.do"
 
 /*
 if `aggregateSOC'==1 {
