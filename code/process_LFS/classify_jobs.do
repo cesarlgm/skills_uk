@@ -9,7 +9,7 @@
 *===============================================================================
 set graph on
 local occupation bsoc00Agg
-local definition_list educ_4 educ_3_low  educ_3_mid
+local definition_list educ_4  educ_3_low  educ_3_mid
 local thresh_list   0 //10 20 30 40 These borders do not work. Maybe I should discuss this with Kevin
 grscheme, ncolor(8) style(tableau)
 
@@ -102,6 +102,9 @@ foreach definition in `definition_list' {
 
     generate occ_share=total_occ_employment/total_employment
 
+      
+    do "code/process_LFS/aggregate_occupations.do" `occupation'
+
     save "data/temporary/job_classification_`definition'", replace
 
     
@@ -130,6 +133,28 @@ foreach definition in `definition_list' {
             list `occupation' educ_share* if job_type_`thresh'==`educ' & year==2006
         }
         log close
+
+        foreach thresh in `thresh_list' { 
+             keep if n_educ_`thresh'==1
+            preserve
+            *Some details on the type of jobs
+            collapse (sum) occ_share (count) n_jobs=occ_share, by(year job_type_`thresh' occ_1dig)
+        
+            gegen job_type_share=sum(occ_share),  by(year job_type_`thresh')
+
+            generate type_empshare=occ_share/job_type_share
+
+           
+            levelsof job_type_`thresh'
+            foreach educ in `r(levels)' {
+                graph	bar	type_empshare	if  job_type_`thresh'==`educ', ///
+                    over(occ_1dig)	by(job_type_0)	stack	hor	label ///
+                    title("Education==`educ', `definition'")
+                graph export "results/figures/job_type_composition_`definition'_`thresh'_`educ'.png", replace
+            }
+            restore
+        }
     }
+    
 }
 

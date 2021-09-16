@@ -1,0 +1,77 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/employment_share_corr.txt
+  log type:  text
+ opened on:  10 Sep 2021, 15:05:28
+
+. 
+. di "all years"
+all years
+
+. pwcorr emp_share0-emp_share4
+
+             | emp_sh~0 emp_sh~1 emp_sh~2 emp_sh~3 emp_sh~4
+-------------+---------------------------------------------
+  emp_share0 |   1.0000 
+  emp_share1 |   0.8537   1.0000 
+  emp_share2 |   0.6355   0.8057   1.0000 
+  emp_share3 |   0.4480   0.6262   0.8126   1.0000 
+  emp_share4 |   0.0483   0.1614   0.3121   0.3673   1.0000 
+
+. 
+. foreach year in 2001 2003 2005 2010 2017 { 
+  2.     di "`year'"
+  3.     pwcorr emp_share0-emp_share4 if year==`year'
+  4. }
+2001
+
+             | emp_sh~0 emp_sh~1 emp_sh~2 emp_sh~3 emp_sh~4
+-------------+---------------------------------------------
+  emp_share0 |   1.0000 
+  emp_share1 |   0.7907   1.0000 
+  emp_share2 |   0.5745   0.8402   1.0000 
+  emp_share3 |   0.4384   0.6367   0.7502   1.0000 
+  emp_share4 |   0.0193   0.1634   0.2804   0.3176   1.0000 
+2003
+
+             | emp_sh~0 emp_sh~1 emp_sh~2 emp_sh~3 emp_sh~4
+-------------+---------------------------------------------
+  emp_share0 |   1.0000 
+  emp_share1 |   0.8360   1.0000 
+  emp_share2 |   0.6418   0.8431   1.0000 
+  emp_share3 |   0.4397   0.6383   0.7725   1.0000 
+  emp_share4 |   0.0227   0.1718   0.2784   0.3049   1.0000 
+2005
+
+             | emp_sh~0 emp_sh~1 emp_sh~2 emp_sh~3 emp_sh~4
+-------------+---------------------------------------------
+  emp_share0 |   1.0000 
+  emp_share1 |   0.8533   1.0000 
+  emp_share2 |   0.6358   0.8295   1.0000 
+  emp_share3 |   0.4493   0.6507   0.7902   1.0000 
+  emp_share4 |   0.0371   0.1849   0.2840   0.3391   1.0000 
+2010
+
+             | emp_sh~0 emp_sh~1 emp_sh~2 emp_sh~3 emp_sh~4
+-------------+---------------------------------------------
+  emp_share0 |   1.0000 
+  emp_share1 |   0.8869   1.0000 
+  emp_share2 |   0.6461   0.7895   1.0000 
+  emp_share3 |   0.4620   0.6362   0.8705   1.0000 
+  emp_share4 |   0.0653   0.1838   0.3475   0.4142   1.0000 
+2017
+
+             | emp_sh~0 emp_sh~1 emp_sh~2 emp_sh~3 emp_sh~4
+-------------+---------------------------------------------
+  emp_share0 |   1.0000 
+  emp_share1 |   0.8547   1.0000 
+  emp_share2 |   0.6485   0.7965   1.0000 
+  emp_share3 |   0.4758   0.6541   0.8998   1.0000 
+  emp_share4 |   0.1102   0.2242   0.4333   0.5177   1.0000 
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/employment_share_corr.txt
+  log type:  text
+ closed on:  10 Sep 2021, 15:05:29
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------

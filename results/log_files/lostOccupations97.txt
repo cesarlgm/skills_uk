@@ -1,0 +1,56 @@
+---------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/lo
+> stOccupations97.txt
+  log type:  text
+ opened on:   9 Sep 2021, 10:51:51
+
+. *These are the occupations from 1997 that I am losing
+. table index dataset, c(count gwtall) format(%14.0fc) row
+
+-----------------------------
+             |    Dataset    
+       index |           1997
+-------------+---------------
+In 1997 only |             36
+     In both |          2,431
+             | 
+       Total |          2,467
+-----------------------------
+
+. tab b_soc90 if index==1
+
+ 3-digit soc90; 01 recoded from soc2000 |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                    112 clerks of works |          2        5.56        5.56
+               222 ophthalmic opticians |          1        2.78        8.33
+     240 judges & officers of the court |          1        2.78       11.11
+                      261 town planners |          1        2.78       13.89
+291 other social,behaviourial scientist |          1        2.78       16.67
+  511 boring,drilling machine operators |          2        5.56       22.22
+         542 vehicle body repairers etc |          1        2.78       25.00
+                           551 knitters |          2        5.56       30.56
+                 555 shoe repairers etc |          2        5.56       36.11
+          560 originators & compositors |          5       13.89       50.00
+       811 preparatory fibre processors |          1        2.78       52.78
+                    813 winders,reelers |          1        2.78       55.56
+     822 cutting etc machine operatives |          1        2.78       58.33
+                      831 metal drawers |          1        2.78       61.11
+    833 annealers,hardeners etc (metal) |          2        5.56       66.67
+                 834 electroplaters etc |          3        8.33       75.00
+          843 metal dressing operatives |          3        8.33       83.33
+      883 railway signal etc operatives |          1        2.78       86.11
+                      934 drivers mates |          1        2.78       88.89
+                   950 hospital porters |          2        5.56       94.44
+                                    997 |          1        2.78       97.22
+                                    998 |          1        2.78      100.00
+----------------------------------------+-----------------------------------
+                                  Total |         36      100.00
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/lo
+> stOccupations97.txt
+  log type:  text
+ closed on:   9 Sep 2021, 10:51:52
+---------------------------------------------------------------------------------------------------------------------
