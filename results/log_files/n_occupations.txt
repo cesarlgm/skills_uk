@@ -1,25 +1,25 @@
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- opened on:  20 Sep 2021, 14:20:44
+ opened on:  29 Sep 2021, 16:21:48
 Number of unique values of bsoc00Agg is  235
 Number of records is  20923
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- closed on:  20 Sep 2021, 14:20:44
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  29 Sep 2021, 16:21:48
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- opened on:  20 Sep 2021, 14:20:45
+ opened on:  29 Sep 2021, 16:21:48
 Number of occupations once I limit them to occupations appearing in all years
 Number of unique values of bsoc00Agg is  225
 Number of records is  3825
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- closed on:  20 Sep 2021, 14:20:45
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  29 Sep 2021, 16:21:48
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------

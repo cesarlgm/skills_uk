@@ -1,9 +1,17 @@
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.tx
+> t
   log type:  text
- opened on:  20 Sep 2021, 14:14:31
-Education level 1
+ opened on:  29 Sep 2021, 16:21:48
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.tx
+> t
+  log type:  text
+ opened on:  29 Sep 2021, 16:21:52
+1 2 3 12 13 23
+Job type==1
 
       +---------------------------------------------------------------------------+
       |                                bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
@@ -43,7 +51,7 @@ Education level 1
 3729. |   9243 school crossing patrol attendants    .603503    .396497          0 |
 3814. |   9259 elementary sales occupations nec.   .4979104   .4447168   .0573728 |
       +---------------------------------------------------------------------------+
-Education level 2
+Job type==2
 
       +--------------------------------------------------------------------------------------------------+
       |                                                       bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
@@ -92,7 +100,7 @@ Education level 2
       |--------------------------------------------------------------------------------------------------|
 3712. |                                            9242 traffic wardens          0          1          0 |
       +--------------------------------------------------------------------------------------------------+
-Education level 3
+Job type==3
 
       +-----------------------------------------------------------------------------------------------+
       |                                                    bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
@@ -196,414 +204,114 @@ Education level 3
 2335. |                     5495 goldsmth, slvrsmth, prec stone wrkr   .1600126   .4495442   .3904433 |
 2641. |                     7121 collector salsprsns and cred agents    .070489   .4304666   .4990444 |
       +-----------------------------------------------------------------------------------------------+
+Job type==12
+
+      +--------------------------------------------------------------------------------------------------------+
+      |                                                             bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
+      |--------------------------------------------------------------------------------------------------------|
+ 261. |          1161 Transport, distribution, storage and warehouse managers   .2128362   .5490683   .2380955 |
+ 397. |     1221 Managers and proprietors in hospitality and leisure services   .2059726   .4966042   .2974232 |
+ 448. |                              1234 shopkprs, wholesale & retail dealrs   .2016838   .5707981   .2275181 |
+1893. |                                                     4141 telephonists   .3778796   .5672472   .0548732 |
+1961. |                              5111 Farmers, gardeners and ground women   .3607143   .4909942   .1482915 |
+      |--------------------------------------------------------------------------------------------------------|
+1978. |                               5119 agricult and fishing trades n.e.c.   .2881972   .5188813   .1929215 |
+1995. |                        5213 Metal forming, welding and related trades   .2485834   .7167456    .034671 |
+2131. |                                                  5321 building trades    .283238   .6619819     .05478 |
+2148. |                                                     5412 upholsterers   .3826497   .5814588   .0358915 |
+2199. |                              5419 text, garment & related trades nec.   .1941489    .805851          0 |
+      |--------------------------------------------------------------------------------------------------------|
+2216. |                                                  5421 printing trades   .2549385   .6820918   .0629697 |
+2233. |                                           5431 butchers, meat cutters   .5475351   .4524649          0 |
+2250. |                        5432 chefs, cooks, bakers, flour confectioners   .3926775   .5521798   .0551428 |
+2301. |                                                 5492 Skill trades nec   .2257158   .7157161   .0585682 |
+2369. |                            6111 nursing aux, amb staff, dental nurses   .2207568   .5037985   .2754447 |
+      |--------------------------------------------------------------------------------------------------------|
+2386. | 6114 houseprnts, residential wardens, care assistants and home carers   .2683769   .5999517   .1316714 |
+2437. |         6131 veterinary nurses and assistants, other aniimal care occ   .1910798   .5809053   .2280149 |
+2471. |                                           6215 rail travel assistants   .3058774   .5191438   .1749788 |
+2573. |                                            6292 pest control officers   .4941292   .5058708          0 |
+2590. |                                      7111 sales and retail assistants    .345912   .5478001   .1062879 |
+      |--------------------------------------------------------------------------------------------------------|
+2607. |                              7112 retail cashiers/check-out operators   .4282325   .4986356   .0731319 |
+2709. |                               8112 glass and ceramics process oprties   .3495397   .6093485   .0411118 |
+2743. |                              8114 chem and related process operatives   .2886783    .630824   .0804977 |
+2760. |                                        8115 rubber process operatives   .4335363   .5664638          0 |
+2777. |                                      8116 plastics process operatives   .4682512   .4942935   .0374554 |
+      |--------------------------------------------------------------------------------------------------------|
+2794. |                              8117 mtl mkng & treating procss operatve   .3203115   .6412494   .0384392 |
+2828. |                                        8119 process operatives n.e.c.   .2661985   .6350656    .098736 |
+2845. |                                     8121 Plant and machine operatives   .3911195   .5678729   .0410075 |
+2896. |                                 8132 assemblers (veh and metal goods)   .3658026   .6004851   .0337123 |
+2913. |                                   8133 routine inspectors and testers   .2797168   .5856003   .1346829 |
+      |--------------------------------------------------------------------------------------------------------|
+2947. |                               8135 tyre, exhaust and windscrn fitters   .2810872   .6230132   .0958996 |
+2998. |                              8139 assemblers and routine oprtves nec.   .3560979   .6059346   .0379674 |
+3015. |                                    8141 scaffolders, stagers, riggers   .2721297   .6993526   .0285178 |
+3032. |                             8142 Road and ail construction operatives   .4634545   .4526921   .0838535 |
+3049. |                                   8149 construction operatives n.e.c.   .3634992   .5977852   .0387156 |
+      |--------------------------------------------------------------------------------------------------------|
+3066. |                                      8211 heavy goods vehicle drivers    .514336   .4702022   .0154618 |
+3083. |                                                      8212 van drivers   .4113947   .5324559   .0561494 |
+3100. |                                            8213 bus and coach drivers   .3852642   .5505349   .0642009 |
+3134. |                                         8215 Transport operatives nec   .3312753   .5930449   .0756798 |
+3151. |                                        8216 rail transport operatives   .2776728   .6535742   .0687531 |
+      |--------------------------------------------------------------------------------------------------------|
+3168. |                                         8218 air transport operatives   .3674734    .564948   .0675786 |
+3185. |                                                    8221 crane drivers   .4923304   .5076696          0 |
+3219. |                                   8223 agricultural machinery drivers    .485224    .514776          0 |
+3236. |                              8229 mobile machine drivers & operatives   .5311717   .4566016   .0122267 |
+3253. |                                                     9111 farm workers     .46283   .4753449   .0618251 |
+      |--------------------------------------------------------------------------------------------------------|
+3270. |                                                 9112 forestry workers   .1979208   .5953618   .2067173 |
+3304. |                               9121 labrers build & woodworking trades   .4712681   .4880674   .0406646 |
+3338. |                              9132 indust cleaning process occupations   .4022019   .5229436   .0748545 |
+3355. |                              9133 printing machine minders and assist   .3722709   .5577806   .0699485 |
+3389. |                               9139 labrs process & plant opertns nec.   .4720866   .4559589   .0719545 |
+      |--------------------------------------------------------------------------------------------------------|
+3406. |                                 9141 stevadores, dockers and slingers   .5085797   .4914203          0 |
+3423. |                              9149 oth good hndlng & storage occup nec   .4867347   .4570964   .0561689 |
+3440. |                              9211 post wrkr, mail sort, msngr, courir   .3923844      .5274   .0802156 |
+3457. |                               9219 elementary office occupatns n.e.c.    .273296   .5892584   .1374456 |
+3542. |                                                        9225 bar staff   .3293718   .5085644   .1620639 |
+      |--------------------------------------------------------------------------------------------------------|
+3559. |                                9226 leisure and theme park attendants   .3297056   .4753668   .1949276 |
+3576. |                              9229 elmntry persnal servcs occup n.e.c.   .4379458   .5199339   .0421203 |
+3593. |                                                  9231 window cleaners      .2912      .7088          0 |
+3695. |                              9241 security guards and rel occupations   .3832772   .5455544   .0711684 |
+3746. |                                        9244 school mid-day assistants   .4447402   .4871778    .068082 |
+      |--------------------------------------------------------------------------------------------------------|
+3763. |                                              9245 car park attendants   .2682614   .7317386          0 |
+3780. |                              9249 elementary security occupation nec.   .4005567   .4880952    .111348 |
+3797. |                                                    9251 shelf fillers   .4329647   .4839888   .0830465 |
+      +--------------------------------------------------------------------------------------------------------+
+Job type==13
+Job type==23
+
+      +--------------------------------------------------------------------------------------------------------------+
+      |                                                                   bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
+      |--------------------------------------------------------------------------------------------------------------|
+  74. |                                     1121 prod. works & maintenance managers   .0727363   .4518793   .4753844 |
+ 227. |                           1141 quality assurance and customer care managers   .0536993   .4635054   .4827954 |
+ 244. |                              1151 Financial institution and office managers   .0847601   .5468009   .3684391 |
+ 295. |                                            1172 protective service officers   .0273268   .4980663   .4746069 |
+ 414. |                                                 1226 travel agency managers   .1262598   .4773039   .3964363 |
+      |--------------------------------------------------------------------------------------------------------------|
+ 431. |     1231 Managers And Proprietors In Other Service Industries except retail   .1107722   .4736684   .4155594 |
+1196. |                   3111 laboratory, engineering, and quality assurance tech.   .0860789    .485622   .4282991 |
+1553. |                                         3442 Sports And Fitness Occupations   .0795981   .4666577   .4537441 |
+1604. |                                          3520 legal associate professionals   .0117899    .508981   .4792291 |
+1621. |     3531 Estimators, valuers, assessors, brokers and insurance underwriters   .0637733   .5305598   .4056669 |
+      |--------------------------------------------------------------------------------------------------------------|
+1638. |                       3534 fin., invest, and taxation analysts and advisers   .0423174   .4759687   .4817139 |
+1689. |      3541 sales representatives, marketing profs, estate agents, actioneers    .129261   .4642394   .4064995 |
+1740. | 3561 public service associates, personnel and industrial relations officers   .0626062   .4529928    .484401 |
+1757. |                                    3563 vocatn & indust trainrs & instrctrs   .0706763   .4533189   .4760049 |
+1791. |          3565 inspects fact, utils & trading standards, statutory examiners   .1310912   .4535486   .4153603 |
+      +--------------------------------------------------------------------------------------------------------------+
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.tx
+> t
   log type:  text
- closed on:  20 Sep 2021, 14:14:31
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.txt
-  log type:  text
- opened on:  20 Sep 2021, 14:16:18
-Education level 1
-
-      +---------------------------------------------------------------------------+
-      |                                bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
-      |---------------------------------------------------------------------------|
- 346. |                       1211 farm managers   .2957011   .3949377   .3093612 |
-2165. |          5413 leather and related trades   .7423025   .2576975          0 |
-2267. |       5433 fishmongers, poultry dressers   .6935484    .209253   .0971986 |
-2284. |  5491 glss & cermic mkr, decortr, finshr   .5450106   .2666375   .1883519 |
-2488. | 6219 leisure & travel serv occuptns nec.    .459051   .3607067   .1802423 |
-      |---------------------------------------------------------------------------|
-2522. |   6231 housekprs and related occupations   .5053669   .3816066   .1130265 |
-2539. |                          6232 caretakers    .482814   .4357451   .0814408 |
-2692. |  8111 food, drink & tobac process operat   .5383415   .4244393   .0372192 |
-2726. |          8113 textile process operatives   .5532163   .3956062   .0511775 |
-2811. |                      8118 electroplaters   .8069368   .0978588   .0952044 |
-      |---------------------------------------------------------------------------|
-2879. |    8131 assemblers (electrical products)   .5130519   .4465552    .040393 |
-2930. |          8134 weighers, graders, sorters   .5247881   .3572339   .1179779 |
-2964. |                   8137 sewing machinists   .6015028   .3557334   .0427638 |
-3117. |    8214 taxi, cab drivers and chauffeurs   .4870975    .435145   .0777575 |
-3202. |             8222 fork-lift truck drivers   .5692825   .4006938   .0300237 |
-      |---------------------------------------------------------------------------|
-3287. | 9119 fishng & agric reltd occupatns nec.   .4488216   .3660939   .1850846 |
-3321. |         9129 lab oth const trades n.e.c.    .497975   .4429228   .0591021 |
-3372. | 9134 packers, bottlers, canners, fillers     .65241   .3234811   .0241088 |
-3474. |                    9221 hospital porters   .6334593   .3665407          0 |
-3491. |                       9222 hotel porters   .7191628   .2075867   .0732505 |
-      |---------------------------------------------------------------------------|
-3508. |     9223 kitchen and catering assistants   .5439523    .412204   .0438436 |
-3525. |                  224 waiters, waitresses   .4771408   .3900253   .1328338 |
-3610. |                       9232 road sweepers   .6960561   .3039439          0 |
-3627. |                 9233 cleaners, domestics    .679581   .2967469    .023672 |
-3644. |  9234 launderers, dry cleaners, pressers   .6469266   .3530734          0 |
-      |---------------------------------------------------------------------------|
-3661. |      9235 refuse and salvage occupations   .6429269   .3263134   .0307597 |
-3678. |    9239 elementary cleaning occupns nec.   .7219836   .2780165          0 |
-3729. |   9243 school crossing patrol attendants    .603503    .396497          0 |
-3814. |   9259 elementary sales occupations nec.   .4979104   .4447168   .0573728 |
-      +---------------------------------------------------------------------------+
-Education level 2
-
-      +--------------------------------------------------------------------------------------------------+
-      |                                                       bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
-      |--------------------------------------------------------------------------------------------------|
- 278. |                              1163 retail and wholesale managers    .183551   .5993786   .2170704 |
- 380. |                         1219 mngr anml hsbndry, frst, fish nec.          0   .7372022   .2627978 |
-1213. |                        3112 electrical & electronic technicians   .1078098   .5829443   .3092459 |
-1332. |                                       3216 dispensing opticians   .0739766   .7603801   .1656433 |
-1451. |                          3312 police, fire, and prison officers   .0960406   .6420124    .261947 |
-      |--------------------------------------------------------------------------------------------------|
-1587. |                          3511 Transport Associate Professionals   .1470685   .5563877   .2965438 |
-1655. |                                       3536 importers, exporters   .1437726   .8562273          0 |
-1808. |                      4111 civil service officers and assistants   .0723184   .6327816      .2949 |
-1825. |       4113 local gov clerical offs & assists / officers in NGOs   .0820987   .6178059   .3000954 |
-1842. |        4121 Credit controllers, accnts wages cleark, bookkeeper   .1309206   .6023445   .2667349 |
-      |--------------------------------------------------------------------------------------------------|
-1859. |                                             4123 counter clerks   .1038077   .7620581   .1341342 |
-1876. |                        4131 Administrative occupations: records   .1895254   .5881802   .2222944 |
-1910. |                                    4142 communication operators   .1346589   .6604787   .2048624 |
-1927. |                        4150 general office assistants or clerks   .1782217   .6428206   .1789577 |
-1944. |                        4211 Secretarial and related occupations   .1593234   .6611254   .1795512 |
-      |--------------------------------------------------------------------------------------------------|
-2012. |                                               5216 pipe fitters   .0525732   .8005174   .1469094 |
-2029. |      5221 Metal Machining, Fitting And Instrument Making Trades   .1744822   .6699309   .1555869 |
-2046. |                                             5231 Vehicle trades   .1655084   .7657087   .0687829 |
-2063. |                                          5233 auto electricians          0    .847416    .152584 |
-2080. |                                          5241 Electrical trades   .0987882   .6864882   .2147236 |
-      |--------------------------------------------------------------------------------------------------|
-2097. |                                        5311 Construction trades   .0627193   .9036184   .0336623 |
-2114. |                               5312 bricklayers, masons, roofers   .1795779   .7652487   .0551734 |
-2182. |                                    5414 tailors and dressmakers          0   .6503278   .3496722 |
-2318. |                                    5493 pattern makers (moulds)          0          1          0 |
-2352. |                                 5496 floral arrangers, florists   .0730051    .569468   .3575269 |
-      |--------------------------------------------------------------------------------------------------|
-2403. |                                             6121 nursery nurses     .09438    .667067    .238553 |
-2420. | 6122 childminders, playgroup leaders and educational assistants   .1163762   .6112678    .272356 |
-2454. |                     6211 Leisure And Travel Service Occupations   .1433656   .6277431   .2288914 |
-2505. |                       6221 Hairdressers And Related Occupations   .0896236   .8090548   .1013216 |
-2556. |                        6291 undertakers and mortuary assistants          0   .9207712   .0792288 |
-      |--------------------------------------------------------------------------------------------------|
-2624. |                                     7113 telephone salespersons   .1538506   .6094294     .23672 |
-2658. |                                  7122 Sales related occupations   .1888127   .5901643   .2210229 |
-2675. |                                7211 Customer sevice occupations   .1742818   .6584866   .1672316 |
-2862. |                                    8124 energy plant operatives   .0465678   .6200414   .3333908 |
-2981. |                                 8138 routine laboratory testers   .0841179   .7176917   .1981905 |
-      |--------------------------------------------------------------------------------------------------|
-3712. |                                            9242 traffic wardens          0          1          0 |
-      +--------------------------------------------------------------------------------------------------+
-Education level 3
-
-      +-----------------------------------------------------------------------------------------------+
-      |                                                    bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
-      |-----------------------------------------------------------------------------------------------|
-   6. |                        1111 senior officials in national gov          0   .3281797   .6718203 |
-  23. |                     1112 directors & chief execs of maj orgs   .0924568   .2086044   .6989388 |
-  40. |                           1113 senior officials in local gov   .0404312   .2297631   .7298057 |
-  57. |                       1114 sen. officials spec interest orgs   .0139278   .1928544   .7932177 |
-  91. |             1122 managers in construction, mining and energy   .1070161   .4012758   .4917081 |
-      |-----------------------------------------------------------------------------------------------|
- 108. |                     1131 financial managers & chartered secs   .0850189   .3448793   .5701017 |
- 125. |                            1132 marketing and sales managers   .0704665   .3774156   .5521179 |
- 142. |                                     1133 purchasing managers   .0771027   .3578747   .5650226 |
- 159. |                       1134 advertising & public rel managers   .0497251   .2606043   .6896706 |
- 176. |                          1135 pers training & ind rel mngers   .0308746    .300999   .6681265 |
-      |-----------------------------------------------------------------------------------------------|
- 193. |                     1136 info & communication technol mngers    .043714   .3024791   .6538069 |
- 210. |                       1137 research and development managers   .0201501   .1181658   .8616841 |
- 312. |                  1181 healthcare and social service managers   .0408408   .2199384   .7392208 |
- 329. |                                       1182 pharmacy managers   .0944444   .0815972   .8239583 |
- 363. |                         1212 natural environ & cons managers    .071022    .074817    .854161 |
-      |-----------------------------------------------------------------------------------------------|
- 465. |                      1235 recyc and refuse disposal managers   .0798736   .4350181   .4851083 |
- 482. |                     1239 mngers and prop. in other srvcs nec   .1093476   .4451683   .4454841 |
- 499. |                                                2111 chemists          0   .1058681   .8941319 |
- 516. |                          2112 bio scientists and biochemists   .0718352   .0375336   .8906312 |
- 533. |                     2113 physts, geologists & meteorologists   .1087418   .0265406   .8647177 |
-      |-----------------------------------------------------------------------------------------------|
- 550. | 2121 civil, mechanical, electrical and electronics engineers   .0205204   .2877563   .6917233 |
- 567. |                                      2125 chemical engineers   .1581656          0   .8418344 |
- 584. |   2126 design, development, production and process engineers   .0603752    .323232   .6163928 |
- 601. |                        2129 engineering professionals n.e.c.   .0310821   .3805589    .588359 |
- 618. |                       2131 it strategy and planning prfsnals   .0609078   .2686351   .6704571 |
-      |-----------------------------------------------------------------------------------------------|
- 635. |                                  2132 software professionals   .0712585    .244829   .6839125 |
- 652. |                                   2211 medical practitioners   .0571199   .0161961    .926684 |
- 669. |                                           2212 psychologists          0          0          1 |
- 686. |                           2213 pharmacists & pharmacologists   .0545395   .0730901   .8723704 |
- 703. |                                    2214 ophthalmic opticians          0    .108817    .891183 |
-      |-----------------------------------------------------------------------------------------------|
- 720. |                                    2215 dental practitioners          0          0          1 |
- 737. |                                           2216 veterinarians   .0743415          0   .9256585 |
- 754. |                           2311 higher educ teaching prfsnals   .0334673    .003111   .9634217 |
- 771. |                          2312 further educ teaching prfsnals   .0171002   .0847194   .8981804 |
- 788. |                          2313 educ officers,school inspectrs          0   .1232586   .8767415 |
-      |-----------------------------------------------------------------------------------------------|
- 805. |                      2314 secondary eductn teaching prfsnals   .0070115   .0123508   .9806378 |
- 822. |                       2315 prim & nurs eductn teaching profs   .0100081   .0214051   .9685868 |
- 839. |                          2316 spec needs educ teaching profs   .0098024   .0595455   .9306521 |
- 856. |                      2317 registrs & sen admins ed establish   .1488662   .3939976   .4571362 |
- 873. |                           2319 teaching professionals n.e.c.   .0223542   .0816944   .8959514 |
-      |-----------------------------------------------------------------------------------------------|
- 890. |                                  2321 scientific researchers   .0882726          0   .9117274 |
- 907. |                              2322 social science researchers   .1190098   .0519532    .829037 |
- 924. |                                      2329 researchers n.e.c.   .0433733   .1147554   .8418713 |
- 941. |                      2411 solic & lawyers, judges & coroners   .0253737   .0275622    .947064 |
- 958. |                              2419 legal professionals n.e.c.   .0479604   .1474152   .8046244 |
-      |-----------------------------------------------------------------------------------------------|
- 975. |                     2421 chartered and certified accountants   .0382768   .1784804   .7832428 |
- 992. |                                  2422 management accountants   .0468978   .2559667   .6971354 |
-1009. |                      2423 mngmnt cons, actuar, econs & statn   .0509696   .1977147   .7513157 |
-1026. |                                              2431 architects          0   .0576097   .9423903 |
-1043. |                                           2432 town planners   .0275721   .1097566   .8626712 |
-      |-----------------------------------------------------------------------------------------------|
-1060. |                                      2433 quantity surveyors          0   .2245659   .7754341 |
-1077. |                     2434 chartrd surveyors (not qntity surv)   .0231444   .1783935   .7984621 |
-1094. |                     2441 public service administrative profs   .0242371   .4085191   .5672438 |
-1111. |                                          2442 social workers   .0532216   .1612031   .7855753 |
-1128. |                                      2443 probation officers   .0669923   .0739707    .859037 |
-      |-----------------------------------------------------------------------------------------------|
-1145. |                                                  2444 clergy   .0290101    .135031    .835959 |
-1162. |                                              2451 librarians   .0690481   .1432254   .7877265 |
-1179. |                                 2452 archivists and curators          0   .2162564   .7837436 |
-1230. |                 3121 Draughtspersons And Building Inspectors    .054085   .3949088   .5510063 |
-1247. |                                     3123 building inspectors          0   .2632576   .7367424 |
-      |-----------------------------------------------------------------------------------------------|
-1264. |                                          3131 it technitians   .1102629   .4207975   .4689396 |
-1281. |                                                  3211 nurses   .0538158   .0501862    .895998 |
-1298. |                  3212 healthcare techinitians, except nurses   .0730754   .3786898   .5482348 |
-1315. |                                            3215 chiropodists          0          0          1 |
-1349. |                                        3221 physiotherapists   .0299147   .1025603    .867525 |
-      |-----------------------------------------------------------------------------------------------|
-1366. |                                 3222 occupational therapists   .0658191    .070868   .8633129 |
-1383. |                          3223 speech and language therapists   .0242985   .1475794   .8281221 |
-1400. |                                       3229 therapists n.e.c.    .051329   .1045618   .8441092 |
-1417. |                             3231 youth and community workers   .0835287   .3583856   .5580857 |
-1434. |                            3232 housing and welfare officers   .0925235   .4143237   .4931528 |
-      |-----------------------------------------------------------------------------------------------|
-1468. |                                  3411 artistic professionals   .1103331   .2651296   .6245373 |
-1485. |                                       3421 graphic designers   .0372433   .2509824   .7117743 |
-1502. |                     3422 product, clothing & related dsgners   .0993232   .2416575   .6590194 |
-1519. |                           3431 Media Associate Professionals   .0652507   .2640617   .6706876 |
-1536. |                                          3441 sports players          0   .4311216   .5688784 |
-      |-----------------------------------------------------------------------------------------------|
-1570. |                     3449 sports and fitness occupations nec.          0   .2486752   .7513248 |
-1672. |           3537 finantial and accounting techs, and profs nec   .1065606   .3523736   .5410658 |
-1706. |                     3551 conservat & environ protection offs   .0155675   .2030131   .7814195 |
-1723. |                            3552 countryside and park rangers   .0870198   .3182645   .5947158 |
-1774. |                     3564 car. advis & voction guidnce spcils          0    .255517    .744483 |
-      |-----------------------------------------------------------------------------------------------|
-2335. |                     5495 goldsmth, slvrsmth, prec stone wrkr   .1600126   .4495442   .3904433 |
-2641. |                     7121 collector salsprsns and cred agents    .070489   .4304666   .4990444 |
-      +-----------------------------------------------------------------------------------------------+
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.txt
-  log type:  text
- closed on:  20 Sep 2021, 14:16:18
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.txt
-  log type:  text
- opened on:  20 Sep 2021, 14:20:48
-Education level 1
-
-      +---------------------------------------------------------------------------+
-      |                                bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
-      |---------------------------------------------------------------------------|
- 346. |                       1211 farm managers   .2957011   .3949377   .3093612 |
-2165. |          5413 leather and related trades   .7423025   .2576975          0 |
-2267. |       5433 fishmongers, poultry dressers   .6935484    .209253   .0971986 |
-2284. |  5491 glss & cermic mkr, decortr, finshr   .5450106   .2666375   .1883519 |
-2488. | 6219 leisure & travel serv occuptns nec.    .459051   .3607067   .1802423 |
-      |---------------------------------------------------------------------------|
-2522. |   6231 housekprs and related occupations   .5053669   .3816066   .1130265 |
-2539. |                          6232 caretakers    .482814   .4357451   .0814408 |
-2692. |  8111 food, drink & tobac process operat   .5383415   .4244393   .0372192 |
-2726. |          8113 textile process operatives   .5532163   .3956062   .0511775 |
-2811. |                      8118 electroplaters   .8069368   .0978588   .0952044 |
-      |---------------------------------------------------------------------------|
-2879. |    8131 assemblers (electrical products)   .5130519   .4465552    .040393 |
-2930. |          8134 weighers, graders, sorters   .5247881   .3572339   .1179779 |
-2964. |                   8137 sewing machinists   .6015028   .3557334   .0427638 |
-3117. |    8214 taxi, cab drivers and chauffeurs   .4870975    .435145   .0777575 |
-3202. |             8222 fork-lift truck drivers   .5692825   .4006938   .0300237 |
-      |---------------------------------------------------------------------------|
-3287. | 9119 fishng & agric reltd occupatns nec.   .4488216   .3660939   .1850846 |
-3321. |         9129 lab oth const trades n.e.c.    .497975   .4429228   .0591021 |
-3372. | 9134 packers, bottlers, canners, fillers     .65241   .3234811   .0241088 |
-3474. |                    9221 hospital porters   .6334593   .3665407          0 |
-3491. |                       9222 hotel porters   .7191628   .2075867   .0732505 |
-      |---------------------------------------------------------------------------|
-3508. |     9223 kitchen and catering assistants   .5439523    .412204   .0438436 |
-3525. |                  224 waiters, waitresses   .4771408   .3900253   .1328338 |
-3610. |                       9232 road sweepers   .6960561   .3039439          0 |
-3627. |                 9233 cleaners, domestics    .679581   .2967469    .023672 |
-3644. |  9234 launderers, dry cleaners, pressers   .6469266   .3530734          0 |
-      |---------------------------------------------------------------------------|
-3661. |      9235 refuse and salvage occupations   .6429269   .3263134   .0307597 |
-3678. |    9239 elementary cleaning occupns nec.   .7219836   .2780165          0 |
-3729. |   9243 school crossing patrol attendants    .603503    .396497          0 |
-3814. |   9259 elementary sales occupations nec.   .4979104   .4447168   .0573728 |
-      +---------------------------------------------------------------------------+
-Education level 2
-
-      +--------------------------------------------------------------------------------------------------+
-      |                                                       bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
-      |--------------------------------------------------------------------------------------------------|
- 278. |                              1163 retail and wholesale managers    .183551   .5993786   .2170704 |
- 380. |                         1219 mngr anml hsbndry, frst, fish nec.          0   .7372022   .2627978 |
-1213. |                        3112 electrical & electronic technicians   .1078098   .5829443   .3092459 |
-1332. |                                       3216 dispensing opticians   .0739766   .7603801   .1656433 |
-1451. |                          3312 police, fire, and prison officers   .0960406   .6420124    .261947 |
-      |--------------------------------------------------------------------------------------------------|
-1587. |                          3511 Transport Associate Professionals   .1470685   .5563877   .2965438 |
-1655. |                                       3536 importers, exporters   .1437726   .8562273          0 |
-1808. |                      4111 civil service officers and assistants   .0723184   .6327816      .2949 |
-1825. |       4113 local gov clerical offs & assists / officers in NGOs   .0820987   .6178059   .3000954 |
-1842. |        4121 Credit controllers, accnts wages cleark, bookkeeper   .1309206   .6023445   .2667349 |
-      |--------------------------------------------------------------------------------------------------|
-1859. |                                             4123 counter clerks   .1038077   .7620581   .1341342 |
-1876. |                        4131 Administrative occupations: records   .1895254   .5881802   .2222944 |
-1910. |                                    4142 communication operators   .1346589   .6604787   .2048624 |
-1927. |                        4150 general office assistants or clerks   .1782217   .6428206   .1789577 |
-1944. |                        4211 Secretarial and related occupations   .1593234   .6611254   .1795512 |
-      |--------------------------------------------------------------------------------------------------|
-2012. |                                               5216 pipe fitters   .0525732   .8005174   .1469094 |
-2029. |      5221 Metal Machining, Fitting And Instrument Making Trades   .1744822   .6699309   .1555869 |
-2046. |                                             5231 Vehicle trades   .1655084   .7657087   .0687829 |
-2063. |                                          5233 auto electricians          0    .847416    .152584 |
-2080. |                                          5241 Electrical trades   .0987882   .6864882   .2147236 |
-      |--------------------------------------------------------------------------------------------------|
-2097. |                                        5311 Construction trades   .0627193   .9036184   .0336623 |
-2114. |                               5312 bricklayers, masons, roofers   .1795779   .7652487   .0551734 |
-2182. |                                    5414 tailors and dressmakers          0   .6503278   .3496722 |
-2318. |                                    5493 pattern makers (moulds)          0          1          0 |
-2352. |                                 5496 floral arrangers, florists   .0730051    .569468   .3575269 |
-      |--------------------------------------------------------------------------------------------------|
-2403. |                                             6121 nursery nurses     .09438    .667067    .238553 |
-2420. | 6122 childminders, playgroup leaders and educational assistants   .1163762   .6112678    .272356 |
-2454. |                     6211 Leisure And Travel Service Occupations   .1433656   .6277431   .2288914 |
-2505. |                       6221 Hairdressers And Related Occupations   .0896236   .8090548   .1013216 |
-2556. |                        6291 undertakers and mortuary assistants          0   .9207712   .0792288 |
-      |--------------------------------------------------------------------------------------------------|
-2624. |                                     7113 telephone salespersons   .1538506   .6094294     .23672 |
-2658. |                                  7122 Sales related occupations   .1888127   .5901643   .2210229 |
-2675. |                                7211 Customer sevice occupations   .1742818   .6584866   .1672316 |
-2862. |                                    8124 energy plant operatives   .0465678   .6200414   .3333908 |
-2981. |                                 8138 routine laboratory testers   .0841179   .7176917   .1981905 |
-      |--------------------------------------------------------------------------------------------------|
-3712. |                                            9242 traffic wardens          0          1          0 |
-      +--------------------------------------------------------------------------------------------------+
-Education level 3
-
-      +-----------------------------------------------------------------------------------------------+
-      |                                                    bsoc00Agg   educ_s~1   educ_s~2   educ_s~3 |
-      |-----------------------------------------------------------------------------------------------|
-   6. |                        1111 senior officials in national gov          0   .3281797   .6718203 |
-  23. |                     1112 directors & chief execs of maj orgs   .0924568   .2086044   .6989388 |
-  40. |                           1113 senior officials in local gov   .0404312   .2297631   .7298057 |
-  57. |                       1114 sen. officials spec interest orgs   .0139278   .1928544   .7932177 |
-  91. |             1122 managers in construction, mining and energy   .1070161   .4012758   .4917081 |
-      |-----------------------------------------------------------------------------------------------|
- 108. |                     1131 financial managers & chartered secs   .0850189   .3448793   .5701017 |
- 125. |                            1132 marketing and sales managers   .0704665   .3774156   .5521179 |
- 142. |                                     1133 purchasing managers   .0771027   .3578747   .5650226 |
- 159. |                       1134 advertising & public rel managers   .0497251   .2606043   .6896706 |
- 176. |                          1135 pers training & ind rel mngers   .0308746    .300999   .6681265 |
-      |-----------------------------------------------------------------------------------------------|
- 193. |                     1136 info & communication technol mngers    .043714   .3024791   .6538069 |
- 210. |                       1137 research and development managers   .0201501   .1181658   .8616841 |
- 312. |                  1181 healthcare and social service managers   .0408408   .2199384   .7392208 |
- 329. |                                       1182 pharmacy managers   .0944444   .0815972   .8239583 |
- 363. |                         1212 natural environ & cons managers    .071022    .074817    .854161 |
-      |-----------------------------------------------------------------------------------------------|
- 465. |                      1235 recyc and refuse disposal managers   .0798736   .4350181   .4851083 |
- 482. |                     1239 mngers and prop. in other srvcs nec   .1093476   .4451683   .4454841 |
- 499. |                                                2111 chemists          0   .1058681   .8941319 |
- 516. |                          2112 bio scientists and biochemists   .0718352   .0375336   .8906312 |
- 533. |                     2113 physts, geologists & meteorologists   .1087418   .0265406   .8647177 |
-      |-----------------------------------------------------------------------------------------------|
- 550. | 2121 civil, mechanical, electrical and electronics engineers   .0205204   .2877563   .6917233 |
- 567. |                                      2125 chemical engineers   .1581656          0   .8418344 |
- 584. |   2126 design, development, production and process engineers   .0603752    .323232   .6163928 |
- 601. |                        2129 engineering professionals n.e.c.   .0310821   .3805589    .588359 |
- 618. |                       2131 it strategy and planning prfsnals   .0609078   .2686351   .6704571 |
-      |-----------------------------------------------------------------------------------------------|
- 635. |                                  2132 software professionals   .0712585    .244829   .6839125 |
- 652. |                                   2211 medical practitioners   .0571199   .0161961    .926684 |
- 669. |                                           2212 psychologists          0          0          1 |
- 686. |                           2213 pharmacists & pharmacologists   .0545395   .0730901   .8723704 |
- 703. |                                    2214 ophthalmic opticians          0    .108817    .891183 |
-      |-----------------------------------------------------------------------------------------------|
- 720. |                                    2215 dental practitioners          0          0          1 |
- 737. |                                           2216 veterinarians   .0743415          0   .9256585 |
- 754. |                           2311 higher educ teaching prfsnals   .0334673    .003111   .9634217 |
- 771. |                          2312 further educ teaching prfsnals   .0171002   .0847194   .8981804 |
- 788. |                          2313 educ officers,school inspectrs          0   .1232586   .8767415 |
-      |-----------------------------------------------------------------------------------------------|
- 805. |                      2314 secondary eductn teaching prfsnals   .0070115   .0123508   .9806378 |
- 822. |                       2315 prim & nurs eductn teaching profs   .0100081   .0214051   .9685868 |
- 839. |                          2316 spec needs educ teaching profs   .0098024   .0595455   .9306521 |
- 856. |                      2317 registrs & sen admins ed establish   .1488662   .3939976   .4571362 |
- 873. |                           2319 teaching professionals n.e.c.   .0223542   .0816944   .8959514 |
-      |-----------------------------------------------------------------------------------------------|
- 890. |                                  2321 scientific researchers   .0882726          0   .9117274 |
- 907. |                              2322 social science researchers   .1190098   .0519532    .829037 |
- 924. |                                      2329 researchers n.e.c.   .0433733   .1147554   .8418713 |
- 941. |                      2411 solic & lawyers, judges & coroners   .0253737   .0275622    .947064 |
- 958. |                              2419 legal professionals n.e.c.   .0479604   .1474152   .8046244 |
-      |-----------------------------------------------------------------------------------------------|
- 975. |                     2421 chartered and certified accountants   .0382768   .1784804   .7832428 |
- 992. |                                  2422 management accountants   .0468978   .2559667   .6971354 |
-1009. |                      2423 mngmnt cons, actuar, econs & statn   .0509696   .1977147   .7513157 |
-1026. |                                              2431 architects          0   .0576097   .9423903 |
-1043. |                                           2432 town planners   .0275721   .1097566   .8626712 |
-      |-----------------------------------------------------------------------------------------------|
-1060. |                                      2433 quantity surveyors          0   .2245659   .7754341 |
-1077. |                     2434 chartrd surveyors (not qntity surv)   .0231444   .1783935   .7984621 |
-1094. |                     2441 public service administrative profs   .0242371   .4085191   .5672438 |
-1111. |                                          2442 social workers   .0532216   .1612031   .7855753 |
-1128. |                                      2443 probation officers   .0669923   .0739707    .859037 |
-      |-----------------------------------------------------------------------------------------------|
-1145. |                                                  2444 clergy   .0290101    .135031    .835959 |
-1162. |                                              2451 librarians   .0690481   .1432254   .7877265 |
-1179. |                                 2452 archivists and curators          0   .2162564   .7837436 |
-1230. |                 3121 Draughtspersons And Building Inspectors    .054085   .3949088   .5510063 |
-1247. |                                     3123 building inspectors          0   .2632576   .7367424 |
-      |-----------------------------------------------------------------------------------------------|
-1264. |                                          3131 it technitians   .1102629   .4207975   .4689396 |
-1281. |                                                  3211 nurses   .0538158   .0501862    .895998 |
-1298. |                  3212 healthcare techinitians, except nurses   .0730754   .3786898   .5482348 |
-1315. |                                            3215 chiropodists          0          0          1 |
-1349. |                                        3221 physiotherapists   .0299147   .1025603    .867525 |
-      |-----------------------------------------------------------------------------------------------|
-1366. |                                 3222 occupational therapists   .0658191    .070868   .8633129 |
-1383. |                          3223 speech and language therapists   .0242985   .1475794   .8281221 |
-1400. |                                       3229 therapists n.e.c.    .051329   .1045618   .8441092 |
-1417. |                             3231 youth and community workers   .0835287   .3583856   .5580857 |
-1434. |                            3232 housing and welfare officers   .0925235   .4143237   .4931528 |
-      |-----------------------------------------------------------------------------------------------|
-1468. |                                  3411 artistic professionals   .1103331   .2651296   .6245373 |
-1485. |                                       3421 graphic designers   .0372433   .2509824   .7117743 |
-1502. |                     3422 product, clothing & related dsgners   .0993232   .2416575   .6590194 |
-1519. |                           3431 Media Associate Professionals   .0652507   .2640617   .6706876 |
-1536. |                                          3441 sports players          0   .4311216   .5688784 |
-      |-----------------------------------------------------------------------------------------------|
-1570. |                     3449 sports and fitness occupations nec.          0   .2486752   .7513248 |
-1672. |           3537 finantial and accounting techs, and profs nec   .1065606   .3523736   .5410658 |
-1706. |                     3551 conservat & environ protection offs   .0155675   .2030131   .7814195 |
-1723. |                            3552 countryside and park rangers   .0870198   .3182645   .5947158 |
-1774. |                     3564 car. advis & voction guidnce spcils          0    .255517    .744483 |
-      |-----------------------------------------------------------------------------------------------|
-2335. |                     5495 goldsmth, slvrsmth, prec stone wrkr   .1600126   .4495442   .3904433 |
-2641. |                     7121 collector salsprsns and cred agents    .070489   .4304666   .4990444 |
-      +-----------------------------------------------------------------------------------------------+
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_job_type_0.txt
-  log type:  text
- closed on:  20 Sep 2021, 14:20:48
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  29 Sep 2021, 16:21:52
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------

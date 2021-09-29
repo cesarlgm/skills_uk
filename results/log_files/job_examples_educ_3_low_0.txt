@@ -1,8 +1,8 @@
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_0.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_0.txt
   log type:  text
- opened on:  20 Sep 2021, 14:20:17
+ opened on:  29 Sep 2021, 16:21:24
 Population shares in 2006
 
 ---------------------------------
@@ -13,7 +13,7 @@ A* level / trade |         .22465
       Bachelor + |       .3582544
 ---------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_0.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_0.txt
   log type:  text
- closed on:  20 Sep 2021, 14:20:17
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  29 Sep 2021, 16:21:24
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------

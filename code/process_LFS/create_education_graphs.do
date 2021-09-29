@@ -5,11 +5,11 @@ local legend_educ_4 legend(order(1 "GCSE D-" 2 "GCSE A-C" ///
         3 "A* level" 4 "Bachelor +") pos(6))
 
 
-local legend_educ_3_low legend(order(1 "GCSE C-" 2  "A* level" 3 "Bachelor +") pos(6))
+local legend_educ_3_low legend(order(2 "GCSE C-" 3  "A* level" 4 "Bachelor +") pos(6))
 
 
-local legend_educ_3_mid legend(order(1  "GCSE D-" 2 "GCSE A-A*" ///
-        3 "Bachelor +") pos(6))
+local legend_educ_3_mid legend(order(2  "GCSE D-" 3 "GCSE A-A*" ///
+        4 "Bachelor +") pos(6))
 
 
 set graphics on 
@@ -34,21 +34,21 @@ foreach variable in `education_list' {
 
 
         local y_var l_hourpay
-        tw  (line `y_var'  year if edlev==0) ///
-            (line `y_var'  year if edlev==1) ///
-            (line `y_var'  year if edlev==2) ///
-            (line `y_var'  year if edlev==3) ///
-            (line `y_var'  year if edlev==4) if year>2001, ///
+        tw  (line `y_var'  year if `variable'==0) ///
+            (line `y_var'  year if `variable'==1) ///
+            (line `y_var'  year if `variable'==2) ///
+            (line `y_var'  year if `variable'==3) ///
+            (line `y_var'  year if `variable'==4) if year>2001, ///
             `legend_`variable''
         graph export "results/figures/average_wages_by_education_`variable'.png", replace
 
         
         local y_var emp_share
-        tw  (line `y_var'  year if edlev==0) ///
-            (line `y_var'  year if edlev==1) ///
-            (line `y_var'  year if edlev==2) ///
-            (line `y_var'  year if edlev==3) ///
-            (line `y_var'  year if edlev==4) if year>2001, ///
+        tw  (line `y_var'  year if `variable'==0) ///
+            (line `y_var'  year if `variable'==1) ///
+            (line `y_var'  year if `variable'==2) ///
+            (line `y_var'  year if `variable'==3) ///
+            (line `y_var'  year if `variable'==4) if year>2001, ///
             `legend_`variable''
         graph export "results/figures/emp_share_by_education_`variable'.png", replace
     restore
@@ -94,4 +94,5 @@ foreach year in 2001 2003 2005 2010 2017 {
 log close
 
 *I am inclined to keep A*, the bottom three and bachelor+
+
 

@@ -1,0 +1,58 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skills_available.txt
+  log type:  text
+ opened on:  29 Sep 2021, 15:44:31
+
+. descr bchoice-cstats
+
+              storage   display    value
+variable name   type    format     label      variable label
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+bchoice         float   %11.0g     bchoice    how much choice have over way in which do job
+brepeat         byte    %8.0g      brepeat    how often work involves short repetitive tasks
+bvariety        byte    %8.0g      bvariety   how much variety in job
+bme1            float   %11.0g     bme1       influence personally have on: how hard work
+bme2            float   %11.0g     bme2       influence personally have on: what tasks to do
+bme3            float   %11.0g     bme3       influence personally have on: how to do the task
+bme4            float   %11.0g     bme4       influence personally have on: quality standards work to
+cpeople         byte    %10.0g     cpeople    importance of: dealing with people
+cteach          byte    %10.0g     cteach     importance of: teaching people (individuals or groups)
+cspeech         byte    %10.0g     cspeech    importance of: making speeches/ presentations
+cpersuad        byte    %10.0g     cpersuad   importance of: persuading or influencing others
+cselling        byte    %10.0g     cselling   importance of: selling a product or service
+ccaring         byte    %10.0g     ccaring    importance of: counselling, advising or caring for customers or clients
+cteamwk         byte    %10.0g     cteamwk    importance of: working with a team
+clisten         byte    %10.0g     clisten    importance of: listening carefully to colleagues
+cstrengt        byte    %10.0g     cstrengt   importance of: physical strength
+cstamina        byte    %10.0g     cstamina   importance of: physical stamina
+chands          byte    %10.0g     chands     importance of: skill or accuracy in using hands/fingers
+ctools          byte    %10.0g     ctools     importance of: knowledge of use or operation of tools
+cproduct        byte    %10.0g     cproduct   importance of: knowledge of particular products or services
+cspecial        byte    %10.0g     cspecial   importance of: specialist knowledge or understanding
+corgwork        byte    %10.0g     corgwork   importance of: knowledge of how organisation works
+cusepc          byte    %10.0g     cusepc     importance of: using a computer/ pc/ other computerised equipment
+cfaults         byte    %10.0g     cfaults    importance of: spotting problems or faults
+ccause          byte    %10.0g     ccause     importance of: working out cause of problems/ faults
+csolutn         byte    %10.0g     csolutn    importance of: thinking of solutions to problems
+canalyse        byte    %10.0g     canalyse   importance of: analysing complex problems in depth
+cplanme         byte    %8.0g      cplanme    Importance of planning own act, bigger=less routine
+cplanoth        byte    %8.0g      cplanoth   importance of: planning the activities of others
+cmytime         byte    %8.0g      cmytime    importance of: organising own time
+cahead          byte    %8.0g      cahead     importance of: thinking ahead
+cread           byte    %10.0g     cread      importance of: reading written information (eg. forms, notices, signs)
+cshort          byte    %10.0g     cshort     importance of: reading short documents
+clong           byte    %10.0g     clong      importance of: reading long documents
+cwrite          byte    %10.0g     cwrite     importance of: writing materials such as forms, notices or signs
+cwritesh        byte    %10.0g     cwritesh   importance of: writing short documents
+cwritelg        byte    %10.0g     cwritelg   importance of: writing long documents
+ccalca          byte    %10.0g     ccalca     importance of: arithmetic (adding, subtracting, multiplying, dividing) (using ca
+cpercent        byte    %10.0g     cpercent   importance of: arithmetic involving fractions (decimals, percentages, fractions)
+cstats          byte    %10.0g     cstats     importance of: advanced mathematics/ statistics (using calculator/ computer if n
+
+. log close
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skills_available.txt
+  log type:  text
+ closed on:  29 Sep 2021, 15:44:31
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------

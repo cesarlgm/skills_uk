@@ -132,6 +132,9 @@ foreach definition in `definition_list' {
     *I output some necessary graphs
     foreach thresh in `thresh_list' { 
         foreach classf in job_type_`thresh' ref_job_type`thresh' {
+            cap log close
+            log using "results/log_files/job_examples_`definition'_`classf'.txt", text replace
+            cap log close
             preserve
                 keep if `classf'<10
                 collapse (sum) occ_share (count) n_jobs=occ_share, by(year `classf')
@@ -164,9 +167,10 @@ foreach definition in `definition_list' {
             *export example of jobs by type
             cap log close
             log using "results/log_files/job_examples_`definition'_`classf'.txt", text append
-            forvalues educ=1/`n_educ' {
-                di "Education level `educ'"
-                list `occupation' educ_share* if `classf'==`educ' & year==2006
+            levelsof `classf'
+            foreach jobtype in `r(levels)' {
+                di "Job type==`jobtype'"
+                list `occupation' educ_share* if `classf'==`jobtype' & year==2006
             }
             log close
             }

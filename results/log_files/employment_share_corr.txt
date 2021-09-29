@@ -1,8 +1,8 @@
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/employment_share_corr.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/employment_share_corr.txt
   log type:  text
- opened on:  10 Sep 2021, 15:05:28
+ opened on:  29 Sep 2021, 11:24:09
 
 . 
 . di "all years"
@@ -13,10 +13,10 @@ all years
              | emp_sh~0 emp_sh~1 emp_sh~2 emp_sh~3 emp_sh~4
 -------------+---------------------------------------------
   emp_share0 |   1.0000 
-  emp_share1 |   0.8537   1.0000 
-  emp_share2 |   0.6355   0.8057   1.0000 
-  emp_share3 |   0.4480   0.6262   0.8126   1.0000 
-  emp_share4 |   0.0483   0.1614   0.3121   0.3673   1.0000 
+  emp_share1 |   0.8280   1.0000 
+  emp_share2 |   0.5942   0.8010   1.0000 
+  emp_share3 |   0.4126   0.6122   0.8069   1.0000 
+  emp_share4 |   0.0245   0.1408   0.3095   0.3753   1.0000 
 
 . 
 . foreach year in 2001 2003 2005 2010 2017 { 
@@ -71,7 +71,7 @@ all years
 
 . log close
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/employment_share_corr.txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/employment_share_corr.txt
   log type:  text
- closed on:  10 Sep 2021, 15:05:29
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  29 Sep 2021, 11:24:09
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
