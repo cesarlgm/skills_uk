@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_use_education.txt
+  log type:  text
+ opened on:  11 Oct 2021, 18:49:38
+
+. 
+. *Average skill use by education, all years
+. 
+. table educ_3_low [fw=gwtall], c(mean abstract mean social mean routine   mean manual) format(%9.2fc)
+
+---------------------------------------------------------------------------------
+      educ_3_low | mean(abstract)    mean(social)   mean(routine)    mean(manual)
+-----------------+---------------------------------------------------------------
+         GCSE C- |          -0.35           -0.31            0.16            0.29
+A* level / trade |          -0.04           -0.08            0.06            0.16
+      Bachelor + |           0.44            0.45           -0.08           -0.37
+---------------------------------------------------------------------------------
+
+. 
+. table educ_3_mid [fw=gwtall], c(mean abstract mean social mean routine   mean manual)  format(%9.2fc)
+
+--------------------------------------------------------------------------------
+     educ_3_mid | mean(abstract)    mean(social)   mean(routine)    mean(manual)
+----------------+---------------------------------------------------------------
+        GCSE G- |          -0.48           -0.41            0.20            0.49
+GCSE A-A* level |          -0.13           -0.15            0.09            0.14
+     Bachelor + |           0.44            0.45           -0.08           -0.37
+--------------------------------------------------------------------------------
+
+. 
+. log close
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_use_education.txt
+  log type:  text
+ closed on:  11 Oct 2021, 18:49:38
+---------------------------------------------------------------------------------------------------------------------------------------------------------------

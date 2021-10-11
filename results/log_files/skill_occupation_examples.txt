@@ -1,0 +1,165 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_occupation_examples.txt
+  log type:  text
+ opened on:  11 Oct 2021, 18:49:39
+
+. foreach index in `index_list' {
+  2.         gsort -`index'
+  3.         di "Occupations at the top of `index'"
+  4.         list bsoc00Agg if inrange(_n,1,10)
+  5. 
+.         di "Occupations at the bottom of `index'"
+  6.         list bsoc00Agg if inrange(_n,_N-10,_N)  
+  7. }
+Occupations at the top of abstract
+
+     +--------------------------------------------------------------+
+     |                                                    bsoc00Agg |
+     |--------------------------------------------------------------|
+  1. |                                  2321 scientific researchers |
+  2. |                     1112 directors & chief execs of maj orgs |
+  3. |                     2421 chartered and certified accountants |
+  4. |                       1114 sen. officials spec interest orgs |
+  5. |                     2434 chartrd surveyors (not qntity surv) |
+     |--------------------------------------------------------------|
+  6. | 2121 civil, mechanical, electrical and electronics engineers |
+  7. |                                     1133 purchasing managers |
+  8. |                      2423 mngmnt cons, actuar, econs & statn |
+  9. |                     1131 financial managers & chartered secs |
+ 10. |                                                2111 chemists |
+     +--------------------------------------------------------------+
+Occupations at the bottom of abstract
+
+     +------------------------------------------+
+     |                                bsoc00Agg |
+     |------------------------------------------|
+146. |  9234 launderers, dry cleaners, pressers |
+147. | 8229 mobile machine drivers & operatives |
+148. |  9139 labrs process & plant opertns nec. |
+149. |                     9231 window cleaners |
+150. |                         8212 van drivers |
+     |------------------------------------------|
+151. |               8213 bus and coach drivers |
+152. | 9211 post wrkr, mail sort, msngr, courir |
+153. |                       9251 shelf fillers |
+154. |           9244 school mid-day assistants |
+155. |   9259 elementary sales occupations nec. |
+     |------------------------------------------|
+156. |                 9233 cleaners, domestics |
+     +------------------------------------------+
+Occupations at the top of social
+
+     +------------------------------------------+
+     |                                bsoc00Agg |
+     |------------------------------------------|
+  1. |                              2444 clergy |
+  2. |  2314 secondary eductn teaching prfsnals |
+  3. |      2312 further educ teaching prfsnals |
+  4. |       2311 higher educ teaching prfsnals |
+  5. | 1112 directors & chief execs of maj orgs |
+     |------------------------------------------|
+  6. | 3563 vocatn & indust trainrs & instrctrs |
+  7. | 3564 car. advis & voction guidnce spcils |
+  8. |      1135 pers training & ind rel mngers |
+  9. |      3442 Sports And Fitness Occupations |
+ 10. |      2313 educ officers,school inspectrs |
+     +------------------------------------------+
+Occupations at the bottom of social
+
+     +------------------------------------------+
+     |                                bsoc00Agg |
+     |------------------------------------------|
+146. |                        9111 farm workers |
+147. |         8116 plastics process operatives |
+148. |         8211 heavy goods vehicle drivers |
+149. |                     5421 printing trades |
+150. |   6231 housekprs and related occupations |
+     |------------------------------------------|
+151. |    8214 taxi, cab drivers and chauffeurs |
+152. |                    5492 Skill trades nec |
+153. |                         8212 van drivers |
+154. |  9234 launderers, dry cleaners, pressers |
+155. |                 9233 cleaners, domestics |
+     |------------------------------------------|
+156. | 8229 mobile machine drivers & operatives |
+     +------------------------------------------+
+Occupations at the top of routine
+
+     +------------------------------------------+
+     |                                bsoc00Agg |
+     |------------------------------------------|
+  1. | 9211 post wrkr, mail sort, msngr, courir |
+  2. |    8132 assemblers (veh and metal goods) |
+  3. |                       9251 shelf fillers |
+  4. | 8139 assemblers and routine oprtves nec. |
+  5. | 9134 packers, bottlers, canners, fillers |
+     |------------------------------------------|
+  6. |                  224 waiters, waitresses |
+  7. |   9259 elementary sales occupations nec. |
+  8. |               8213 bus and coach drivers |
+  9. |      8133 routine inspectors and testers |
+ 10. |                     9231 window cleaners |
+     +------------------------------------------+
+Occupations at the bottom of routine
+
+     +-------------------------------------------+
+     |                                 bsoc00Agg |
+     |-------------------------------------------|
+146. |  8229 mobile machine drivers & operatives |
+147. |    2131 it strategy and planning prfsnals |
+148. | 6221 Hairdressers And Related Occupations |
+149. |                         5412 upholsterers |
+150. |  2113 physts, geologists & meteorologists |
+     |-------------------------------------------|
+151. |              3222 occupational therapists |
+152. |                               2444 clergy |
+153. |  3551 conservat & environ protection offs |
+154. |       3223 speech and language therapists |
+155. |                           2431 architects |
+     |-------------------------------------------|
+156. |                        2216 veterinarians |
+     +-------------------------------------------+
+Occupations at the top of manual
+
+     +------------------------------------------------+
+     |                                      bsoc00Agg |
+     |------------------------------------------------|
+  1. |        5119 agricult and fishing trades n.e.c. |
+  2. |                           5321 building trades |
+  3. |                             1211 farm managers |
+  4. |        9121 labrers build & woodworking trades |
+  5. |              5312 bricklayers, masons, roofers |
+     |------------------------------------------------|
+  6. |                           9231 window cleaners |
+  7. |       5111 Farmers, gardeners and ground women |
+  8. |                    5431 butchers, meat cutters |
+  9. |                            5231 Vehicle trades |
+ 10. | 5213 Metal forming, welding and related trades |
+     +------------------------------------------------+
+Occupations at the bottom of manual
+
+     +-----------------------------------------------------------------------------+
+     |                                                                   bsoc00Agg |
+     |-----------------------------------------------------------------------------|
+146. |                                      1134 advertising & public rel managers |
+147. |                                    3551 conservat & environ protection offs |
+148. |                                         1135 pers training & ind rel mngers |
+149. |                                                     2329 researchers n.e.c. |
+150. |                                     2411 solic & lawyers, judges & coroners |
+     |-----------------------------------------------------------------------------|
+151. | 3561 public service associates, personnel and industrial relations officers |
+152. |                       3534 fin., invest, and taxation analysts and advisers |
+153. |                                          3520 legal associate professionals |
+154. |                                                     2433 quantity surveyors |
+155. |                                     2423 mngmnt cons, actuar, econs & statn |
+     |-----------------------------------------------------------------------------|
+156. |                                    2441 public service administrative profs |
+     +-----------------------------------------------------------------------------+
+
+. log close 
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_occupation_examples.txt
+  log type:  text
+ closed on:  11 Oct 2021, 18:49:39
+---------------------------------------------------------------------------------------------------------------------------------------------------------------

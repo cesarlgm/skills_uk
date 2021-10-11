@@ -1,14 +1,14 @@
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skills_available.txt
   log type:  text
- opened on:  29 Sep 2021, 15:44:31
+ opened on:  11 Oct 2021, 16:48:47
 
 . descr bchoice-cstats
 
               storage   display    value
 variable name   type    format     label      variable label
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 bchoice         float   %11.0g     bchoice    how much choice have over way in which do job
 brepeat         byte    %8.0g      brepeat    how often work involves short repetitive tasks
 bvariety        byte    %8.0g      bvariety   how much variety in job
@@ -54,5 +54,5 @@ cstats          byte    %10.0g     cstats     importance of: advanced mathematic
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skills_available.txt
   log type:  text
- closed on:  29 Sep 2021, 15:44:31
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  11 Oct 2021, 16:48:47
+---------------------------------------------------------------------------------------------------------------------------------------------------------------

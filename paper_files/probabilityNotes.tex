@@ -1,0 +1,51 @@
+%probability computation notes
+
+\section{Notes on probability computation}
+
+Under the assumption of known covariance matrix the likelihood of the employment share is:
+\beqn
+	\mathbf{s}|y\sim N\left(\bar{\mathbf{s}},\frac{1}{N}\Sigma\right)	
+\eeqn
+where the mean and variance parameters are occupation-specific. Let's denote by $\bar s$ the population-level employment shares. Then for each job I compute the probability of belonging to any of the six possible categories.
+
+\beqns
+	Pr(border_{ij})&=&Pr(s_i\geq\underline{s}_i,s_j\geq\underline{s}_j)\\
+	&=&1+\Phi_y(\underline s_i,\underline s_j)-\Phi_y(1,\underline s_j)-\Phi_y(\underline s_i,1)\\
+	Pr(type_{1})&=&Pr(s_1\geq\underline{s}_1,s_2\leq\underline{s}_2,1-\underline s_3\leq s_1+s_2)\\
+	&=&1+\Phi_y(\underline s_i,\underline s_j)-\Phi_y(1,\underline s_j)-\Phi_y(\underline s_i,1)\\
+	&=&1-\Phi_y(1,\underline s_2,\underline s_3)-\Phi_y(\underline s_1,\underline s_2,1)+\Phi_y(\underline s_1,\underline s_2,\underline s_3)
+\eeqns
+I assume sigma to be the appropriate sample analog of 
+\beqn
+\left(\begin{array}{ccc}
+	\sigma_1^2 & \sigma_{12}&\sigma_{1}^2+\sigma_{12}\\
+	& \sigma_{2}^2&\sigma_{2}^2+\sigma_{12}\\
+	&&\sigma_{1}^2+\sigma_{2}^2+2\sigma_{12}
+\end{array}\right)
+\eeqn
+which admittedly might be wrong, but this is a first pass. Note that:
+\beqn
+	\sigma_{ij}=-p_ip_j
+\eeqn
+
+
+
+%
+%I just construct a Bayesian posterior using a non-informative priors. Let's first define $X^o_j$ as the number of workers with education level $j$ working in occupation $o$. Then in a sample of size $n$ we have:
+%\beqn
+%	f(X_1,X_2,X_3)&=&\frac{n!}{n_1!n_2!n_3!}p_1^{X_1}p_2^{X_2}p_3^{X_3}
+%\eeqn
+%under a non-informative prior, the posterior distribution is given by:
+%\beqn
+%	f(\mathbf{p})\propto p_1^{X_1}p_2^{X_2}(1-p_1-p_2)^{n-X_1-X_2}
+%\eeqn
+%which is a Dirichlet distribution: $D(X_1+1,X_2+1,n-X_1-X_2+1)$. Given this 
+%
+%
+%
+%
+%Let $d_{ijo}$ be a dummy equal to 1 if the education level of the worker in occupation $o$ is $j$. From the CLT we have that:
+%\begin{eqnarray}
+%	\hat{\mathbf{s}}_o\sim N\left(\mathbf{s}_o,\frac{1}{N}\Sigma_o\right)
+%\end{eqnarray}
+%where $\mathbf{s}$ is the vector of educational employment shares in occupation $o$. I approximate that distribution with $N\left(\mathbf{\hat{s}}_o,\frac{1}{N}\hat{\Sigma}_o\right)$. With this distribution I compute the probability that the jobs falls in any of the six possible job categories.

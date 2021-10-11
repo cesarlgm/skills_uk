@@ -1,0 +1,201 @@
+\documentclass[a4paper, 12pt]{article}
+\input{commandspreamble.tex}
+\usepackage{tabularx}
+
+\begin{document}
+
+\section{Sample}
+I am restricting the sample to people:
+\bitem
+	\item Aged 20-60.
+	\item Not in the armed forces.
+	\item With non-missing occupation.
+	\item Non-missing educational level.
+	\item At least one year of work after leaving full-time education.
+\eitem
+
+\section{Occupation cross-walks}
+\bitem
+	\item The occupation classification of the LFS changes every ten years.
+	\item The new version of the SES/LFS provides cross-walks between the 90s - 00s - 10s classification, but the mapping is not 1-1 (e.g. some 90s codes are mapped into more than one 00s code). I address this issue as follows:
+	\item \textbf{90s-00s}
+	\bitem
+		\item There is no cross walk available directly from the LFS. However the SES classifies observations into both the 90s and the 00s classifications.
+		\item I use the SES to construct the mapping.
+		\item \textbf{Issues}
+		\bitem
+			\item It matters at which year I look at. If I observe the SES 1997, all soc90 map into an unique soc00 category.
+			\item However, when I look at 2001 the mapping is no longer unique.
+			\item There are \textbf{more} soc90 codes in SES 2001 than in SES 1997.
+		\eitem
+		\item For now, I am using the SES 2001 to build the mapping. Main concerns with this:
+		\bitem
+			\item I am losing 22 jobs that were available in SES 1997.
+			\item Small sample might be an issue. The main question here is: would the weights be ok?
+			\item The SES 2001 gives 577 soc90-soc00 links. 31\% of those links have only 1 observation in them.
+			\item 190 bsoc90 codes map uniquely into \href{https://www.dropbox.com/s/9a6xgrs32jsneuw/soc90count.txt?dl=0}{bsoc00}.
+		\eitem
+	\eitem
+	\item \textbf{10s-00s}
+	\bitem
+		\item The cross walk is directly provided in the LFS.
+	\eitem
+\eitem
+
+%\section{Regarding weighting}
+
+%\bitem
+%\item The dataset comes with sampling weights.
+%\item According to the documentation the weights apply to people aged 20-60 years old. Even within this sample some observations in 2006 and 2012 have missing weights. The documentation does not say why this could happen. 
+%\item Without weighting, the dataset has too few mean and young people.
+%\item For now, all results are weighted. 
+%
+%\begin{table} [h!]
+%	\centering
+%	\caption{Share with missing weights}
+%	\input{../output/shareMissingWeightsFinal.tex}
+%\end{table}
+%
+%
+%
+%\input{../output/weightedSampleTable2012Final.tex}
+%
+%
+%\input{../output/summaryMissing.tex}
+%
+%
+%\section{Occupations to keep}
+%\item Not all occupations appear in all years. It's unclear to me if this is a result of new jobs appearing, or whether this is a result of people in this occupations not being sampled.
+%\item For now I restrict everything to occupations appearing in all waves.
+%
+%\begin{table}[h!]
+%	\caption{Occupation counts}
+%	\centering\input{../output/empShareCoverageFinal.tex}
+%\end{table}
+%\eitem
+\section{Definition of education}
+\subsection{Survey of skills and employment}
+\bitem
+\item I am using the variable \texttt{edlev} for the education definition.
+\item This variable:
+\bitem
+	\item Is the only variable describing education that is available in \textbf{all} years of the wave.
+	\item It harmonizes the complicated UK educational classification into roughly comparable qualifications.
+\eitem
+\item I recover the mapping of uk qualifications into NQF levels. The levels roughly correspond to:
+\bitem
+	\item \textbf{Level 4+}: professional degree, bachelor's degree or more.
+	\item \textbf{Level 3}: GCE A$^*$ levels / trade apprenticeship.
+	\item \textbf{Level 2}: GCSE A levels.
+	\item \textbf{Level 1}: GCSE D-G levels.
+	\item \textbf{Level 0}: no qualification.
+\eitem
+\item The recovered mapping classifies correctly all \href{https://www.dropbox.com/s/jnzx818eogoiepc/educationMapping.txt?dl=0}{but 9 observations (out of 6481)}. The incorrectly classified observations probably stem from changes in the way that the ``other" category was classified.
+\item The detailed mapping can be found \href{https://www.dropbox.com/s/5cutdsc5n23vqdk/educationMapping.xlsx?dl=0}{here}.
+\eitem
+
+\subsection{Labor Force Survey}
+\bitem
+	\item I try to reproduce the educational classification of the SES into the LFS.
+	\item I match any ``new'' categories using the classification provided in the LFS 2017 documentation. See page 107 in this \href{https://www.dropbox.com/s/zk285nssot3z5dw/lfs_user_guide_vol5_classifications2009.pdf?dl=0}{pdf} 
+	\item The detailed mapping can be found in the LFS sheet in this \href{https://www.dropbox.com/s/5cutdsc5n23vqdk/educationMapping.xlsx?dl=0}{document}
+\eitem 	
+
+\subsection{Grouping educational levels}
+\bitem
+\item I group education levels by looking at how similar the occupational distribution between them.
+\item I do this by examining:
+\bitem
+	\item Correlation of the employment distribution across skills.
+	\item Computing the pairwise Welch indexes:
+	\begin{align*}
+		G_{kl}&=\frac{\sum_o(q_{ko}-\bar{q}_{o})(q_{lo}-\bar{q}_{c})/\bar{q_o}}{\sqrt{(\sum_o(q_{ko}-\bar{q}_o)^2/\bar{q}_o)(\sum_o(q_{lo}-\bar{q}_o)^2/\bar{q}_o)}}
+	\end{align*}
+\eitem
+\item The overall pattern is:
+\bitem
+	\item No qualification and GCSE D-G are pretty similar and they become more similar across time.
+	\item Bachelor + is an independent category in its own right.
+	\item	What to do with GCSE A-C and GCE A* is less clear. 
+	\bitem
+		\item GCSE A-C appears to be closer to No qualification and  GCSE D-G than to GCE A*.
+	\eitem
+\eitem
+ \item At this point I do the grouping as follows:
+ \bitem 
+ 	\item Low education: no qualification,  GCSE D-G, and  GCSE A-C.
+ 	\item Medium education:  GCSE A*.
+ 	\item High education: Bachelor +.
+\eitem
+
+\input{../output/welchTableWeighted.tex}
+\input{../output/corrTableWeighted.tex}
+\input{../output/edlevPopCount.tex}
+\eitem
+\section{Boundary jobs}
+	Let $s_{j}(o), j\in\{H,M,L\}$ denote the employment share of education level $j$ in occupation $o$. Denote as $p_i(o)$ the i-th employment share in occupation $o$, thus $p_1(o)=s_{H}(o)$ if high-education workers represent the largest share of employment in occupation $o$.
+\bitem
+	\item \textbf{Definition 1:} $o\in B_1$ iff:
+	\beqns
+	p_1(o)\leq R
+	\eeqns
+	\item \textbf{Definition 1:} $o\in B_2$ iff:
+	\beqns
+	\frac{p_1(o)}{p_1(o)+p_2(o)}\leq R
+	\eeqns
+	\item \textbf{Definition 3}: $o\in B_3$ iff:
+	\beqns
+		p_1(o)-p_2(o)\leq R-0.5
+	\eeqns
+	\item For any $R$, $B_3\subset B_2\subset B_1$
+\eitem
+
+\begin{figure}[h!]
+	\centering
+	\caption{Border under alternative definitions}
+	\subfloat[Definition 1:]{\includegraphics[width=.5\textwidth]{../output/absoluteFrontierDrawing}}
+	\subfloat[Definition 2:]{\includegraphics[width=.5\textwidth]{../output/relativeFrontierDrawing}}\\
+	\subfloat[Definition 3:]{\includegraphics[width=.5\textwidth]{../output/parallelFrontierDrawing}}
+\end{figure}
+\newpage
+\begin{figure}
+	\centering
+	\caption{Job classification under different boundary definitions  ($R=60\%$)}
+	\subfloat[Definition 1]{\includegraphics[width=.6\textwidth]{../output/lfsBoundary160}}\\
+	\subfloat[Definition 2]{\includegraphics[width=.6\textwidth]{../output/lfsBoundary260}}\\
+	\subfloat[Definition 3]{\includegraphics[width=.6\textwidth]{../output/lfsBoundary360}}
+\end{figure}
+\newpage 
+
+\input{../output/shareBoundaryJobs1.tex}
+\input{../output/shareBoundaryJobs2.tex}
+\input{../output/shareBoundaryJobs3.tex}
+
+\subsection{Jobs by education-pair border}	
+\input{../output/boundaryTypeCounts1.tex}
+\input{../output/boundaryTypeCounts2.tex}
+\input{../output/boundaryTypeCounts3.tex}
+
+\subsection{Time in the border}
+\input{../output/yearsBorder1.tex}
+\input{../output/yearsBorder2.tex}
+\input{../output/yearsBorder3.tex}
+
+\subsection{Border jobs examples}
+\input{../output/borderExamples1.tex}
+\input{../output/borderExamples2.tex}
+\input{../output/borderExamples3.tex}
+
+\section{Going back to SES}
+\bitem
+	\item I have 192 out of 332 occupations which I can track throughout the whole period.
+	\item Occupations appearing only 4 times across the period could be an issue. They account for about 25\% of employment in the \href{https://www.dropbox.com/s/bzkjsuhid0z5yaf/sesPanelEmpshare.txt?dl=0}{LFS}.
+	\bitem 
+		\item Out of these: those not appearing in 1997 are the issue. They account for about 22\% of total employment in the LFS.
+		\item Those that are missing in a year other than 1997 are probably just due to sampling. They are fairly small so I am very confident excluding them.
+	\eitem
+	\item Missing occupations after 1997 are probably the result of sampling error. They are generally small and account at most for 2\% of LFS employment.
+	\item Crux of the issues are in the change between 1997 and 2001.
+\eitem
+\end{document}
+
