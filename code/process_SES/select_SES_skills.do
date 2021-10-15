@@ -11,11 +11,9 @@
 
 
 local occupation 		`1'
-local filter 			`2'
-local obsThreshold		`3'
-local aggregateSOC		`4'
-local educationType		`5'
 local do_location=		"2\_process_SES/select\_SES\_skills.do"
+set graphics on 
+
 
 use "data/temporary/filtered_dems_SES", clear
 
@@ -56,7 +54,7 @@ do "code/process_LFS/aggregate_occupations.do"
 *===============================================================================
 
 local abstract 		clong cwritelg ccalca cpercent cstats cplanme cplanoth csolutn canalyse
-local social		cpeople cteach cspeech cpersuad
+local social		cpeople cteach cspeech cpersuad cteamwk clisten
 local routine		brepeat bvariety cplanme bme4 
 local manual		chands cstrengt cstamina
 
@@ -117,7 +115,7 @@ log using "results/log_files/index_correlations.txt", text replace
 
 
 foreach index in `index_list' {
-	pwcorr ``index''
+	cap pwcorr ``index''
 }
 
 log close
@@ -134,7 +132,7 @@ di "correlations after correction of direction"
 local index_list abstract social routine manual
 
 foreach index in `index_list' {
-	pwcorr ``index''
+	cap pwcorr ``index''
 }
 
 *===============================================================================
@@ -174,6 +172,9 @@ log close
 *CHARACTERIZING OCCUPATIONS ACCORDING TO THEIR SKILL USE
 *===============================================================================	
 
+
+save "data/additional_processing/SES_skill_index_database.dta", replace
+
 collapse (mean) `index_list' (count) people=educ_4 [fw=gwtall], by(bsoc00Agg occ_1dig)
 grstyle init
 grstyle set symbol lean
@@ -197,6 +198,8 @@ foreach index in `index_list' {
 	list bsoc00Agg if inrange(_n,_N-10,_N)	
 }
 log close 
+
+
 
 /*
 *===============================================================================

@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_occupation_examples.txt
   log type:  text
- opened on:  11 Oct 2021, 18:49:39
+ opened on:  15 Oct 2021, 12:07:51
 
 . foreach index in `index_list' {
   2.         gsort -`index'
@@ -55,14 +55,14 @@ Occupations at the top of social
      |------------------------------------------|
   1. |                              2444 clergy |
   2. |  2314 secondary eductn teaching prfsnals |
-  3. |      2312 further educ teaching prfsnals |
-  4. |       2311 higher educ teaching prfsnals |
-  5. | 1112 directors & chief execs of maj orgs |
+  3. | 1112 directors & chief execs of maj orgs |
+  4. |      2312 further educ teaching prfsnals |
+  5. |       2311 higher educ teaching prfsnals |
      |------------------------------------------|
-  6. | 3563 vocatn & indust trainrs & instrctrs |
-  7. | 3564 car. advis & voction guidnce spcils |
-  8. |      1135 pers training & ind rel mngers |
-  9. |      3442 Sports And Fitness Occupations |
+  6. |   2315 prim & nurs eductn teaching profs |
+  7. | 3563 vocatn & indust trainrs & instrctrs |
+  8. | 3564 car. advis & voction guidnce spcils |
+  9. |      1135 pers training & ind rel mngers |
  10. |      2313 educ officers,school inspectrs |
      +------------------------------------------+
 Occupations at the bottom of social
@@ -70,19 +70,19 @@ Occupations at the bottom of social
      +------------------------------------------+
      |                                bsoc00Agg |
      |------------------------------------------|
-146. |                        9111 farm workers |
-147. |         8116 plastics process operatives |
-148. |         8211 heavy goods vehicle drivers |
-149. |                     5421 printing trades |
-150. |   6231 housekprs and related occupations |
+146. |  9234 launderers, dry cleaners, pressers |
+147. |         8211 heavy goods vehicle drivers |
+148. |                         8212 van drivers |
+149. |   6231 housekprs and related occupations |
+150. |               8213 bus and coach drivers |
      |------------------------------------------|
-151. |    8214 taxi, cab drivers and chauffeurs |
-152. |                    5492 Skill trades nec |
-153. |                         8212 van drivers |
-154. |  9234 launderers, dry cleaners, pressers |
-155. |                 9233 cleaners, domestics |
+151. |                    5492 Skill trades nec |
+152. |                        5412 upholsterers |
+153. |                 9233 cleaners, domestics |
+154. |    8214 taxi, cab drivers and chauffeurs |
+155. | 8229 mobile machine drivers & operatives |
      |------------------------------------------|
-156. | 8229 mobile machine drivers & operatives |
+156. |                     9231 window cleaners |
      +------------------------------------------+
 Occupations at the top of routine
 
@@ -161,5 +161,5 @@ Occupations at the bottom of manual
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_occupation_examples.txt
   log type:  text
- closed on:  11 Oct 2021, 18:49:39
+ closed on:  15 Oct 2021, 12:07:51
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------

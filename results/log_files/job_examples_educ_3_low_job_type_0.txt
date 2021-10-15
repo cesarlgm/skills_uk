@@ -1,15 +1,15 @@
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_job_type_0.tx
-> t
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_job_type_0.
+> txt
   log type:  text
- opened on:  29 Sep 2021, 16:21:25
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ opened on:  15 Oct 2021, 15:45:48
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_job_type_0.tx
-> t
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_job_type_0.
+> txt
   log type:  text
- opened on:  29 Sep 2021, 16:21:28
+ opened on:  15 Oct 2021, 15:45:51
 1 2 3 12 13 23
 Job type==1
 
@@ -311,8 +311,8 @@ Job type==23
 2641. |                                    7121 collector salsprsns and cred agents   .2224845   .2784711   .4990444 |
       +--------------------------------------------------------------------------------------------------------------+
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_job_type_0.tx
-> t
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_low_job_type_0.
+> txt
   log type:  text
- closed on:  29 Sep 2021, 16:21:28
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  15 Oct 2021, 15:45:52
+---------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_composition.txt
   log type:  text
- opened on:  11 Oct 2021, 18:49:37
+ opened on:  15 Oct 2021, 12:07:49
 
 . foreach index in `index_list' {
   2.         di "Variables in `index'"
@@ -31,6 +31,8 @@ cpeople         float   %10.0g     cpeople    importance of: dealing with people
 cteach          float   %10.0g     cteach     importance of: teaching people (individuals or groups)
 cspeech         float   %10.0g     cspeech    importance of: making speeches/ presentations
 cpersuad        float   %10.0g     cpersuad   importance of: persuading or influencing others
+cteamwk         float   %10.0g     cteamwk    importance of: working with a team
+clisten         float   %10.0g     clisten    importance of: listening carefully to colleagues
 Variables in routine
 
               storage   display    value
@@ -53,5 +55,5 @@ cstamina        float   %10.0g     cstamina   importance of: physical stamina
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_composition.txt
   log type:  text
- closed on:  11 Oct 2021, 18:49:37
+ closed on:  15 Oct 2021, 12:07:49
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------

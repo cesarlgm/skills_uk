@@ -126,7 +126,6 @@ foreach definition in `definition_list' {
 
     do "code/process_LFS/refine_classification.do" `thresh_list'
 
-
     save "data/temporary/job_classification_`definition'", replace
 
     *I output some necessary graphs

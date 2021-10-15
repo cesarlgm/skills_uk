@@ -1,15 +1,15 @@
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_ref_job_type0
-> .txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_ref_job_typ
+> e0.txt
   log type:  text
- opened on:  29 Sep 2021, 16:21:52
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ opened on:  15 Oct 2021, 15:46:13
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_ref_job_type0
-> .txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_ref_job_typ
+> e0.txt
   log type:  text
- opened on:  29 Sep 2021, 16:21:55
+ opened on:  15 Oct 2021, 15:46:16
 1 2 3 12 13 23
 Job type==1
 
@@ -310,8 +310,8 @@ Job type==23
 1689. |  3541 sales representatives, marketing profs, estate agents, actioneers    .129261   .4642394   .4064995 |
       +----------------------------------------------------------------------------------------------------------+
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_ref_job_type0
-> .txt
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/job_examples_educ_3_mid_ref_job_typ
+> e0.txt
   log type:  text
- closed on:  29 Sep 2021, 16:21:55
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  15 Oct 2021, 15:46:16
+---------------------------------------------------------------------------------------------------------------------------------------------------------------

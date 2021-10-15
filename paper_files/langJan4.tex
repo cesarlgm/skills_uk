@@ -3,98 +3,11 @@
 \usepackage{tabularx}
 
 \begin{document}
-	\section{Education}
-%	\bitem
-%	\item I group education levels by looking at how similar the occupational distribution between them.
-%	\item I do this by examining:
-%		\bitem
-%		\item Correlation of the employment distribution across skills.
-%		\item Computing the pairwise Welch indexes:
-%	
-%		\eitem
-	\bitem
-	\item I do the grouping as follows:
-	\bitem 
-	\item Low education: no qualification,  GCSE D-G, and  GCSE A-C.
-	\item Medium education:  GCSE A*.
-	\item High education: Bachelor +.
-	\eitem
-	
-	\item The Welch index is computed as:
-		\begin{align*}
-		G_{kl}&=\frac{\sum_o(q_{ko}-\bar{q}_{o})(q_{lo}-\bar{q}_{c})/\bar{q_o}}{\sqrt{(\sum_o(q_{ko}-\bar{q}_o)^2/\bar{q}_o)(\sum_o(q_{lo}-\bar{q}_o)^2/\bar{q}_o)}}
-		\end{align*}
-	where $k,l$ denote education levels, $o$ occupation, $q_{ko}$ denotes the share of k-people employed in occupation $o$, and $\bar{q}_o$ is the share of population employed in job $o$.
-	\eitem
-	
-	\input{../output/welchTableWeighted.tex}
-	\input{../output/corrTableWeighted.tex}
-	\input{../output/edlevPopCount.tex}
 
-	\section{Boundary jobs}
-	Let $s_{j}(o), j\in\{H,M,L\}$ denote the share $o$-workers with education level $j$. Denote as $p_i(o)$ the $i$-th largest element of $\{s_H(o),s_M(o),s_L(o)\}$.
-	\bitem
-	\item \textbf{Definition 1:} $o\in B_1$ iff (suggested by Costas):
-	\beqns
-	p_1(o)\leq R
-	\eeqns
-	\item \textbf{Definition 2:} $o\in B_2$ iff:
-	\beqns
-	\frac{p_1(o)}{p_1(o)+p_2(o)}\leq R
-	\eeqns
-	\item \textbf{Definition 3}: $o\in B_3$ iff (similar to 2, but generates border ``arms'' of constant width):
-	\beqns
-	p_1(o)-p_2(o)\leq R-0.5
-	\eeqns
-	\item For any $R$, $B_3\subset B_2\subset B_1$
-	\eitem
-	
-	\begin{figure}[h!]
-		\centering
-		\caption{Border under alternative definitions}
-		\subfloat[Definition 1:]{\includegraphics[width=.5\textwidth]{../output/absoluteFrontierDrawing}}
-		\subfloat[Definition 2:]{\includegraphics[width=.5\textwidth]{../output/relativeFrontierDrawing}}\\
-		\subfloat[Definition 3:]{\includegraphics[width=.5\textwidth]{../output/parallelFrontierDrawing}}
-	\end{figure}
-	\newpage
-	\begin{figure}
-		\centering
-		\caption{Job classification under different boundary definitions  ($R=60\%$)}
-		\subfloat[Definition 1]{\includegraphics[width=.6\textwidth]{../output/lfsBoundary160}}\\
-		\subfloat[Definition 2]{\includegraphics[width=.6\textwidth]{../output/lfsBoundary260}}\\
-		\subfloat[Definition 3]{\includegraphics[width=.6\textwidth]{../output/lfsBoundary360}}
-	\end{figure}
-	\newpage 
-	
-%	\input{../output/shareBoundaryJobs1.tex}
-%	\input{../output/shareBoundaryJobs2.tex}
-%	\input{../output/shareBoundaryJobs3.tex}
-	
-%	\subsection{Jobs by education-pair border}	
-%	\input{../output/boundaryTypeCounts1.tex}
-%	\input{../output/boundaryTypeCounts2.tex}
-%	\input{../output/boundaryTypeCounts3.tex}
-	
-%	\subsection{Time in the border}
-%	\input{../output/yearsBorder1.tex}
-%	\input{../output/yearsBorder2.tex}
-%	\input{../output/yearsBorder3.tex}
+\input{../results/tables/skill_use_border_jobs_educ_3_low.tex}
 
-	
-%	\input{../output/borderExamples1.tex}
-	\input{../output/borderExamples2.tex}
-%	\input{../output/borderExamples3.tex}
-	
-%	\section{Going back to SES}
-%	\bitem
-%	\item I have 192 out of 332 occupations which I can track throughout the whole period.
-%	\item Occupations appearing only 4 times across the period could be an issue. They account for about 25\% of employment in the \href{https://www.dropbox.com/s/bzkjsuhid0z5yaf/sesPanelEmpshare.txt?dl=0}{LFS}.
-%	\bitem 
-%	\item Out of these: those not appearing in 1997 are the issue. They account for about 22\% of total employment in the LFS.
-%	\item Those that are missing in a year other than 1997 are probably just due to sampling. They are fairly small so I am very confident excluding them.
-%	\eitem
-%	\item Missing occupations after 1997 are probably the result of sampling error. They are generally small and account at most for 2\% of LFS employment.
-%	\item Crux of the issues are in the change between 1997 and 2001.
-%	\eitem
+\input{../results/tables/skill_use_border_jobs_educ_3_mid.tex}
+
+
 \end{document}
 
