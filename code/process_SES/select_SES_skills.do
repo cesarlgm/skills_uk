@@ -17,6 +17,8 @@ set graphics on
 
 use "data/temporary/filtered_dems_SES", clear
 
+replace cplanoth=6-cplanoth
+
 do "code/aggregate_SOC2000.do"
 
 merge m:1 bsoc00Agg using  "data/temporary/SES_occupation_key", nogen 
@@ -53,7 +55,7 @@ do "code/process_LFS/aggregate_occupations.do"
 *SKILL INDEXES
 *===============================================================================
 
-local abstract 		clong cwritelg ccalca cpercent cstats cplanme cplanoth csolutn canalyse
+local abstract 		clong cwritelg ccalca cpercent cstats cplanoth csolutn canalyse
 local social		cpeople cteach cspeech cpersuad cteamwk clisten
 local routine		brepeat bvariety cplanme bme4 
 local manual		chands cstrengt cstamina
@@ -112,14 +114,13 @@ log close
 cap log close
 log using "results/log_files/index_correlations.txt", text replace
 
-
-
 foreach index in `index_list' {
-	cap pwcorr ``index''
+	pwcorr ``index''
 }
 
 log close
 
+/*
 *cplanme and cplanoth have the wrong direction
 
 replace cplanme=-cplanme+1
