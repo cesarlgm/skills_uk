@@ -1,4 +1,6 @@
-function i_matrix=rescaled_matrix(dummy_matrix,alpha_D,alpha_restr,solution,n_scale,restr_index,scale_matrix,skill_indexes)
+function i_matrix=rescaled_matrix(dummy_matrix, ...
+    ... %alpha_D,alpha_restr,
+    solution,n_scale,restr_index,scale_matrix,skill_indexes)
    n_param=size(solution,1);
     
    %Next step: I assign p with the required restrictions
@@ -11,7 +13,8 @@ function i_matrix=rescaled_matrix(dummy_matrix,alpha_D,alpha_restr,solution,n_sc
    r_matrix=dummy_matrix*diag(r_scale_param)*scale_matrix;
 
    %Create vector of restricted alphas
-   r_alpha=alpha_D*alpha_param+alpha_restr;
+   r_alpha=alpha_param;
+   %r_alpha=alpha_D*alpha_param+alpha_restr;
 
    alpha_matrix=create_alpha_matrix(skill_indexes);
 

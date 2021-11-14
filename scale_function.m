@@ -1,4 +1,5 @@
-function out=scale_function(p,D,b,dummy_matrix,scale_matrix,restr_index)
+function out=scale_function(p, ... %D,b,
+        dummy_matrix,scale_matrix,restr_index)
     n_param=size(p,1);
     n_scale=sum(restr_index==0);
     n_obs=size(dummy_matrix,1);
@@ -15,7 +16,8 @@ function out=scale_function(p,D,b,dummy_matrix,scale_matrix,restr_index)
     
  
     %Create vector of restricted alphas
-    r_alpha=D*alpha_param+b;
+    %r_alpha=D*alpha_param+b;
+    r_alpha=alpha_param;
 
     error=rMatrix*r_alpha-ones(n_obs,1);
  

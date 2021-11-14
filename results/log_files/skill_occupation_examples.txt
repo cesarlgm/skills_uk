@@ -1,8 +1,8 @@
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_occupation_examples.txt
   log type:  text
- opened on:  15 Oct 2021, 12:07:51
+ opened on:   4 Nov 2021, 12:31:15
 
 . foreach index in `index_list' {
   2.         gsort -`index'
@@ -161,5 +161,5 @@ Occupations at the bottom of manual
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_occupation_examples.txt
   log type:  text
- closed on:  15 Oct 2021, 12:07:51
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:   4 Nov 2021, 12:31:15
+------------------------------------------------------------------------------------------------------------------------------------------------------------

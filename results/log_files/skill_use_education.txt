@@ -1,8 +1,8 @@
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_use_education.txt
   log type:  text
- opened on:  15 Oct 2021, 12:07:50
+ opened on:   4 Nov 2021, 12:31:14
 
 . 
 . *Average skill use by education, all years
@@ -33,5 +33,5 @@ GCSE A-A* level |          -0.13           -0.12            0.09            0.14
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/skill_use_education.txt
   log type:  text
- closed on:  15 Oct 2021, 12:07:50
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:   4 Nov 2021, 12:31:14
+------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
-function solution=solve_weight_problem(data,education_vector,scale_solution,skill_indexes)
-    n_educ=length(unique(education_vector))
+function [solution,i_matrix]=solve_weight_problem(data,education_vector,scale_solution,skill_indexes)
+    n_educ=length(unique(education_vector));
 
     %Step 1: compute the index matrix for mid and high_education level
     [i_matrix,n_indexes]=create_index_matrix(data,skill_indexes,scale_solution,education_vector);

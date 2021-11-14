@@ -1,8 +1,8 @@
-function [scale_matrix,restriction_matrix,restriction_b]=scaling_matrix(dummy_matrix,data,alpha_A)
+function [scale_matrix,restriction_matrix,restriction_b]=scaling_matrix(dummy_matrix,data,n_alphas) %,alpha_A add this if weights are restricted.
     counter=1;
     n_vals=size(dummy_matrix,2);
     n_skills=size(data,2);
-    n_indexes=size(alpha_A,1)/2;
+    %n_indexes=size(alpha_A,1)/2;
 
     scale_matrix=zeros(n_vals,n_skills);
     for i=1:n_skills
@@ -22,11 +22,13 @@ function [scale_matrix,restriction_matrix,restriction_b]=scaling_matrix(dummy_ma
     %Uncomment this line if alphas are constrained to sum to one 
     %restriction_matrix=blkdiag(-1*restriction_matrix,alpha_A);
     
-    restriction_matrix=-1*restriction_matrix;
+    temp=zeros(size(restriction_matrix,1),n_alphas);
+    restriction_matrix=horzcat(-1*restriction_matrix,temp);
 
-    n_restrictions=size(restriction_matrix,1)
+    n_restrictions=size(restriction_matrix,1);
 
     restriction_b=zeros(n_restrictions,1);
 
-    restriction_b(n_restrictions-n_indexes+1:n_restrictions,1)=ones(n_indexes,1);
+    %uncomment this line if weights are restricted to sum to one
+    %restriction_b(n_restrictions-n_indexes+1:n_restrictions,1)=ones(n_indexes,1);
 end

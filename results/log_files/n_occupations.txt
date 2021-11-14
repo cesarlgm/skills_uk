@@ -1,25 +1,24 @@
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- opened on:  15 Oct 2021, 15:46:10
-Number of unique values of bsoc00Agg is  235
-Number of records is  20923
+ opened on:   4 Nov 2021, 12:28:06
+
+. tab n_years
+
+    n_years |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |          2        0.87        0.87
+          1 |         10        4.33        5.19
+          2 |         32       13.85       19.05
+          3 |         31       13.42       32.47
+          4 |        156       67.53      100.00
+------------+-----------------------------------
+      Total |        231      100.00
+
+. log close
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- closed on:  15 Oct 2021, 15:46:10
----------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
-  log type:  text
- opened on:  15 Oct 2021, 15:46:11
-Number of occupations once I limit them to occupations appearing in all years
-Number of unique values of bsoc00Agg is  225
-Number of records is  3825
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
-  log type:  text
- closed on:  15 Oct 2021, 15:46:11
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:   4 Nov 2021, 12:28:06
+------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,65 +1,55 @@
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_correlations.txt
   log type:  text
- opened on:  15 Oct 2021, 12:07:49
-
-. 
-. 
-. 
-. foreach index in `index_list' {
-  2.         cap pwcorr ``index''
-  3. }
-
-. 
-. log close
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_correlations.txt
-  log type:  text
- closed on:  15 Oct 2021, 12:07:50
----------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-      name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_correlations.txt
-  log type:  text
- opened on:  15 Oct 2021, 12:07:50
-
-. 
-. di "correlations after correction of direction"
-correlations after correction of direction
-
-. 
-. local index_list abstract social routine manual
+ opened on:   4 Nov 2021, 12:38:51
 
 . 
 . foreach index in `index_list' {
-  2.         cap pwcorr ``index''
+  2.         pwcorr ``index''
   3. }
 
-. 
-. *===============================================================================
-. *GENERATING SKILL INDEXES
-. *===============================================================================        
-. foreach index in abstract social routine manual {
-  2.         cap drop temp
-  3.         egen temp=rowmean(``index'')
-  4.         egen `index'=std(temp)
-  5. }
+             |    clong cwritelg   ccalca cpercent   cstats cplanoth  csolutn
+-------------+---------------------------------------------------------------
+       clong |   1.0000 
+    cwritelg |   0.6612   1.0000 
+      ccalca |   0.2475   0.2358   1.0000 
+    cpercent |   0.3159   0.3237   0.7515   1.0000 
+      cstats |   0.3466   0.3798   0.5255   0.6753   1.0000 
+    cplanoth |   0.3596   0.3823   0.1960   0.2340   0.2462   1.0000 
+     csolutn |   0.3940   0.3356   0.2703   0.3064   0.2723   0.3529   1.0000 
+    canalyse |   0.5275   0.5025   0.2660   0.3573   0.4093   0.3810   0.5990 
 
-. 
-. *Everything looks good here
-. pwcorr `index_list'
+             | canalyse
+-------------+---------
+    canalyse |   1.0000 
 
-             | abstract   social  routine   manual
+             |  cpeople   cteach  cspeech cpersuad  cteamwk  clisten
+-------------+------------------------------------------------------
+     cpeople |   1.0000 
+      cteach |   0.3182   1.0000 
+     cspeech |   0.2860   0.4610   1.0000 
+    cpersuad |   0.3758   0.4787   0.5935   1.0000 
+     cteamwk |   0.2596   0.4298   0.2651   0.3137   1.0000 
+     clisten |   0.2958   0.4085   0.2739   0.3376   0.6478   1.0000 
+
+             |  brepeat bvariety  cplanme     bme4
 -------------+------------------------------------
-    abstract |   1.0000 
-      social |   0.6092   1.0000 
-     routine |  -0.0840  -0.1077   1.0000 
-      manual |  -0.1053  -0.0925   0.0778   1.0000 
+     brepeat |   1.0000 
+    bvariety |   0.3087   1.0000 
+     cplanme |   0.1550   0.3421   1.0000 
+        bme4 |   0.0457   0.2239   0.2464   1.0000 
 
+             |   chands cstrengt cstamina
+-------------+---------------------------
+      chands |   1.0000 
+    cstrengt |   0.5243   1.0000 
+    cstamina |   0.5041   0.7574   1.0000 
+
+. 
 . log close
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_correlations.txt
   log type:  text
- closed on:  15 Oct 2021, 12:07:50
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:   4 Nov 2021, 12:38:51
+------------------------------------------------------------------------------------------------------------------------------------------------------------
