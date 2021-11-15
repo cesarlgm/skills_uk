@@ -1,4 +1,5 @@
-function [scale_vector,scale_weights,index_weights]=split_parameters(parameter,n_skills,normalize_index)
+function [scale_vector,scale_weights,index_weights]=split_parameters(...
+    parameter,n_skills,normalize_index)
     n_scales=sum(normalize_index==0);
     n_alphas=n_skills;
     

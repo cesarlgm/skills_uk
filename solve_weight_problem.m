@@ -12,7 +12,7 @@ function [solution,i_matrix]=solve_weight_problem(data,education_vector,scale_so
     %Anonymizing the function
     fun=@(p)square_error_wg(p,i_matrix,n_indexes);
     
-    n_parameters=(n_indexes-1)*(n_educ-1)
+    n_parameters=(n_indexes-1)*(n_educ-1);
     parameter0=ones(n_parameters,1);
 
     %Solving the problem

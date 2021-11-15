@@ -2,7 +2,7 @@ function [skill_data,education_index,n_skills]=extract_scale_data(data)
     %Extracts information required for scale calibration
     skill_data=table2array(data);
     
-    education_index=data(:,2);
+    education_index=table2array(data(:,2));
     
     skill_data(:,1:3)=[];
 

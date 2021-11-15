@@ -7,6 +7,8 @@ function [rwgt,n_educ]=restricted_weight(weights,n_skills)
 
     %rest of weights
     w_end=reshape(weights(1:n_weights),n_skills-1,n_educ-1);
+    
+    w_end=horzcat(ones(n_skills-1,1),w_end);
 
-    rwgt=reshape(vertcat([1,1],w_end),n_skills*(n_educ-1),1);
+    rwgt=reshape(vertcat([1,1,1],w_end),n_skills*(n_educ),1);
 end

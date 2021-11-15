@@ -1,16 +1,18 @@
-function restructured_data=educ_restructure(data,educ_vector)
-    %Extracting data from other education groups
-    educ_r=unique(educ_vector(educ_vector~=1));
+function restructured_indexes=educ_restructure(index_matrix,education_indexes)
+    %This function reshapes the index matrix into a block diagonal matrix
+    %splitted by education level
+
+    educ_r=unique(education_indexes);
     n_educ=length(educ_r);
 
     for i=1:n_educ
         educ_i=educ_r(i);
-        row_index=educ_vector==educ_i;
-        temp_dat=data(row_index,:);
+        row_index=education_indexes==educ_i;
+        temp_dat=index_matrix(row_index,:);
         if i==1
-            restructured_data=temp_dat;
+            restructured_indexes=temp_dat;
         else
-            restructured_data=blkdiag(restructured_data,temp_dat);
+            restructured_indexes=blkdiag(restructured_indexes,temp_dat);
         end
     end
 end

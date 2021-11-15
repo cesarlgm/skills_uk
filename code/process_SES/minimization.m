@@ -12,24 +12,7 @@ data=readtable('data/additional_processing/file_for_minimization.csv');
 
 
 %%
-data.educ_3_low(data.educ_3_low==1)=4;
-data.educ_3_low(data.educ_3_low==3)=1;
-data.educ_3_low(data.educ_3_low==4)=3;
-
-%%a
-education_vector=data.educ_3_low;
-n_educ=length(unique(education_vector));
-
-%%
-%%COMPUTE SKILL SCALES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[scale_matrix,alpha_vec,s_weights]=solve_skill_problem(data,educ_reference,skill_indexes);
-
-[scale_solution,index_l]=solve_scale_problem(data,education,skill_indexes);
-
-%%
-%%COMPUTE WEIGHTS FOR OTHER EDUCATION GROUPS
-[weights,i_matrix]=solve_weight_problem(data,education_vector,scale_solution,skill_indexes);
+trial=solve_skill_problem(data,skill_indexes)
 
 %%
 %%EXTRACTING THE RESULTS
