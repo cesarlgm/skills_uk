@@ -1,7 +1,5 @@
 function [scale,index_l]=solve_scale_problem(data,education,skill_indexes)
     
-    %extract data required for calibration of scales
-    [input_data,n_skills]=extract_scale_data(data,education);
 
     %Uncomment these lines if alphas are restricted to sum to one.
         %With imposed restrictions

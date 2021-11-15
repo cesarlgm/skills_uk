@@ -1,4 +1,4 @@
-function [dummy,param]=expand_matrix(data)
+function [dummy,param]=create_scale_dummies(data)
     n_skills=size(data,2);
 
     for i=1:n_skills
