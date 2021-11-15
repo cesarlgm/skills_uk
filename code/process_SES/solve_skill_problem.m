@@ -35,10 +35,12 @@ function [scale_matrix,alpha_vec,s_weights]=solve_skill_problem(data,index_compo
            zeros(restriction_size,missing_columns));
     restriction_b=zeros(restriction_size,1);
 
+    upper_bounds=vertcat(ones(n_scales,1),Inf*ones(missing_columns,1));
+
     %STEP 5: solve the problem
-    options = optimset('Display','iter','TolX',1e-10,'MaxFunEvals',10000e3);
+    options = optimset('Display','iter','PlotFcns',@optimplotfval,'TolX',1e-10,'MaxFunEvals',10000e3);
     
     solution=fmincon(fun,parameter0,parameter_restriction_matrix,restriction_b,[],[],zeros(n_parameters,1), ...
-       [],[],options)
+       upper_bounds,[],options)
     scale_matrix=solution;
 end

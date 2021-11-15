@@ -12,7 +12,7 @@ data=readtable('data/additional_processing/file_for_minimization.csv');
 
 
 %%
-trial=solve_skill_problem(data,skill_indexes)
+trial=solve_skill_problem(data,skill_indexes);
 
 %%
 %%EXTRACTING THE RESULTS
