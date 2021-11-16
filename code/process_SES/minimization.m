@@ -12,13 +12,11 @@ data=readtable('data/additional_processing/file_for_minimization.csv');
 
 
 %%
-trial=solve_skill_problem(data,skill_indexes);
+[scale_matrix,scale_weights,index_weights,MSE]=solve_skill_problem(data,skill_indexes);
 
 %%
 %%EXTRACTING THE RESULTS
 
-[scale_matrix,alpha_vec,s_weights]=extract_solution_data(data,skill_indexes,scale_solution,weights,n_educ);
-
 writetable(scale_matrix,'results/tables/scale_matrix.xls','WriteRowNames',true)
-writetable(alpha_vec,'results/tables/weight_on_scales.xls')
-writetable(s_weights,'results/tables/weight_on_indexes.xls','WriteRowNames',true)
+writetable(scale_weights,'results/tables/weight_on_scales.xls')
+writetable(index_weights,'results/tables/weight_on_indexes.xls','WriteRowNames',true)
