@@ -9,7 +9,7 @@ function [scale_array,scale_weight_array,index_weight_array,index_matrix_array,s
     scale_weight_array={};
     index_weight_array={};
     index_matrix_array={};
-    sum_array{};
+    sum_array={};
 
     for i=1:n_solutions
         
@@ -41,7 +41,7 @@ function [scale_array,scale_weight_array,index_weight_array,index_matrix_array,s
 
     %First I extract all the elements of the solution
     [scale_vector,scale_weights,index_weights,sum_vector]=split_parameters(mean_sol, ... 
-         n_skills,normalize_vector);
+         n_skills,normalize_vector,n_educ);
 
     scale_matrix=create_output_scale_matrix(scale_vector,skill_data,n_skills,varnames);
 

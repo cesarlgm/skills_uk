@@ -14,6 +14,14 @@ data=readtable('data/additional_processing/file_for_minimization.csv');
 
 
 %%
+%Renormalizing
+%data.educ_3_low(data.educ_3_low==1)=4;
+%data.educ_3_low(data.educ_3_low==3)=1;
+%data.educ_3_low(data.educ_3_low==4)=3;
+
+%%
+
+%%
 n_solutions=1;
 tic
 [solution_array,scale_array,alpha_array,s_weights_array,...

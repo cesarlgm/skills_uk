@@ -14,7 +14,7 @@ function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
         n_indexes=length(index_composition);
 
 
-        initial_guess=create_initial_guess(n_scales,n_skills,n_educ,...
+        [initial_guess,lower_bounds]=create_initial_guess(n_scales,n_skills,n_educ,...
             n_indexes,n_initial_cond,n_scale_vector);
 
         n_parameters=size(initial_guess,1);
@@ -32,12 +32,13 @@ function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
         %STEP 3: create the vector of upper bounds
         upper_bounds=vertcat(ones(n_scales,1),Inf*ones(missing_columns,1));
 
+
         %STEP 5: solve the problem
         options = optimset('TolX',1e-10,'MaxFunEvals',10000e3);
 
         parfor i=1:n_initial_cond 
             display(i)
-            [solution,MSE]=fmincon(fun,initial_guess(:,i),parameter_restriction_matrix,restriction_b,[],[],zeros(n_parameters,1), ...
+            [solution,MSE]=fmincon(fun,initial_guess(:,i),parameter_restriction_matrix,restriction_b,[],[],lower_bounds, ...
                upper_bounds,[],options);
             solution_array{i}=solution;
             MSE_array{i}=MSE;
