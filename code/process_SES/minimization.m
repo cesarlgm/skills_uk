@@ -14,10 +14,10 @@ data=readtable('data/additional_processing/file_for_minimization.csv');
 
 
 %%
-n_solutions=50;
+n_solutions=1;
 tic
 [solution_array,scale_array,alpha_array,s_weights_array,...
-    MSE_array,index_matrix_array]=solve_skill_problem(data,skill_indexes, ...
+    MSE_array,index_matrix_array,sum_array]=solve_skill_problem(data,skill_indexes, ...
     n_solutions);
 toc
 

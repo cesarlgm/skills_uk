@@ -38,7 +38,7 @@ n_indexes=length(index_composition);
 fun=@(p)error_function(p,skill_dummies,normalize_index,index_composition, ...
     scale_mult_matrix,education_index);
 
-n_parameters=size(parameter0,1);
+n_parameters=size(a,1);
 
 %%
 %STEP 5
@@ -54,7 +54,7 @@ upper_bounds=vertcat(ones(n_scales,1),Inf*ones(missing_columns,1));
 % %STEP 5: solve the problem
 options = optimset('PlotFcns',@optimplotfval,'TolX',1e-10,'MaxFunEvals',10000e3);
 % 
-[solution,MSE]=fmincon(fun,parameter0,parameter_restriction_matrix,restriction_b,[],[],zeros(n_parameters,1), upper_bounds,[],options);
+[solution,MSE]=fmincon(fun,a,parameter_restriction_matrix,restriction_b,[],[],zeros(n_parameters,1), upper_bounds,[],options);
 
 %%
 [scale_matrix,alpha_vec,s_weights,index_matrix]=extract_solution(solution,normalize_index,...

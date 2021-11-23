@@ -26,6 +26,7 @@ function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
         restriction_size=size(scale_restriction_mat,1);
         parameter_restriction_matrix=horzcat(scale_restriction_mat, ...
                zeros(restriction_size,missing_columns));
+        size(parameter_restriction_matrix)
         restriction_b=zeros(restriction_size,1);
         
         %STEP 3: create the vector of upper bounds

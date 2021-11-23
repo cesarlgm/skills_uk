@@ -1,4 +1,4 @@
-function [solution_array,scale_array,alpha_array,s_weights_array,MSE_array,index_matrix_array]= ... 
+function [solution_array,scale_array,alpha_array,s_weights_array,MSE_array,index_matrix_array,sum_array]= ... 
     solve_skill_problem(data,index_composition,n_initial_cond)
 
     %STRUCTURE OF THE PARAMETER VECTOR
@@ -28,6 +28,6 @@ function [solution_array,scale_array,alpha_array,s_weights_array,MSE_array,index
         index_composition, n_scale_vector);
 
 
-    [scale_array,alpha_array,s_weights_array,index_matrix_array]=extract_solution(solution_array,normalize_index, ...
+    [scale_array,alpha_array,s_weights_array,index_matrix_array,sum_array]=extract_solution(solution_array,normalize_index, ...
         n_skills, n_educ,index_names,skill_data,skill_dummies,scale_mult_matrix,index_composition);
 end

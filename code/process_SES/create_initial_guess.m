@@ -17,7 +17,8 @@ function initial_guess=create_initial_guess(n_scales,n_skills,n_educ,...
     end
 
     scale_weight_guess=rand(n_skills,n_initial_cond);
+    total_sum_guess=2*rand(n_educ-1,n_initial_cond);
     index_weight_guess=2*rand((n_indexes-1)*(n_educ-1),n_initial_cond);
 
-    initial_guess=vertcat(scale_guess,scale_weight_guess,index_weight_guess);
+    initial_guess=vertcat(scale_guess,scale_weight_guess,total_sum_guess,index_weight_guess);
 end
