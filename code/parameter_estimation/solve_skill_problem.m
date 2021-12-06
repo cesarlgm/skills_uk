@@ -1,8 +1,8 @@
 function [solution_array,scale_array,alpha_array,s_weights_array,MSE_array,index_matrix_array,sum_array]= ... 
-    solve_skill_problem(data,index_composition,n_initial_cond)
+    solve_skill_problem(data,empshares,index_composition,n_initial_cond)
 
     %STRUCTURE OF THE PARAMETER VECTOR
-    % Scales - scale weights - index weights 
+    % Scales - scale weights
 
     
     %STEP 1: extract data required for calibration of scales
@@ -19,8 +19,9 @@ function [solution_array,scale_array,alpha_array,s_weights_array,MSE_array,index
     %STEP 3: create the matrices of non-negativity restrictions 
     [scale_mult_matrix,scale_restriction_mat]=create_scaling_matrix(skill_dummies,skill_data);
     
-    fun=@(p)error_function(p,skill_dummies,normalize_index,index_composition, ...
-        scale_mult_matrix,education_index);
+    fun=@(p)error_wrapper(p, ...
+        normalize_index,scale_dummies,scale_mult_matrix,index_composition, ...
+        n_skills,occ_index,job_type_index,empshares);
 
     [solution_array,MSE_array,n_educ]= ...
         create_solution_array(fun, n_initial_cond, ...
