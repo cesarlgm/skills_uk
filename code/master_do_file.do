@@ -13,16 +13,17 @@ cd "C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assi
 *===============================================================================
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
 *===============================================================================
+/*
 *Recovering the mapping of edlev in the SES
 do "code/reconstructionEdlev.do"
 
 do "code/saveOccupationCrossWalks.do"
-
+*/
 
 *Process Labor Force Surveys
 do "code/process_LFS/process_LFS_database.do" 
 
-do "code/process_SES/process_SES_database.do"
+*do "code/process_SES/process_SES_database.do"
 
 
 /*

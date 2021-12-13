@@ -10,8 +10,8 @@ education='educ_3_low';
 skill_indexes=[3,4,8,6];
 
 %READING THE DATA
-data=readtable('data/additional_processing/file_for_minimization.csv');
-
+skill_data=readtable('data/additional_processing/file_for_minimization.csv');
+empshare_data=readtable('data/additional_processing/file_theta_estimation.csv')
 
 %%
 %Renormalizing
