@@ -1,9 +1,14 @@
 function [scale_array,scale_weight_array,theta_array, theta_matrix_array, ...
         skill_index_array]= ...
-            extract_solution(solution_array,normalize_vector, ...
-            n_skills, n_educ,varnames,skill_data,scale_dummies,scale_mult_matrix, ... 
-            index_composition, empshares, occ_index, job_type_index)
+            extract_solution(solution_array,varnames, n_educ,data, ... 
+            computation_information,observation_trackers)
     
+    %Extracting formation from the input
+    skill_data=data{4};
+    n_skills=computation_information{1};
+
+
+    %Preparing information for the solutions
     n_solutions=length(solution_array);
 
     scale_array=cell(n_solutions,1);
@@ -15,15 +20,15 @@ function [scale_array,scale_weight_array,theta_array, theta_matrix_array, ...
     for i=1:n_solutions
         %First I extract all the elements of the solution
         [scale_vector,scale_weights]=split_parameters(solution_array{i}, ... 
-             n_skills,normalize_vector);
+             computation_information);
     
         scale_matrix=create_output_scale_matrix(scale_vector,skill_data,n_skills,varnames);
-    
+
+
         scale_weight_matrix=extract_alpha(scale_weights,varnames);
     
         [theta, theta_matrix,skill_indexes]=extract_weights(scale_vector,scale_weights, ...
-            normalize_vector,scale_dummies, scale_mult_matrix, ...
-            index_composition, empshares, occ_index, job_type_index,n_educ);
+            data,observation_trackers,computation_information,n_educ);
 
         %Now I write the elements into the output array
         scale_array{i}=scale_matrix;
@@ -38,10 +43,10 @@ function [scale_array,scale_weight_array,theta_array, theta_matrix_array, ...
 
     %First I extract all the elements of the solution
     [scale_vector,scale_weights]=split_parameters(mean_sol, ... 
-         n_skills,normalize_vector);
+         computation_information);
 
     scale_matrix=create_output_scale_matrix(scale_vector,skill_data,n_skills,varnames);
-
+    
     scale_weight_matrix=extract_alpha(scale_weights,varnames);
 
     %index_weight_matrix=extract_weights(index_weights,n_educ);

@@ -36,6 +36,9 @@ foreach definition in `definition_list' {
         frame change SES_occs
         do "code/process_SES/save_file_for_minimization.do"
         
+        tempfile SES_file
+        save `SES_file'
+
         keep bsoc00Agg `education' year 
         duplicates drop 
 
@@ -53,6 +56,8 @@ foreach definition in `definition_list' {
         tab ref_job_type0 _merge if ref_job_type0==`definition'
 
     log close
+
+    drop if _merge!=3
 
     sort obs_id time_id 
     *Indicator of whether the job stays in the sample classification for two consecutive waves
@@ -77,18 +82,58 @@ foreach definition in `definition_list' {
 
         generate l_educ_empshare=log(educ_empshare)
 
-        generate d_l_educ_emphare=d.l_educ_empshare
+        generate d_l_educ_empshare=d.l_educ_empshare
 
         generate ref_year=l.year
 
-        drop if missing(d_l_educ_emphare)
+        drop if missing(d_l_educ_empshare)
 
-        keep bsoc00Agg ref_year ref_job_type0 d_l_educ_emphare
+        keep bsoc00Agg ref_year ref_job_type0 d_l_educ_empshare
 
-        sort  ref_job_type0 ref_year d_l_educ_emphare
+        sort  ref_job_type0 ref_year d_l_educ_empshare
+
+        rename ref_year year
     }
 
+    preserve
+        rename bsoc00Agg occupation
+        rename ref_job_type0 education
 
-    export delimited "data/additional_processing/file_theta_estimation.csv", ///
+        tempfile lfs_to_filter
+        save `lfs_to_filter'    
+    restore
+
+    *I get the set of years, occupations and education levels
+    {
+        keep ref_job_type0 year bsoc00Agg
+
+        rename ref_job_type0 `definition'
+
+        tempfile filter_SES
+        save `filter_SES'
+    }    
+
+    use `SES_file', clear 
+    merge m:1 bsoc00Agg `definition' year using `filter_SES', keep(3) nogen 
+
+    rename bsoc00Agg occupation
+    rename `definition' education
+
+    export delimited "data/additional_processing/SES_file_theta_estimation.csv", ///
 	    replace nolabel 
+
+    keep occupation education year
+    duplicates drop 
+    tempfile to_filter_LFS
+    save `to_filter_LFS'
+
+    {
+        use `lfs_to_filter', clear
+        merge 1:1 occupation education year using `to_filter_LFS', keep(3) nogen 
+        
+        export delimited "data/additional_processing/LFS_file_theta_estimation.csv", ///
+            replace nolabel 
+
+    }
+
 }

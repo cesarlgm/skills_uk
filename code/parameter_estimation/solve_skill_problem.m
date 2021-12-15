@@ -1,12 +1,39 @@
-function [solution_array,scale_array,alpha_array,theta_array,theta_matrix_array,skill_index_array,MSE_array]= ... 
-    solve_skill_problem(data,empshares,index_composition,n_initial_cond)
+%==========================================================================
+%CREATE SOLUTION ARRAY
+%Description> this function is wrapper for the theta estimation problem.
+%==========================================================================
+
+%Arguments
+% skill_data> skill fata coming from the SES
+
+% empshares> changes in employment shares in core jobs comming from the
+% LFS.
+
+% index_composition> vector indivating mapping of skills to skill indexes.
+
+% n_initial_cond> number of initial guesses to compute. All guesses are
+% generated randomly out of a uniform distribution. Code is slightly
+% modified to make sure that the initial conditions fit the problem
+% restrictions.
+
+%==========================================================================
+
+%OUTPUT
+
+
+
+function [solution_array,scale_array,alpha_array,theta_array, ...
+    theta_matrix_array,skill_index_array,MSE_array]= ... 
+    solve_skill_problem(skill_path,empshare_path,index_composition,n_initial_cond)
 
     %STRUCTURE OF THE PARAMETER VECTOR
     % Scales - scale weights
-
     
-    %STEP 1: extract data required for calibration of scales
-    [skill_data,job_type_index,occ_index,n_skills,index_names]=extract_scale_data(data);
+    %STEP 1: extract data required for calibration of scales and employment
+    %shares
+    [skill_data,skill_obs_tracker,n_skills,index_names]=extract_scale_data(skill_path);
+
+    [empshares,empshare_tracker]=extract_share_data(empshare_path);
 
     %Compute number of scales in the data
     n_scale_vector=count_n_scales(skill_data);
@@ -17,19 +44,23 @@ function [solution_array,scale_array,alpha_array,theta_array,theta_matrix_array,
     [scale_dummies,normalize_index]=create_scale_dummies(skill_data);
     
     %STEP 3: create the matrices of non-negativity restrictions 
-    [scale_mult_matrix,scale_restriction_mat]=create_scaling_matrix(scale_dummies,skill_data);
+    [scale_mult_matrix,scale_restriction_mat]= ...
+        create_scaling_matrix(scale_dummies,skill_data);
     
-    fun=@(p)error_wrapper(p, ...
-        normalize_index,scale_dummies,scale_mult_matrix,index_composition, ...
-        n_skills,occ_index,job_type_index,empshares);
+    observation_trackers={skill_obs_tracker,empshare_tracker};
+
+    data={scale_dummies,scale_mult_matrix,empshares,skill_data};
+
+    computation_information={n_skills,index_composition,normalize_index,n_scale_vector};
+
+    fun=@(p)error_wrapper(p, data,observation_trackers,computation_information);
 
     [solution_array,MSE_array,n_educ]= ...
         create_solution_array(fun, n_initial_cond, ...
-        normalize_index,scale_restriction_mat,job_type_index,...
-        index_composition, n_scale_vector);
+        scale_restriction_mat,computation_information,observation_trackers);
 
 
-    [scale_array,alpha_array,theta_array,theta_matrix_array,skill_index_array]=extract_solution(solution_array,normalize_index, ...
-        n_skills, n_educ,index_names,skill_data,scale_dummies,scale_mult_matrix, ...
-        index_composition, empshares, occ_index, job_type_index);
+    [scale_array,alpha_array,theta_array,theta_matrix_array, ...
+        skill_index_array]=extract_solution(solution_array,index_names,n_educ,...
+        data,computation_information,observation_trackers);
 end

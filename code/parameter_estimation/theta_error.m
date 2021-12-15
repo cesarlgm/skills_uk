@@ -8,5 +8,5 @@ function MSE=theta_error(skill_indexes,theta,job_type_index)
     error=S*theta-1;
     
     %Compute MSE
-    MSE=1/observations*(error'*error);
+    MSE=(1/observations)*(error'*error);
 end

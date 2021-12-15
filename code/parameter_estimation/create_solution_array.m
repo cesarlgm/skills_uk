@@ -1,8 +1,16 @@
-function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
-    n_initial_cond,  normalize_index,scale_restriction_mat,education_index,...
-    index_composition,n_scale_vector)
+%==========================================================================
+%CREATE SOLUTION ARRAY
+%Description> this function is wrapper for the theta estimation problem
+%==========================================================================
 
-        n_skills=sum(index_composition);
+
+function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
+    n_initial_cond,scale_restriction_mat,computation_information,observation_trackers)
+
+        n_skills=computation_information{1};
+        normalize_index=computation_information{3};
+        n_scale_vector=computation_information{4};
+
 
         solution_array={};
         MSE_array={};
@@ -10,9 +18,8 @@ function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
         %STEP 1
         %First I create the matrix of initial conditions
         n_scales=sum(normalize_index==0);
-        n_educ=length(unique(education_index));
-        n_indexes=length(index_composition);
 
+        n_educ=length(unique(observation_trackers{1}(:,2)));
 
         initial_guess=create_initial_guess(n_scales,n_skills,n_initial_cond,n_scale_vector);
 
@@ -34,7 +41,7 @@ function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
 
 
         %STEP 5: solve the problem
-        options = optimset('TolX',1e-10,'MaxFunEvals',10000e3);
+        options = optimset('TolX',1e-10,'MaxFunEvals',10000e3,'PlotFcn','optimplotfval');
 
         parfor i=1:n_initial_cond 
             display(i)

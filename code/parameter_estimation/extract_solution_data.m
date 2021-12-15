@@ -2,7 +2,7 @@ function [scale_matrix,alpha_vec,s_weights]=extract_solution_data(data,indexes,s
     data_r=data;
     data_r(:,1:3)=[];
 
-    varnames=data_r.Properties.VariableNames
+    varnames=data_r.Properties.VariableNames;
 
     n_skills=size(data_r,2);
 

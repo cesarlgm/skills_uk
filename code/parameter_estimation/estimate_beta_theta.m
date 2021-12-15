@@ -1,17 +1,24 @@
 %this function takes the average skill use and computes the beta_theta
 %vector
 
-function beta=estimate_beta_theta(empshares,skill_index_avg,job_type_index)
-    %STEP 1: I extract parameters to add the constant to the estimation
-    n_obs=size(skill_index_avg,1);
+function [beta,obs_tracker,job_type_index]=estimate_beta_theta(deviations)
+    %STEP 1: I extract data I require for the regressions
+    empshares=table2array(deviations{2}(:,4:end));
+    obs_tracker=deviations{1}(:,1:3);
+
+
+    skill_deviations=table2array(deviations{1}(:,4:end));
+    job_type_index=table2array(deviations{1}(:,'job_type'));
+    
+    n_obs=size(skill_deviations,1);
     n_educ=length(unique(job_type_index));
 
     %STEP 2: I add column of ones to estimate the constant
-    skill_index_avg=horzcat(ones(n_obs,1),skill_index_avg);
+    skill_deviations=horzcat(ones(n_obs,1),skill_deviations);
 
     %STEP 3: restructure the matrix to estimate different parameters for
     %each education level.
-    S=educ_restructure(skill_index_avg,job_type_index);
+    S=educ_restructure(skill_deviations,job_type_index);
     
     
     %STEP 4: erase the constants from the parameter estimates

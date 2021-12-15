@@ -1,15 +1,13 @@
 function [theta,theta_matrix,skill_indexes]=extract_weights(scale_vector,scale_weights, ...
-    normalize_index,scale_dummies,scale_mult_matrix,index_composition, ...
-    empshares, occ_index, job_type_index, n_educ)
+    data,observation_trackers,computation_information, n_educ)
     %Step 1> I take the solution scales and weights and compute the skill
     %indexes
 
    skill_indexes=create_skill_index(scale_vector, ...
-    scale_weights,normalize_index,scale_dummies, ...
-    scale_mult_matrix, index_composition);
+        scale_weights,data,computation_information);
 
     %Step 2> I take the indexes and compute the final theta
-    theta=theta_wrapper(empshares,skill_indexes,occ_index,job_type_index);
+    theta=theta_wrapper(skill_indexes,data,observation_trackers);
 
     %Step 3> create matrix for the output
     n_weights=length(theta);

@@ -1,10 +1,11 @@
 %wrapper of theta estimation
-function theta=theta_wrapper(empshares,skill_indexes,occ_index,job_type_index)
-    %Step 1: I compute average skill use by type 
-    [skill_job_use,job_type]=average_skill_use(skill_indexes,occ_index,job_type_index);
+function [theta,job_type]=theta_wrapper(skill_indexes,data,observation_trackers)
+    %Step 1: structure average data to estimate the thetas
+    deviations=create_regression_data(skill_indexes,...
+        data,observation_trackers);
 
     %STEP 2: estimate beta
-    beta=estimate_beta_theta(empshares,skill_job_use,job_type);
+    [beta,~,job_type]=estimate_beta_theta(deviations);
 
     %STEP 3: estimate theta
     theta=estimate_theta(beta,job_type);

@@ -27,7 +27,8 @@ do "code/process_LFS/create_education_graphs.do"
 
 *Produce list of occupations by group
 do "code/process_LFS/produce_occ_groups_list.do"
-*/c
+*/
+
 *Classifying jobs into jobs that 
 do "code/process_LFS/classify_jobs.do"
 
