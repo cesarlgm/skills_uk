@@ -1,0 +1,196 @@
+\documentclass[a4paper, 12pt]{article}
+\input{commandspreamble.tex}
+\usepackage{tabularx}
+\defcitealias{NationalAcademyofSciences.CommitteeonOccupationalClassificationandAnalysis.1971}{National Academy of Sciences, 1971}
+
+
+\title{Code documentation}
+\author{C\'esar Garro-Mar\'in\thanks{Boston University, email: \href{mailto:cesarlgm@bu.edu}{cesarlgm@bu.edu}}} 
+\begin{document}
+\maketitle
+
+\newcommand{\ntimes}{4 }
+\section{Estimating $\theta$}
+\subsection{Assuming scales}
+We normalize all the skill questions to range between zero and one. I define as the simple average of the skill questions involved:
+\beqns
+	S_{\theta,m}=\frac{1}{||m||}\sum_{l=1}^{||m||}s_{mli}
+\eeqns
+where $s_{mji}$ is the individual $i$'s answer to the skill question $l$. Next, I aggregate the dataset to at the occupation-year level and I estimate $\theta_i$ using the regression:
+\beqns
+		d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\pi_\theta+\sum_{i}\beta_{\theta,m}(S^\star_{\theta,m}(J)-\overline{S^\star_{\theta,m}(J)})+\nu_{\theta}(J)
+\eeqns
+The implied $\theta_i$ are given by,
+\bitem 
+	\item Unweighted: \href{https://www.dropbox.com/s/epmal84fzmnwiam/unweighted_thetas.txt?dl=0}{see log file}
+	\item Weighted: \href{https://www.dropbox.com/s/bkq8o6zcjmgpjf8/weighted_thetas.txt?dl=0}{see log file}
+\eitem 
+
+\input{../results/tables/regression_table.tex}
+
+
+\subsection{Sanity check}
+\subsubsection{Simulating data}
+If the model were true in the data, it generate data following the two equations below:
+\beqn
+\sum_{m=1}^I\theta_jS_{\theta,m}(J)&=&1 \label{eq:skill_sum}\\
+d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i  \label{eq:skill_reg}
+\eeqn
+\textbf{How do I simulate the data:}
+
+Equation \eqref{eq:skill_reg} is simple. Choose $\varepsilon$ and $d\ln A_i$ and generate data following:
+\beqns
+d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i+\nu_\theta(J)
+\eeqns
+Making equation \eqref{eq:skill_sum} work seems more involved. This equation implies that:
+\beqns
+	S_{\theta,M}(J)=\frac{1}{\theta_M}\left(1-\sum_{m=1}^{M-1}\theta_{i}S_{\theta,m}(J)\right)+\eta_{\theta}(J)
+\eeqns
+
+I will start simple:
+\bitem
+	\item Assume a matrix of $\theta_i$.
+	\item Why am I complicating myself with this? Simply generate the data following the above equation.
+	\item See if my algorithm works in finding the solution.
+\eitem 
+
+\subsection{Estimating scales}
+%Fix the notation here
+Estimation uses two key equations from the model:
+\beqn
+	\sum_{m=1}^I\theta_jS_{\theta,m}(J)&=&1 \label{eq:skill_sum}\\
+	d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i
+\eeqn
+our current procedure to estimate the model parameter is choose scales $c_{jml}$ and scale weights $\alpha_{jm}$  to minimize the MSE from equation \eqref{eq:skill_sum}:
+		\beqns
+		\min_{\alpha_{jm},c_{jml}}\frac{1}{N}\left[\sum_{m=1}^I\theta_jS_{\theta,m}-1\right]^2 \text{ s.t. }  S_{\theta,m}=\sum_{j=1}^{||m||}\alpha_{jm}\sum_{l=1}^5c_{jml}1_{d_{ijm}=l}
+		\eeqns
+ Where $\theta_i$ comes from an OLS regression using the estimating equation:
+	\beqns
+		d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\pi_\theta+\sum_{i}\beta_{\theta,i}(S^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)})+\nu_{\theta}(J)
+	\eeqns
+
+
+
+\section{Defining education groups}
+	Our current results group education levels into three broad groups that I will often call Low, Mid, and High.
+\input{results/tables/education_definition.tex}
+	
+
+\section{Classifying jobs}
+We say that an occupation $j$ is a core job of education group $e$ if two conditions are met:
+\benu	 
+	\item Education group $e$ is overrepresented in the occupation relative to the overall population. That is:
+	\beqns
+		s_e(j)\geq\overline{s}_e
+	\eeqns
+	where $s_e(j)$ denotes the employment share of the education group $e$ in job $j$, and $\overline{s}_e$ is its employment share in the population.
+	\item The employment share of group $e$ in job $j$ is at least \ntimes the employment share of any other education group that is overrepresented in the occupation.
+	\beqns
+		s_e(j)\geq\ntimes s_{e'}(j)
+	\eeqns
+	for any other education group $e'$ such that $	s_{e'}(j)\geq\overline{s}_{e'}$.
+\eenu
+
+\section{Computing $\theta$s}
+\subsection{Data I use}
+First I restrict data to only:
+\benu 
+\item occupations that are core jobs in two consecutive SES-waves.
+\item people with education levels matching the job-classification. For example, I restrict to observations of individuals with low-education in low-education core-jobs.
+\eenu 
+Using this restricted dataset, I occupational employment shares by education level:
+\beqns
+	s_e(j)=\frac{l_e(j)}{\sum_{j'}l_e(j')}
+\eeqns
+where $l$ denotes employment and the summation is over jobs that stay in the core of education group $e$ in two consecutive SES-waves.
+
+
+\section{Solution procedure}
+
+Out of equation 32 we have:
+\beqns
+	\frac{\partial \ln f_\theta(J)}{\partial A_i}-\frac{\partial \ln f_\theta(J')}{\partial A_i}&=&\frac{\varepsilon}{\varepsilon-1}\left[\frac{\ln y^\star_\theta(J)}{\partial \ln A_i}-\frac{\ln y^\star_\theta(J')}{\partial \ln A_i}\right]
+\eeqns
+Moreover, out of question 44 we have
+\beqns
+\frac{\partial \ln y^\star_\theta(J)}{\partial \ln A_i}&=&\theta_iS^\star_{\theta,i}(J)
+\eeqns
+Plugging into 32 we have:
+\beqn
+\label{eq:plug}
+\frac{\partial \ln f_\theta(J)}{\partial A_i}-\frac{\partial \ln f_\theta(J')}{\partial A_i}&=&\frac{\varepsilon}{\varepsilon-1}\left[\theta_iS^\star_{\theta,i}(J)-\theta_iS^\star_{\theta,i}(J')\right]
+\eeqn
+Thus:
+\beqns
+d\ln f_\theta(J)-d\ln f_\theta(J')=\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_iS^\star_{\theta,i}(J')\right]d\ln A_i+\theta_MS^\star_{\theta,M}(J)-\theta_MS^\star_{\theta,M}(J')
+\eeqns
+Summing over jobs and dividing by the number of jobs we have:
+\beqns
+d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}=\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i
+\eeqns
+This equation calls for the following regression specification:
+\beqns
+	d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\alpha_\theta+\sum_{i}\beta_{\theta,i}(S^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)})+\nu_{\theta}(J)
+\eeqns
+Then:
+\bitem
+	\item Under the assumption that $\theta_i=1$, $\frac{\varepsilon}{\varepsilon-1}d\ln A_i$ is identified out of the low education group.
+	\item Rest of education groups identify $\theta_i$. 
+\eitem 
+
+
+
+
+
+\subsection{Procedure}
+\benu
+	\item Guess $S_{\theta,i}(J)$.
+	\item Estimate $\theta_i$ out of core jobs. %\red{What is the reference job? The average for that education group?}
+	\item Given $\theta_i$ estimate $S_{\theta,i}(J)$.
+	\item Return to 1.
+\eenu
+
+\subsection{What functions do I need to write}
+\subsubsection{Estimation of $\theta_i$}
+Let $y_\theta$ be the $J\times 1$ vector containing the vector of $d\ln f_\theta(J)-d\ln f_\theta(J')$. Let $S_\theta$ the $J\times I$ matrix of skill indexes $S^\star_{\theta,i}(J)-S^\star_{\theta,i}(J')$. Then:
+\beqns
+	\beta_\theta=\frac{\epsilon}{\epsilon-1}[\theta_1d\ln A_1 \dots \theta_Id\ln A_I]'
+\eeqns
+I estimate $\beta_\theta$ by OLS:
+\beqns
+	\beta_\theta=(X_\theta'X_\theta)^{-1}X_\theta y_\theta
+\eeqns
+Using the appropriate block diagonal matrix I can estimate all the vectors at the same time. For this I need:
+\bitem
+\item The usual OLS function
+\item The function to block diagonalize the matrix that I already wrote.
+\eitem 
+Next, I need to back out the $\theta_i$. For this I need to do:
+\beqns
+	\beta_1=\frac{\epsilon}{\epsilon-1}[d\ln A_1 \dots d\ln A_I]'
+\eeqns
+Then:
+\beqns
+	\theta=\beta_\theta\oslash\beta_1
+\eeqns
+For this I need:
+\bitem
+	\item Function splitting the vector by education level.
+	\item Function estimating $\beta_{\theta}$: {\tt estimate\_beta\_theta}
+	\item Function estimating the $\theta$ {\tt estimate\_theta}.
+	\item Function estimating averages of skill indexes by education level: {\tt average\_skill\_use}.
+\eitem 
+\subsubsection{How do I estimate the scales then?}
+There are a set of $O$ skill questions in the SES survey that we have partitioned into $M$ mutually exclusive groups that we index by $m$. Within each partition, we index the skill questions by $j$. Let $d_{ijm}$ be individual's $i$ answer for the skill question $jm$. $d_{ijm}\in\{1,2,3,4,5\}$. The problem is then:
+\beqns
+	\min_{\alpha_{jm},c_{jml}}\frac{1}{N}\left[\sum_{m=1}^I\theta_jS_{\theta,m}\right]^2 \text{ s.t. }  S_{\theta,m}=v
+\eeqns
+\bitem
+	\item I think this is mostly done. I just have to modify the loss function for this.
+\eitem 
+\bibliographystyle{apalike}
+\bibliography{../../../../CentralLibrary/Papers/library}{}
+
+\end{document}
+

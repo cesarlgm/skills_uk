@@ -1,0 +1,21 @@
+This is 8-bit Big BibTeX version 0.99d
+Implementation:  Microsoft(R) C/C++ for Win32
+Release version: 3.71 (04 mar 2019)
+
+The 8-bit codepage and sorting file: 88591lat.csf
+The top-level auxiliary file: documentation.aux
+The style file: apalike.bst
+I found no \citation commands---while reading file documentation.aux
+Reallocated glb_str_ptr (elt_size=4) to 10 items from 0.
+Reallocated global_strs (elt_size=1001) to 10 items from 0.
+Reallocated glb_str_end (elt_size=4) to 10 items from 0.
+Database file #1: ../../../../CentralLibrary/Papers/library.bib
+
+Here's how much of BibTeX's memory you used:
+ Cites:                 0 out of 750
+ Fields:             5000 out of 5000
+ Hash table:         4865 out of 5000
+ Strings:             469 out of 4000
+ Free string pool:   3702 out of 65000
+ Wizard functions:   1935 out of 3000
+(There was 1 error message)
