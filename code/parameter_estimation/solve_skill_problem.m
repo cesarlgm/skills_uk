@@ -42,7 +42,7 @@ function [solution_array,scale_array,alpha_array,theta_array, ...
     [scale_dummies,normalize_index]=create_scale_dummies(skill_data);
     
     %STEP 3: create the matrices of non-negativity restrictions 
-    [scale_mult_matrix,scale_restriction_mat]= ...
+    [scale_mult_matrix,minimization_input]= ...
         create_scaling_matrix(scale_dummies,skill_data);
     
     observation_trackers={skill_obs_tracker,empshare_tracker};
@@ -59,15 +59,21 @@ function [solution_array,scale_array,alpha_array,theta_array, ...
 
         %I just want a function that takes parameters and spits out a
         %theta
-        
+        new_theta=get_theta(parameter_vector, ...
+            data, observation_trackers,computation_information);
 
+        %Now I use that theta to estimate the scales
+        new_scales=get_scales(new_theta,old_scales, data, ...
+        computation_information,minimization_input,job_type_index);
 
         %update the loop trakers
         deviation=norm(new_theta-old_theta);
-        old_theta=new_theta;
         n=n+1;
+        
+        %update the parameters I search for
+        old_scales=new_scales;
+        old_theta=new_theta;
     end
-    
     
     
     fun=@(p)error_wrapper(p, data,observation_trackers,computation_information);

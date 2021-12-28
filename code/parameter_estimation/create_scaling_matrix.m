@@ -1,4 +1,4 @@
-function [scale_mult_matrix,scale_restriction_mat]=create_scaling_matrix(dummy_matrix,data) 
+function [scale_mult_matrix,minimization_inputs]=create_scaling_matrix(dummy_matrix,data) 
     
     %This function performs two different tasks:
     % 1. Creates the matrix of ones to multiply to the vector of alphas.
@@ -25,4 +25,28 @@ function [scale_mult_matrix,scale_restriction_mat]=create_scaling_matrix(dummy_m
     end
 
     scale_restriction_mat=-1*scale_restriction_mat;
+    n_scales=size(scale_restriction_mat,2);
+
+    %I resize the matrix to add empty restrictions for the weights
+    restriction_size=size(scale_restriction_mat,1);
+    zero_mat=zeros(restriction_size,n_skills);
+    missing_columns=size(zero_mat,2);
+
+    scale_restriction_mat=horzcat(scale_restriction_mat,zero_mat);
+
+
+    %Creating b vector for the minimiztation
+    restriction_b=zeros(restriction_size,1);
+
+
+    %Creating upper and lower bounds
+    upper_bounds=vertcat(ones(n_scales,1),Inf*ones(missing_columns,1));
+    lower_bounds=vertcat(ones(n_scales+missing_columns,1));
+
+
+    minimization_inputs=cell(4,1);
+    minimization_inputs{1}=scale_restriction_mat;
+    minimization_inputs{2}=restriction_b;
+    minimization_inputs{4}=upper_bounds;
+    minimization_inputs{3}=lower_bounds;
 end

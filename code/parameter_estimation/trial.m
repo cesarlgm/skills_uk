@@ -1,63 +1,84 @@
+clear
 
 cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assistantship/ukData';
 
-addpath('code/process_SES/','data');
+addpath('code/parameter_estimation/','data');
 
 education='educ_3_low';
 index_composition=[3,4,8,6];
 
 %READING THE DATA
-data=readtable('data/additional_processing/file_for_minimization.csv');
+skill_path='data/additional_processing/SES_file_theta_estimation.csv';
+empshare_path='data/additional_processing/LFS_file_theta_estimation.csv';
+
+%%
+%STEP 1: I create all the 
+[skill_data,skill_obs_tracker,n_skills,index_names]=extract_scale_data(skill_path);
+
+[empshares,empshare_tracker]=extract_share_data(empshare_path);
+
+%Compute number of scales in the data
+n_scale_vector=count_n_scales(skill_data);
+
+%STEP 2: create matrix of dummies for the scales
+    % - In this step I also create an index indicating with scales are 
+    %   normalized to zero (-1) and to (1).
+[scale_dummies,normalize_index]=create_scale_dummies(skill_data);
+
+%STEP 3: create the matrices of non-negativity restrictions 
+[scale_mult_matrix,minimization_input]= ...
+    create_scaling_matrix(scale_dummies,skill_data);
 
 %%
 
-%STEP 1: extract data required for calibration of scales
-[skill_data,education_index,n_skills,index_names]=extract_scale_data(data);
+observation_trackers={skill_obs_tracker,empshare_tracker};
 
-%%
-[skill_dummies,normalize_index]=create_scale_dummies(skill_data);
+data={scale_dummies,scale_mult_matrix,empshares,skill_data};
 
-%%
-[scale_mult_matrix,scale_restriction_mat]=create_scaling_matrix(skill_dummies,skill_data);
+computation_information={n_skills,index_composition,normalize_index,n_scale_vector};
 
 
 %%
-%STEP 4: set up initial condition
-%in the to do> handle the initial condition
-n_scales=sum(normalize_index==0);
-n_educ=length(unique(education_index));
-n_indexes=length(index_composition);
+old_scales=create_initial_guess(62,21,...
+    1,computation_information{4});
 
-%parameter0=transpose([0.222579700657215,0.805915707554167,0.805934255512936,0.998742098480153,0.998753548886498,0.998759395160812,0.988453838035417,0.988454324399959,0.988454643404971,0.268104124114063,0.270362961075603,0.453779683934298,0.284155521668228,0.32396871550592,0.465747332247708,0.283388060944434,0.291911760201956,0.999689697420195,0.999716612484963,0.999750308598423,0.000012087123588704,6.74430860574033E-05,0.0457083770487271,0.817572150744241,0.892346102038369,0.892358765167264,0.0746904166643458,0.489138219930771,0.723176281516481,0.162148714673458,0.44411378742385,0.760574778420233,1.13787670194296E-05,3.35993452899801E-05,5.79782400666725E-05,0.95568806148284,0.955689575984563,0.955715177974054,0.00028266608974846,0.000490027065999569,0.000633699604492,0.97761574994023,0.988787925826292,0.992652765015978,0.226806873696037,0.50872580499229,0.778595679594773,0.132375248541863,0.438751590280475,0.771912191447761,0.000460671536995092,0.000478939365235358,0.000509850082433456,0.999996164262167,0.999997761749677,0.999998697141552,0.999998140523949,0.999999119547604,0.999999501737552,0.00948107158860159,0.00953213215598239,0.018938917250085,0.15907239066474,0.125441806659596,0.130020889801743,0.0306043687342344,0.0033618962325284,0.00420445036520223,0.0467232040026071,4.18328512281006E-07,4.92720365184944E-08,0.00344533542900382,0.149365178327892,0.00229285914866229,0.467041364170443,1.5665746476365E-08,8.74601615739359E-08,0.00378440501170678,0.0245447076756775,0.0922429939712351,0.457402862945524,1.08358140655004,1.17000993048979,0.148535768182651,0.82461224468476,1.36556864186467]);
-%parameter0= transpose(1:89); %create_initial_guess(n_scales,n_skills,n_educ,n_indexes);
+%Step 1: split the vector into scales and weights
+[scale_vector,scale_weights]=split_parameters(...
+    old_scales,computation_information);
 
-%[scale_matrix,alpha_vec,s_weights,index_matrix]=extract_solution(parameter0,normalize_index, ...
- %       n_skills, n_educ,index_names,skill_data,skill_dummies,scale_mult_matrix,index_composition);
+%Step 2: I take the scale observations and compute skill indexes
+skill_indexes=create_skill_index(scale_vector, ...
+    scale_weights,data,computation_information);
 
-%%
-fun=@(p)error_function(p,skill_dummies,normalize_index,index_composition, ...
-    scale_mult_matrix,education_index);
-
-n_parameters=size(a,1);
 
 %%
-%STEP 5
-%fix size of mrestruction matrix
-missing_columns=n_parameters-size(scale_restriction_mat,2);
-restriction_size=size(scale_restriction_mat,1);
-parameter_restriction_matrix=horzcat(scale_restriction_mat, ...
-       zeros(restriction_size,missing_columns));
-restriction_b=zeros(restriction_size,1);
+%Write while loop here
+tolerance=1^-6;
+max_iter=3;
+old_theta=zeros(12,1);
+deviation=1000;
+n=0;
 
-upper_bounds=vertcat(ones(n_scales,1),Inf*ones(missing_columns,1));
-% 
-% %STEP 5: solve the problem
-options = optimset('PlotFcns',@optimplotfval,'TolX',1e-10,'MaxFunEvals',10000e3);
-% 
-[solution,MSE]=fmincon(fun,a,parameter_restriction_matrix,restriction_b,[],[],zeros(n_parameters,1), upper_bounds,[],options);
+while (deviation>tolerance)&&(n<max_iter) 
+   fprintf('Just started iteration #%d\n', n);
 
-%%
-[scale_matrix,alpha_vec,s_weights,index_matrix]=extract_solution(solution,normalize_index,...
-    n_skills, n_educ,index_names,skill_dummies,scale_mult_matrix,index_composition);
+    %loop over thetas here
 
-tr=mean(transpose(sum(index_matrix,2)-1)*sum(index_matrix,2)-1)
+    %I just want a function that takes parameters and spits out a
+    %theta
+    [new_theta,job_type_index]=get_theta(old_scales, ...
+        data, observation_trackers,computation_information);
+
+    %Now I use that theta to estimate the scales
+    new_scales=get_scales(new_theta,old_scales, data, ...
+        computation_information,minimization_input,job_type_index);
+
+    %update the loop trakers
+    deviation=norm(new_theta-old_theta);
+    n=n+1;
+    
+    %update the parameters I search for
+    old_scales=new_scales;
+    old_theta=new_theta;
+end
+

@@ -10,8 +10,8 @@ education='educ_3_low';
 skill_indexes=[3,4,8,6];
 
 %READING THE DATA
-skill_data=readtable('data/additional_processing/SES_file_theta_estimation.csv');
-empshare_data=readtable('data/additional_processing/LFS_file_theta_estimation.csv');
+skill_path='data/additional_processing/SES_file_theta_estimation.csv';
+empshare_path='data/additional_processing/LFS_file_theta_estimation.csv';
 
 
 %%

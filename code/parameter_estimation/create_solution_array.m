@@ -25,23 +25,6 @@ function [solution_array,MSE_array,n_educ]=create_solution_array(fun, ...
 
         n_parameters=size(initial_guess,1);
 
-        
-        %STEP 2
-        %fix size of mrestruction matrix
-        missing_columns=n_parameters-size(scale_restriction_mat,2);
-        restriction_size=size(scale_restriction_mat,1);
-        parameter_restriction_matrix=horzcat(scale_restriction_mat, ...
-               zeros(restriction_size,missing_columns));
-        size(parameter_restriction_matrix)
-        restriction_b=zeros(restriction_size,1);
-        
-        %STEP 3: create the vector of upper bounds
-        upper_bounds=vertcat(ones(n_scales,1),Inf*ones(missing_columns,1));
-        lower_bounds=vertcat(ones(n_parameters,1));
-
-
-        %STEP 5: solve the problem
-        options = optimset('TolX',1e-10,'MaxFunEvals',10000e3,'PlotFcn','optimplotfval');
 
         parfor i=1:n_initial_cond 
             display(i)
