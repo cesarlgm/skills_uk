@@ -19,12 +19,10 @@
 %==========================================================================
 
 %OUTPUT
-
-
-
 function [solution_array,scale_array,alpha_array,theta_array, ...
     theta_matrix_array,skill_index_array,MSE_array]= ... 
-    solve_skill_problem(skill_path,empshare_path,index_composition,n_initial_cond)
+    solve_skill_problem(skill_path,empshare_path,index_composition, ...
+    n_initial_cond, tolerance,max_iter)
 
     %STRUCTURE OF THE PARAMETER VECTOR
     % Scales - scale weights
@@ -53,14 +51,34 @@ function [solution_array,scale_array,alpha_array,theta_array, ...
 
     computation_information={n_skills,index_composition,normalize_index,n_scale_vector};
 
+    %Write while loop here
+    deviation=1000;
+    n=0;
+    while (deviation>tolerance)||(n<max_iter) 
+        %loop over thetas here
+
+        %I just want a function that takes parameters and spits out a
+        %theta
+        
+
+
+        %update the loop trakers
+        deviation=norm(new_theta-old_theta);
+        old_theta=new_theta;
+        n=n+1;
+    end
+    
+    
+    
     fun=@(p)error_wrapper(p, data,observation_trackers,computation_information);
 
-    [solution_array,MSE_array,n_educ]= ...
-        create_solution_array(fun, n_initial_cond, ...
-        scale_restriction_mat,computation_information,observation_trackers);
+    %Create solution array goes into the shelf now, while I figure this out
+    %[solution_array,MSE_array,n_educ]= ...
+     %   create_solution_array(fun, n_initial_cond, ...
+      %  scale_restriction_mat,computation_information,observation_trackers);
 
 
-    [scale_array,alpha_array,theta_array,theta_matrix_array, ...
-        skill_index_array]=extract_solution(solution_array,index_names,n_educ,...
-        data,computation_information,observation_trackers);
+    %[scale_array,alpha_array,theta_array,theta_matrix_array, ...
+     %   skill_index_array]=extract_solution(solution_array,index_names,n_educ,...
+      %  data,computation_information,observation_trackers);
 end

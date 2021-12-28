@@ -1,4 +1,3 @@
-
 function error=error_wrapper(parameter_vector, ...
     data, observation_trackers,computation_information)
 

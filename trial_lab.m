@@ -45,9 +45,6 @@ data={scale_dummies,scale_mult_matrix,empshares,skill_data};
 
 computation_information={n_skills,skill_composition,normalize_index};
 
-%%
-
-parameter_vector=rand(83,1);
 
 [solution_array,scale_array,alpha_array,theta_array, ...
     theta_matrix_array,skill_index_array,MSE_array]= ...
