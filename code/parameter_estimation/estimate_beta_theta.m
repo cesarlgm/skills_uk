@@ -2,11 +2,12 @@
 %vector
 
 function [beta,obs_tracker,job_type_index]=estimate_beta_theta(deviations)
+    %I haven't made sure that the data is in the right order
+
     %STEP 1: I extract data I require for the regressions
     empshares=table2array(deviations{2}(:,4:end));
     obs_tracker=deviations{1}(:,1:3);
-
-
+    
     skill_deviations=table2array(deviations{1}(:,4:end));
     job_type_index=table2array(deviations{1}(:,'job_type'));
     

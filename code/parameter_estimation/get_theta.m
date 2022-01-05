@@ -9,6 +9,7 @@ function [theta,job_type]=get_theta(parameter_vector, ...
     skill_indexes=create_skill_index(scale_vector, ...
         scale_weights,data,computation_information);
 
+
     %Step 3: with those scales, compute the thetas
     [theta,job_type]=theta_wrapper(skill_indexes,data,observation_trackers);
 end

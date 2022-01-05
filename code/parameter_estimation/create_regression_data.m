@@ -12,10 +12,11 @@ function deviations=create_regression_data(skill_indexes,data,...
 
     %Step 2: arrange the data into a suitable format
     skill_table=array2table([skill_tracker,skill_indexes]);
-    skill_table=grpstats(skill_table,{'Var1','Var3'},'mean');
-    skill_table(:,3)=[];
-    skill_table=renamevars(skill_table,["Var1","Var3","mean_Var2"],...
-        ["occupation","year","job_type"]);
+    skill_table=grpstats(skill_table,{'Var1','Var2','Var3'},'mean');
+    
+    skill_table.GroupCount=[];
+    skill_table=renamevars(skill_table,["Var1",'Var2',"Var3"],...
+        ["occupation","job_type","year"]);
 
     empshare_table=array2table([empshare_tracker,empshares]);
     empshare_table=renamevars(empshare_table,["Var1","Var2","Var3"],...
@@ -23,8 +24,8 @@ function deviations=create_regression_data(skill_indexes,data,...
 
     %This line outputs the skill index data. No averages needed anymore
     deviations{1}=sortrows(skill_table, ...
-            {'job_type','occupation','year'});
+            {'job_type' 'occupation' 'year'});
     %This line outputs the empshare data. No averages needed.
     deviations{2}=sortrows(empshare_table, ...
-            {'job_type','occupation','year'});
+            {'job_type' 'occupation' 'year'});
 end
