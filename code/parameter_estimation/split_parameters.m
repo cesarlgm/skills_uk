@@ -11,3 +11,4 @@ function [scale_vector,scale_weights]=split_parameters(...
     scale_vector=parameter(1:n_scales,1);
     scale_weights=parameter(n_scales+1:n_scales+n_alphas,1);
 end
+

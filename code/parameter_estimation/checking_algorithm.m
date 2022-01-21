@@ -5,7 +5,7 @@ cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assi
 
 addpath('code/parameter_estimation/','data');
 
-index_composition=[1,1];
+index_composition=[1,1,3,1];
 
 %READING THE DATA
 skill_path='data/additional_processing/sim_skill.csv';
@@ -55,10 +55,11 @@ skill_indexes=create_skill_index(scale_vector, ...
 
 %%
 %Write while loop here
-TOLERANCE=1e-10
+TOLERANCE=1e-100;
 MAX_ITER=100;
 old_theta=zeros(4,1);
-new_theta=ones(4,1)
+new_theta=ones(4,1);
+new_scales=zeros(4,1);
 deviation=1000;
 n=1;
 
@@ -67,7 +68,7 @@ while (deviation>TOLERANCE)&&(n<MAX_ITER)
 
     %I just want a function that takes parameters and spits out a
     %theta
-    [new_theta,job_type_index]=get_theta(old_scales, ...
+    [new_theta,job_type_index,regression_data]=get_theta(old_scales, ...
         data, observation_trackers,computation_information);
 
     %Now I use that theta to estimate the scales
@@ -76,15 +77,14 @@ while (deviation>TOLERANCE)&&(n<MAX_ITER)
 
     %update the loop trakers
     deviation=norm(new_theta-old_theta);
-    deviation
-    deviation>TOLERANCE
-    
+
     n=n+1;
-    n
-    n<MAX_ITER
     
     %update the parameters I search for
     old_scales=new_scales;
     old_theta=new_theta;
 end
 
+
+[scale_vector,scale_weights]=split_parameters(...
+    new_scales,computation_information);

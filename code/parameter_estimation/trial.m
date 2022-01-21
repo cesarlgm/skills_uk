@@ -5,7 +5,7 @@ cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assi
 addpath('code/parameter_estimation/','data');
 
 education='educ_3_low';
-index_composition=[3,4,8,6];
+index_composition=[2,2,2,2];
 
 %READING THE DATA
 skill_path='data/additional_processing/SES_file_theta_estimation.csv';
@@ -28,8 +28,7 @@ n_scale_vector=count_n_scales(skill_data);
 %STEP 3: create the matrices of non-negativity restrictions 
 [scale_mult_matrix,minimization_input]= ...
     create_scaling_matrix(scale_dummies,skill_data);
-
-%%
+%% 
 
 observation_trackers={skill_obs_tracker,empshare_tracker};
 
@@ -39,7 +38,9 @@ computation_information={n_skills,index_composition,normalize_index,n_scale_vect
 
 
 %%
-old_scales=create_initial_guess(62,21,...
+n_scales=sum(computation_information{3}==0);
+n_weights=sum(index_composition);
+old_scales=create_initial_guess(n_scales,n_weights,...
     1,computation_information{4});
 
 %Step 1: split the vector into scales and weights
@@ -54,7 +55,7 @@ skill_indexes=create_skill_index(scale_vector, ...
 %%
 %Write while loop here
 tolerance=1^-6;
-max_iter=3;
+max_iter=1000;
 old_theta=zeros(12,1);
 deviation=1000;
 n=0;
@@ -75,6 +76,8 @@ while (deviation>tolerance)&&(n<max_iter)
 
     %update the loop trakers
     deviation=norm(new_theta-old_theta);
+    deviation
+    new_theta
     n=n+1;
     
     %update the parameters I search for

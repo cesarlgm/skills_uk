@@ -41,7 +41,7 @@ function [scale_mult_matrix,minimization_inputs]=create_scaling_matrix(dummy_mat
 
     %Creating upper and lower bounds
     upper_bounds=vertcat(ones(n_scales,1),Inf*ones(missing_columns,1));
-    lower_bounds=vertcat(ones(n_scales+missing_columns,1));
+    lower_bounds=vertcat(zeros(n_scales+missing_columns,1));
 
 
     minimization_inputs=cell(4,1);
