@@ -5,7 +5,7 @@ cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assi
 
 addpath('code/parameter_estimation/','data');
 
-index_composition=[1,1,3,1];
+index_composition=[1,1];
 
 %READING THE DATA
 skill_path='data/additional_processing/sim_skill.csv';
@@ -85,6 +85,12 @@ while (deviation>TOLERANCE)&&(n<MAX_ITER)
     old_theta=new_theta;
 end
 
+%%
+[scale_vector,scale_weights]=split_parameters(old_scales, ... 
+     computation_information);
 
-[scale_vector,scale_weights]=split_parameters(...
-    new_scales,computation_information);
+%%
+scale_matrix=create_output_scale_matrix(scale_vector,skill_data,n_skills,index_names);
+
+%%
+scale_weight_matrix=extract_alpha(scale_weights,index_names);

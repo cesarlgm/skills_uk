@@ -19,23 +19,19 @@
 %==========================================================================
 
 %OUTPUT
-function [solution_array,scale_array,alpha_array,theta_array, ...
-    theta_matrix_array,skill_index_array,MSE_array]= ... 
-    solve_skill_problem(skill_path,empshare_path,index_composition, ...
-    n_initial_cond, tolerance,max_iter)
+function solution= solve_skill_problem(skill_path,empshare_path,index_composition, ...
+    n_initial_cond, tolerance,max_iter,restricted_weights)
 
     %STRUCTURE OF THE PARAMETER VECTOR
     % Scales - scale weights
     
-    %STEP 1: extract data required for calibration of scales and employment
-    %shares
-    [skill_data,skill_obs_tracker,n_skills,index_names]=extract_scale_data(skill_path);
-
+      [skill_data,skill_obs_tracker,n_skills,index_names]=extract_scale_data(skill_path);
+    
     [empshares,empshare_tracker]=extract_share_data(empshare_path);
-
+    
     %Compute number of scales in the data
     n_scale_vector=count_n_scales(skill_data);
-   
+    
     %STEP 2: create matrix of dummies for the scales
         % - In this step I also create an index indicating with scales are 
         %   normalized to zero (-1) and to (1).
@@ -44,12 +40,36 @@ function [solution_array,scale_array,alpha_array,theta_array, ...
     %STEP 3: create the matrices of non-negativity restrictions 
     [scale_mult_matrix,minimization_input]= ...
         create_scaling_matrix(scale_dummies,skill_data);
+
+    %STEP 4: add weight normalizations if needed.
+    if restricted_weights==1
+        alpha_restrictions=create_alpha_restrictions(index_composition);
+    else
+        alpha_restrictions=[];
+    end
+
     
     observation_trackers={skill_obs_tracker,empshare_tracker};
-
+    
     data={scale_dummies,scale_mult_matrix,empshares,skill_data};
-
+    
     computation_information={n_skills,index_composition,normalize_index,n_scale_vector};
+
+    %%
+    %CREATING INITIAL GUESS
+    n_scales=sum(computation_information{3}==0);
+    n_weights=sum(index_composition);
+    old_scales=create_initial_guess(n_scales,n_weights,...
+        1,computation_information{4});
+
+    %Step 1: split the vector into scales and weights
+    [scale_vector,scale_weights]=split_parameters(...
+        old_scales,computation_information);
+
+    %Step 2: I take the scale observations and compute skill indexes
+    skill_indexes=create_skill_index(scale_vector, ...
+        scale_weights,data,computation_information);
+    %%
 
     %Write while loop here
     deviation=1000;
