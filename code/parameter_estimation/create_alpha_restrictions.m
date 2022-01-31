@@ -5,7 +5,9 @@ function alpha_restrictions=create_alpha_restrictions(index_composition)
     %D*alpha=b. I will embed these restrictions into the problem. They will
     %not be imposed as a constraint
 
-    %Alpha A imposes the non-negativity of the 1-sum(alpha) weights.
+    %Alpha A imposes the non-negativity of the 1-sum(alpha) weights and the
+    %constraint that they have to be less than one.
+    %the constraint I want to pass is alpha_A*alpha<alpha_b
 
     b=zeros(sum(index_composition),1);
     b(cumsum(index_composition),1)=1;
@@ -26,9 +28,13 @@ function alpha_restrictions=create_alpha_restrictions(index_composition)
     %The second part constrains them to be less than one.
     alpha_A=vertcat(-1*alpha_A,alpha_A);
 
+    n_indexes=size(index_composition,2);
+    alpha_b=vertcat(zeros(n_indexes,1),ones(n_indexes,1));
+
     %Saving the restrictions into the output
-    alpha_restrictions=cell(3,1);
+    alpha_restrictions=cell(4,1);
     alpha_restrictions{1,1}=D;
     alpha_restrictions{2,1}=alpha_A;
     alpha_restrictions{3,1}=b;
+    alpha_restrictions{4,1}=alpha_b;
 end

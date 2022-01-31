@@ -1,5 +1,5 @@
-function scale_error=get_scale_error( parameter_vector, theta, ...
-    data,computation_information,job_type_index)
+function scale_error=get_scale_error(parameter_vector, theta, ...
+    data,computation_information,job_type_index,alpha_restrictions)
 
     %Step 1: split the vector into scales and weights
     [scale_vector,scale_weights]=split_parameters(...
@@ -7,7 +7,7 @@ function scale_error=get_scale_error( parameter_vector, theta, ...
 
     %Step 2: I take the scale observations and compute skill indexes
     skill_indexes=create_skill_index(scale_vector, ...
-        scale_weights,data,computation_information);
+        scale_weights,data,computation_information,alpha_restrictions);
 
     %Step 3: I use the estimated theta to compute the theta error
     scale_error=theta_error(skill_indexes,theta,job_type_index);

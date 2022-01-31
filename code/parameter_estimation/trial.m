@@ -29,16 +29,7 @@ n_scale_vector=count_n_scales(skill_data);
 
 %STEP 3: create the matrices of non-negativity restrictions 
 [scale_mult_matrix,minimization_input]= ...
-    create_scaling_matrix(scale_dummies,skill_data);
-
-%%
-
-%STEP 4: add weight normalizations if needed.
-if restricted_weights==1
-    alpha_restrictions=create_alpha_restrictions(index_composition);
-else
-    alpha_restrictions=[];
-end
+    create_scaling_matrix(scale_dummies,skill_data,restricted_weights,index_composition);
 
 %% 
 
@@ -48,6 +39,13 @@ data={scale_dummies,scale_mult_matrix,empshares,skill_data};
 
 computation_information={n_skills,index_composition,normalize_index,n_scale_vector,restricted_weights};
 
+if restricted_weights==1
+    %If the weights are restricted then, create the appropriate
+    %inequality restrictions
+    alpha_restrictions=create_alpha_restrictions(index_composition);
+else
+    alpha_restrictions=[];
+end
 
 %%
 n_weights=create_n_weights(index_composition,restricted_weights);
@@ -68,13 +66,15 @@ skill_indexes=create_skill_index(scale_vector, ...
     scale_weights,data,computation_information,alpha_restrictions);
 
 
+
+
 %%
 %Write while loop here
 tolerance=0.01;
 max_iter=1000;
-old_theta=new_theta;
-old_scales=new_scales;
-%old_theta=zeros(12,1);
+%old_theta=new_theta;
+%old_scales=new_scales;
+old_theta=zeros(12,1);
 deviation=1000;
 n=0;
 
@@ -86,11 +86,11 @@ while (deviation>tolerance)&&(n<max_iter)
     %I just want a function that takes parameters and spits out a
     %theta
     [new_theta,job_type_index]=get_theta(old_scales, ...
-        data, observation_trackers,computation_information);
+        data, observation_trackers,computation_information,alpha_restrictions);
 
     %Now I use that theta to estimate the scales
     new_scales=get_scales(new_theta,old_scales, data, ...
-        computation_information,minimization_input,job_type_index);
+        computation_information,minimization_input,job_type_index,alpha_restrictions);
 
     %update the loop trakers
     deviation=norm(new_theta-old_theta);
