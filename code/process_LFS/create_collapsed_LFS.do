@@ -2,15 +2,25 @@
 *Creates the collapsed LFS databases
 *===============================================================================
 
-forvalues year=2002/2002{
-	forvalues quarter=1/1 {
+
+forvalues year=2000/2017{
+	if `year'>2008 {
+		local industry_cw in0792dm
+		local industry indd07m
+	}
+	else {
+		local industry_cw indd92m
+		local industry indd92m
+	}
+	forvalues quarter=1/4 {
 		if `year'!=2004 | `quarter'!=1 {
 			use "./data/raw/LFS/`year'q`quarter'", clear
 			
 			display "`year'q`quarter'"
 			
 			rename *, lower
-			
+
+
 			*Note here I am dropping the people that say they don't know
 			g year=`year'
 			g quarter= `quarter'
@@ -137,7 +147,7 @@ forvalues year=2002/2002{
 				
 				gcollapse (sum) observations (count) people=age  ///
 					(mean) `continuousList' [fw=waveWeight], ///
-					by(year quarter edlevLFS `occupation') fast
+					by(year quarter edlevLFS `occupation' `industry_cw') fast
 				
 				*Check this cross walks
 
@@ -153,11 +163,25 @@ forvalues year=2002/2002{
 					cap replace `variable'=	`variable'*cwWeight
 				}
 				
-				gcollapse (sum) people observations `continuousList', ///
-					by(bsoc2000 year quarter edlevLFS)
-					
-				*Here everything is averages by category
-				save "data/temporary/LFS`year'q`quarter'_collapsed", replace
+				preserve
+					gcollapse (sum) people observations `continuousList', ///
+						by(bsoc2000 year quarter edlevLFS)
+						
+					*Here everything is averages by category
+					save "data/temporary/LFS`year'q`quarter'_collapsed", replace
+				restore
+				
+				*Saving files for employment share computation
+				{
+					preserve
+						gcollapse (sum) people observations `continuousList', ///
+							by(bsoc2000 `industry_cw'  year quarter edlevLFS)
+							
+						rename `industry_cw' industry_cw
+						*Here everything is averages by category
+						save "data/temporary/LFS`year'q`quarter'_industry_cw", replace
+					restore
+				}
 			}
 			
 		}

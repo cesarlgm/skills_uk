@@ -5,8 +5,9 @@
 *Here I am aggregating based on the number of observations in the SES
 *====================================================================
 g bsoc00Agg=bsoc2000
-label copy bsoc2000 bsoc00Agg, replace
-label values bsoc00Agg bsoc00Agg
+cap label copy soc2km bsoc00Agg, replace
+cap label copy bsoc2000 bsoc00Agg, replace
+cap label values bsoc00Agg bsoc00Agg
 
 *This creates the aggregation for problematic 2001 codes
 replace bsoc00Agg=1122 if inlist(bsoc2000,1122,1123)
@@ -69,7 +70,7 @@ replace bsoc00Agg=5312 if inlist(bsoc2000,5312,5314,5315,5316,5319)
 replace bsoc00Agg=8142 if inlist(bsoc2000,8142,8143)
 replace bsoc00Agg=4121 if inlist(bsoc2000,4121,4122)
 
-
+cap  {
 *RELABELLING
 label define bsoc00Agg  1122 "1122 managers in construction, mining and energy", modify
 label define bsoc00Agg  1141 "1141 quality assurance and customer care managers", modify
@@ -131,3 +132,4 @@ label define bsoc00Agg  5111 "5111 Farmers, gardeners and ground women", modify
 label define bsoc00Agg  5311 "5311 Construction trades", modify
 label define bsoc00Agg  8142 "8142 Road and ail construction operatives", modify
 label define bsoc00Agg  4121 "4121 Credit controllers, accnts wages cleark, bookkeeper", modify
+}

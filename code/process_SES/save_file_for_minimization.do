@@ -44,17 +44,17 @@ do "code/process_LFS/aggregate_occupations.do"
 *SKILL INDEXES
 *===============================================================================
 
-local abstract 		clong cwritelg ccalca cpercent cstats cplanoth csolutn canalyse
-local social		cpeople cteach cspeech cpersuad cteamwk clisten
+local abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
+local social		cpeople cteach  cspeech cpersuad cteamwk clisten
 local routine		brepeat bvariety cplanme bme4 
-local manual		chands cstrengt cstamina
+local manual		chands cstrengt  cstamina
 local index_list 	abstract social routine manual 
 
 local variable_list  `manual' `routine' `abstract' `social' 
 
 
 foreach index in `index_list' {
-	pwcorr ``index''
+	cap pwcorr ``index''
 }
 
 
