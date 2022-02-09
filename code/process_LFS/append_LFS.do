@@ -61,6 +61,7 @@ do "code/process_LFS/create_education_variables.do"
 
 gcollapse (sum) people observations, by(bsoc00Agg industry_cw year educ_3_low)
 
+drop if industry_cw<0
 
 save "data/temporary/LFS_industry_occ_file", replace
 

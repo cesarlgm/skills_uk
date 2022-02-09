@@ -37,7 +37,7 @@ egen tot_skill=rowtotal($index_list)
 
 *I force the skills to sum to 1
 foreach variable in $index_list  {
-    generate i_`variable'=`variable' / tot_skill
+    generate i_`variable'=`variable' // tot_skill
 }
 
 egen temp=rowtotal(i_*)
@@ -55,79 +55,64 @@ forvalues educ=1/3 {
 
 
 
+egen industry_id=group(industry_cw education)
+
 
 eststo clear
-forvalues educ=1/3 {
-    reghdfe d_l_employment  i_* if education==`educ', nocons absorb(industry_cw)
-    
-    unique occupation if education==`educ' 
-    estadd scalar n_occupations=`r(unique)'
-    
-    eststo reg`educ'u
-  
-    foreach variable in $index_list {
-        global `variable'_`educ'_u=_b[i_`variable']
-    }
 
-    reghdfe d_l_employment  i_* if education==`educ' [aw=obs], nocons absorb(industry_cw)
-    unique occupation if education==`educ' 
-    estadd scalar n_occupations=`r(unique)'
-    eststo reg`educ'w
-
-    foreach variable in $index_list {
-        global `variable'_`educ'_w=_b[i_`variable']
-    }
-    
-}
-
+reghdfe d_l_employment  *1 *2 *3 , nocons absorb(industry_id) vce(cl occupation)
+eststo regu
 
 forvalues educ=1/3 {
     foreach variable in $index_list {
-        global theta_`variable'_`educ'_u= ${`variable'_`educ'_u}/ (${`variable'_1_u}-$manual_1_u+${manual_`educ'_u})
-        global theta_`variable'_`educ'_w= ${`variable'_`educ'_w}/ (${`variable'_1_w}-$manual_1_w+${manual_`educ'_w})
+        est restore regu
+        nlcom _b[`variable'`educ']/(_b[`variable'1]-_b[manual1]+_b[manual`educ']), post 
+        eststo theta`variable'`educ'u
     }
 }
 
 
-*Write matrix here
-matrix resultsu=J(3,4,.)
-matrix resultsw=J(3,4,.)
+reghdfe d_l_employment  *1 *2 *3 [aw=obs], nocons absorb(industry_id) vce(cl occupation)
+eststo regw
 
 forvalues educ=1/3 {
-    local counter=1
     foreach variable in $index_list {
-        matrix resultsu[`educ',`counter']=${theta_`variable'_`educ'_u}
-        matrix resultsw[`educ',`counter']=${theta_`variable'_`educ'_w}
-        local ++counter
+        est restore regw
+        nlcom _b[`variable'`educ']/(_b[`variable'1]-_b[manual1]+_b[manual`educ']), post 
+        eststo theta`variable'`educ'w
     }
 }
-
-
-*Ok this doesn't work, but I don't know what to do about it. What about normalizing to 1?
-matrix colnames resultsu= "Manual" "Routine" "Abstract" "Social"
-matrix rownames resultsu= "Low" "Mid" "High"
-log using "results/log_files/unweighted_thetas.txt", text replace
-    matrix list resultsu
-log close
-matrix colnames resultsw= "Manual" "Routine" "Abstract" "Social"
-matrix rownames resultsw= "Low" "Mid" "High"
-log using "results/log_files/weighted_thetas.txt", text replace
-    matrix list resultsw
-log close
 
 
 local table_name "results/tables/regression_table.tex"
 local table_title "Estimates of $\beta_{i}^e$"
+local table_note   "Standard errors clustered at the occupation level. Estimates include industry by education fixed-effects"
 local table_options   label append f collabels(none) ///
         nomtitles plain  par  b(%9.3fc) se(%9.3fc) star
-local col_titles Low Mid High Low Mid High 
+local col_titles Unweighted Weighted 
 
-textablehead using `table_name', ncols(6) coltitles(`col_titles') ///
-    exhead(&\multicolumn{3}{c}{Unweighted}&\multicolumn{3}{c}{Weighted} \\) ///
+textablehead using `table_name', ncols(2) coltitles(`col_titles') ///
     title(`table_title')
 
 leanesttab reg*u reg*w using `table_name', fmt(2) ///
     stat(n_occupations N r2, fmt(%9.0fc %9.0fc %9.2fc)) append
     
-textablefoot using `table_name'
+textablefoot using `table_name', notes(`table_note')
+
+
+local table_name "results/tables/theta_estimates.tex"
+local table_title "Estimates of $\theta_{i}^e$"
+local table_note   "standard errors computed using the delta method"
+local table_options   label append f collabels(none) ///
+        nomtitles plain  par  b(%9.3fc) se(%9.3fc) star
+local col_titles Manual Routine Abstract Social Manual Routine Abstract Social
+
+textablehead using `table_name', ncols(8) coltitles(`col_titles') ///
+    exhead(&\multicolumn{4}{c}{Unweighted}&\multicolumn{4}{c}{Weighted} \\) ///
+    title(`table_title')
+
+leanesttab theta*1u theta*1w using `table_name', fmt(2) noobs append  coeflabel(_nl_1 "Low")
+leanesttab theta*2u theta*2w using `table_name', fmt(2) noobs append  coeflabel(_nl_1 "Mid")
+leanesttab theta*3u theta*3w using `table_name', fmt(2) noobs append  coeflabel(_nl_1 "High")
+textablefoot using `table_name', notes(`table_note')
 
