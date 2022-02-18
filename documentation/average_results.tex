@@ -1,0 +1,44 @@
+\documentclass[a4paper, 12pt]{article}
+\input{commandspreamble.tex}
+\usepackage{tabularx}
+\defcitealias{NationalAcademyofSciences.CommitteeonOccupationalClassificationandAnalysis.1971}{National Academy of Sciences, 1971}
+
+
+\title{Results with simple average indexes}
+\author{C\'esar Garro-Mar\'in\thanks{Boston University, email: \href{mailto:cesarlgm@bu.edu}{cesarlgm@bu.edu}}} 
+\begin{document}
+	\maketitle
+	
+	\newcommand{\ntimes}{4 }
+	
+	Here I show estimated skill acquisition costs when I compute them using simple average indexes. These $\theta_i$ come from the regression:
+	\beqn
+	d\ln f^e(J)&=&\sum_i\beta_i^eS_i^e(J)\\
+	\eeqn
+	where:
+	\beqns
+		\beta_{i}^e=\frac{\varepsilon}{1-\varepsilon}\theta_i^e(d\ln A_i - K^e)
+	\eeqns
+	I define the indexes as follows:
+	\beqns
+		S_i(J)&=&\frac{\tilde{S}_i(J)}{\sum_k^K\tilde{S}_k(J) } \\
+	\eeqns
+	where $S_k(J)$ is the simple average of the scores I assigned to each SES question:
+	\beqns
+		S_{i}(J)=\frac{1}{||i||}\sum_{j=1}^{||i||}\sum_{l=1}^5c_{ijl}1_{d_{ij}=l}\\
+	\eeqns
+	remember that the SES questions have possible answer going from 1 to 5. I normalized these answers $c_{ijl}$  to be between zero and one.
+	\beqns
+		c_{ijl}=\frac{l-1}{4}
+	\eeqns
+	\section{Results}
+	Weighted result weights observation by the occupation-years cells size. The implied thetas are in these files:
+	\bitem
+		\item Unweighted $\theta$s: \href{URL}{click here}
+		\item Weighted $\theta$s: \href{URL}{click here}
+	\eitem
+	\FloatBarrier
+	\input{../results/tables/regression_table.tex}
+	\FloatBarrier
+	\end{document}
+	

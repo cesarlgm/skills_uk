@@ -10,187 +10,346 @@
 \maketitle
 
 \newcommand{\ntimes}{4 }
+
+\begin{figure}
+	\caption{Change in employment shares: 2001-2017}
+	\addfig{1}{../results/figures/direction_triangle}
+\end{figure}
+
+\FloatBarrier
+\begin{figure}
+\caption{Abstract, Routine and Manual}
+\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra12_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+\ContinuedFloat
+\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra13_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+\ContinuedFloat
+\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra23_}{2001}{2017}}
+\end{figure}
+
+\begin{figure}
+	\caption{Social, Routine and Manual}
+	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs12_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+	\ContinuedFloat
+	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs13_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+	\ContinuedFloat
+	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs23_}{2001}{2017}}
+\end{figure}
+
+
+\begin{figure}
+	\caption{Abstract, Routine and Social}
+	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra12_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+	\ContinuedFloat
+	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra13_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+	\ContinuedFloat
+	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra23_}{2001}{2017}}
+\end{figure}
+
+
+\begin{figure}
+	\caption{Abstract, Social and Manual}
+	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa12_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+	\ContinuedFloat
+	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa13_}{2001}{2017}}
+\end{figure}
+\begin{figure}
+	\ContinuedFloat
+	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa23_}{2001}{2017}}
+\end{figure}
+
+\FloatBarrier
+
 \section{Estimating $\theta$}
-\subsection{Assuming scales}
-We normalize all the skill questions to range between zero and one. I define as the simple average of the skill questions involved:
-\beqns
-	S_{\theta,m}=\frac{1}{||m||}\sum_{l=1}^{||m||}s_{mli}
-\eeqns
-where $s_{mji}$ is the individual $i$'s answer to the skill question $l$. Next, I aggregate the dataset to at the occupation-year level and I estimate $\theta_i$ using the regression:
-\beqns
-		d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\pi_\theta+\sum_{i}\beta_{\theta,m}(S^\star_{\theta,m}(J)-\overline{S^\star_{\theta,m}(J)})+\nu_{\theta}(J)
-\eeqns
-The implied $\theta_i$ are given by,
-\bitem 
-	\item Unweighted: \href{https://www.dropbox.com/s/epmal84fzmnwiam/unweighted_thetas.txt?dl=0}{see log file}
-	\item Weighted: \href{https://www.dropbox.com/s/bkq8o6zcjmgpjf8/weighted_thetas.txt?dl=0}{see log file}
-\eitem 
-
-\input{../results/tables/regression_table.tex}
-
-
-\subsection{Sanity check}
-\subsubsection{Simulating data}
-If the model were true in the data, it generate data following the two equations below:
-\beqn
-\sum_{m=1}^I\theta_jS_{\theta,m}(J)&=&1 \label{eq:skill_sum}\\
-d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i  \label{eq:skill_reg}
-\eeqn
-\textbf{How do I simulate the data:}
-
-Equation \eqref{eq:skill_reg} is simple. Choose $\varepsilon$ and $d\ln A_i$ and generate data following:
-\beqns
-d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i+\nu_\theta(J)
-\eeqns
-Making equation \eqref{eq:skill_sum} work seems more involved. This equation implies that:
-\beqns
-	S_{\theta,M}(J)=\frac{1}{\theta_M}\left(1-\sum_{m=1}^{M-1}\theta_{i}S_{\theta,m}(J)\right)+\eta_{\theta}(J)
-\eeqns
-
-I will start simple:
-\bitem
-	\item Assume a matrix of $\theta_i$.
-	\item Why am I complicating myself with this? Simply generate the data following the above equation.
-	\item See if my algorithm works in finding the solution.
-\eitem 
-
-\subsection{Estimating scales}
+\label{sec:model}
 %Fix the notation here
-Estimation uses two key equations from the model:
+We use two key equations from the model:
 \beqn
-	\sum_{m=1}^I\theta_jS_{\theta,m}(J)&=&1 \label{eq:skill_sum}\\
-	d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i
+\sum_{i=1}^I\theta_i^eS_{i}^e(J)&=&1 \\
+d\ln f^e(J)&=&\frac{\varepsilon}{1-\varepsilon}\sum_i\theta_i^e(d\ln A_i - K^e)S_i^e(J) \label{eq:empshare}
 \eeqn
-our current procedure to estimate the model parameter is choose scales $c_{jml}$ and scale weights $\alpha_{jm}$  to minimize the MSE from equation \eqref{eq:skill_sum}:
-		\beqns
-		\min_{\alpha_{jm},c_{jml}}\frac{1}{N}\left[\sum_{m=1}^I\theta_jS_{\theta,m}-1\right]^2 \text{ s.t. }  S_{\theta,m}=\sum_{j=1}^{||m||}\alpha_{jm}\sum_{l=1}^5c_{jml}1_{d_{ijm}=l}
-		\eeqns
- Where $\theta_i$ comes from an OLS regression using the estimating equation:
-	\beqns
-		d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\pi_\theta+\sum_{i}\beta_{\theta,i}(S^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)})+\nu_{\theta}(J)
-	\eeqns
+where $e\in\{1,2,3\}$ indexes the education group and $i$ indexes the skill. We impose several normalizations to the model:
+\bitem 
+\item Skill acquisition costs are 1 for the low education group $\theta_i^1=1$.
+\item Manual acquisition costs are 1 for all education groups $\theta_1^e=1$.
+\eitem
 
 
+We do not observe the skill indexes $S_{i}^e(J)$. We estimate them using information from 22 questions from the SES survey. These questions typically ask respondents to rate how important a given task or job trait is for their job. These ratings go from 1 to 5, 5 being very important. We combine all these answers into an index as follows:
+\beqn
+S_{i}(J)=\sum_{j=1}^{||i||}\alpha_{ij}\sum_{l=1}^5c_{ijl}1_{d_{ij}=l}
+\eeqn
+where $d_{jm}\in\{1,2,3,4,5\}$ is the individual's answer to the SES question $ij$. I abused notation  by indicating the number of SES questions in index $i$ with $||i||$.  $\alpha_{ij}$ and $c_{ijl}$ are parameters to estimate. The scales $c_{ijl}$  are the numeric values we give to each answer in the Likert scale. The $\alpha_{ij}$ are weights we give to each question within the index. For all questions we normalize the lowest scale value to zero ($c_{ij1}=0, \forall i,j$) and highest value to 1 ($c_{ij5}=0,\forall i,j$). The only restriction on the weights  $\alpha_{ij}$ is that they must be non-negative.
 
-\section{Defining education groups}
-	Our current results group education levels into three broad groups that I will often call Low, Mid, and High.
-\input{results/tables/education_definition.tex}
+\subsection{Data I use for estimation}
+The data I feed to the algorithm satisfies two restrictions:
+\benu
+	\item I restrict to jobs that I observe as \red{\textbf{core}} in any two consecutive SES years.
+	\item As of now, I \red{\textbf{am not}} applying any restriction by education group. 
 	
-
-\section{Classifying jobs}
-We say that an occupation $j$ is a core job of education group $e$ if two conditions are met:
-\benu	 
-	\item Education group $e$ is overrepresented in the occupation relative to the overall population. That is:
-	\beqns
-		s_e(j)\geq\overline{s}_e
-	\eeqns
-	where $s_e(j)$ denotes the employment share of the education group $e$ in job $j$, and $\overline{s}_e$ is its employment share in the population.
-	\item The employment share of group $e$ in job $j$ is at least \ntimes the employment share of any other education group that is overrepresented in the occupation.
-	\beqns
-		s_e(j)\geq\ntimes s_{e'}(j)
-	\eeqns
-	for any other education group $e'$ such that $	s_{e'}(j)\geq\overline{s}_{e'}$.
+	So, for example I am including observations of low education individuals that are in high-education core jobs.
 \eenu
-
-\section{Computing $\theta$s}
-\subsection{Data I use}
-First I restrict data to only:
-\benu 
-\item occupations that are core jobs in two consecutive SES-waves.
-\item people with education levels matching the job-classification. For example, I restrict to observations of individuals with low-education in low-education core-jobs.
-\eenu 
-Using this restricted dataset, I occupational employment shares by education level:
-\beqns
-	s_e(j)=\frac{l_e(j)}{\sum_{j'}l_e(j')}
-\eeqns
-where $l$ denotes employment and the summation is over jobs that stay in the core of education group $e$ in two consecutive SES-waves.
-
-
-\section{Solution procedure}
-
-Out of equation 32 we have:
-\beqns
-	\frac{\partial \ln f_\theta(J)}{\partial A_i}-\frac{\partial \ln f_\theta(J')}{\partial A_i}&=&\frac{\varepsilon}{\varepsilon-1}\left[\frac{\ln y^\star_\theta(J)}{\partial \ln A_i}-\frac{\ln y^\star_\theta(J')}{\partial \ln A_i}\right]
-\eeqns
-Moreover, out of question 44 we have
-\beqns
-\frac{\partial \ln y^\star_\theta(J)}{\partial \ln A_i}&=&\theta_iS^\star_{\theta,i}(J)
-\eeqns
-Plugging into 32 we have:
-\beqn
-\label{eq:plug}
-\frac{\partial \ln f_\theta(J)}{\partial A_i}-\frac{\partial \ln f_\theta(J')}{\partial A_i}&=&\frac{\varepsilon}{\varepsilon-1}\left[\theta_iS^\star_{\theta,i}(J)-\theta_iS^\star_{\theta,i}(J')\right]
-\eeqn
-Thus:
-\beqns
-d\ln f_\theta(J)-d\ln f_\theta(J')=\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_iS^\star_{\theta,i}(J')\right]d\ln A_i+\theta_MS^\star_{\theta,M}(J)-\theta_MS^\star_{\theta,M}(J')
-\eeqns
-Summing over jobs and dividing by the number of jobs we have:
-\beqns
-d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}=\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i
-\eeqns
-This equation calls for the following regression specification:
-\beqns
-	d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\alpha_\theta+\sum_{i}\beta_{\theta,i}(S^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)})+\nu_{\theta}(J)
-\eeqns
-Then:
-\bitem
-	\item Under the assumption that $\theta_i=1$, $\frac{\varepsilon}{\varepsilon-1}d\ln A_i$ is identified out of the low education group.
-	\item Rest of education groups identify $\theta_i$. 
-\eitem 
-
-
-
-
 
 \subsection{Procedure}
-\benu
-	\item Guess $S_{\theta,i}(J)$.
-	\item Estimate $\theta_i$ out of core jobs. %\red{What is the reference job? The average for that education group?}
-	\item Given $\theta_i$ estimate $S_{\theta,i}(J)$.
-	\item Return to 1.
-\eenu
 
-\subsection{What functions do I need to write}
-\subsubsection{Estimation of $\theta_i$}
-Let $y_\theta$ be the $J\times 1$ vector containing the vector of $d\ln f_\theta(J)-d\ln f_\theta(J')$. Let $S_\theta$ the $J\times I$ matrix of skill indexes $S^\star_{\theta,i}(J)-S^\star_{\theta,i}(J')$. Then:
+We start by guessing values for the weights $\alpha_{jm}$ and the Likert scales $c_{jml}$. This gives us an initial guess for the skill indexes $S_{\theta,m}(J)$.
+
+\paragraph{Step 1: estimate skill acquisition costs:} given the guess for $S_{\theta,m}(J)$ we estimate the skill acquisition costs $\theta_{i}^e$ using the empirical analogous of equation \eqref{eq:empshare}.
 \beqns
-	\beta_\theta=\frac{\epsilon}{\epsilon-1}[\theta_1d\ln A_1 \dots \theta_Id\ln A_I]'
+d\ln f^e(J)&=&\sum_i\beta_i^eS_i^e(J) + \lambda_I+v^e(J)
 \eeqns
-I estimate $\beta_\theta$ by OLS:
+In this equation we constrain the $\theta_{i}$ to be positive by estimating the following non-linear equation:
 \beqns
-	\beta_\theta=(X_\theta'X_\theta)^{-1}X_\theta y_\theta
+d\ln f^1(J)&=&\sum_i\beta_i^1S_i^e(J) + v^1(J)\\
+d\ln f^e(J)&=&\beta_1^eS_1^e(J)+\sum_{i=2}^4(\sqrt{\theta_i^e})^2\left(\beta_{i}^1-\beta_{1}^1+\beta_{1}^e\right)S_i^e(J) + v^e(J), e>1\\
 \eeqns
-Using the appropriate block diagonal matrix I can estimate all the vectors at the same time. For this I need:
+%We can compute the skill acquisition costs out of the $\beta_i^e$ using:
+\beqn
+\theta_i^e=\frac{\beta_i^e}{\beta_i^1-\beta_1^1+\beta_1^e} \label{eq:empirical}
+\eeqn
+
+\paragraph{Step 2: estimate Likert scales and question weights} we use the $\theta_i^e$ estimated in the step above to compute the Likert scales and the question weights. We choose scales and weights to minimize the MSE from equation \eqref{eq:skill_sum}: 
+
+\beqns
+\min_{\alpha_{jm},c_{jml}}\frac{1}{N}\left[\sum_{m=1}^I\theta_j^eS_{m}^e-1\right]^2 \text{ s.t. }  S_{m}^e=\sum_{j=1}^{||m||}\alpha_{jm}\sum_{l=1}^5c_{jml}1_{d_{ijm}=l}
+\eeqns
+
+\paragraph{Iterate until $\theta$ converges}: we iterate this procedure until the skill acquisition costs converge: 
+\beqns
+||\Theta_n-\Theta_{n-1}||<0.01
+\eeqns
+
+where $\Theta_n$ is the vector of skill acquisition costs estimated in step $n$\footnote{You could argue that 0.01 is a loose tolerance threshold is large, but I was getting bored of having the code running. I just wanted to see a likely convergence point.}.
+
+\section{$\theta$s from regressions out of simple average skill indexes}
+Here I show estimated skill acquisition costs when I compute them using simple average indexes. These $\theta_i$ come from the regression:
+\beqn
+d\ln f^e(J)&=&\sum_i\beta_i^eS_i^e(J)\\
+\eeqn
+where:
+\beqns
+\beta_{i}^e=\frac{\varepsilon}{1-\varepsilon}\theta_i^e(d\ln A_i - K^e)
+\eeqns
+I define the indexes as follows:
+\beqns
+S_i(J)&=&\frac{\tilde{S}_i(J)}{\sum_k^K\tilde{S}_k(J) } \\
+\eeqns
+where $S_k(J)$ is the simple average of the scores I assigned to each SES question:
+\beqns
+S_{i}(J)=\frac{1}{||i||}\sum_{j=1}^{||i||}\sum_{l=1}^5c_{ijl}1_{d_{ij}=l}\\
+\eeqns
+remember that the SES questions have possible answer going from 1 to 5. I normalized these answers $c_{ijl}$  to be between zero and one.
+\beqns
+c_{ijl}=\frac{l-1}{4}
+\eeqns
+\subsection{Results}
+Weighted result weights observation by the occupation-years cells size. The implied thetas are in these files:
 \bitem
-\item The usual OLS function
-\item The function to block diagonalize the matrix that I already wrote.
-\eitem 
-Next, I need to back out the $\theta_i$. For this I need to do:
-\beqns
-	\beta_1=\frac{\epsilon}{\epsilon-1}[d\ln A_1 \dots d\ln A_I]'
-\eeqns
-Then:
-\beqns
-	\theta=\beta_\theta\oslash\beta_1
-\eeqns
-For this I need:
-\bitem
-	\item Function splitting the vector by education level.
-	\item Function estimating $\beta_{\theta}$: {\tt estimate\_beta\_theta}
-	\item Function estimating the $\theta$ {\tt estimate\_theta}.
-	\item Function estimating averages of skill indexes by education level: {\tt average\_skill\_use}.
-\eitem 
-\subsubsection{How do I estimate the scales then?}
-There are a set of $O$ skill questions in the SES survey that we have partitioned into $M$ mutually exclusive groups that we index by $m$. Within each partition, we index the skill questions by $j$. Let $d_{ijm}$ be individual's $i$ answer for the skill question $jm$. $d_{ijm}\in\{1,2,3,4,5\}$. The problem is then:
-\beqns
-	\min_{\alpha_{jm},c_{jml}}\frac{1}{N}\left[\sum_{m=1}^I\theta_jS_{\theta,m}\right]^2 \text{ s.t. }  S_{\theta,m}=v
-\eeqns
-\bitem
-	\item I think this is mostly done. I just have to modify the loss function for this.
-\eitem 
+\item Unweighted $\theta$s: \href{https://www.dropbox.com/s/epmal84fzmnwiam/unweighted_thetas.txt?dl=0}{click here}
+\item Weighted $\theta$s: \href{https://www.dropbox.com/s/bkq8o6zcjmgpjf8/weighted_thetas.txt?dl=0}{click here}
+\eitem
+\FloatBarrier
+\input{../results/tables/regression_table.tex}
+\input{../results/tables/theta_estimates.tex}
+\FloatBarrier
+%
+%\section{Simulating data}
+%I simulate data based on equations:
+%\beqn
+%\sum_{i=1}^I\theta_i^eS_{i}^e(J)&=&1 \label{eq:skill_sum}\\
+%d\ln f^e(J)&=&\frac{\varepsilon}{1-\varepsilon}\sum_i\theta_i^e(d\ln A_i - K^e)S_i^e(J) \label{eq:empshares}
+%\eeqn
+%\subsection{Procedure}
+%\subsubsection{Assumptions}
+%I assume a world of 2 education groups, 2 skills, and each skill is made up of a unique dummy variable:
+%\newline
+%
+%\noindent\textbf{Model parameters:}
+%\bitem 
+%	\item $\varepsilon=0.5$
+%	\item $d\ln A=\begin{pmatrix}
+%		3 & -2 \\
+%		3 & -2
+%	\end{pmatrix}$
+%	\item $K^e=2$
+%	\item $\theta=\begin{pmatrix}
+%		1 & 1 \\
+%		1 & 0.5
+%	\end{pmatrix}$
+%\eitem 
+%In this world equations equation \eqref{eq:skill_sum} holds at the job level\footnote{It makes a difference whether I assume this is true at the job level, or at the individual level!} with some noise so that:
+%\beqns
+%	S_1^e(J)=1-\theta_2^eS_2^e(J)+\nu(J) \label{eq:sim_prob}
+%\eeqns
+%because the skills are dummy variables, then $S_i^e(J)$ is simply the probability that the skill variable is equal to 1 for job $J$ and education $e$. Given $S_2^e(J)$ and $\nu(J)$, equation \eqref{eq:sim_prob} defines the probabilities to generate data for skill 1. Throughout I assume $p_2^1(J)=\frac{1}{8}$, $p_2^2(J)=\frac{7}{8}$ and $v(J) \sim U[  -m,m ]$. I chose $m$ so that the probabilities are well defined.
+%
+%Next, I generate employment share data using: 
+%\beqns
+%d\ln f^e(J)&=&\frac{\varepsilon}{1-\varepsilon}\sum_i\theta_i^e(d\ln A_i - K^e)S_i^e(J)+\kappa(J)
+%\eeqns
+%where $\kappa(J)\sim N(0,1)$.
+%
+%\paragraph{Estimated $\theta$}
+%\bitem 
+%\item $\theta=\begin{pmatrix}
+%	1 & 1 \\
+%	1 & 0.53
+%\end{pmatrix}$
+%\eitem 
+
+
+%
+%\red{Put this in a proof later}
+%The normalization on the manual index implies:
+%\beqns
+%\beta_i^1=d\ln A_i-K^e
+%\eeqns
+%therefore:
+%\beqns
+%d\ln A_1&=&\beta_1^1+K\\
+%K^e&=&-\beta_1^e+\beta_1^1+K^e
+%\eeqns
+%Now, from the low-education normalizations we have:
+%\beqns
+%d\ln A_i&=&\beta_i^1+K^e\\	
+%\eeqns
+%Therefore:
+%\beqns
+%\theta_i^e=\frac{\beta_i^e}{\beta_i^1-\beta_1^1+\beta_1^e}
+%\eeqns
+%
+%\section{Defining education groups}
+%	Our current results group education levels into three broad groups that I will often call Low, Mid, and High.
+%\input{results/tables/education_definition.tex}
+%	
+%
+%\section{Classifying jobs}
+%We say that an occupation $j$ is a core job of education group $e$ if two conditions are met:
+%\benu	 
+%	\item Education group $e$ is overrepresented in the occupation relative to the overall population. That is:
+%	\beqns
+%		s_e(j)\geq\overline{s}_e
+%	\eeqns
+%	where $s_e(j)$ denotes the employment share of the education group $e$ in job $j$, and $\overline{s}_e$ is its employment share in the population.
+%	\item The employment share of group $e$ in job $j$ is at least \ntimes the employment share of any other education group that is overrepresented in the occupation.
+%	\beqns
+%		s_e(j)\geq\ntimes s_{e'}(j)
+%	\eeqns
+%	for any other education group $e'$ such that $	s_{e'}(j)\geq\overline{s}_{e'}$.
+%\eenu
+%
+%%\section{Computing $\theta$s}
+%%\subsection{Data I use}
+%%First I restrict data to only:
+%%\benu 
+%%\item occupations that are core jobs in two consecutive SES-waves.
+%%\item people with education levels matching the job-classification. For example, I restrict to observations of individuals with low-education in low-education core-jobs.
+%%\eenu 
+%%Using this restricted dataset, I occupational employment shares by education level:
+%%\beqns
+%%	s_e(j)=\frac{l_e(j)}{\sum_{j'}l_e(j')}
+%%\eeqns
+%%where $l$ denotes employment and the summation is over jobs that stay in the core of education group $e$ in two consecutive SES-waves.
+%%
+%%
+%%\section{Solution procedure}
+%%
+%%Out of equation 32 we have:
+%%\beqns
+%%	\frac{\partial \ln f_\theta(J)}{\partial A_i}-\frac{\partial \ln f_\theta(J')}{\partial A_i}&=&\frac{\varepsilon}{\varepsilon-1}\left[\frac{\ln y^\star_\theta(J)}{\partial \ln A_i}-\frac{\ln y^\star_\theta(J')}{\partial \ln A_i}\right]
+%%\eeqns
+%%Moreover, out of question 44 we have
+%%\beqns
+%%\frac{\partial \ln y^\star_\theta(J)}{\partial \ln A_i}&=&\theta_iS^\star_{\theta,i}(J)
+%%\eeqns
+%%Plugging into 32 we have:
+%%\beqn
+%%\label{eq:plug}
+%%\frac{\partial \ln f_\theta(J)}{\partial A_i}-\frac{\partial \ln f_\theta(J')}{\partial A_i}&=&\frac{\varepsilon}{\varepsilon-1}\left[\theta_iS^\star_{\theta,i}(J)-\theta_iS^\star_{\theta,i}(J')\right]
+%%\eeqn
+%%Thus:
+%%\beqns
+%%d\ln f_\theta(J)-d\ln f_\theta(J')=\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_iS^\star_{\theta,i}(J')\right]d\ln A_i+\theta_MS^\star_{\theta,M}(J)-\theta_MS^\star_{\theta,M}(J')
+%%\eeqns
+%%Summing over jobs and dividing by the number of jobs we have:
+%%\beqns
+%%d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}=\frac{\varepsilon}{\varepsilon-1}\sum_i\left[\theta_iS^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)}\right]d\ln A_i
+%%\eeqns
+%%This equation calls for the following regression specification:
+%%\beqns
+%%	d\ln f_\theta(J)-\overline{d\ln f_\theta(J)}&=&\alpha_\theta+\sum_{i}\beta_{\theta,i}(S^\star_{\theta,i}(J)-\theta_i\overline{S^\star_{\theta,i}(J)})+\nu_{\theta}(J)
+%%\eeqns
+%%Then:
+%%\bitem
+%%	\item Under the assumption that $\theta_i=1$, $\frac{\varepsilon}{\varepsilon-1}d\ln A_i$ is identified out of the low education group.
+%%	\item Rest of education groups identify $\theta_i$. 
+%%\eitem 
+%%
+%%
+%%
+%%
+%%
+%%\subsection{Procedure}
+%%\benu
+%%	\item Guess $S_{\theta,i}(J)$.
+%%	\item Estimate $\theta_i$ out of core jobs. %\red{What is the reference job? The average for that education group?}
+%%	\item Given $\theta_i$ estimate $S_{\theta,i}(J)$.
+%%	\item Return to 1.
+%%\eenu
+%
+%\subsection{What functions do I need to write}
+%\subsubsection{Estimation of $\theta_i$}
+%Let $y_\theta$ be the $J\times 1$ vector containing the vector of $d\ln f_\theta(J)-d\ln f_\theta(J')$. Let $S_\theta$ the $J\times I$ matrix of skill indexes $S^\star_{\theta,i}(J)-S^\star_{\theta,i}(J')$. Then:
+%\beqns
+%	\beta_\theta=\frac{\epsilon}{\epsilon-1}[\theta_1d\ln A_1 \dots \theta_Id\ln A_I]'
+%\eeqns
+%I estimate $\beta_\theta$ by OLS:
+%\beqns
+%	\beta_\theta=(X_\theta'X_\theta)^{-1}X_\theta y_\theta
+%\eeqns
+%Using the appropriate block diagonal matrix I can estimate all the vectors at the same time. For this I need:
+%\bitem
+%\item The usual OLS function
+%\item The function to block diagonalize the matrix that I already wrote.
+%\eitem 
+%Next, I need to back out the $\theta_i$. For this I need to do:
+%\beqns
+%	\beta_1=\frac{\epsilon}{\epsilon-1}[d\ln A_1 \dots d\ln A_I]'
+%\eeqns
+%Then:
+%\beqns
+%	\theta=\beta_\theta\oslash\beta_1
+%\eeqns
+%For this I need:
+%\bitem
+%	\item Function splitting the vector by education level.
+%	\item Function estimating $\beta_{\theta}$: {\tt estimate\_beta\_theta}
+%	\item Function estimating the $\theta$ {\tt estimate\_theta}.
+%	\item Function estimating averages of skill indexes by education level: {\tt average\_skill\_use}.
+%\eitem 
+%\subsubsection{How do I estimate the scales then?}
+%There are a set of $O$ skill questions in the SES survey that we have partitioned into $M$ mutually exclusive groups that we index by $m$. Within each partition, we index the skill questions by $j$. Let $d_{ijm}$ be individual's $i$ answer for the skill question $jm$. $d_{ijm}\in\{1,2,3,4,5\}$. The problem is then:
+%\beqns
+%	\min_{\alpha_{jm},c_{jml}}\frac{1}{N}\left[\sum_{m=1}^I\theta_jS_{\theta,m}\right]^2 \text{ s.t. }  S_{\theta,m}=v
+%\eeqns
+%\bitem
+%	\item I think this is mostly done. I just have to modify the loss function for this.
+%\eitem 
 \bibliographystyle{apalike}
-\bibliography{../../../../CentralLibrary/Papers/library}{}
+%\bibliography{../../../../CentralLibrary/Papers/library}{}
 
 \end{document}
 
