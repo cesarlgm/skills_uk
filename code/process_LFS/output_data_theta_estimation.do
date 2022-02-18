@@ -93,7 +93,6 @@ foreach definition in `definition_list' {
 
     
     *Computing changes in employment shares and total emploument
-
     {
         generate l_employment=log(people)
 

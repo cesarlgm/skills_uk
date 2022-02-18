@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/unweighted_thetas.txt
+  log type:  text
+ opened on:   9 Feb 2022, 14:02:15
+
+.     matrix list resultsu
+
+resultsu[3,4]
+          Manual     Routine    Abstract      Social
+ Low           1           1           1           1
+ Mid           1   15.232969   5.0080488   1.8682998
+High           1  -.20489668   12.496122   3.4350543
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/unweighted_thetas.txt
+  log type:  text
+ closed on:   9 Feb 2022, 14:02:15
+----------------------------------------------------------------------------------------------------------------------------------------------------

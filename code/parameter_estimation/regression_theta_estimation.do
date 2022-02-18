@@ -29,6 +29,12 @@ use  "data/additional_processing/final_SES_file.dta", clear
 }
 
 use "data/additional_processing/final_LFS_file.dta"
+
+gstats winsor d_l_employment, cuts(2 98) generate(d_l_employment_w) 
+gstats winsor d_l_employment, cuts(5 95) generate(d_l_employment_5) 
+gstats winsor d_l_employment, cuts(20 80) generate(d_l_employment_20)  
+
+
 *Now I add the employment share data
 merge m:1 occupation year using  `indexes'
 
@@ -60,7 +66,7 @@ egen industry_id=group(industry_cw education)
 
 eststo clear
 
-reghdfe d_l_employment  *1 *2 *3 , nocons absorb(industry_id) vce(cl occupation)
+reghdfe d_l_employment_w  *1 *2 *3 , nocons absorb(industry_id) vce(cl occupation)
 eststo regu
 
 forvalues educ=1/3 {
@@ -70,9 +76,19 @@ forvalues educ=1/3 {
         eststo theta`variable'`educ'u
     }
 }
+/*
+local stat_list 
+forvalues educ=1/3 {
+    foreach variable in $index_list {
+        local stat_list  `stat_list' theta_`variable'`educ'=(_b[`variable'`educ']/(_b[`variable'1]-_b[manual1]+_b[manual`educ']))
+    
+    }
+}
 
+bootstrap `stat_list', reps(1000): reghdfe d_l_employment  *1 *2 *3, nocons absorb(industry_id) vce(r)
+*/
 
-reghdfe d_l_employment  *1 *2 *3 [aw=obs], nocons absorb(industry_id) vce(cl occupation)
+reghdfe d_l_employment_w  *1 *2 *3 [aw=obs], nocons absorb(industry_id) vce(cl occupation)
 eststo regw
 
 forvalues educ=1/3 {

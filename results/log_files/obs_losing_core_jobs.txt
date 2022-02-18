@@ -1,0 +1,21 @@
+-----------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_f
+> iles/obs_losing_core_jobs.txt
+  log type:  text
+ opened on:  27 Jan 2022, 15:23:54
+
+ref_job_ty |        _merge
+       pe0 | master on  matched ( |     Total
+-----------+----------------------+----------
+         1 |       113        183 |       296 
+         2 |        41         58 |        99 
+         3 |        73        257 |       330 
+-----------+----------------------+----------
+     Total |       227        498 |       725 
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_f
+> iles/obs_losing_core_jobs.txt
+  log type:  text
+ closed on:  27 Jan 2022, 15:23:54
+-----------------------------------------------------------------------------------------------------------------------

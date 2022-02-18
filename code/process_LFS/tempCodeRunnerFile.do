@@ -1,1 +1,2 @@
-do "code/process_LFS/append_LFS.do" edlevLFS 
+
+rscript using "code/process_SES/create_border_triangles.R"
