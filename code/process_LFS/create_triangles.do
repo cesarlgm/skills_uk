@@ -16,7 +16,7 @@
 
         generate empshare=people/total_people
 
-        keep $occupation $education year empshare
+        keep $occupation $education year empshare 
 
         reshape wide empshare, i($occupation year) j($education)
 
@@ -62,6 +62,15 @@
         
 
         export delimited using "data/additional_processing/empshares_graphs.csv", replace
+
+        bysort $occupation: keep if _n==1
+        keep if deskilling>0
+        gsort d_empshare1
+
+        log using "results/log_files/deskilling_occupations.txt", replace text
+        unique $occupation
+        list bsoc00Agg empshare1 d_empshare1
+        log close
     }
 
 

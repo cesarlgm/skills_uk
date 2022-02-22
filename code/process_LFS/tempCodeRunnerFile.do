@@ -1,2 +1,1 @@
-
-rscript using "code/process_SES/create_border_triangles.R"
+summ occ_obs if low_increase, d
