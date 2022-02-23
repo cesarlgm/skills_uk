@@ -68,5 +68,25 @@
 
     summ occ_obs if low_increase, d
 
+    drop empshare2 empshare3 observations2 observations3 
+    reshape wide empshare1 observations1 occ_obs, i($occupation) j(year)
+    *Compute t-statistic
+
+    generate df=occ_obs2001+occ_obs2017-2
+    generate sp=((occ_obs2001-1)*empshare12001*(1-empshare12001)+(occ_obs2017-1)*empshare12017*(1-empshare12017))/(df)
+    generate t_stat=d_empshare1/sqrt(sp/(occ_obs2001-1)+sp/(occ_obs2017-1))
+
+    generate p_value=ttail(df,t_stat)
+
+    gsort p_value
+    
+    generate threshold=.1*_n/_N
+
+    generate reject=p_value<threshold
+
+    log using "results/log_files/t_stats.txt", text replace
+    list bsoc00Agg d_empshare1 t_stat threshold p_value
+    log close
+
     save "data/additional_processing/file_step_up_correction", replace
 }

@@ -11,12 +11,24 @@
 
 \newcommand{\ntimes}{4 }
 
+\subsection{Benjamini-Hotchberg}
+
+\beqns
+	t_{stat}&=&\frac{p_{2017}-p_{2001}}{\sqrt{s_p^2/n_{2017}+s_p^2/n_{2001}}}\\
+			s_p^2&=&\frac{(n_{2017}-1)p_{2017}(1-p_{2017})+(n_{2001}-1)p_{2001}(1-p_{2001})}{n_{2017}+n_{2001}-2}
+\eeqns
+\bitem
+	\item Order p-values from lowest to highest.
+	\item Reject if $p_k<\alpha\frac{k}{m}$
+\eitem 
+
 \begin{figure}
 	\caption{Change in employment shares: 2001-2017}
 	\addfig{1}{../results/figures/direction_triangle}
 \end{figure}
 
 \FloatBarrier
+\href{https://www.dropbox.com/s/pxkgmtnkhq6c0j1/deskilling_occupations.txt?dl=0}{Occupations in yellow}
 \begin{figure}
 \caption{Abstract, Routine and Manual}
 \subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra12_}{2001}{2017}}
