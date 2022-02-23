@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats.txt
   log type:  text
- opened on:  23 Feb 2022, 11:24:56
+ opened on:  23 Feb 2022, 13:47:14
 .     list bsoc00Agg d_empshare1 t_stat threshold p_value
 
      +---------------------------------------------------------------------------------------------------------------------------+
@@ -143,62 +143,62 @@
 111. |                                                      3421 graphic designers   -.1419314   -5.023541   .0711538   .9999996 |
 112. |                                      1134 advertising & public rel managers   -.1526962   -5.141051   .0717949   .9999998 |
 113. |                1161 Transport, distribution, storage and warehouse managers   -.1245684   -5.201211   .0724359   .9999999 |
-114. |                              5432 chefs, cooks, bakers, flour confectioners   -.0992989   -5.240406   .0730769   .9999999 |
-115. |                                    8229 mobile machine drivers & operatives   -.2540434    -5.45503    .073718   .9999999 |
+114. |                                    8229 mobile machine drivers & operatives   -.2540434    -5.45503   .0730769   .9999999 |
+115. |                                     2317 registrs & sen admins ed establish   -.1686233   -5.398342    .073718   .9999999 |
      |---------------------------------------------------------------------------------------------------------------------------|
 116. |                                          3431 Media Associate Professionals   -.0925558   -5.277418    .074359   .9999999 |
-117. |                                     2317 registrs & sen admins ed establish   -.1686233   -5.398342       .075   .9999999 |
-118. |                                                         6121 nursery nurses   -.2441578   -11.36844    .075641          1 |
-119. |                                  4111 civil service officers and assistants    -.144008   -8.178398   .0762821          1 |
-120. |                                            7111 sales and retail assistants    -.195406   -19.85406   .0769231          1 |
+117. |                              5432 chefs, cooks, bakers, flour confectioners   -.0992989   -5.240406       .075   .9999999 |
+118. |                                                              9225 bar staff   -.1752105   -5.918208    .075641          1 |
+119. |                                    1239 mngers and prop. in other srvcs nec   -.1862061   -8.222981   .0762821          1 |
+120. |                                                 2132 software professionals   -.0801865   -7.060755   .0769231          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-121. |                                    1239 mngers and prop. in other srvcs nec   -.1862061   -8.222981   .0775641          1 |
-122. |                                      3312 police, fire, and prison officers   -.1518169     -8.9678   .0782051          1 |
-123. |                                    7112 ret cashiers and check-out operator   -.1419604   -6.928749   .0788462          1 |
+121. |                                    9134 packers, bottlers, canners, fillers   -.1222274   -5.675878   .0775641          1 |
+122. |      3541 sales representatives, marketing profs, estate agents, actioneers   -.1408514   -9.668526   .0782051          1 |
+123. |                                           3232 housing and welfare officers    -.130197   -6.451286   .0788462          1 |
 124. |                                    9149 oth good hndlng & storage occup nec   -.1279146   -8.606309   .0794872          1 |
-125. |                                    4150 general office assistants or clerks   -.2137612   -17.42784   .0801282          1 |
+125. |                                              9244 school mid-day assistants   -.1556756   -6.076199   .0801282          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-126. |                                              9244 school mid-day assistants   -.1556756   -6.076199   .0807692          1 |
-127. |           1221 Managers and proprietors in hospitality and leisure services   -.1573182   -7.696908   .0814103          1 |
-128. |                       3534 fin., invest, and taxation analysts and advisers   -.1457468   -7.368852   .0820513          1 |
-129. |                                     8111 food, drink & tobac process operat   -.1239502   -5.764184   .0826923          1 |
-130. |                                    9134 packers, bottlers, canners, fillers   -.1222274   -5.675878   .0833333          1 |
+126. |               6131 veterinary nurses and assistants, other aniimal care occ   -.2813657   -6.083501   .0807692          1 |
+127. |                                  6111 nursing aux, amb staff, dental nurses   -.2624359   -15.84817   .0814103          1 |
+128. |                                 1181 healthcare and social service managers   -.0834858   -5.549109   .0820513          1 |
+129. |                                                    9224 waiters, waitresses   -.2458157   -8.004924   .0826923          1 |
+130. |           1221 Managers and proprietors in hospitality and leisure services   -.1573182   -7.696908   .0833333          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-131. |                                    4131 Administrative occupations: records   -.1782439   -12.50469   .0839744          1 |
-132. |      3541 sales representatives, marketing profs, estate agents, actioneers   -.1408514   -9.668526   .0846154          1 |
-133. |                                                         3131 it technitians   -.1259815   -6.266789   .0852564          1 |
-134. |                                                    9224 waiters, waitresses   -.2458157   -8.004924   .0858974          1 |
-135. |                                                              9225 bar staff   -.1752105   -5.918208   .0865385          1 |
+131. |                                                         3131 it technitians   -.1259815   -6.266789   .0839744          1 |
+132. |                                    4150 general office assistants or clerks   -.2137612   -17.42784   .0846154          1 |
+133. |                       3534 fin., invest, and taxation analysts and advisers   -.1457468   -7.368852   .0852564          1 |
+134. |                   4113 local gov clerical offs & assists / officers in NGOs   -.1765006   -9.266493   .0858974          1 |
+135. |                                    4211 Secretarial and related occupations   -.2358126   -20.95501   .0865385          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-136. |             6122 childminders, playgroup leaders and educational assistants    -.307124   -24.26139   .0871795          1 |
-137. |                                                 2132 software professionals   -.0801865   -7.060755   .0878205          1 |
-138. |                                          1163 retail and wholesale managers    -.150763   -8.767753   .0884615          1 |
-139. |                              1151 Financial institution and office managers   -.1653773   -11.92775   .0891026          1 |
-140. |                                                         4123 counter clerks   -.2278532   -9.543786   .0897436          1 |
+136. |                                              7122 Sales related occupations    -.225269   -8.233806   .0871795          1 |
+137. |             6122 childminders, playgroup leaders and educational assistants    -.307124   -24.26139   .0878205          1 |
+138. |                    4121 Credit controllers, accnts wages cleark, bookkeeper    -.234393   -18.22921   .0884615          1 |
+139. |                                          1163 retail and wholesale managers    -.150763   -8.767753   .0891026          1 |
+140. |                                                         6121 nursery nurses   -.2441578   -11.36844   .0897436          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-141. |                    4121 Credit controllers, accnts wages cleark, bookkeeper    -.234393   -18.22921   .0903846          1 |
-142. |                                              7122 Sales related occupations    -.225269   -8.233806   .0910256          1 |
-143. | 3561 public service associates, personnel and industrial relations officers   -.1260561   -6.318622   .0916667          1 |
-144. |                                            3231 youth and community workers   -.1492116   -5.556231   .0923077          1 |
-145. |                                                    9233 cleaners, domestics   -.1289443   -13.42362   .0929487          1 |
+141. |                                            3231 youth and community workers   -.1492116   -5.556231   .0903846          1 |
+142. |                                    7112 ret cashiers and check-out operator   -.1419604   -6.928749   .0910256          1 |
+143. |                                                    9233 cleaners, domestics   -.1289443   -13.42362   .0916667          1 |
+144. |                                            7111 sales and retail assistants    -.195406   -19.85406   .0923077          1 |
+145. |                                      3312 police, fire, and prison officers   -.1518169     -8.9678   .0929487          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-146. |                                    4211 Secretarial and related occupations   -.2358126   -20.95501   .0935897          1 |
-147. |                                           1132 marketing and sales managers   -.1048976   -9.522435   .0942308          1 |
-148. |       6114 houseprnts, residential wardens, care assistants and home carers   -.2660435   -23.64922   .0948718          1 |
-149. |                                  6111 nursing aux, amb staff, dental nurses   -.2624359   -15.84817   .0955128          1 |
-150. |                                 1181 healthcare and social service managers   -.0834858   -5.549109   .0961538          1 |
+146. |                                     8111 food, drink & tobac process operat   -.1239502   -5.764184   .0935897          1 |
+147. |                                            7211 Customer sevice occupations   -.1660042   -10.16175   .0942308          1 |
+148. |                                                         2442 social workers   -.0947507   -5.661539   .0948718          1 |
+149. |                              1151 Financial institution and office managers   -.1653773   -11.92775   .0955128          1 |
+150. |                                        9223 kitchen and catering assistants   -.2240867   -15.58154   .0961538          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-151. |                                        9223 kitchen and catering assistants   -.2240867   -15.58154   .0967949          1 |
-152. |                                           3232 housing and welfare officers    -.130197   -6.451286   .0974359          1 |
-153. |                                            7211 Customer sevice occupations   -.1660042   -10.16175   .0980769          1 |
-154. |                                                         2442 social workers   -.0947507   -5.661539    .098718          1 |
-155. |                   4113 local gov clerical offs & assists / officers in NGOs   -.1765006   -9.266493    .099359          1 |
+151. |                                  4111 civil service officers and assistants    -.144008   -8.178398   .0967949          1 |
+152. | 3561 public service associates, personnel and industrial relations officers   -.1260561   -6.318622   .0974359          1 |
+153. |       6114 houseprnts, residential wardens, care assistants and home carers   -.2660435   -23.64922   .0980769          1 |
+154. |                                    4131 Administrative occupations: records   -.1782439   -12.50469    .098718          1 |
+155. |                                           1132 marketing and sales managers   -.1048976   -9.522435    .099359          1 |
      |---------------------------------------------------------------------------------------------------------------------------|
-156. |               6131 veterinary nurses and assistants, other aniimal care occ   -.2813657   -6.083501         .1          1 |
+156. |                                                         4123 counter clerks   -.2278532   -9.543786         .1          1 |
      +---------------------------------------------------------------------------------------------------------------------------+
 .     log close
       name:  <unnamed>
        log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats.txt
   log type:  text
- closed on:  23 Feb 2022, 11:24:56
+ closed on:  23 Feb 2022, 13:47:14
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -41,8 +41,34 @@
     frame change default
     merge m:1 bsoc00Agg year using `SES_occs', keep(3) nogen
 
+    replace observations=floor(observations)
+
+    generate low_education=$education==1
+
+    levelsof $occupation 
     
-    
+    cap drop p_value
+    generate p_value=.
+    foreach occupation in `r(levels)' {
+        tab low_education year if $occupation==`occupation' [fw=observation], chi
+        replace p_value=`r(p)' if `occupation'==$occupation
+    }
+
+    keep $occupation p_value
+
+    gsort p_value
+
+    generate threshold=.2*_n/_N
+
+    generate reject=p_value<threshold
+
+    rename p_value new_p_value
+
+    merge m:1 $occupation using "data/additional_processing/file_step_up_correction"
+
+    keep if reject&d_empshare1>0
+
+    /*
     reshape wide empshare obs, i($occupation year) j($education)
     
     sort $occupation year
@@ -89,4 +115,5 @@
     log close
 
     save "data/additional_processing/file_step_up_correction", replace
+    */
 }
