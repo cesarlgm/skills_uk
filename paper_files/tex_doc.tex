@@ -1,0 +1,37 @@
+\documentclass[a4paper, 12pt]{article}
+\input{commandspreamble.tex}
+\usepackage{tabularx}
+
+\begin{document}
+
+\input{../results/tables/skill_use_border_jobs_educ_3_low.tex}
+
+\input{../results/tables/skill_use_border_jobs_educ_3_mid.tex}
+
+
+\section{Finding the skill investment costs}
+We solve the problem in two steps:
+\subsection{Scales}
+There are a set of $O$ skill questions in the SES survey that we have partitioned into $K$ mutually exclusive groups that we index by $k$. Within each partition, we index the skill questions by $j$. Let $d_{ijk}$ be individual's $i$ answer for the skill question $jk$. $d_{ijk}\in\{1,2,3,4,5\}$.
+
+The problem we are solving is:
+\beqns
+\min_{\alpha_{jk},c_{jkl}}\frac{1}{N}\left[\sum_{k=1}^K\sum_{j=1}^{||k||}\alpha_{jk}\sum_{l=1}^5c_{jkl}1_{d_{ijk}=l}-1\right]^2
+\eeqns
+subject to the restrictions:
+\beqns
+	\sum_{j=1}^{||k||}\alpha_{jk}=1, && \forall k \\
+	\alpha_{jk}\geq0&&\forall j,k \\
+	c_{jkl}\leq c_{jkm} &&\forall l<m, j, k\\
+	c_{jk1}=0, 	c_{jk5}=1, && \forall j,k
+\eeqns
+for the construction of this moment conditions, we restrict the data to observations from the lowest education level.
+\subsection{Weighs on skill indexes:}
+Let $e$ index education level and let $s_{kji}=\sum_{j=1}^{||k||}\alpha_{jk}\sum_{l=1}^5c_{jkl}1_{d_{ijk}=l}$. Thus the $s_{kji}$ are the skill indexes computed out of the solutions from the problem above. Now, we find skill acquisition costs $\theta_{ke}$
+\beqns
+	\min_{\theta_{ke}}\frac{1}{N}\sum_i\left(\sum_{k=1}^{||k||}\theta_{ke}s_{ik}-1\right)^2
+\eeqns
+subject to $\theta_{1e}=1$, $\forall e$, $\theta_{k1}=1 \forall k$. These restrictions impose that the costs for ``manual'' skill acquisition are one for all education groups, and that the skill acquisition costs for the lowest education group are one for all skills. 
+
+\end{document}
+

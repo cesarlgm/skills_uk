@@ -1,0 +1,26 @@
+\documentclass[a4paper, 12pt]{article}
+\input{commandspreamble.tex}
+\usepackage{tabularx}
+\usepackage{csquotes}
+\usepackage{amssymb}
+\usepackage{pifont}
+
+
+
+\begin{document}
+ My understanding of the problem I am solving is the following. The structure in the model impose that for each education level $j$:
+ \beqn
+	\sum_iS_i\theta_i^j=1
+ \eeqn
+Let me focus on the problem of choosing the weights $\theta^j$. The problem I want to solve is choosing a vector of $\theta$ for each education level so that $\sum_iS_i\theta_i^j=1$. I find the lack of indexing of education levels in the paper confusing.
+
+But anyways. Suppose I have chosen the scales $S_i$ already.
+\benu
+	\item What restrictions do I have in $\theta$? 
+	\item For the low education level I am essentially completely unrestricted. Why isn't the solution to this problem trivially a ton of weight to the skill the use the most intensively and close to nothing to the rest?
+	\item 
+\eenu
+
+
+
+\end{document}

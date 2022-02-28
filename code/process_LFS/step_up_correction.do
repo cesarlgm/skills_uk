@@ -58,7 +58,7 @@
 
     gsort p_value
 
-    generate threshold=.2*_n/_N
+    generate threshold=.20*_n/_N
 
     generate reject=p_value<threshold
 

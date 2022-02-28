@@ -11,10 +11,9 @@
 \PassOptionsToPackage{svgnames}{xcolor}
 \usepackage[colorlinks=true, citecolor=blue, linkcolor=purple]{hyperref}
 \usepackage[english]{babel}
-\usepackage{caption}
 \usepackage[latin1]{inputenc}
-\usepackage{indentfirst}
 \usepackage{enumitem}
+\usepackage{indentfirst}
 \usepackage{colortbl}
 \usepackage{longtable}
 \usepackage{threeparttablex}
@@ -23,11 +22,10 @@
 \usepackage{multirow}
 \usepackage{pdflscape}
 \usepackage{tablefootnote}
-\usepackage{xcolor}
+\usepackage[table,xcdraw]{xcolor}
 \usepackage{amsmath}
 \usepackage{flafter} 
 \usepackage{dcolumn} 
-\usepackage{geometry}
 \usepackage{natbib}
 \usepackage{rotating}	
 \usepackage{amsthm}
@@ -43,10 +41,16 @@
 \usepackage{subfig}
 \usepackage{setspace}
 \usepackage{booktabs}
+\usepackage{placeins}
 \usepackage{enumitem}
 \usepackage{natbib}
 \usepackage{filecontents}
 \usepackage[encoding,filenameencoding=utf8,extendedchars,space]{grffile}
+\newcommand{\addfig}[2]{\begin{center}
+			\includegraphics[width=#1\textwidth]{#2}
+	\end{center}
+}
+
 %\usepackage[capposition=top]{floatrow}
 %\usepackage[colorinlistoftodos]{todonotes}
 \newcommand{\expect}[2]{\mathbb{E}_{#2}\left(#1\right)}
@@ -55,7 +59,11 @@
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{proposition}[theorem]{Proposition}
 
+\newcommand{\alert}[1]{{\textbf{\color{red}#1}}}
 %general commands
+
+\newcommand{\bcite}{\begin{quote}}
+\newcommand{\ecite}{\end{quote}}
 \newcommand{\beqns}{\begin{eqnarray*}}
 \newcommand{\eeqns}{\end{eqnarray*}}
 \newcommand{\beqn}{\begin{eqnarray}}
@@ -74,22 +82,7 @@
 	title=#1]}%
 {\endtcolorbox}
 
-%equation commands
-\newcommand{\arrowprice}{q_t^0(s^t)}
-\newcommand{\arrowpriceh}{q_t^0(s^{t+h})}
-\newcommand{\arrowrestriction}{\sum_{t=0}^{\infty}\arrowprice c_t^i(s^t)\leq\sum_{t=0}^{\infty}\arrowprice y_t^i(s^t)}
-\newcommand{\lagrange}{\mathcal{L}}
-\newcommand{\prob}{\pi(s^t)}
-\newcommand{\arrowrestlagrange}{\sum_{t=0}^{\infty}\arrowprice y_t^i(s^t)-\arrowprice c_t^i(s^t)}
-\newcommand{\st}{^*}
-\newcommand{\Asq}{\frac{(1-\nu-(1-\rho)\alpha)^2}{(1-\nu)^2}}
-\newcommand{\A}{\frac{\rho}{(1-\alpha-\nu)}}
-\newcommand{\B}{\frac{1}{(1-\nu)}}
-\newcommand{\rhofac}{(1-\rho^2)}
-\newcommand{\Az}{\frac{1-\nu-(1-\rho)\alpha}{(1-\nu)(1-\alpha-\nu)}}
-\newcommand{\mun}{\left(\frac{\nu}{W}\right)^\frac{1-\alpha}{1-(\alpha+\nu)}\left(\frac{\alpha}{R^k}\right)^\frac{\alpha}{1-(\alpha+\nu)}}
-\newcommand{\muk}{\left(\frac{\alpha}{R^k}\right)^\frac{1-\nu}{1-(\alpha+\nu)}\left(\frac{\nu}{W}\right)^\frac{\nu}{1-(\alpha+\nu)}}
-\newcommand{\muy}{\left(\frac{\nu}{W}\right)^\frac{\nu}{1-(\alpha+\nu)}\left(\frac{\alpha}{R^k}\right)^\frac{\alpha}{1-(\alpha+\nu)}}
+
 \newcommand{\sym}[1]{\rlap{#1}}% Thanks David Carlisle
 
 \usepackage{siunitx}
@@ -103,11 +96,19 @@
 
 %mathematical commands
 \newcommand{\problemIndustries}{(A_t\cup \Omega_t)}
+\newcommand{\red}[1]{{\color{red}#1}}
 \newcommand{\normalIndustries}{\problemIndustries^C}
 \newcommand{\sumNormalIndustries}{\sum_{j\in\normalIndustries}}
 \newcommand{\sumProblemIndustries}{\sum_{j\in\problemIndustries}}
 \newcommand{\sumWithinNormal}{\sum_{j\in\normalIndustries\cap \Gamma_t}}
 \newcommand{\sumWithinProblem}{\sum_{j\in\normalIndustries\cap \Gamma_t^C}}
 \newcommand{\ser}[1]{s_{er#1}}
-\newcommand{\incolor}[1]{{\color{purple} #1}}
-\newcommand{\addfig}[2]{\includegraphics[width=#1\textwidth]{#2}}
+\newcommand{\cov}{\text{cov}}
+\newcommand{\explain}[2]{\underbrace{#1}_{\parbox{\widthof{\ensuremath{#1}}}{\footnotesize\raggedright #2}}}
+\newcommand{\lfpthresh}[1]{\underline{\chi_{#1 lt}}}
+\newcommand{\crho}{\frac{\sigma-1}{\sigma}}
+\newcommand{\crhoinv}{\frac{\sigma}{\sigma-1}}
+
+\newcommand{\lquote}[3][]{\bcite #2 \citep[#1]{#3} \ecite}
+
+\newcommand{\laquote}[3][]{\bcite #2 \citepalias[#1]{#3} \ecite}
