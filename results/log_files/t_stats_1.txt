@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats_1.txt
+  log type:  text
+ opened on:   2 Mar 2022, 10:58:58
+.     list bsoc00Agg d_empshare1  threshold1 p_value1  if reject1&d_empshare1>0
+
+     +-----------------------------------------------------------------------------------------------+
+     |                                                    bsoc00Agg   d_emps~1   thresh~1   p_value1 |
+     |-----------------------------------------------------------------------------------------------|
+ 38. |                            5312 bricklayers, masons, roofers   .0771192   .0564103   2.72e-06 |
+ 68. |                    6221 Hairdressers And Related Occupations   .0589352   .1371795   .1266115 |
+ 73. |                                         5421 printing trades   .0807233   .1192308   .0595008 |
+120. |               5213 Metal forming, welding and related trades   .0674947   .1269231   .0905276 |
+121. |                        2129 engineering professionals n.e.c.   .0497605   .0897436   .0041342 |
+     |-----------------------------------------------------------------------------------------------|
+126. |                                8215 Transport operatives nec   .0608214   .1320513   .1051618 |
+128. | 2121 civil, mechanical, electrical and electronics engineers   .0157688   .1333333   .1103967 |
+140. |                                  5431 butchers, meat cutters   .0664995   .1307692   .1024317 |
+152. |                     2434 chartrd surveyors (not qntity surv)   .0453741   .1166667   .0549684 |
+     +-----------------------------------------------------------------------------------------------+
+.     log close
+      name:  <unnamed>
+       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats_1.txt
+  log type:  text
+ closed on:   2 Mar 2022, 10:58:58
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

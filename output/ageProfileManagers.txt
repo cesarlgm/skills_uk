@@ -1,0 +1,44 @@
+current job soc 2000 in numeric 4 digit format	Mean	Mean
+	age1	age2
+1112 directors & chief execs of maj orgs	45.3	44.6
+1113 senior officials in local gov	48.6	45.0
+1114 sen. officials spec interest orgs	47.4	47.1
+1121 prod. works & maintenance managers	43.6	45.3
+1122 managers in construction	44.4	44.6
+1123 managers in mining and energy	45.5	44.9
+1131 financial managers & chartered secs	45.2	43.8
+1132 marketing and sales managers	42.8	41.2
+1133 purchasing managers	43.3	43.8
+1134 advertising & public rel managers	41.9	41.5
+1135 pers training & ind rel mngers	42.5	41.9
+1136 info & communication technol mngers	41.9	42.0
+1137 research and development managers	43.7	43.8
+1141 quality assurance managers	43.5	42.6
+1142 customer care managers	41.6	38.7
+1151 financial institution managers	42.7	40.2
+1152 office managers	43.7	40.9
+1161 transport and distribution managers	44.6	43.8
+1162 storage and warehouse managers	42.2	38.9
+1163 retail and wholesale managers	41.1	38.0
+1172 police officers (inspectrs & above)	44.6	44.0
+1173 snr officers fire, amb, prson et al	45.2	46.4
+1174 security managers	44.0	41.3
+1181 hospital and health service mngers	46.8	45.7
+1182 pharmacy managers	37.3	44.0
+1183 healthcare practice managers	48.9	46.3
+1184 social services managers	48.5	41.7
+1185 residential and day care managers	47.2	42.4
+1211 farm managers	45.7	44.5
+1221 hotel and accommodation managers	46.7	43.7
+1222 conference and exhibition managers	38.9	34.6
+1223 restaurant and catering managers	40.3	37.7
+1224 publicans & managrs licensed prmses	40.8	37.6
+1225 leisure and sports managers	40.6	37.4
+1226 travel agency managers	44.0	40.8
+1231 property, housing and land managers	45.8	45.3
+1232 garage managers and proprietors	42.3	45.7
+1233 hairdrs & beauty slon mngr & props	39.5	38.9
+1234 shopkprs, wholesale & retail dealrs	44.8	42.9
+1239 mngers and prop. in other srvcs nec	43.3	42.7
+Total	43.8	42.4
+

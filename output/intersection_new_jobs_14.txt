@@ -1,0 +1,99 @@
+----------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox\Boston University\8-Research Assistantship\ukData\output/intersection_new_jo
+> bs_14.txt
+  log type:  text
+ opened on:  11 Jun 2020, 19:12:12
+
+. *Jobs that are in the intersection of transition / core
+. table `occupation' year if intersection_14, contents(mean in_core)
+
+----------------------------------------------------------------------------------------------------------------
+                                         |                                 Year                                 
+                               bsoc00Agg | 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014
+-----------------------------------------+----------------------------------------------------------------------
+3541 sales representatives, marketing pr |    1    1    1    1    1    1    1    1    1    1    1    1    1    1
+3561 public service associates, personne |    0    0    1    1    1    1    1    1    1    1    1    1    1    1
+4111 civil service officers and assistan |    1    1    1    1    1    1    1    1    1    1    1    1    1    1
+8117 mtl mkng & treating procss operatve |    0    0    0    1    1    1    1    1    1    1    1    1    1    1
+              8213 bus and coach drivers |    0    0    0    1    1    1    1    1    1    1    1    1    1    1
+9149 oth good hndlng & storage occup nec |    0    0    1    1    1    0    1    1    1    1    1    1    1    1
+----------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------
+                                         |      Year     
+                               bsoc00Agg | 2015 2016 2017
+-----------------------------------------+---------------
+3541 sales representatives, marketing pr |    0    0    0
+3561 public service associates, personne |    1    1    1
+4111 civil service officers and assistan |    1    0    0
+8117 mtl mkng & treating procss operatve |    1    1    1
+              8213 bus and coach drivers |    1    1    1
+9149 oth good hndlng & storage occup nec |    1    1    1
+---------------------------------------------------------
+
+. 
+. *Jobs added from core_16 to core_14
+. table `occupation' year if new_core, contents(mean in_core)
+
+----------------------------------------------------------------------------------------------------------------
+                                         |                                 Year                                 
+                               bsoc00Agg | 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014
+-----------------------------------------+----------------------------------------------------------------------
+1161 Transport, distribution, storage an |    1    1    1    1    1    1    0    1    1    1    1    1    1    1
+      1163 retail and wholesale managers |    1    1    1    1    1    1    1    1    1    0    1    1    1    1
+        1172 protective service officers |    1    0    1    1    1    1    1    1    1    1    1    1    1    0
+1234 shopkprs, wholesale & retail dealrs |    1    1    1    0    1    1    1    1    1    1    1    1    1    1
+1239 mngers and prop. in other srvcs nec |    1    0    0    0    1    1    1    1    1    1    1    1    1    1
+                 2125 chemical engineers |    1    1    1    1    1    1    1    1    1    1    1    0    1    1
+                3123 building inspectors |    1    1    1    1    1    1    1    1    1    1    0    0    1    1
+                     3131 it technitians |    0    1    1    1    0    1    1    1    1    1    1    1    1    1
+     3442 Sports And Fitness Occupations |    1    1    1    1    0    1    1    1    1    1    0    1    1    1
+3563 vocatn & indust trainrs & instrctrs |    0    1    1    1    1    1    1    0    1    1    1    1    1    1
+                       4141 telephonists |    1    1    1    1    1    1    1    0    1    1    1    0    0    1
+4211 Secretarial and related occupations |    1    1    0    0    1    1    1    1    1    1    1    1    1    1
+5111 Farmers, gardeners and ground women |    1    0    0    1    1    1    0    1    1    1    1    1    1    1
+           5211 smiths and forge workers |    1    1    1    1    1    1    1    1    1    0    0    0    1    1
+                5311 Construction trades |    1    1    1    1    0    0    1    1    1    1    1    1    1    1
+7112 retail cashiers/check-out operators |    1    1    1    0    0    1    1    1    1    1    1    1    1    1
+          8119 process operatives n.e.c. |    0    1    1    1    1    1    1    0    1    1    1    1    1    1
+8142 Road and ail construction operative |    1    0    0    0    1    1    1    1    1    1    1    1    1    1
+           8218 air transport operatives |    1    1    1    1    1    1    1    1    1    1    0    1    1    1
+9119 fishng & agric reltd occupatns nec. |    1    1    1    1    0    1    1    0    1    1    0    1    1    1
+  9259 elementary sales occupations nec. |    1    1    0    1    1    1    1    1    1    1    1    1    1    1
+----------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------
+                                         |      Year     
+                               bsoc00Agg | 2015 2016 2017
+-----------------------------------------+---------------
+1161 Transport, distribution, storage an |    1    1    0
+      1163 retail and wholesale managers |    0    1    1
+        1172 protective service officers |    0    1    1
+1234 shopkprs, wholesale & retail dealrs |    1    1    0
+1239 mngers and prop. in other srvcs nec |    1    1    1
+                 2125 chemical engineers |    1    1    0
+                3123 building inspectors |    1    0    1
+                     3131 it technitians |    1    0    1
+     3442 Sports And Fitness Occupations |    1    0    1
+3563 vocatn & indust trainrs & instrctrs |    1    1    1
+                       4141 telephonists |    1    1    1
+4211 Secretarial and related occupations |    1    1    1
+5111 Farmers, gardeners and ground women |    1    1    1
+           5211 smiths and forge workers |    1    1    1
+                5311 Construction trades |    1    1    0
+7112 retail cashiers/check-out operators |    1    1    1
+          8119 process operatives n.e.c. |    1    1    1
+8142 Road and ail construction operative |    1    1    1
+           8218 air transport operatives |    0    1    1
+9119 fishng & agric reltd occupatns nec. |    1    1    1
+  9259 elementary sales occupations nec. |    1    1    0
+---------------------------------------------------------
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox\Boston University\8-Research Assistantship\ukData\output/intersection_new_jo
+> bs_14.txt
+  log type:  text
+ closed on:  11 Jun 2020, 19:12:12
+----------------------------------------------------------------------------------------------------------------

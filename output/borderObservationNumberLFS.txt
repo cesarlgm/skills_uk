@@ -1,0 +1,39 @@
+------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\César\Dropbox\Boston University\8-Research Assistantship\ukData\output/bor
+> derObservationNumberLFS.txt
+  log type:  text
+ opened on:  13 Jan 2020, 15:13:40
+
+. foreach stat in min mean p5 p25 p50 {
+  2.         table borderType if boundaryJob`thresh', contents( `stat' observations1 `stat' obse
+> rvations2 ///
+>                                                                   `stat' observations3)
+  3. }
+boundaryJob ambiguous abbreviation
+r(111);
+
+end of do-file
+r(111);
+
+end of do-file
+r(111);
+
+end of do-file
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\César\Dropbox\Boston University\8-Research Assistantship\ukData\codeFiles\ukCesar
+> .do"
+
+. clear all
+
+. clear matrix
+
+. set more off, permanently
+(set more preference recorded)
+
+. capture log close 

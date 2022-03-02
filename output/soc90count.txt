@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\output/soc90count.tx
+> t
+  log type:  text
+ opened on:   9 Sep 2021, 10:51:52
+
+. table numSoc90
+
+----------------------
+Number    |
+soc90     |
+codes     |      Freq.
+----------+-----------
+        1 |        190
+        2 |         92
+        3 |         27
+        4 |         11
+        5 |          8
+        6 |          4
+        7 |          2
+----------------------
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\output/soc90count.tx
+> t
+  log type:  text
+ closed on:   9 Sep 2021, 10:51:52
+---------------------------------------------------------------------------------------------------------------------

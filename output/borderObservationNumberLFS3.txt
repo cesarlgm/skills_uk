@@ -1,0 +1,582 @@
+------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\César\Dropbox\Boston University\8-Research Assistantship\ukData\output/bor
+> derObservationNumberLFS3.txt
+  log type:  text
+ opened on:  13 Jan 2020, 14:31:25
+
+. foreach stat in min mean p5 p25 p50 {
+  2.         table borderType if boundaryJob`thresh', contents( `stat' observations1 `stat' obse
+> rvations2 ///
+>                                                                   `stat' observations3)
+  3. }
+
+-------------------------------------------------------
+borderTyp |
+e         | min(observ~1)  min(observ~2)  min(observ~3)
+----------+--------------------------------------------
+  Low-Mid |             6              5              0
+ Low-High |             2              1              3
+ Mid-High |             8              6             11
+-------------------------------------------------------
+
+----------------------------------------------------------
+borderTyp |
+e         | mean(observ~1)  mean(observ~2)  mean(observ~3)
+----------+-----------------------------------------------
+  Low-Mid |        147.275         128.649         66.0585
+ Low-High |        213.707         142.456         202.299
+ Mid-High |         107.75             150             177
+----------------------------------------------------------
+
+----------------------------------------------------
+borderTyp |
+e         | p5(observ~1)  p5(observ~2)  p5(observ~3)
+----------+-----------------------------------------
+  Low-Mid |           15            14             2
+ Low-High |           17             7            13
+ Mid-High |           10          13.5            20
+----------------------------------------------------
+
+-------------------------------------------------------
+borderTyp |
+e         | p25(observ~1)  p25(observ~2)  p25(observ~3)
+----------+--------------------------------------------
+  Low-Mid |            35             28              9
+ Low-High |            58             31             45
+ Mid-High |          30.5           50.5           48.5
+-------------------------------------------------------
+
+-------------------------------------------------------
+borderTyp |
+e         | med(observ~1)  med(observ~2)  med(observ~3)
+----------+--------------------------------------------
+  Low-Mid |            84             77             26
+ Low-High |           109             72            109
+ Mid-High |          52.5             71           89.5
+-------------------------------------------------------
+
+. local stat mean
+
+. bysort year: table `occupation' if boundaryJob`thresh'& borderType==12, contents( `stat' ///
+>         observations1 `stat' observations2 )
+
+------------------------------------------------------------------------------------------------
+-> year = 2001
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~2)
+-----------------------------------------+-------------------------------
+             1142 customer care managers |            156             152
+                  1174 security managers |             42              48
+   1221 hotel and accommodation managers |            105              86
+             1226 travel agency managers |             26              25
+          3217 pharmaceutical dispensers |             78              78
+ 3312 police offcrs (sergeant and below) |            393             376
+3313 fire serv off (leading off & below) |            150             113
+  3314 prison serv off (below princ off) |            112              99
+3319 protective servcs assoc prfsnls nec |             64              47
+                     3441 sports players |             25              16
+            3511 air traffic controllers |             21              21
+       3513 ship and hovercraft officers |             38              47
+         3544 estate agents, auctioneers |             53              40
+   4111 civil service executive officers |            203             214
+       4132 pensions and insurance clrks |            278             180
+ 5212 moulders, core makers, die casters |             33              28
+                     5215 welding trades |            238             291
+5221 metal mach setter & setter-operator |            308             251
+ 5224 prec instrument makers & repairers |             70              93
+             5234 vehicle spray painters |             51              69
+       5242 telecommunications engineers |            143             201
+ 5243 lines repairers and cable jointers |             42              48
+      5244 tv, video and audio engineers |             34              53
+                     5311 steel erectors |             38              45
+   5313 roofers, roof tilers and slaters |            125              88
+         5319 construction trades n.e.c. |            494             482
+                         5321 plasterers |            111             143
+                           5422 printers |            109             132
+    5423 bookbinders and print finishers |            104              81
+                    5424 screen printers |             15              13
+        5432 bakers, flour confectioners |             91              74
+5492 furntre mkr, other crft woodworkers |            104             136
+   6112 amb staff (excluding paramedics) |             45              33
+                     6121 nursery nurses |            356             210
+   6131 veterinary nurses and assistants |             28              19
+      6211 sports and leisure assistants |             93              64
+6222 beauticians and related occupations |             84              94
+              6292 pest control officers |             13              16
+            8124 energy plant operatives |             19              20
+8126 water and sewerage plant operatives |             24              21
+                8215 driving instructors |             74              57
+ 8217 seafrer (m navy), brge, lght, boat |             38              28
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2006
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~2)
+-----------------------------------------+-------------------------------
+1224 publicans & managrs licensed prmses |            166             102
+    1232 garage managers and proprietors |            117             159
+               3216 dispensing opticians |             20              33
+          3217 pharmaceutical dispensers |            128              89
+ 3312 police offcrs (sergeant and below) |            463             380
+3313 fire serv off (leading off & below) |            129             125
+  3314 prison serv off (below princ off) |            155             102
+                     3441 sports players |             38              25
+             3533 insurance underwriters |             73              72
+       4132 pensions and insurance clrks |            227             141
+            4142 communication operators |             96              66
+           5211 smiths and forge workers |             11              15
+                     5215 welding trades |            207             299
+5221 metal mach setter & setter-operator |            184             245
+5232 vehicle body builders and repairers |             87             105
+             5234 vehicle spray painters |             69              71
+ 5243 lines repairers and cable jointers |             41              35
+      5244 tv, video and audio engineers |             38              33
+  5249 elec & electronic engineer n.e.c. |            228             336
+                     5311 steel erectors |             39              58
+         5319 construction trades n.e.c. |            669             577
+                         5321 plasterers |            156             179
+            5323 painters and decorators |            428             509
+            5414 tailors and dressmakers |             18              17
+5421 origntrs, compositors & print preps |             28              28
+                           5422 printers |            116             133
+5492 furntre mkr, other crft woodworkers |             93             151
+                     6121 nursery nurses |            458             355
+     6123 playgroup leaders & assistants |            128             116
+   6131 veterinary nurses and assistants |             28              33
+      6211 sports and leisure assistants |            107              75
+                      6212 travel agents |            141             120
+              6214 air travel assistants |            153              90
+6222 beauticians and related occupations |            144             147
+7121 collector salsprsns and cred agents |             43              24
+8117 mtl mkng & treating procss operatve |             71              47
+            8124 energy plant operatives |             20              27
+      8141 scaffolders, stagers, riggers |            107              79
+     8149 construction operatives n.e.c. |            345             237
+                8215 driving instructors |            132             105
+     8223 agricultural machinery drivers |             20              12
+                   9112 forestry workers |             15              20
+9133 printing machine minders and assist |             86              65
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2012
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~2)
+-----------------------------------------+-------------------------------
+1224 publicans & managrs licensed prmses |            206             131
+    1232 garage managers and proprietors |             70              96
+3313 fire serv off (leading off & below) |             65             102
+  3314 prison serv off (below princ off) |            120              93
+                      3514 train drivers |             75              63
+                 4121 credit controllers |            117              99
+                     4123 counter clerks |            440             280
+       4132 pensions and insurance clrks |            150             118
+                       4141 telephonists |             55              51
+            4142 communication operators |             86              70
+                 4213 school secretaries |            178             127
+                4214 company secretaries |             83              48
+                            4217 typists |             14              12
+       5113 gardeners and grounds(wo)men |            454             269
+ 5119 agricult and fishing trades n.e.c. |             37              30
+                5213 sheet metal workers |             35              51
+                     5215 welding trades |            122             180
+5232 vehicle body builders and repairers |             82              65
+                  5233 auto electricians |             15              17
+             5234 vehicle spray painters |             21              39
+  5249 elec & electronic engineer n.e.c. |            132             139
+                     5311 steel erectors |             18              16
+                5312 bricklayers, masons |            168             229
+                         5321 plasterers |            174             130
+            5323 painters and decorators |            294             319
+                           5422 printers |             71              61
+                    5424 screen printers |              6               5
+5492 furntre mkr, other crft woodworkers |             77             107
+      5499 hand craft occupations n.e.c. |             27              27
+ 6111 nursing auxiliaries and assistants |            615             521
+   6112 amb staff (excluding paramedics) |             44              29
+ 6114 houseprnts and residential wardens |             65              82
+    6115 care assistants and home carers |           2061            1396
+   6122 childminders and rel occupations |            237             218
+     6123 playgroup leaders & assistants |             67              88
+      6211 sports and leisure assistants |             79              59
+                      6212 travel agents |             94              77
+              6214 air travel assistants |             73              68
+6222 beauticians and related occupations |            159             161
+7121 collector salsprsns and cred agents |             40              24
+           212 customer care occupations |            641             457
+8123 quarry workers and related oprtives |             34              21
+            8124 energy plant operatives |             20              13
+8126 water and sewerage plant operatives |             26              28
+     8149 construction operatives n.e.c. |            297             197
+                8215 driving instructors |             82              55
+ 8217 seafrer (m navy), brge, lght, boat |             16              10
+                      8221 crane drivers |             23              18
+     8223 agricultural machinery drivers |             27              20
+                      9222 hotel porters |             18              14
+  9226 leisure and theme park attendants |             44              23
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2017
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~2)
+-----------------------------------------+-------------------------------
+1224 publicans & managrs licensed prmses |            114              77
+    1232 garage managers and proprietors |             54              63
+          3217 pharmaceutical dispensers |            102             109
+                     4123 counter clerks |            271             188
+                      4216 receptionists |            453             274
+                5213 sheet metal workers |             27              31
+                     5215 welding trades |            101             117
+                       5216 pipe fitters |             13              20
+5221 metal mach setter & setter-operator |             97             109
+ 5223 mtl working prod & maintnce fitter |            314             477
+5232 vehicle body builders and repairers |             46              65
+             5234 vehicle spray painters |             26              20
+       5242 telecommunications engineers |            112             116
+      5244 tv, video and audio engineers |             19              27
+                     5311 steel erectors |             20              15
+                5312 bricklayers, masons |            139             187
+         5319 construction trades n.e.c. |            507             331
+                         5321 plasterers |            128              92
+            5323 painters and decorators |            285             219
+         5496 floral arrangers, florists |             18              14
+      5499 hand craft occupations n.e.c. |             42              28
+ 6111 nursing auxiliaries and assistants |            539             570
+    6115 care assistants and home carers |           1803            1333
+   6122 childminders and rel occupations |            168             181
+                      6212 travel agents |             61              59
+             6215 rail travel assistants |             35              33
+6222 beauticians and related occupations |            178             209
+              6292 pest control officers |              9               6
+8117 mtl mkng & treating procss operatve |             21              16
+     8133 routine inspectors and testers |            138             109
+ 8135 tyre, exhaust and windscrn fitters |             34              22
+8143 rail constructn & maintnce oprtives |             16              20
+     8149 construction operatives n.e.c. |            215             174
+9133 printing machine minders and assist |             23              22
+                          9225 bar staff |            252             144
+-------------------------------------------------------------------------
+
+. bysort year: table `occupation' if boundaryJob`thresh'& borderType==13, contents( `stat' ///
+>         observations1 `stat' observations3 )
+
+------------------------------------------------------------------------------------------------
+-> year = 2001
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~3)
+-----------------------------------------+-------------------------------
+       1132 marketing and sales managers |            838            1342
+     1151 financial institution managers |            305             313
+                    1152 office managers |            636             411
+       1183 healthcare practice managers |             64              42
+  1185 residential and day care managers |            128             189
+        1225 leisure and sports managers |            104              78
+1231 property, housing and land managers |            169             251
+1239 mngers and prop. in other srvcs nec |            430             349
+             3111 laboratory technicians |            139             189
+          3131 it operations technicians |            259             300
+                         3213 paramedics |             34              27
+               3216 dispensing opticians |             15              23
+     3218 medical and dental technicians |             60              96
+        3231 youth and community workers |            170             197
+               3413 actors, entertainers |             63              42
+3442 sports coaches, instruc & officials |             71              64
+      3520 legal associate professionals |             66              75
+                            3532 brokers |            122             109
+  3534 fin. & invest. analyst & advisers |            298             334
+3539 business & related assoc profs nec. |            170             252
+     3541 buyers and purchasing officers |            173             177
+              3542 sales representatives |            631             416
+     3562 personnel & ind relations offs |            243             370
+                3566 statutory examiners |             34              30
+     4114 officers non-gov organisations |             86              92
+        4135 library assistants & clerks |            127              91
+       4137 market research interviewers |             62              43
+                      6113 dental nurses |            109              75
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2006
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~3)
+-----------------------------------------+-------------------------------
+     1151 financial institution managers |            390             423
+                    1152 office managers |            865             606
+       1183 healthcare practice managers |             58              75
+                      1211 farm managers |             58              33
+   1221 hotel and accommodation managers |            112             115
+        1225 leisure and sports managers |            110             115
+             1226 travel agency managers |             34              25
+1239 mngers and prop. in other srvcs nec |            477             492
+             3111 laboratory technicians |            120             206
+   3119 science & eng technicians n.e.c. |             87             118
+          3131 it operations technicians |            281             377
+        3132 it user support technicians |            161             146
+                         3213 paramedics |             58              78
+3319 protective servcs assoc prfsnls nec |             78              73
+               3413 actors, entertainers |             79              90
+                3443 fitness instructors |             59              62
+  3534 fin. & invest. analyst & advisers |            327             445
+     3541 buyers and purchasing officers |            145             196
+              3542 sales representatives |            636             434
+         3544 estate agents, auctioneers |             78              71
+3561 public serv associate professionals |            192             278
+                3566 statutory examiners |             37              32
+ 3567 occupl hygnists & health sfty offs |             91             114
+   4111 civil service executive officers |            230             236
+  4113 local gov clerical offs & assists |            688             418
+     4114 officers non-gov organisations |            119             126
+        4135 library assistants & clerks |            115             108
+       4136 database assistants & clerks |            237             132
+       4137 market research interviewers |             40              36
+ 5245 comp engineer, installn & maintnce |             86              95
+         5496 floral arrangers, florists |             44              31
+                      6113 dental nurses |             90              89
+ 6114 houseprnts and residential wardens |            104              79
+                  6124 educal assistants |           1262             869
+  7125 merchandisers and window dressers |            104              74
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2012
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~3)
+-----------------------------------------+-------------------------------
+             1142 customer care managers |            186             236
+                    1152 office managers |            465             566
+1161 transport and distribution managers |            185             180
+     1162 storage and warehouse managers |            243             169
+      1163 retail and wholesale managers |            975             738
+                      1211 farm managers |             27              39
+   1221 hotel and accommodation managers |             97             103
+   1223 restaurant and catering managers |            401             228
+        1225 leisure and sports managers |            115             160
+1231 property, housing and land managers |            231             353
+   3119 science & eng technicians n.e.c. |            121             140
+                3123 building inspectors |             13              13
+3319 protective servcs assoc prfsnls nec |             81              97
+                     3441 sports players |             34              22
+               3536 importers, exporters |             20              14
+     3541 buyers and purchasing officers |            100             157
+              3542 sales representatives |            442             416
+4112 civil serv admin offcrs and assists |            563             462
+  4113 local gov clerical offs & assists |            397             376
+     4114 officers non-gov organisations |             94             134
+     4122 accnts wages clerk, bookkeeper |           1173            1136
+4131 filng & othr recrds assists & clrks |            340             212
+       4136 database assistants & clerks |             71              65
+4150 general office assistants or clerks |           1583             984
+4215 personal assists & othr secretaries |            537             385
+           5211 smiths and forge workers |              7              11
+       5242 telecommunications engineers |            119              92
+ 5491 glss & cermic mkr, decortr, finshr |             18              17
+     6139 animal care occupations n.e.c. |             91              85
+             6213 travel and tour guides |             71              53
+6219 leisure & travel serv occuptns nec. |              7               8
+  7125 merchandisers and window dressers |             58              45
+   7129 sales related occupations n.e.c. |            162             128
+     7211 call centre agents & operators |            248             167
+                9245 car park attendants |             24              13
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2017
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~1)  mean(observ~3)
+-----------------------------------------+-------------------------------
+             1142 customer care managers |            182             238
+                    1152 office managers |            428             655
+1161 transport and distribution managers |            135             183
+     1162 storage and warehouse managers |            251             192
+      1163 retail and wholesale managers |            778             697
+       1183 healthcare practice managers |             36              65
+   1221 hotel and accommodation managers |             74             100
+   1223 restaurant and catering managers |            290             286
+             1226 travel agency managers |             22              24
+      3115 quality assurance technicians |             52              47
+   3119 science & eng technicians n.e.c. |            106             131
+  3314 prison serv off (below princ off) |             66              71
+                     3441 sports players |             26              21
+            3511 air traffic controllers |              9               9
+     3541 buyers and purchasing officers |             96             133
+              3542 sales representatives |            271             377
+  4113 local gov clerical offs & assists |            321             385
+                 4121 credit controllers |             64              69
+     4122 accnts wages clerk, bookkeeper |            867            1112
+4131 filng & othr recrds assists & clrks |            223             289
+       4132 pensions and insurance clrks |            161             128
+                       4141 telephonists |             46              24
+4150 general office assistants or clerks |           1451            1323
+                4211 medical secretaries |            154             105
+                 4213 school secretaries |            132             127
+                4214 company secretaries |             88              69
+4215 personal assists & othr secretaries |            372             304
+                            4217 typists |             17              20
+               5112 horticultural trades |             29              35
+       5113 gardeners and grounds(wo)men |            399             240
+ 5119 agricult and fishing trades n.e.c. |             61              38
+ 5224 prec instrument makers & repairers |             44              45
+ 5243 lines repairers and cable jointers |             18              13
+            5414 tailors and dressmakers |             17              20
+    5423 bookbinders and print finishers |             35              19
+ 5491 glss & cermic mkr, decortr, finshr |             27              19
+            5493 pattern makers (moulds) |              2               3
+ 6114 houseprnts and residential wardens |             63              53
+     6139 animal care occupations n.e.c. |            147             108
+      6211 sports and leisure assistants |             73              61
+6219 leisure & travel serv occuptns nec. |             16              11
+6291 undertakers and mortuary assistants |             48              32
+ 7124 mrkt and street traders and assist |             23              24
+  7125 merchandisers and window dressers |             61              61
+   7129 sales related occupations n.e.c. |            123             151
+           212 customer care occupations |            563             454
+ 9219 elementary office occupatns n.e.c. |             65              45
+                 224 waiters, waitresses |            288             215
+9229 elmntry persnal servcs occup n.e.c. |             38              29
+-------------------------------------------------------------------------
+
+. bysort year: table `occupation' if boundaryJob`thresh'& borderType==23, contents( `stat' ///
+>         observations2 `stat' observations3 )
+
+------------------------------------------------------------------------------------------------
+-> year = 2001
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~2)  mean(observ~3)
+-----------------------------------------+-------------------------------
+ 1121 prod. works & maintenance managers |            771             993
+           1122 managers in construction |            441             388
+      1123 managers in mining and energy |             22              24
+1173 snr officers fire, amb, prson et al |             35              29
+3112 electrical & electronic technicians |            108              90
+            3113 engineering technicians |            200             140
+      3114 build & civil eng technicians |             62              82
+      3115 quality assurance technicians |             48              48
+   3119 science & eng technicians n.e.c. |            110             105
+        3132 it user support technicians |            122             191
+3434 photo. & audio-visual equip operats |             98             120
+                3443 fitness instructors |             55              62
+  3531 estimators, valuers and assessors |            154             177
+             3533 insurance underwriters |             60              35
+                   3535 taxation experts |             60              89
+               3536 importers, exporters |             22              27
+3563 vocatn & indust trainrs & instrctrs |            236             329
+ 5245 comp engineer, installn & maintnce |             91              99
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2006
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~2)  mean(observ~3)
+-----------------------------------------+-------------------------------
+ 1121 prod. works & maintenance managers |            835            1181
+           1122 managers in construction |            558             712
+             1142 customer care managers |            210             263
+                  1174 security managers |             51              31
+               2123 electrical engineers |            144             209
+   2127 production and process engineers |            107             107
+   2129 engineering professionals n.e.c. |            201             292
+3112 electrical & electronic technicians |             83              51
+            3113 engineering technicians |            192             150
+      3115 quality assurance technicians |             54              57
+                    3122 draughtspersons |            101             131
+     3218 medical and dental technicians |             94             115
+            3511 air traffic controllers |             26              26
+ 3512 aircraft pilots and flight enginrs |             61              80
+      3520 legal associate professionals |            102             141
+  3531 estimators, valuers and assessors |            137             198
+                            3532 brokers |            118             117
+ 5224 prec instrument makers & repairers |             66              41
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2012
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~2)  mean(observ~3)
+-----------------------------------------+-------------------------------
+                  1174 security managers |             44              52
+             1226 travel agency managers |             30              27
+3112 electrical & electronic technicians |             43              49
+            3113 engineering technicians |            198             200
+      3115 quality assurance technicians |             36              50
+          3217 pharmaceutical dispensers |            107             103
+ 3312 police offcrs (sergeant and below) |            309             436
+                3443 fitness instructors |             76             122
+            3511 air traffic controllers |             11              11
+       3513 ship and hovercraft officers |             26              43
+             3533 insurance underwriters |             69              55
+     3537 financial and accounting techs |             70              80
+         3544 estate agents, auctioneers |             58              64
+        4135 library assistants & clerks |             50              75
+ 5224 prec instrument makers & repairers |             47              47
+ 5245 comp engineer, installn & maintnce |             56              81
+            5414 tailors and dressmakers |              6              17
+                      6113 dental nurses |             76             114
+                     6121 nursery nurses |            482             323
+                  6124 educal assistants |            929            1018
+   6131 veterinary nurses and assistants |             30              23
+-------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+-> year = 2017
+
+-------------------------------------------------------------------------
+current job soc 2000 in numeric 4 digit  |
+format                                   | mean(observ~2)  mean(observ~3)
+-----------------------------------------+-------------------------------
+           1122 managers in construction |            372             590
+1173 snr officers fire, amb, prson et al |             16              26
+        1225 leisure and sports managers |             72             126
+ 1233 hairdrs & beauty slon mngr & props |             57              36
+3112 electrical & electronic technicians |             67              45
+            3113 engineering technicians |            154             217
+ 3312 police offcrs (sergeant and below) |            251             382
+3313 fire serv off (leading off & below) |             69              76
+             3533 insurance underwriters |             59              72
+         3544 estate agents, auctioneers |             55              65
+                3566 statutory examiners |             21              40
+4112 civil serv admin offcrs and assists |            233             283
+            4142 communication operators |             57              83
+  5249 elec & electronic engineer n.e.c. |            148             112
+                      6113 dental nurses |             95             111
+                     6121 nursery nurses |            502             346
+     6123 playgroup leaders & assistants |             66              55
+                  6124 educal assistants |            805            1213
+   6131 veterinary nurses and assistants |             47              73
+              6214 air travel assistants |             69              92
+     7211 call centre agents & operators |            177             174
+            8124 energy plant operatives |             11              12
+                   9112 forestry workers |              9              11
+-------------------------------------------------------------------------
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\César\Dropbox\Boston University\8-Research Assistantship\ukData\output/bor
+> derObservationNumberLFS3.txt
+  log type:  text
+ closed on:  13 Jan 2020, 14:31:25
+------------------------------------------------------------------------------------------------
