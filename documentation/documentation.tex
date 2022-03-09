@@ -11,16 +11,24 @@
 
 \newcommand{\ntimes}{4 }
 
-\subsection{Benjamini-Hotchberg}
-
+Let $j$ and $e$ index occupation and education respectively. The specification is:
 \beqns
-	t_{stat}&=&\frac{p_{2017}-p_{2001}}{\sqrt{s_p^2/n_{2017}+s_p^2/n_{2001}}}\\
-			s_p^2&=&\frac{(n_{2017}-1)p_{2017}(1-p_{2017})+(n_{2001}-1)p_{2001}(1-p_{2001})}{n_{2017}+n_{2001}-2}
+	\Delta \ln w_{jet}=\lambda_j+\sum_{i=1}^{4}\beta_{ei}S_{iejt}+ \varepsilon_{ejt}
 \eeqns
-\bitem
-	\item Order p-values from lowest to highest.
-	\item Reject if $p_k<\alpha\frac{k}{m}$
-\eitem 
+I get the $\theta$s computing $\theta_{ei}=\beta_{ei}/\beta_{1i}$.
+{\tiny \input{../results/tables/theta_wage_d_l_hourpay}}
+{\tiny \input{../results/tables/theta_wage_d_l_wkpay}}
+{\tiny \input{../results/tables/theta_wage_d_al_hourpay}}
+{\tiny \input{../results/tables/theta_wage_d_al_wkpay}}
+%\input{../results/tables/theta_wage_d_l_gpay}
+
+\href{https://www.dropbox.com/s/dnt84rs90zac1h9/t_stats.txt?dl=0}{Occupations with increasing low share}
+
+\input{../results/tables/up_low_occ}
+\input{../results/tables/overall_employment_share_deskill}
+\input{../results/tables/deskilling_occ_educ_shares}
+\input{../results/tables/deskilling_occ_educ_shares_fe}
+
 
 \begin{figure}
 	\caption{Change in employment shares: 2001-2017}

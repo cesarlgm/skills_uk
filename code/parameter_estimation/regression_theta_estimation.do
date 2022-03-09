@@ -88,7 +88,7 @@ forvalues educ=1/3 {
 bootstrap `stat_list', reps(1000): reghdfe d_l_employment  *1 *2 *3, nocons absorb(industry_id) vce(r)
 */
 
-reghdfe d_l_employment_w  *1 *2 *3 [aw=obs], nocons absorb(industry_id) vce(cl occupation)
+reghdfe d_l_employment_w  *1 *2 *3 , nocons absorb(industry_id) vce(cl occupation)
 eststo regw
 
 forvalues educ=1/3 {

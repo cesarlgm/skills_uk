@@ -129,16 +129,17 @@ forvalues year=2000/2017{
 				*Here I save the LFS database at the individual level
 				save "data/temporary/LFS`year'q`quarter'_indiv", replace
 				
-				local continuousList age grossPay grossWkPayMain hourpay l_hourpay
+				gstats winsor grossWkPayMain, cut(5 95)
+				gstats winsor grossPay, cut(5 95)
+				gstats winsor hourpay, cut(5 95)
 				
-				gstats winsor hourpay, trim
-				
-				generate l_hourpay=log(hourpay)
+				generate al_wkpay=log(grossWkPayMain)
+				generate al_hourpay=log(hourpay)
 
 			
-				drop if missing(grossPay)|missing(grossWkPayMain)|missing(l_hourpay)
+				*Pay measures are available only for people in government schemes or who are employees
+				drop if missing(grossPay)|missing(grossWkPayMain)|missing(hourpay)
 
-	
 				g observations=1/waveWeight
 				
 
@@ -146,7 +147,7 @@ forvalues year=2000/2017{
 				*classification of the year
 				
 				gcollapse (sum) observations (count) people=age  ///
-					(mean) `continuousList' [fw=waveWeight], ///
+					(mean) $continuous_list [fw=waveWeight], ///
 					by(year quarter edlevLFS `occupation' `industry_cw') fast
 				
 				*Check this cross walks
@@ -159,12 +160,12 @@ forvalues year=2000/2017{
 				
 				
 				*Then I collage at the appropriate bsoc2000 level
-				foreach variable in observations people `continuousList' {
+				foreach variable in observations people $continuous_list {
 					cap replace `variable'=	`variable'*cwWeight
 				}
 				
 				preserve
-					gcollapse (sum) people observations `continuousList', ///
+					gcollapse (sum) people observations $continuous_list, ///
 						by(bsoc2000 year quarter edlevLFS)
 						
 					*Here everything is averages by category
@@ -174,7 +175,7 @@ forvalues year=2000/2017{
 				*Saving files for employment share computation
 				{
 					preserve
-						gcollapse (sum) people observations `continuousList', ///
+						gcollapse (sum) people observations $continuous_list, ///
 							by(bsoc2000 `industry_cw'  year quarter edlevLFS)
 							
 						rename `industry_cw' industry_cw

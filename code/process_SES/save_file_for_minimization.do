@@ -88,7 +88,7 @@ drop bme4
 rename temp bme4
 
 
-keep bsoc00Agg `education' year `variable_list' 
+keep bsoc00Agg `education' year `variable_list' gwtall 
 order  bsoc00Agg `education' year `variable_list' 
 
 

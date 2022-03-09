@@ -14,25 +14,36 @@ forvalues year=1997/2017 {
 
 do "code/aggregate_SOC2000.do"
 
+cap drop l_hourpay
+cap drop l_wkpay
+cap drop l_gpay
+
+generate l_hourpay=log(hourpay)
+generate l_wkpay=log(grossWkPayMain)
+generate l_gpay=log(grossPay)
+
 save "data/temporary/appended_LFS_occ_level", replace
 
 *Here, if I want it I aggregate the SOC2000 further
 *=======================================================
 local occupation bsoc00Agg
 
-local continuousList grossPay grossWkPayMain hourpay l_hourpay age
-
 cap drop observations
 rename people weight
 
 generate people=1
 
-collapse (mean)  `continuousList' (sum) people [pw=weight], ///
+collapse (mean)  $continuous_list l_*  (sum) people [pw=weight], ///
 	by(`education' `occupation' year) 
-	
+
+
+keep if inrange(year,2001,2017)
+
 *Note Apr 6: the averages here look fine.
 save "data/temporary/LFS_agg_database", replace
 
+
+/*
 
 clear
 *Here, I aggregate files for the employment share regressions
@@ -65,3 +76,4 @@ drop if industry_cw<0
 
 save "data/temporary/LFS_industry_occ_file", replace
 
+*/

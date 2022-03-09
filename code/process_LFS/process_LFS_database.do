@@ -10,8 +10,10 @@
 *===============================================================================
 *Some notes: 2001q1 does not have data on occupational classification
 *===============================================================================
-/*
+global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
+
 do "code/process_LFS/import_CPI.do"
+
 
 
 *First I create the collapsed datasets by year
