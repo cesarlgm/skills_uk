@@ -16,11 +16,11 @@ frames reset
 
     keep if inlist(year,2001,2017)
 
-	gcollapse (mean) grossWkPayMain hourpay al_* l_hourpay l_wkpay l_gpay (sum) temp [fw=people], by($occupation year $education)
+	gcollapse (mean) grossWkPayMain hourpay al_* l_hourpay l_wkpay l_gpay (sum) temp [fw=people], by($occupation year $education industry_cw)
 
     rename temp people
 
-    egen obs_id=group($occupation $education)
+    egen obs_id=group($occupation $education industry_cw)
     egen time_counter=group(year)
 
     xtset obs_id time_counter
@@ -49,20 +49,21 @@ frames reset
 
         do "code/process_SES/compute_skill_indexes.do"
 
-        gcollapse (mean)  $index_list (count) obs=chands (sum) wobs=gwtall, by($occupation $education year)
+        gcollapse (mean)  $index_list (count) obs=chands (sum) wobs=gwtall, by($occupation $education year) 
 
         tempfile SES_data
         save `SES_data'
     }
 
     frame change default
-    merge 1:1 $occupation $education year using `SES_data', keep(3) nogen
+    merge m:1 $occupation $education year using `SES_data', keep(3) nogen
 }
 
+gstats winsor d_*, replace cut(20 80)
 
 eststo clear
 foreach income of varlist d_* {
-    eststo w_`income': reghdfe `income' i.$education#c.($index_list) [aw=obs], absorb($occupation)  vce(r)
+    eststo w_`income': reghdfe `income' i.$education#c.($index_list) [aw=obs], absorb($occupation industry_cw)  vce(r)
     foreach index in $index_list {
         est restore w_`income'
         nlcom _b[3.$education#`index']/_b[1.$education#`index'], post
@@ -71,7 +72,7 @@ foreach income of varlist d_* {
         nlcom _b[2.$education#`index']/_b[1.$education#`index'], post
         eststo w_tm_`index'_`income'        
     }
-    eststo `income': reghdfe `income' i.$education#c.($index_list) , absorb($occupation)  vce(r)
+    eststo `income': reghdfe `income' i.$education#c.($index_list) , absorb($occupation industry_cw)  vce(r)
     foreach index in $index_list {
         est restore `income'
         nlcom _b[3.$education#`index']/_b[1.$education#`index'], post

@@ -129,9 +129,10 @@ forvalues year=2000/2017{
 				*Here I save the LFS database at the individual level
 				save "data/temporary/LFS`year'q`quarter'_indiv", replace
 				
-				gstats winsor grossWkPayMain, cut(5 95)
-				gstats winsor grossPay, cut(5 95)
-				gstats winsor hourpay, cut(5 95)
+
+				gstats winsor grossWkPayMain, cut($wave_cuts)
+				gstats winsor grossPay, cut($wave_cuts)
+				gstats winsor hourpay, cut($wave_cuts)
 				
 				generate al_wkpay=log(grossWkPayMain)
 				generate al_hourpay=log(hourpay)
@@ -166,8 +167,9 @@ forvalues year=2000/2017{
 				
 				preserve
 					gcollapse (sum) people observations $continuous_list, ///
-						by(bsoc2000 year quarter edlevLFS)
+						by(bsoc2000 year quarter edlevLFS `industry_cw')
 						
+					rename `industry_cw' industry_cw	
 					*Here everything is averages by category
 					save "data/temporary/LFS`year'q`quarter'_collapsed", replace
 				restore

@@ -34,7 +34,7 @@ rename people weight
 generate people=1
 
 collapse (mean)  $continuous_list l_*  (sum) people [pw=weight], ///
-	by(`education' `occupation' year) 
+	by(`education' `occupation' industry_cw year) 
 
 
 keep if inrange(year,2001,2017)
