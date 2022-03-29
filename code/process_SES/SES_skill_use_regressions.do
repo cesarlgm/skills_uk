@@ -10,6 +10,80 @@
 */
 *===============================================================================
 *===============================================================================
+
+
+use "data/temporary/filtered_dems_SES", clear
+drop if missing(gwtall)
+
+rename edlev edlevLFS
+do "code/process_LFS/create_education_variables.do"
+
+
+do "code/aggregate_SOC2000.do"
+
+merge m:1 bsoc00Agg using  "data/temporary/SES_occupation_key", nogen 
+
+keep if  n_years==4
+
+rename educ_3_low education
+rename bsoc00Agg occupation
+
+
+*First I compute the skill indexes
+local abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
+local social		cpeople cteach  cspeech cpersuad cteamwk clisten
+local routine		brepeat bvariety cplanme bme4 
+local manual		chands cstrengt  cstamina
+global index_list 	manual routine abstract social   
+
+cap drop $index_list
+
+local variable_list  `manual' `routine' `abstract' `social' 
+
+foreach variable in `variable_list' {
+	summ `variable'
+	replace `variable'=(`variable'-`r(min)')/(`r(max)'-`r(min)')
+	summ `variable'
+	assert `r(min)'==0
+	assert `r(max)'==1
+}
+
+foreach index in $index_list {
+	egen `index'=rowmean(``index'')
+}
+
+
+eststo clear
+foreach index in $index_list {
+	eststo `index'r: reghdfe `index' i.education, absorb(year) vce(cl occupation)
+	eststo `index'n: reghdfe `index' i.education, absorb(year occupation) vce(cl occupation)
+}
+
+
+esttab *r 
+esttab *n
+
+label define education 1 "HS dropouts" 2 "HG graduates" 3 "College+"
+label values education education
+
+local table_name "results/tables/skill_use_within_jobs.tex"
+local table_title "Within-job skill use across education groups"
+local coltitles `""Manual""Routine""Abstract""Social""'
+local table_notes "standard errors clustered at the occupation level in parenthesis"
+
+textablehead using `table_name', ncols(4) coltitles(`coltitles') title(`table_title')
+leanesttab *n using `table_name', fmt(3) append star(* .10 ** .05 *** .01) coeflabel(_cons "Baseline use") nobase stat(N, label( "\midrule Observations") fmt(%9.0fc))
+texspec using `table_name', spec(y y y y) label(Occupation f.e.)
+texspec using `table_name', spec(y y y y) label(Year f.e.)
+textablefoot using `table_name', notes(`table_notes')
+
+
+
+/*
+
+OLD TABLES
+
+
 local do_location		"3\_sesAnalysis/createSESSkillRegressions.do"
 local definition_list educ_3_low educ_3_mid
 local index_list 	abstract social routine manual
