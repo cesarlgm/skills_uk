@@ -24,20 +24,6 @@
     keep if inlist(year, 2001,2017)
 
 
-
-    /*
-    reshape wide empshare observations, i($occupation year) j($education)
-
-    sort $occupation year
-    foreach variable of varlist empshare* {
-        replace    `variable'=0 if missing(`variable')
-        by $occupation: generate t_`variable'=`variable'[_n]-`variable'[_n-1] 
-        egen d_`variable'=max(`variable'), by($occupation)
-        drop t_`variable'
-    }
-    
-    */
-
     *FILTERING OCCUPATIONS
     *The chunck of code below gets the occupations that are in SES
     {
@@ -90,7 +76,7 @@
     }
     
     log using "results/log_files/t_stats_1.txt", text replace
-    list bsoc00Agg d_empshare1  threshold1 p_value1  if reject1&d_empshare1>0
+    list bsoc00Agg d_empshare1 d_empshare2 d_empshare3  threshold1 p_value1  if reject1&d_empshare1>0
     log close
     
     log using "results/log_files/t_stats_3.txt", text replace
@@ -100,9 +86,104 @@
         
     log using "results/log_files/t_stats_2.txt", text replace
     list bsoc00Agg d_empshare2  threshold2 p_value2 if reject2&d_empshare2<0
-    log close
-    
+    log close 
+
+    expand 2
+    eststo clear
+    foreach variable of varlist d_empshare* {
+        eststo `variable': regress `variable' ibn.bsoc00Agg if reject1&d_empshare1>0, nocons
+    }
+
+    local table_name "results/tables/polarizing_occupations.tex"
+    local table_title "Polarizing occupations: change in occupational employment shares by education group, 2001-2017"
+    local coltitles `""Low""Mid""High""'
+    local table_notes "the table shows the 9 occupations (i) where the low education share increased, and (ii) survived the Benjamini-Hochberg step up procedure for the test of no change in the low education employment share at 20\% significance level"
+
+    textablehead using `table_name', f(Occupation) ncols(3) title(`table_title') coltitles(`coltitles')
+    esttab d_empshare1 d_empshare2 d_empshare3  using `table_name', f b(2) append booktabs label not noobs nomtitles plain collabels(none)
+    textablefoot using `table_name', notes(`table_notes')
+
+    keep bsoc00Agg
+    duplicates drop
+    save "data/additional_processing/increase_low_occupations", replace
 }
+
+*Is the employment share in these 9 occupation disappearing?
+{
+    frames reset
+    global education educ_3_low
+    global occupation bsoc00Agg
+
+    use "./data/temporary/LFS_industry_occ_file", clear
+
+    merge m:1 $occupation using  "data/additional_processing/increase_low_occupations", keep(1 3)
+
+    generate deskilled=_merge==3
+
+    cap drop _merge
+
+    eststo share_change: regress deskilled ibn.year [aw=people], nocons 
+
+    
+    grscheme, ncolor(7) style(tableau)
+    coefplot, base vert yscale(range(0 .05)) ///
+        ylab(0(.01).05) xlab(1 "2001" 2 "2006" 3 "2012" 4 "2017")
+    graph export "results/figures/empshare_in_polarizing_occupations.png", replace
+
+    local figure_name "results/figures/empshare_in_polarizing_occupations.tex"
+    local path "../results/figures/"
+    local figure_list empshare_in_polarizing_occupations.png
+    local figure_title "Overall employment share in polarizing occupations"
+    local figure_note "the figure shows the overall employment share for nine polarizing occupations"
+    local figure_key "fig:empshare_coef"
+
+    latexfigure using `figure_name', ///
+        path(`path') rowsize(2) note(`figure_note') ///
+        figurelist(`figure_list') title(`figure_title')
+    
+
+
+    /*
+    local table_name "results/tables/overall_employment_share_deskill.tex"
+    local table_title "Employment share of deskilling occupations by year"
+    local coltitles `""Employment share""'
+
+    textablehead using `table_name', ncols(2) coltitles(`coltitles') title(`table_title') drop
+    leanesttab share_change using `table_name', append nostar fmt(3)
+    textablefoot using `table_name'
+
+    generate high_educ= $education==3
+    generate mid_educ=  $education==2
+    generate low_educ=  $education==1
+
+
+    eststo high:    regress high ibn.year [aw=people] if deskilled, nocons
+    eststo mid:     regress mid ibn.year [aw=people] if deskilled, nocons
+    eststo low:     regress low ibn.year [aw=people] if deskilled, nocons
+
+    local table_name "results/tables/deskilling_occ_educ_shares.tex"
+    local table_title "Education employment share of deskilling occupations by year"
+    local coltitles `""Low""Mid""High""'
+
+    textablehead using `table_name', ncols(3) coltitles(`coltitles') title(`table_title') drop
+    leanesttab low mid high using `table_name', append nostar fmt(3)
+    textablefoot using `table_name'
+
+    eststo low:         reghdfe low i.year [aw=people] if deskilled, nocons absorb($occupation)
+    eststo mid:         reghdfe mid i.year [aw=people] if deskilled, nocons absorb($occupation)
+    eststo high:        reghdfe high i.year [aw=people] if deskilled, nocons absorb($occupation)
+
+    local table_name "results/tables/deskilling_occ_educ_shares_fe.tex"
+    local table_title "Education employment share of deskilling occupations by year, includes occ fe"
+    local coltitles `""Low""Mid""High""'
+    
+    textablehead using `table_name', ncols(3) coltitles(`coltitles') title(`table_title') drop
+    leanesttab low mid high using `table_name', append nostar fmt(3)
+    textablefoot using `table_name'
+    */
+}
+
+
 /*
 *How do these occupations look in the skill space
 {
@@ -153,56 +234,3 @@
     textablefoot using `table_name'
 }
 
-*Are these occupations dropping off?
-{
-    frames reset
-    global education educ_3_low
-    global occupation bsoc00Agg
-
-    use "./data/temporary/LFS_industry_occ_file", clear
-
-    merge m:1 $occupation using  "data/additional_processing/increase_low_occupations", keep(1 3)
-
-    generate deskilled=_merge==3
-
-    cap drop _merge
-
-    eststo share_change: regress deskilled ibn.year [aw=people], nocons 
-
-    local table_name "results/tables/overall_employment_share_deskill.tex"
-    local table_title "Employment share of deskilling occupations by year"
-    local coltitles `""Employment share""'
-
-    textablehead using `table_name', ncols(2) coltitles(`coltitles') title(`table_title') drop
-    leanesttab share_change using `table_name', append nostar fmt(3)
-    textablefoot using `table_name'
-
-    generate high_educ= $education==3
-    generate mid_educ=  $education==2
-    generate low_educ=  $education==1
-
-
-    eststo high:    regress high ibn.year [aw=people] if deskilled, nocons
-    eststo mid:     regress mid ibn.year [aw=people] if deskilled, nocons
-    eststo low:     regress low ibn.year [aw=people] if deskilled, nocons
-
-    local table_name "results/tables/deskilling_occ_educ_shares.tex"
-    local table_title "Education employment share of deskilling occupations by year"
-    local coltitles `""Low""Mid""High""'
-
-    textablehead using `table_name', ncols(3) coltitles(`coltitles') title(`table_title') drop
-    leanesttab low mid high using `table_name', append nostar fmt(3)
-    textablefoot using `table_name'
-
-    eststo low:         reghdfe low i.year [aw=people] if deskilled, nocons absorb($occupation)
-    eststo mid:         reghdfe mid i.year [aw=people] if deskilled, nocons absorb($occupation)
-    eststo high:        reghdfe high i.year [aw=people] if deskilled, nocons absorb($occupation)
-
-    local table_name "results/tables/deskilling_occ_educ_shares_fe.tex"
-    local table_title "Education employment share of deskilling occupations by year, includes occ fe"
-    local coltitles `""Low""Mid""High""'
-    
-    textablehead using `table_name', ncols(3) coltitles(`coltitles') title(`table_title') drop
-    leanesttab low mid high using `table_name', append nostar fmt(3)
-    textablefoot using `table_name'
-}

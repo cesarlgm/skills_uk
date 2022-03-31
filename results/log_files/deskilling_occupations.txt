@@ -1,14 +1,12 @@
----------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\
-> ukData\results/log_files/deskilling_occupations.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/deskilling_occupations.
+> txt
   log type:  text
- opened on:  22 Feb 2022, 09:45:58
-
+ opened on:  31 Mar 2022, 13:31:05
 .         unique $occupation
 Number of unique values of bsoc00Agg is  22
 Number of records is  22
-
 .         list bsoc00Agg empshare1 d_empshare1
 
      +------------------------------------------------------------------------------------+
@@ -41,11 +39,10 @@ Number of records is  22
  21. |                            5312 bricklayers, masons, roofers   .2996444   .0771192 |
  22. |                                         5421 printing trades   .4732406   .0807233 |
      +------------------------------------------------------------------------------------+
-
 .         log close
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\
-> ukData\results/log_files/deskilling_occupations.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/deskilling_occupations.
+> txt
   log type:  text
- closed on:  22 Feb 2022, 09:45:58
----------------------------------------------------------------------------------------------------
+ closed on:  31 Mar 2022, 13:31:05
+---------------------------------------------------------------------------------------------------------------------------------------------------
