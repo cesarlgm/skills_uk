@@ -97,12 +97,14 @@
     local table_name "results/tables/polarizing_occupations.tex"
     local table_title "Polarizing occupations: change in occupational employment shares by education group, 2001-2017"
     local coltitles `""Low""Mid""High""'
+    local table_key tab:pol_occ
     local table_notes "the table shows the 9 occupations (i) where the low education share increased, and (ii) survived the Benjamini-Hochberg step up procedure for the test of no change in the low education employment share at 20\% significance level"
 
-    textablehead using `table_name', f(Occupation) ncols(3) title(`table_title') coltitles(`coltitles')
+    textablehead using `table_name', f(Occupation) ncols(3) title(`table_title') coltitles(`coltitles') key(`table_key')
     esttab d_empshare1 d_empshare2 d_empshare3  using `table_name', f b(2) append booktabs label not noobs nomtitles plain collabels(none)
     textablefoot using `table_name', notes(`table_notes')
 
+    keep if  reject1&d_empshare1>0
     keep bsoc00Agg
     duplicates drop
     save "data/additional_processing/increase_low_occupations", replace
@@ -183,8 +185,6 @@
     */
 }
 
-
-/*
 *How do these occupations look in the skill space
 {
     do "code/process_SES/save_file_for_minimization.do"
@@ -206,19 +206,52 @@
     global index_list 	abstract social routine manual 
 
     foreach index in $index_list {
+        foreach variable in ``index'' {
+            summ `variable'
+            replace `variable'=(`variable'-`r(min)')/(`r(max)'-`r(min)')
+            summ `variable'
+            assert `r(min)'==0
+            assert `r(max)'==1
+        }
+    }
+
+    foreach index in $index_list {
         egen `index'=rowmean(``index'')
+        generate `index'l=asinh(`index')
     }
 
     label define interest_occ 0 "All other" 1 "Increased low share"
     label values interest_occ interest_occ
 
     foreach index in $index_list {
-        eststo `index'01: regress `index' ibn.interest_occ if year==2001, vce(cl $occupation) nocons
-        eststo `index'17: regress `index' ibn.interest_occ if year==2017, vce(cl $occupation) nocons
-        eststo `index'01d: regress `index' i.interest_occ if year==2001, vce(cl $occupation) 
-        eststo `index'17d: regress `index' i.interest_occ if year==2017, vce(cl $occupation) 
-        eststo `index'd: regress `index' i.year##i.interest_occ, vce(cl $occupation)
+        cap drop x_`index'
+        generate x_`index'=interest_occ
+        eststo `index'01: regress `index'l ibn.x_`index' if year==2001, vce(cl $occupation) 
+        eststo `index'17: regress `index'l ibn.x_`index' if year==2017, vce(cl $occupation) 
+        eststo `index'01d: regress `index'l i.x_`index' if year==2001, vce(cl $occupation) 
+        eststo `index'17d: regress `index'l i.x_`index' if year==2017, vce(cl $occupation) 
+        eststo `index'd: regress `index'l i.year##i.x_`index', vce(cl $occupation)
     }
+
+    grscheme, ncolor(7) style(tableau)
+    coefplot *01, ylabel(1 "Abstract" 2 "Social" 3 "Routine" 4 "Manual") drop(_cons) xline(0) legend(off) 
+    graph export "results/figures/baseline_skill_use.png", replace
+    coefplot abstractd sociald routined manuald, ylabel(1 "Abstract" 2 "Social" 3 "Routine" 4 "Manual") drop(_cons) xline(0) keep(2017*x*)  legend(off)
+    graph export "results/figures/change_skill_use.png", replace
+
+    local figure_name "results/figures/skill_use_polarizing_occ.tex"
+    local path "../results/figures/"
+    local figure_list baseline_skill_use change_skill_use
+    local figure_title "Relative skill use of low education individuals in polarizing occupations"
+    local figure_labs `""Skill use relative to all other occupations, 2001""Change relative to all other occupations, 2001-2017""'
+    local figure_note "the figure shows the relative skill use of low education individuals in polarizing occupation relative to all other occupations. The points can be roughly interpreted as percent changes relative to baseline"
+    local figure_key "fig:relative_use"
+
+    latexfigure using `figure_name', ///
+        path(`path') rowsize(2) note(`figure_note') /// 
+        figurelist(`figure_list') title(`figure_title')  figlab(`figure_labs')   key(`figure_key')
+    
+
 
     local table_name "results/tables/up_low_occ.tex"
     local table_title "Skill use in occupations with increased low share"

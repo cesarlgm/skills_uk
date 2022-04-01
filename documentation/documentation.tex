@@ -24,15 +24,20 @@ We regress skill use in the job on education dummies $d_{ejt}$, and occupation f
 \section{Some jobs are polarizing}
 Figure [] depicts the change in occupational employment share by education group. The yellow arrows show jobs in which the share of the \red{low education} group increased.
 
-Table [] shows jobs in which the shares of employment of low and high education groups are increasing.
+Table \ref{tab:pol_occ} shows jobs in which the shares of employment of low and high education groups are increasing.
+
+
+Table \ref{fig:relative_use} shows low education people in the polarizing occupations used less social and more manual skills than the average occupation. Moreover, over time, the become less routine and more abstract.
 
 \input{../results/tables/polarizing_occupations.tex}
 
 \input{../results/figures/empshare_in_polarizing_occupations.tex}
 
+\input{../results/figures/skill_use_polarizing_occ}
 
 \newcommand{\ntimes}{4 }
 
+\section{Estimating $\theta$}
 Let $j$ and $e$ index occupation and education respectively. The specification is:
 \beqns
 	\Delta \ln w_{jet}=\lambda_j+\sum_{i=1}^{4}\beta_{ei}S_{iejt}+ \varepsilon_{ejt}

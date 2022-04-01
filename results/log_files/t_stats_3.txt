@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats_3.txt
   log type:  text
- opened on:  31 Mar 2022, 13:34:03
+ opened on:   1 Apr 2022, 10:44:29
 .     list bsoc00Agg d_empshare3  threshold3 p_value3 if reject3&d_empshare3<0
 
      +--------------------------------------------------------------------------+
@@ -15,5 +15,5 @@
       name:  <unnamed>
        log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats_3.txt
   log type:  text
- closed on:  31 Mar 2022, 13:34:03
+ closed on:   1 Apr 2022, 10:44:29
 ---------------------------------------------------------------------------------------------------------------------------------------------------

@@ -2,13 +2,13 @@
       name:  <unnamed>
        log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats_2.txt
   log type:  text
- opened on:  31 Mar 2022, 13:34:03
+ opened on:   1 Apr 2022, 10:44:29
 .     list bsoc00Agg d_empshare2  threshold2 p_value2 if reject2&d_empshare2<0
 
      +-----------------------------------------------------------------------------------------------------------+
      |                                                               bsoc00Agg   d_empsh~2   thresh~2   p_value2 |
      |-----------------------------------------------------------------------------------------------------------|
-  9. |                                  3312 police, fire, and prison officers   -.0806802   .0217949   5.62e-07 |
+  2. |                                  3312 police, fire, and prison officers   -.0806802   .0217949   5.62e-07 |
  12. |                                1239 mngers and prop. in other srvcs nec   -.0886979    .025641   .0000248 |
  14. |                              4111 civil service officers and assistants   -.0369931   .0538462   .0105045 |
  15. |              5221 Metal Machining, Fitting And Instrument Making Trades   -.1106021   .0102564   1.47e-10 |
@@ -64,5 +64,5 @@
       name:  <unnamed>
        log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/t_stats_2.txt
   log type:  text
- closed on:  31 Mar 2022, 13:34:03
+ closed on:   1 Apr 2022, 10:44:29
 ---------------------------------------------------------------------------------------------------------------------------------------------------
