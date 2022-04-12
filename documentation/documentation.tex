@@ -6,8 +6,25 @@
 
 \title{Code documentation}
 \author{C\'esar Garro-Mar\'in\thanks{Boston University, email: \href{mailto:cesarlgm@bu.edu}{cesarlgm@bu.edu}}} 
+
 \begin{document}
 \maketitle
+
+\section{New approach:}
+\benu 
+	\item Estimate $\Delta\ln A_i$ using:
+	\beqns
+		\Delta \ln S_{ije}-\Delta \ln S_{ike}&=&\frac{\sigma_j}{\sigma_j-1}\left(\Delta\ln A_{ij}-\Delta\ln A_{ik}\right)
+	\eeqns
+	differencing across skills and assuming that the productivity growth of manual skills $\Delta\ln A_{1j}=0$
+	\beqns
+		\Delta \ln S_{ije}-\Delta \ln S_{1je}&=&\frac{\sigma_j}{\sigma_j-1} \Delta\ln A_{ij}=\pi_{ij}
+	\eeqns
+	\item I can use estimates from above, in combination with equation (12), and the assumption $\bar{w}=1$ to estimate:
+	\beqns
+		\Delta \ln S_{ije}&=&\sum_k \theta_{ei}S_{kje}\pi_{kj}-\pi_{ij}
+	\eeqns
+\eenu 
 
 \section{Jobs are done differently by different education groups}
 
@@ -17,8 +34,6 @@ We regress skill use in the job on education dummies $d_{ejt}$, and occupation f
 \eeqns
 
 \input{../results/tables/skill_use_within_jobs.tex}
-
-
 
 
 \section{Some jobs are polarizing}
