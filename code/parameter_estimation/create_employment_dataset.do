@@ -17,7 +17,7 @@ local definition_list  educ_3_low //educ_4  educ_3_mid
 foreach definition in `definition_list' { 
     use "./data/temporary/LFS_industry_occ_file", clear
 
-    keep if inlist(year, 2001, 2017)
+    *keep if inlist(year, 2001, 2017)
 
     *In this chunk of code I create the variables I need for panel data operations.
     {

@@ -1,9 +1,9 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
+       {txt}log:  {res}c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 1 Apr 2022, 10:50:59
+ {txt}opened on:  {res}12 Apr 2022, 17:32:56
 {txt}
 {com}. table year
 
@@ -19,9 +19,9 @@
 
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
+       {txt}log:  {res}c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 1 Apr 2022, 10:50:59
+ {txt}closed on:  {res}12 Apr 2022, 17:32:56
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

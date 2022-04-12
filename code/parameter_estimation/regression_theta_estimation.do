@@ -1,92 +1,98 @@
-use  "data/additional_processing/final_SES_file.dta", clear
+global normalization .000001
 
-*First I compute the skill indexes
-{
-    local abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
-    local social		cpeople cteach  cspeech cpersuad cteamwk clisten
-    local routine		brepeat bvariety cplanme bme4 
-    local manual		chands cstrengt  cstamina
-    global index_list 	manual abstract social routine  
+*New regression approach
 
-    local variable_list  `manual' `routine' `abstract' `social' 
+*Creating the SES database
+do "code/process_SES/save_file_for_minimization.do"
+do "code/process_SES/compute_skill_indexes.do"
 
-    foreach variable in `variable_list' {
-        summ `variable'
-        replace `variable'=(`variable'-`r(min)')/(`r(max)'-`r(min)')
-        summ `variable'
-        assert `r(min)'==0
-        assert `r(max)'==1
-    }
 
-    foreach index in $index_list {
-        egen `index'=rowmean(``index'')
-    }
+rename educ_3_low education
+rename $occupation occupation
 
-    gcollapse (mean) $index_list (count) obs=chands, by(occupation year education)
+*Collapsing the dataset
+gcollapse (mean) $index_list (count) obs=chands, by(occupation year education)
     
-    tempfile indexes
-    save `indexes'
+*Dropping observations that I don't need
+drop if year==1997
+
+*Setting panel dataset
+{
+    egen group_id=group(occupation education)
+    egen time=group(year)
+
+    xtset group_id time
 }
 
-use "data/additional_processing/final_LFS_file.dta"
-
-gstats winsor d_l_employment, cuts(2 98) generate(d_l_employment_w) 
-gstats winsor d_l_employment, cuts(5 95) generate(d_l_employment_5) 
-gstats winsor d_l_employment, cuts(20 80) generate(d_l_employment_20)  
-
-
-*Now I add the employment share data
-merge m:1 occupation year using  `indexes'
-
-*Compute sum of skills
-egen tot_skill=rowtotal($index_list)
-
-*I force the skills to sum to 1
-foreach variable in $index_list  {
-    generate i_`variable'=`variable' // tot_skill
+*Creating log and dlog of skills
+foreach index in $index_list {
+    generate l_`index'=asinh(`index')
+    generate d_l_`index'=d.l_`index'
 }
 
-egen temp=rowtotal(i_*)
+*gstats winsor d_l_*, cut(20 80) replace
 
-drop temp
+drop if year==2001
 
-global index_vars i_manual  i_routine i_abstract i_social
 
-*Modifying to 
-forvalues educ=1/3 {
-    foreach variable in $index_list {
-        generate `variable'`educ'=i_`variable'*(education==`educ')
-    }
+foreach index in $index_list {
+    generate  y_d_l_`index'=d_l_`index'-d_l_manual
+}
+
+*Computing averages by year
+foreach index in manual social routine abstract {    
+    egen pi_`index'=mean(y_d_l_`index') if !missing(y_d_l_`index'), by(occupation year)
+
+    generate y_`index'=d_l_`index'+ pi_`index'
 }
 
 
+generate x_manual=  manual*pi_manual
+generate x_social=  social*pi_social
+generate x_routine= routine*pi_routine
+generate x_abstract=abstract*pi_abstract
 
-egen industry_id=group(industry_cw education)
 
+gstats winsor y_* x_*, cut(15 95) replace
+
+keep occupation education year y_* x_*  $index_list
+rename (y_manual y_social y_abstract y_routine) (y_1 y_2 y_3 y_4)
+reshape long y_, i(occupation education year)  j(skill)
 
 eststo clear
+foreach index in $index_list {
+    eststo reg: regress y_ i.education#c.x_manual i.education#c.x_social i.education#c.x_routine i.education#c.x_abstract , nocons vce(cl occupation)
+}
 
-reghdfe d_l_employment_w  *1 *2 *3 , nocons absorb(industry_id) vce(cl occupation)
-eststo regu
+generate skill_sum=.
+forvalues education=1/3 {
+    local social`education':    display %9.2fc      _b[`education'.education#c.x_social]
+    local abstract`education':  display %9.2fc      _b[`education'.education#c.x_abstract]
+    local routine`education':   display %9.2fc      _b[`education'.education#c.x_routine]
+    replace skill_sum=_b[`education'.education#c.x_social]*social+_b[`education'.education#c.x_abstract]*abstract+_b[`education'.education#c.x_routine]*routine if education==`education'
+}
 
-forvalues educ=1/3 {
-    foreach variable in $index_list {
-        est restore regu
-        nlcom _b[`variable'`educ']/(_b[`variable'1]-_b[manual1]+_b[manual`educ']), post 
-        eststo theta`variable'`educ'u
+generate y_skill_sum=1-skill_sum
+
+eststo manual: regress y_skill_sum ibn.education#c.manual if skill==1, nocons vce(cl occupation)
+
+forvalues education=1/3{
+    local manual`education':    display %9.2fc      _b[`education'.education#c.manual]
+}
+
+matrix costs=J(3,4,.)
+forvalues education=1/3 {
+    local counter=1
+    foreach skill in manual routine social abstract {
+        matrix costs[`education',`counter']=``skill'`education''
+        local ++counter
     }
 }
+
+matrix colnames costs=manual routine social abstract
+matrix list costs
+
 /*
-local stat_list 
-forvalues educ=1/3 {
-    foreach variable in $index_list {
-        local stat_list  `stat_list' theta_`variable'`educ'=(_b[`variable'`educ']/(_b[`variable'1]-_b[manual1]+_b[manual`educ']))
-    
-    }
-}
-
-bootstrap `stat_list', reps(1000): reghdfe d_l_employment  *1 *2 *3, nocons absorb(industry_id) vce(r)
-*/
 
 reghdfe d_l_employment_w  *1 *2 *3 , nocons absorb(industry_id) vce(cl occupation)
 eststo regw

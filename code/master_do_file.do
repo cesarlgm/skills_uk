@@ -34,7 +34,6 @@ do "code/process_LFS/process_LFS_database.do"
 *===============================================================================
 *Prepare and create regressions
 *===============================================================================
-
 do "code/parameter_estimation/prepare_regression_data.do"
 
 
