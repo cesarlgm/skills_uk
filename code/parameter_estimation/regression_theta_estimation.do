@@ -55,7 +55,7 @@ generate x_abstract=abstract*pi_abstract
 
 gstats winsor y_* x_*, cut(15 95) replace
 
-keep occupation education year y_* x_*  $index_list
+keep occupation education year y_* x_*  $index_list pi_*
 rename (y_manual y_social y_abstract y_routine) (y_1 y_2 y_3 y_4)
 reshape long y_, i(occupation education year)  j(skill)
 
@@ -90,8 +90,52 @@ forvalues education=1/3 {
 }
 
 matrix colnames costs=manual routine social abstract
+matrix rownames costs=Low Mid High
 matrix list costs
 
+*Pi stats
+{
+    label var pi_routine    "Routine"
+    label var pi_abstract   "Abstract"
+    label var pi_social     "Social"
+    estpost tabstat pi_routine pi_abstract pi_social, stat(mean sd p25 p75) columns(stat)
+
+    local   table_name "results/tables/pi_variation_global.tex"
+    local   table_title "Variation of $\pi_{jt}$ across education"
+    esttab . using `table_name', ///
+        cells("mean(fmt(2)) sd(fmt(2)) p25(fmt(2)) p75(fmt(2))") ///
+        unstack label booktabs nomtitles replace ///
+        title(`table_title')
+}
+
+
+local   table_name "results/tables/theta_estimates.tex"
+local   table_title "$\theta\_{ie}$ estimates"
+esttab matrix(costs, fmt(2)) using `table_name', ///
+    replace booktabs title(`table_title')
+
+
+/*
+
+*This thing really doesn't make sense
+{
+    foreach variable of varlist pi_* {
+        eststo `variable'_raw: regress `variable' i.education, vce(r)
+        eststo `variable'_net: reghdfe `variable' i.education, absorb(occupation) vce(r)
+    }
+
+
+    local   table_name "results/tables/pi_variation.tex"
+    local   table_title "Variation of $\pi_{jt}$ across education"
+    global  column_title Routine Abstract Social Routine Abstract Social 
+
+    textablehead using `table_name', ncols(6) title(`table_title') coltitles($column_title)
+    estfe *_net, labels(occupation "Occupation FE")
+    leanesttab pi_routine_raw pi_abstract_raw pi_social_raw pi_routine_net pi_abstract_net pi_social_net ///
+        using `table_name', ///
+        omit nobase fmt(2) indicate(`r(indicate_fe)') stat(N r2) append
+    textablefoot using `table_name'
+} 
 /*
 
 reghdfe d_l_employment_w  *1 *2 *3 , nocons absorb(industry_id) vce(cl occupation)
