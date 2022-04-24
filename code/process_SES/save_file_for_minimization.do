@@ -1,5 +1,5 @@
 
-local education educ_3_low  //`1'
+local education `1'
 
 
 

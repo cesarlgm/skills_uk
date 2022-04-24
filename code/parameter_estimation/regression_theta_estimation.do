@@ -1,13 +1,17 @@
 global normalization .000001
+global reference        abstract
+global not_reference    manual
+global weight          
+global education        educ_3_low
 
 *New regression approach
 
 *Creating the SES database
-do "code/process_SES/save_file_for_minimization.do"
+do "code/process_SES/save_file_for_minimization.do" $education
 do "code/process_SES/compute_skill_indexes.do"
 
 
-rename educ_3_low education
+rename $education education
 rename $occupation occupation
 
 *Collapsing the dataset
@@ -15,6 +19,7 @@ gcollapse (mean) $index_list (count) obs=chands, by(occupation year education)
     
 *Dropping observations that I don't need
 drop if year==1997
+keep if  inlist(year,2001,2017)
 
 *Setting panel dataset
 {
@@ -26,22 +31,20 @@ drop if year==1997
 
 *Creating log and dlog of skills
 foreach index in $index_list {
-    generate l_`index'=asinh(`index')
+    generate l_`index'=log(`index'+$normalization)
     generate d_l_`index'=d.l_`index'
 }
 
-*gstats winsor d_l_*, cut(20 80) replace
-
 drop if year==2001
 
-
+*I compute -dlogS_ijt+dlogS_manualjt
 foreach index in $index_list {
-    generate  y_d_l_`index'=d_l_`index'-d_l_manual
+    generate  y_d_l_`index'=-d_l_`index'+d_l_$reference
 }
 
-*Computing averages by year
+*Compute pi_{ijt} and the dependent variable: dlogS_ijt+\pi_{ijt}
 foreach index in manual social routine abstract {    
-    egen pi_`index'=mean(y_d_l_`index') if !missing(y_d_l_`index'), by(occupation year)
+    gegen pi_`index'=    mean(y_d_l_`index') if !missing(y_d_l_`index') $weight, by(occupation year)
 
     generate y_`index'=d_l_`index'+ pi_`index'
 }
@@ -55,35 +58,37 @@ generate x_abstract=abstract*pi_abstract
 
 gstats winsor y_* x_*, cut(15 95) replace
 
-keep occupation education year y_* x_*  $index_list pi_*
+keep occupation education year y_* x_*  $index_list pi_* obs
 rename (y_manual y_social y_abstract y_routine) (y_1 y_2 y_3 y_4)
 reshape long y_, i(occupation education year)  j(skill)
+rename y_ y_var
 
 eststo clear
 foreach index in $index_list {
-    eststo reg: regress y_ i.education#c.x_manual i.education#c.x_social i.education#c.x_routine i.education#c.x_abstract , nocons vce(cl occupation)
+    eststo reg: regress y_var i.education#c.x_manual i.education#c.x_social i.education#c.x_routine i.education#c.x_abstract $weight, nocons vce(cl occupation)
 }
 
 generate skill_sum=.
 forvalues education=1/3 {
     local social`education':    display %9.2fc      _b[`education'.education#c.x_social]
-    local abstract`education':  display %9.2fc      _b[`education'.education#c.x_abstract]
+    local $not_reference`education':  display %9.2fc      _b[`education'.education#c.x_$not_reference]
     local routine`education':   display %9.2fc      _b[`education'.education#c.x_routine]
     replace skill_sum=_b[`education'.education#c.x_social]*social+_b[`education'.education#c.x_abstract]*abstract+_b[`education'.education#c.x_routine]*routine if education==`education'
 }
 
 generate y_skill_sum=1-skill_sum
 
-eststo manual: regress y_skill_sum ibn.education#c.manual if skill==1, nocons vce(cl occupation)
+eststo $reference: regress y_skill_sum ibn.education#c.$reference if skill==1 $weight, nocons vce(cl occupation)
 
 forvalues education=1/3{
-    local manual`education':    display %9.2fc      _b[`education'.education#c.manual]
+    local  $reference`education':    display %9.2fc      _b[`education'.education#c.$reference]
 }
 
 matrix costs=J(3,4,.)
 forvalues education=1/3 {
     local counter=1
     foreach skill in manual routine social abstract {
+        di "`skill'"
         matrix costs[`education',`counter']=``skill'`education''
         local ++counter
     }
