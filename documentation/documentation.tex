@@ -14,15 +14,19 @@
 \benu 
 	\item Estimate $\Delta\ln A_i$ using:
 	\beqns
-		\Delta \ln S_{ije}-\Delta \ln S_{ike}&=&\frac{\sigma_j}{\sigma_j-1}\left(\Delta\ln A_{ij}-\Delta\ln A_{ik}\right)
+		\Delta \ln S_{ijet}-\Delta \ln S_{iket}&=&\frac{\sigma_j}{\sigma_j-1}\left(\Delta\ln A_{ikt}-\Delta\ln A_{ijt}\right)
 	\eeqns
 	differencing across skills and assuming that the productivity growth of manual skills $\Delta\ln A_{1j}=0$
 	\beqns
-		\Delta \ln S_{ije}-\Delta \ln S_{1je}&=&\frac{\sigma_j}{\sigma_j-1} \Delta\ln A_{ij}=\pi_{ij}
+		\Delta \ln S_{ijet}-\Delta \ln S_{1jet}&=&-\frac{\sigma_j}{\sigma_j-1} \Delta\ln A_{ijt}=-\pi_{ijt}
+	\eeqns
+	$\hat{\pi}_{jt}$ are simple occupation-year averages:
+	\beqns
+	\hat{\pi}_{ijt}=\frac{1}{3}\sum_e	\left(\Delta \ln S_{1jet}-\Delta \ln S_{ijet}\right)
 	\eeqns
 	\item I can use estimates from above, in combination with equation (12), and the assumption $\bar{w}=1$ to estimate:
 	\beqns
-		\Delta \ln S_{ije}&=&\sum_k \theta_{ei}S_{kje}\pi_{kj}-\pi_{ij}
+		\Delta \ln S_{ijet}+\pi_{ijt}&=&\sum_k \theta_{ei}S_{kjet}\pi_{kjt}
 	\eeqns
 \eenu 
 
@@ -39,8 +43,13 @@ $\Rightarrow$  any difference across education groups comes from occupational di
 \input{../results/tables/pi_variation_global.tex}
 \input{../results/tables/pi_variation.tex}
 
-
-
+\section{Exploring the scales}
+\FloatBarrier
+\input{../results/figures/scale_100.tex}
+\input{../results/figures/scale_75.tex}
+\input{../results/figures/scale_25.tex}
+\input{../results/figures/scale_0.tex}
+\FloatBarrier
 \section{Jobs are done differently by different education groups}
 
 We regress skill use in the job on education dummies $d_{ejt}$, and occupation fixed effects $\lambda_j$.

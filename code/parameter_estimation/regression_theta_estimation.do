@@ -2,7 +2,7 @@ global normalization .000001
 global reference        abstract
 global not_reference    manual
 global weight          
-global education        educ_3_low
+global education        educ_3_mid
 
 *New regression approach
 
@@ -10,9 +10,12 @@ global education        educ_3_low
 do "code/process_SES/save_file_for_minimization.do" $education
 do "code/process_SES/compute_skill_indexes.do"
 
-
 rename $education education
 rename $occupation occupation
+
+levelsof education
+global n_educ: word count of `r(levels)'
+global n_educ=$n_educ-1
 
 *Collapsing the dataset
 gcollapse (mean) $index_list (count) obs=chands, by(occupation year education)
@@ -31,7 +34,8 @@ keep if  inlist(year,2001,2017)
 
 *Creating log and dlog of skills
 foreach index in $index_list {
-    generate l_`index'=log(`index'+$normalization)
+    *generate l_`index'=log(`index'+$normalization)
+    generate l_`index'=asinh(`index')
     generate d_l_`index'=d.l_`index'
 }
 
@@ -56,7 +60,7 @@ generate x_routine= routine*pi_routine
 generate x_abstract=abstract*pi_abstract
 
 
-gstats winsor y_* x_*, cut(15 95) replace
+gstats winsor y_* x_*, cut(20 80) replace
 
 keep occupation education year y_* x_*  $index_list pi_* obs
 rename (y_manual y_social y_abstract y_routine) (y_1 y_2 y_3 y_4)
@@ -69,7 +73,7 @@ foreach index in $index_list {
 }
 
 generate skill_sum=.
-forvalues education=1/3 {
+forvalues education=1/$n_educ {
     local social`education':    display %9.2fc      _b[`education'.education#c.x_social]
     local $not_reference`education':  display %9.2fc      _b[`education'.education#c.x_$not_reference]
     local routine`education':   display %9.2fc      _b[`education'.education#c.x_routine]
@@ -80,12 +84,12 @@ generate y_skill_sum=1-skill_sum
 
 eststo $reference: regress y_skill_sum ibn.education#c.$reference if skill==1 $weight, nocons vce(cl occupation)
 
-forvalues education=1/3{
+forvalues education=1/$n_educ{
     local  $reference`education':    display %9.2fc      _b[`education'.education#c.$reference]
 }
 
-matrix costs=J(3,4,.)
-forvalues education=1/3 {
+matrix costs=J($n_educ,4,.)
+forvalues education=1/$n_educ {
     local counter=1
     foreach skill in manual routine social abstract {
         di "`skill'"
@@ -95,9 +99,9 @@ forvalues education=1/3 {
 }
 
 matrix colnames costs=manual routine social abstract
-matrix rownames costs=Low Mid High
+*matrix rownames costs=Low Mid High
 matrix list costs
-
+/*
 *Pi stats
 {
     label var pi_routine    "Routine"
