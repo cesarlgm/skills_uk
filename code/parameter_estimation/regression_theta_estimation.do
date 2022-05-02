@@ -101,22 +101,44 @@ forvalues education=1/$n_educ {
 matrix colnames costs=manual routine social abstract
 *matrix rownames costs=Low Mid High
 matrix list costs
-/*
+
+
+
 *Pi stats
 {
     label var pi_routine    "Routine"
-    label var pi_abstract   "Abstract"
+    label var pi_abstract   "Manual"
     label var pi_social     "Social"
-    estpost tabstat pi_routine pi_abstract pi_social, stat(mean sd p25 p75) columns(stat)
+    estpost tabstat pi_routine pi_manual pi_social, stat(mean sd p25 p75) columns(stat)
 
-    local   table_name "results/tables/pi_variation_global.tex"
-    local   table_title "Variation of $\pi_{jt}$ across education"
+    local   table_name "results/tables/pi_variation_global_base_pooled.tex"
+    local   table_title "Variation of $\pi_{jt}$, squares"
     esttab . using `table_name', ///
         cells("mean(fmt(2)) sd(fmt(2)) p25(fmt(2)) p75(fmt(2))") ///
         unstack label booktabs nomtitles replace ///
         title(`table_title')
 }
 
+{
+    grscheme, ncolor(7) style(tableau)
+    foreach index in social routine  {
+        tw scatter pi_`index' pi_manual, mcolor(ebblue%10) msymbol(O) msize(.5) 
+        graph export "results/figures/pi_`index'_all.png", replace 
+    }
+
+    local figure_name "results/figures/pi_indexes.tex"
+    local figure_path "../results/figures"
+    local figure_list   pi_social_pooled pi_social_all pi_routine_pooled pi_routine_all
+    local figure_title "title"
+    local figure_key    fig:key
+    local figure_notes "figure note"
+    local figlabs       `""Pooled""2000-2017""Pooled""2000-2017""'
+
+    latexfigure using `figure_name', path(`figure_path') ///
+        figurelist(`figure_list') rowsize(2) title(`figure_title') ///
+        key(`figure_key') note(`figure_notes') figlab(`figlabs')
+}
+/*
 
 local   table_name "results/tables/theta_estimates.tex"
 local   table_title "$\theta\_{ie}$ estimates"

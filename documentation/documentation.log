@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  26 APR 2022 10:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  2 MAY 2022 10:55
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -1357,59 +1357,90 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 36.
 
-(../results/tables/pi_variation_global.tex) (../results/tables/pi_variation.tex
-[1
+(../results/tables/pi_variation_global_base_pooled.tex)
+(../results/tables/pi_variation_global_base_all.tex)
+(../results/tables/pi_variation_global_squares_pooled.tex)
+(../results/tables/pi_variation_global_squares_all.tex)
+(../results/figures/pi_indexes.tex
+<../results/figures/pi_social_pooled.png, id=59, 1778.645pt x 1293.83376pt>
+File: ../results/figures/pi_social_pooled.png Graphic file (type png)
+<use ../results/figures/pi_social_pooled.png>
+Package pdftex.def Info: ../results/figures/pi_social_pooled.png  used on input
+ line 5.
+(pdftex.def)             Requested size: 234.87749pt x 170.84975pt.
+<../results/figures/pi_social_all.png, id=60, 1778.645pt x 1293.83376pt>
+File: ../results/figures/pi_social_all.png Graphic file (type png)
+<use ../results/figures/pi_social_all.png>
+Package pdftex.def Info: ../results/figures/pi_social_all.png  used on input li
+ne 5.
+(pdftex.def)             Requested size: 234.87749pt x 170.84975pt.
+<../results/figures/pi_routine_pooled.png, id=61, 1778.645pt x 1293.83376pt>
+File: ../results/figures/pi_routine_pooled.png Graphic file (type png)
+<use ../results/figures/pi_routine_pooled.png>
+Package pdftex.def Info: ../results/figures/pi_routine_pooled.png  used on inpu
+t line 5.
+(pdftex.def)             Requested size: 234.87749pt x 170.84975pt.
+<../results/figures/pi_routine_all.png, id=62, 1778.645pt x 1293.83376pt>
+File: ../results/figures/pi_routine_all.png Graphic file (type png)
+<use ../results/figures/pi_routine_all.png>
+Package pdftex.def Info: ../results/figures/pi_routine_all.png  used on input l
+ine 5.
+(pdftex.def)             Requested size: 234.87749pt x 170.84975pt.
 
-{C:/Users/thecs/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2])
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [1
+
+{C:/Users/thecs/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+[2] [3] [4 <../results/figures/pi_social_pooled.png (PNG copy)> <../results/fig
+ures/pi_social_all.png (PNG copy)> <../results/figures/pi_routine_pooled.png (P
+NG copy)> <../results/figures/pi_routine_all.png (PNG copy)>]
 (../results/figures/scale_100.tex
-<../results/figures//manual_100.png, id=86, 1142.2675pt x 831.105pt>
+<../results/figures//manual_100.png, id=109, 1142.2675pt x 831.105pt>
 File: ../results/figures//manual_100.png Graphic file (type png)
 <use ../results/figures//manual_100.png>
 Package pdftex.def Info: ../results/figures//manual_100.png  used on input line
  4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//routine_100.png, id=87, 1142.2675pt x 831.105pt>
+<../results/figures//routine_100.png, id=110, 1142.2675pt x 831.105pt>
 File: ../results/figures//routine_100.png Graphic file (type png)
 <use ../results/figures//routine_100.png>
 Package pdftex.def Info: ../results/figures//routine_100.png  used on input lin
 e 4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//social_100.png, id=88, 1142.2675pt x 831.105pt>
+<../results/figures//social_100.png, id=111, 1142.2675pt x 831.105pt>
 File: ../results/figures//social_100.png Graphic file (type png)
 <use ../results/figures//social_100.png>
 Package pdftex.def Info: ../results/figures//social_100.png  used on input line
  4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//abstract_100.png, id=89, 1142.2675pt x 831.105pt>
+<../results/figures//abstract_100.png, id=112, 1142.2675pt x 831.105pt>
 File: ../results/figures//abstract_100.png Graphic file (type png)
 <use ../results/figures//abstract_100.png>
 Package pdftex.def Info: ../results/figures//abstract_100.png  used on input li
 ne 4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 ) (../results/figures/scale_75.tex
-<../results/figures//manual_75.png, id=90, 1142.2675pt x 831.105pt>
+<../results/figures//manual_75.png, id=113, 1142.2675pt x 831.105pt>
 File: ../results/figures//manual_75.png Graphic file (type png)
 <use ../results/figures//manual_75.png>
 Package pdftex.def Info: ../results/figures//manual_75.png  used on input line 
 4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//routine_75.png, id=91, 1142.2675pt x 831.105pt>
+<../results/figures//routine_75.png, id=114, 1142.2675pt x 831.105pt>
 File: ../results/figures//routine_75.png Graphic file (type png)
 <use ../results/figures//routine_75.png>
 Package pdftex.def Info: ../results/figures//routine_75.png  used on input line
  4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//social_75.png, id=92, 1142.2675pt x 831.105pt>
+<../results/figures//social_75.png, id=115, 1142.2675pt x 831.105pt>
 File: ../results/figures//social_75.png Graphic file (type png)
 <use ../results/figures//social_75.png>
 Package pdftex.def Info: ../results/figures//social_75.png  used on input line 
 4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//abstract_75.png, id=93, 1142.2675pt x 831.105pt>
+<../results/figures//abstract_75.png, id=116, 1142.2675pt x 831.105pt>
 File: ../results/figures//abstract_75.png Graphic file (type png)
 <use ../results/figures//abstract_75.png>
 Package pdftex.def Info: ../results/figures//abstract_75.png  used on input lin
@@ -1420,25 +1451,25 @@ e 4.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 ) (../results/figures/scale_25.tex
-<../results/figures//manual_25.png, id=94, 1142.2675pt x 831.105pt>
+<../results/figures//manual_25.png, id=117, 1142.2675pt x 831.105pt>
 File: ../results/figures//manual_25.png Graphic file (type png)
 <use ../results/figures//manual_25.png>
 Package pdftex.def Info: ../results/figures//manual_25.png  used on input line 
 4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//routine_25.png, id=95, 1142.2675pt x 831.105pt>
+<../results/figures//routine_25.png, id=118, 1142.2675pt x 831.105pt>
 File: ../results/figures//routine_25.png Graphic file (type png)
 <use ../results/figures//routine_25.png>
 Package pdftex.def Info: ../results/figures//routine_25.png  used on input line
  4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//social_25.png, id=96, 1142.2675pt x 831.105pt>
+<../results/figures//social_25.png, id=119, 1142.2675pt x 831.105pt>
 File: ../results/figures//social_25.png Graphic file (type png)
 <use ../results/figures//social_25.png>
 Package pdftex.def Info: ../results/figures//social_25.png  used on input line 
 4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//abstract_25.png, id=97, 1142.2675pt x 831.105pt>
+<../results/figures//abstract_25.png, id=120, 1142.2675pt x 831.105pt>
 File: ../results/figures//abstract_25.png Graphic file (type png)
 <use ../results/figures//abstract_25.png>
 Package pdftex.def Info: ../results/figures//abstract_25.png  used on input lin
@@ -1449,25 +1480,25 @@ e 4.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 ) (../results/figures/scale_0.tex
-<../results/figures//manual_0.png, id=98, 1142.2675pt x 831.105pt>
+<../results/figures//manual_0.png, id=121, 1142.2675pt x 831.105pt>
 File: ../results/figures//manual_0.png Graphic file (type png)
 <use ../results/figures//manual_0.png>
 Package pdftex.def Info: ../results/figures//manual_0.png  used on input line 4
 .
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//routine_0.png, id=99, 1142.2675pt x 831.105pt>
+<../results/figures//routine_0.png, id=122, 1142.2675pt x 831.105pt>
 File: ../results/figures//routine_0.png Graphic file (type png)
 <use ../results/figures//routine_0.png>
 Package pdftex.def Info: ../results/figures//routine_0.png  used on input line 
 4.
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//social_0.png, id=100, 1142.2675pt x 831.105pt>
+<../results/figures//social_0.png, id=123, 1142.2675pt x 831.105pt>
 File: ../results/figures//social_0.png Graphic file (type png)
 <use ../results/figures//social_0.png>
 Package pdftex.def Info: ../results/figures//social_0.png  used on input line 4
 .
 (pdftex.def)             Requested size: 234.87749pt x 170.88489pt.
-<../results/figures//abstract_0.png, id=101, 1142.2675pt x 831.105pt>
+<../results/figures//abstract_0.png, id=124, 1142.2675pt x 831.105pt>
 File: ../results/figures//abstract_0.png Graphic file (type png)
 <use ../results/figures//abstract_0.png>
 Package pdftex.def Info: ../results/figures//abstract_0.png  used on input line
@@ -1477,27 +1508,29 @@ Package pdftex.def Info: ../results/figures//abstract_0.png  used on input line
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [3] [4 <../results/figures//manual_100.png (PNG copy)> <../results/figures//r
-outine_100.png (PNG copy)> <../results/figures//social_100.png (PNG copy)> <../
-results/figures//abstract_100.png (PNG copy)>] [5 <../results/figures//manual_7
-5.png (PNG copy)> <../results/figures//routine_75.png (PNG copy)> <../results/f
-igures//social_75.png (PNG copy)> <../results/figures//abstract_75.png (PNG cop
-y)>] [6 <../results/figures//manual_25.png (PNG copy)> <../results/figures//rou
-tine_25.png (PNG copy)> <../results/figures//social_25.png (PNG copy)> <../resu
-lts/figures//abstract_25.png (PNG copy)>] [7 <../results/figures//manual_0.png 
-(PNG copy)> <../results/figures//routine_0.png (PNG copy)> <../results/figures/
-/social_0.png (PNG copy)> <../results/figures//abstract_0.png (PNG copy)>]
-Overfull \hbox (11.27074pt too wide) in paragraph at lines 53--53
+) [5
+
+ <../results/figures//manual_100.png (PNG copy)> <../results/figures//routine_1
+00.png (PNG copy)> <../results/figures//social_100.png (PNG copy)> <../results/
+figures//abstract_100.png (PNG copy)>] [6 <../results/figures//manual_75.png (P
+NG copy)> <../results/figures//routine_75.png (PNG copy)> <../results/figures//
+social_75.png (PNG copy)> <../results/figures//abstract_75.png (PNG copy)>] [7 
+<../results/figures//manual_25.png (PNG copy)> <../results/figures//routine_25.
+png (PNG copy)> <../results/figures//social_25.png (PNG copy)> <../results/figu
+res//abstract_25.png (PNG copy)>] [8 <../results/figures//manual_0.png (PNG cop
+y)> <../results/figures//routine_0.png (PNG copy)> <../results/figures//social_
+0.png (PNG copy)> <../results/figures//abstract_0.png (PNG copy)>]
+Overfull \hbox (11.27074pt too wide) in paragraph at lines 56--56
 []\OT1/cmr/bx/n/17.28 Jobs are done dif-fer-ently by dif-fer-ent ed-u-ca-tion g
 roups 
  []
 
 (../results/tables/skill_use_within_jobs.tex)
-(../results/tables/polarizing_occupations.tex [8
+(../results/tables/polarizing_occupations.tex [9
 
 ])
 (../results/figures/empshare_in_polarizing_occupations.tex
-<../results/figures//empshare_in_polarizing_occupations.png, id=161, 1175.39125
+<../results/figures//empshare_in_polarizing_occupations.png, id=177, 1175.39125
 pt x 855.195pt>
 File: ../results/figures//empshare_in_polarizing_occupations.png Graphic file (
 type png)
@@ -1507,13 +1540,13 @@ Package pdftex.def Info: ../results/figures//empshare_in_polarizing_occupations
 (pdftex.def)             Requested size: 234.87749pt x 170.89243pt.
 )
 (../results/figures/skill_use_polarizing_occ.tex
-<../results/figures//baseline_skill_use.png, id=162, 1435.3625pt x 1043.9pt>
+<../results/figures//baseline_skill_use.png, id=178, 1435.3625pt x 1043.9pt>
 File: ../results/figures//baseline_skill_use.png Graphic file (type png)
 <use ../results/figures//baseline_skill_use.png>
 Package pdftex.def Info: ../results/figures//baseline_skill_use.png  used on in
 put line 5.
 (pdftex.def)             Requested size: 234.87749pt x 170.81842pt.
-<../results/figures//change_skill_use.png, id=163, 1435.3625pt x 1043.9pt>
+<../results/figures//change_skill_use.png, id=179, 1435.3625pt x 1043.9pt>
 File: ../results/figures//change_skill_use.png Graphic file (type png)
 <use ../results/figures//change_skill_use.png>
 Package pdftex.def Info: ../results/figures//change_skill_use.png  used on inpu
@@ -1526,38 +1559,38 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 79.
+(hyperref)                removing `math shift' on input line 82.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\theta' on input line 79.
+(hyperref)                removing `\theta' on input line 82.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 79.
+(hyperref)                removing `math shift' on input line 82.
 
-(../results/tables/theta_wage_d_l_hourpay.tex [9 <../results/figures//empshare_
-in_polarizing_occupations.png (PNG copy)>])
+(../results/tables/theta_wage_d_l_hourpay.tex [10 <../results/figures//empshare
+_in_polarizing_occupations.png (PNG copy)>])
 (../results/tables/theta_wage_d_l_wkpay.tex) (../results/tables/up_low_occ.tex
-[10 <../results/figures//baseline_skill_use.png (PNG copy)> <../results/figures
+[11 <../results/figures//baseline_skill_use.png (PNG copy)> <../results/figures
 //change_skill_use.png (PNG copy)>])
-(../results/tables/overall_employment_share_deskill.tex [11])
+(../results/tables/overall_employment_share_deskill.tex [12])
 (../results/tables/deskilling_occ_educ_shares.tex)
 (../results/tables/deskilling_occ_educ_shares_fe.tex)
-<../results/figures/direction_triangle.png, id=189, 722.7pt x 722.7pt>
+<../results/figures/direction_triangle.png, id=205, 722.7pt x 722.7pt>
 File: ../results/figures/direction_triangle.png Graphic file (type png)
 <use ../results/figures/direction_triangle.png>
 Package pdftex.def Info: ../results/figures/direction_triangle.png  used on inp
-ut line 98.
+ut line 101.
 (pdftex.def)             Requested size: 469.75499pt x 469.76045pt.
- [12] [13 <../results/figures/direction_triangle.png>]
-<../results/figures/border_triangle_mra12_2001.png, id=207, 722.7pt x 361.35pt>
+ [13] [14 <../results/figures/direction_triangle.png>]
+<../results/figures/border_triangle_mra12_2001.png, id=223, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mra12_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mra12_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mra12_2001.png  use
-d on input line 105.
+d on input line 108.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mra12_2001.png (PNG copy)> <a0,fr0>
 
@@ -1578,7 +1611,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 This error message was generated by an \errmessage
 command, so I can't give any explicit help.
@@ -1604,7 +1637,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1627,7 +1660,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1650,7 +1683,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1673,7 +1706,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1696,7 +1729,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1719,7 +1752,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1742,7 +1775,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1765,7 +1798,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1788,7 +1821,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1811,7 +1844,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1834,7 +1867,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1857,7 +1890,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1880,7 +1913,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1903,28 +1936,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 ...ures/border_triangle_mra12_}{2001}{2017}}
+l.108 ...ures/border_triangle_mra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a0,fr15>
-<../results/figures/border_triangle_mra12_2017.png, id=210, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mra12_2017.png, id=226, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mra12_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mra12_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mra12_2017.png  use
-d on input line 105.
+d on input line 108.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mra12_2017.png (PNG copy)>
 <a0,fr16>
-<../results/figures/border_triangle_mra13_2001.png, id=260, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mra13_2001.png, id=276, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mra13_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mra13_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mra13_2001.png  use
-d on input line 109.
+d on input line 112.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mra13_2001.png (PNG copy)>
 <a1,fr0>
@@ -1946,7 +1979,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1969,7 +2002,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -1992,7 +2025,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2015,7 +2048,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2038,7 +2071,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2061,7 +2094,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2084,7 +2117,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2107,7 +2140,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2130,7 +2163,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2153,7 +2186,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2176,7 +2209,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2199,7 +2232,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2222,7 +2255,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2245,7 +2278,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2268,28 +2301,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ...ures/border_triangle_mra13_}{2001}{2017}}
+l.112 ...ures/border_triangle_mra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a1,fr15>
-<../results/figures/border_triangle_mra13_2017.png, id=263, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mra13_2017.png, id=279, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mra13_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mra13_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mra13_2017.png  use
-d on input line 109.
+d on input line 112.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mra13_2017.png (PNG copy)>
 <a1,fr16>
-<../results/figures/border_triangle_mra23_2001.png, id=300, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mra23_2001.png, id=316, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mra23_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mra23_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mra23_2001.png  use
-d on input line 113.
+d on input line 116.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mra23_2001.png (PNG copy)>
 <a2,fr0>
@@ -2311,7 +2344,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2334,7 +2367,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2357,7 +2390,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2380,7 +2413,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2403,7 +2436,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2426,7 +2459,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2449,7 +2482,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2472,7 +2505,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2495,7 +2528,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2518,7 +2551,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2541,7 +2574,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2564,7 +2597,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2587,7 +2620,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2610,7 +2643,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2633,28 +2666,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 ...ures/border_triangle_mra23_}{2001}{2017}}
+l.116 ...ures/border_triangle_mra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a2,fr15>
-<../results/figures/border_triangle_mra23_2017.png, id=303, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mra23_2017.png, id=319, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mra23_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mra23_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mra23_2017.png  use
-d on input line 113.
+d on input line 116.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mra23_2017.png (PNG copy)>
 <a2,fr16>
-<../results/figures/border_triangle_mrs12_2001.png, id=340, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mrs12_2001.png, id=356, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mrs12_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mrs12_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mrs12_2001.png  use
-d on input line 118.
+d on input line 121.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mrs12_2001.png (PNG copy)>
 <a3,fr0>
@@ -2676,7 +2709,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2699,7 +2732,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2722,7 +2755,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2745,7 +2778,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2768,7 +2801,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2791,7 +2824,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2814,7 +2847,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2837,7 +2870,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2860,7 +2893,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2883,7 +2916,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2906,7 +2939,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2929,7 +2962,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2952,7 +2985,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2975,7 +3008,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -2998,28 +3031,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.118 ...ures/border_triangle_mrs12_}{2001}{2017}}
+l.121 ...ures/border_triangle_mrs12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a3,fr15>
-<../results/figures/border_triangle_mrs12_2017.png, id=343, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mrs12_2017.png, id=359, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mrs12_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mrs12_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mrs12_2017.png  use
-d on input line 118.
+d on input line 121.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mrs12_2017.png (PNG copy)>
 <a3,fr16>
-<../results/figures/border_triangle_mrs13_2001.png, id=380, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mrs13_2001.png, id=396, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mrs13_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mrs13_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mrs13_2001.png  use
-d on input line 122.
+d on input line 125.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mrs13_2001.png (PNG copy)>
 <a4,fr0>
@@ -3041,7 +3074,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3064,7 +3097,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3087,7 +3120,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3110,7 +3143,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3133,7 +3166,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3156,7 +3189,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3179,7 +3212,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3202,7 +3235,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3225,7 +3258,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3248,7 +3281,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3271,7 +3304,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3294,7 +3327,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3317,7 +3350,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3340,7 +3373,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3363,28 +3396,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.122 ...ures/border_triangle_mrs13_}{2001}{2017}}
+l.125 ...ures/border_triangle_mrs13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a4,fr15>
-<../results/figures/border_triangle_mrs13_2017.png, id=383, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mrs13_2017.png, id=399, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mrs13_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mrs13_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mrs13_2017.png  use
-d on input line 122.
+d on input line 125.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mrs13_2017.png (PNG copy)>
 <a4,fr16>
-<../results/figures/border_triangle_mrs23_2001.png, id=420, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mrs23_2001.png, id=436, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mrs23_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mrs23_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mrs23_2001.png  use
-d on input line 126.
+d on input line 129.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mrs23_2001.png (PNG copy)>
 <a5,fr0>
@@ -3406,7 +3439,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3429,7 +3462,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3452,7 +3485,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3475,7 +3508,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3498,7 +3531,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3521,7 +3554,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3544,7 +3577,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3567,7 +3600,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3590,7 +3623,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3613,7 +3646,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3636,7 +3669,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3659,7 +3692,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3682,7 +3715,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3705,7 +3738,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3728,33 +3761,33 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.126 ...ures/border_triangle_mrs23_}{2001}{2017}}
+l.129 ...ures/border_triangle_mrs23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a5,fr15>
-<../results/figures/border_triangle_mrs23_2017.png, id=423, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_mrs23_2017.png, id=439, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_mrs23_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_mrs23_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_mrs23_2017.png  use
-d on input line 126.
+d on input line 129.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_mrs23_2017.png (PNG copy)>
 <a5,fr16>pdfTeX warning (ext4): destination with the same identifier (name{subf
-igure.6.1}) has been already used, duplicate ignored
+igure.7.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.132 	\subfloat
+l.135 	\subfloat
                 [Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1...
-<../results/figures/border_triangle_sra12_2001.png, id=460, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_sra12_2001.png, id=476, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_sra12_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_sra12_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_sra12_2001.png  use
-d on input line 132.
+d on input line 135.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_sra12_2001.png (PNG copy)> <a6,fr0>
 
@@ -3775,7 +3808,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3798,7 +3831,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3821,7 +3854,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3844,7 +3877,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3867,7 +3900,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3890,7 +3923,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3913,7 +3946,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3936,7 +3969,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3959,7 +3992,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -3982,7 +4015,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4005,7 +4038,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4028,7 +4061,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4051,7 +4084,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4074,7 +4107,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4097,33 +4130,33 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 ...ures/border_triangle_sra12_}{2001}{2017}}
+l.135 ...ures/border_triangle_sra12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a6,fr15>
-<../results/figures/border_triangle_sra12_2017.png, id=463, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_sra12_2017.png, id=479, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_sra12_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_sra12_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_sra12_2017.png  use
-d on input line 132.
+d on input line 135.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_sra12_2017.png (PNG copy)>
 <a6,fr16>pdfTeX warning (ext4): destination with the same identifier (name{subf
-igure.6.2}) has been already used, duplicate ignored
+igure.7.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.136 	\subfloat
+l.139 	\subfloat
                 [Low-High]{\animategraphics[loop,controls,width=\linewidth]{...
-<../results/figures/border_triangle_sra13_2001.png, id=500, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_sra13_2001.png, id=516, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_sra13_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_sra13_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_sra13_2001.png  use
-d on input line 136.
+d on input line 139.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_sra13_2001.png (PNG copy)> <a7,fr0>
 
@@ -4144,7 +4177,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4167,7 +4200,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4190,7 +4223,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4213,7 +4246,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4236,7 +4269,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4259,7 +4292,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4282,7 +4315,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4305,7 +4338,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4328,7 +4361,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4351,7 +4384,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4374,7 +4407,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4397,7 +4430,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4420,7 +4453,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4443,7 +4476,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4466,28 +4499,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136 ...ures/border_triangle_sra13_}{2001}{2017}}
+l.139 ...ures/border_triangle_sra13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a7,fr15>
-<../results/figures/border_triangle_sra13_2017.png, id=503, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_sra13_2017.png, id=519, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_sra13_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_sra13_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_sra13_2017.png  use
-d on input line 136.
+d on input line 139.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_sra13_2017.png (PNG copy)>
 <a7,fr16>
-<../results/figures/border_triangle_sra23_2001.png, id=540, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_sra23_2001.png, id=556, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_sra23_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_sra23_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_sra23_2001.png  use
-d on input line 140.
+d on input line 143.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_sra23_2001.png (PNG copy)>
 <a8,fr0>
@@ -4509,7 +4542,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4532,7 +4565,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4555,7 +4588,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4578,7 +4611,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4601,7 +4634,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4624,7 +4657,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4647,7 +4680,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4670,7 +4703,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4693,7 +4726,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4716,7 +4749,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4739,7 +4772,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4762,7 +4795,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4785,7 +4818,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4808,7 +4841,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4831,28 +4864,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.140 ...ures/border_triangle_sra23_}{2001}{2017}}
+l.143 ...ures/border_triangle_sra23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a8,fr15>
-<../results/figures/border_triangle_sra23_2017.png, id=543, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_sra23_2017.png, id=559, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_sra23_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_sra23_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_sra23_2017.png  use
-d on input line 140.
+d on input line 143.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_sra23_2017.png (PNG copy)>
 <a8,fr16>
-<../results/figures/border_triangle_msa12_2001.png, id=580, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_msa12_2001.png, id=596, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_msa12_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_msa12_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_msa12_2001.png  use
-d on input line 146.
+d on input line 149.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_msa12_2001.png (PNG copy)>
 <a9,fr0>
@@ -4874,7 +4907,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4897,7 +4930,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4920,7 +4953,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4943,7 +4976,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4966,7 +4999,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -4989,7 +5022,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5012,7 +5045,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5035,7 +5068,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5058,7 +5091,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5081,7 +5114,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5104,7 +5137,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5127,7 +5160,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5150,7 +5183,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5173,7 +5206,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5196,28 +5229,28 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.146 ...ures/border_triangle_msa12_}{2001}{2017}}
+l.149 ...ures/border_triangle_msa12_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a9,fr15>
-<../results/figures/border_triangle_msa12_2017.png, id=583, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_msa12_2017.png, id=599, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_msa12_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_msa12_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_msa12_2017.png  use
-d on input line 146.
+d on input line 149.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_msa12_2017.png (PNG copy)>
 <a9,fr16>
-<../results/figures/border_triangle_msa13_2001.png, id=620, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_msa13_2001.png, id=636, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_msa13_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_msa13_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_msa13_2001.png  use
-d on input line 150.
+d on input line 153.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_msa13_2001.png (PNG copy)>
 <a10,fr0>
@@ -5239,7 +5272,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5262,7 +5295,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5285,7 +5318,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5308,7 +5341,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5331,7 +5364,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5354,7 +5387,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5377,7 +5410,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5400,7 +5433,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5423,7 +5456,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5446,7 +5479,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5469,7 +5502,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5492,7 +5525,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5515,7 +5548,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5538,7 +5571,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5561,33 +5594,33 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.150 ...ures/border_triangle_msa13_}{2001}{2017}}
+l.153 ...ures/border_triangle_msa13_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a10,fr15>
-<../results/figures/border_triangle_msa13_2017.png, id=623, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_msa13_2017.png, id=639, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_msa13_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_msa13_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_msa13_2017.png  use
-d on input line 150.
+d on input line 153.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_msa13_2017.png (PNG copy)>
 <a10,fr16>pdfTeX warning (ext4): destination with the same identifier (name{sub
-figure.4.3}) has been already used, duplicate ignored
+figure.5.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.154 	\subfloat
+l.157 	\subfloat
                 [Mid-High]{\animategraphics[loop,controls,width=\linewidth]{...
-<../results/figures/border_triangle_msa23_2001.png, id=660, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_msa23_2001.png, id=676, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_msa23_2001.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_msa23_2001.png>
 Package pdftex.def Info: ../results/figures/border_triangle_msa23_2001.png  use
-d on input line 154.
+d on input line 157.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_msa23_2001.png (PNG copy)> <a11,fr0>
 
@@ -5608,7 +5641,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5631,7 +5664,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5654,7 +5687,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5677,7 +5710,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5700,7 +5733,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5723,7 +5756,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5746,7 +5779,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5769,7 +5802,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5792,7 +5825,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5815,7 +5848,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5838,7 +5871,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5861,7 +5894,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5884,7 +5917,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5907,7 +5940,7 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
@@ -5930,23 +5963,23 @@ See the animate package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 ...ures/border_triangle_msa23_}{2001}{2017}}
+l.157 ...ures/border_triangle_msa23_}{2001}{2017}}
                                                   
 (That was another \errmessage.)
 
 <a11,fr15>
-<../results/figures/border_triangle_msa23_2017.png, id=663, 722.7pt x 361.35pt>
+<../results/figures/border_triangle_msa23_2017.png, id=679, 722.7pt x 361.35pt>
 
 File: ../results/figures/border_triangle_msa23_2017.png Graphic file (type png)
 
 <use ../results/figures/border_triangle_msa23_2017.png>
 Package pdftex.def Info: ../results/figures/border_triangle_msa23_2017.png  use
-d on input line 154.
+d on input line 157.
 (pdftex.def)             Requested size: 722.69823pt x 361.34912pt.
  <../results/figures/border_triangle_msa23_2017.png (PNG copy)>
-<a11,fr16> [14
+<a11,fr16> [15
 
-] [15] [16] [17] [18] [19] [20] (documentation.aux)
+] [16] [17] [18] [19] [20] [21] (documentation.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
@@ -5954,10 +5987,10 @@ Package rerunfilecheck Info: File `documentation.out' has not changed.
 (rerunfilecheck)             Checksum: B119C0BBFE0D0D4010F07134E8DD46C1;1299.
  ) 
 Here is how much of TeX's memory you used:
- 35559 strings out of 478864
- 847466 string characters out of 2846731
- 1143500 words of memory out of 3000000
- 52520 multiletter control sequences out of 15000+600000
+ 35627 strings out of 478864
+ 850456 string characters out of 2846731
+ 1143740 words of memory out of 3000000
+ 52567 multiletter control sequences out of 15000+600000
  415726 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  92i,12n,136p,639b,886s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -5981,9 +6014,9 @@ C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 amsfonts/cm/cmsy10.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/
 type1/public/amsfonts/cm/cmti10.pfb><C:/Users/thecs/AppData/Local/Programs/MiKT
 eX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on documentation.pdf (20 pages, 10051506 bytes).
+Output written on documentation.pdf (21 pages, 10527256 bytes).
 PDF statistics:
- 849 PDF objects out of 1000 (max. 8388607)
- 87 named destinations out of 1000 (max. 500000)
- 679 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 866 PDF objects out of 1000 (max. 8388607)
+ 95 named destinations out of 1000 (max. 500000)
+ 699 words of extra memory for PDF output out of 10000 (max. 10000000)
 

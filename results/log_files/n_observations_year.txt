@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}27 Apr 2022, 14:10:41
+ {txt}opened on:  {res} 2 May 2022, 10:51:20
 {txt}
 {com}. table year
 
@@ -21,7 +21,7 @@
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}27 Apr 2022, 14:10:41
+ {txt}closed on:  {res} 2 May 2022, 10:51:20
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}
