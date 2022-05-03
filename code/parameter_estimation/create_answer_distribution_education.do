@@ -11,12 +11,6 @@ do "code/process_SES/save_file_for_minimization.do" $education
 
 do "code/process_SES/compute_skill_indexes.do"
 
-global abstract 	cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
-global social		cpeople cteach  cspeech cpersuad cteamwk clisten
-global routine		brepeat bvariety cplanme bme4 
-global manual		chands cstrengt  cstamina
-global index_list   manual social routine abstract 
-
 rename $education education
 rename $occupation occupation
 

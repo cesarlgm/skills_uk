@@ -2,7 +2,6 @@
 *APPEND LFS DATABASES
 *================================================================================
 clear
-local education 		`1'
 
 forvalues year=1997/2017 {
 	forvalues quarter=1/4 {
@@ -34,7 +33,7 @@ rename people weight
 generate people=1
 
 collapse (mean)  $continuous_list l_*  (sum) people [pw=weight], ///
-	by(`education' `occupation' industry_cw year) 
+	by(edlevLFS `occupation' industry_cw year) 
 
 
 keep if inrange(year,2001,2017)
@@ -42,8 +41,6 @@ keep if inrange(year,2001,2017)
 *Note Apr 6: the averages here look fine.
 save "data/temporary/LFS_agg_database", replace
 
-
-/*
 
 clear
 *Here, I aggregate files for the employment share regressions
@@ -70,10 +67,9 @@ replace year=2017 if inrange(year,2015,2017)
 do "code/process_LFS/create_education_variables.do"
 
 
-gcollapse (sum) people observations, by(bsoc00Agg industry_cw year educ_3_low)
+gcollapse (sum) people observations, by(bsoc00Agg industry_cw year $education)
 
 drop if industry_cw<0
 
 save "data/temporary/LFS_industry_occ_file", replace
 
-*/

@@ -2,8 +2,6 @@
 {
     {
         frames reset
-        global education educ_3_low
-        global occupation bsoc00Agg
 
         use "./data/temporary/LFS_industry_occ_file", clear
 

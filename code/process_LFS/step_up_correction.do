@@ -4,13 +4,12 @@
 *Getting occupations that increased the low share
 {
     frames reset
-    global education educ_3_low
-    global occupation bsoc00Agg
+
 
     use "./data/temporary/LFS_industry_occ_file", clear
 
 
-    tab educ_3_low year if inlist(year, 2001,2017) [aw=people], col nofreq
+    tab $education year if inlist(year, 2001,2017) [aw=people], col nofreq
 
     gcollapse (sum) people obs, by($occupation  year $education)
 
@@ -34,7 +33,7 @@
         tempfile SES_file
         save `SES_file'
 
-        keep bsoc00Agg `education' year 
+        keep bsoc00Agg year 
         duplicates drop 
 
 
@@ -43,11 +42,30 @@
     }
 
     frame change default
-    merge m:1 bsoc00Agg year using `SES_occs', keep(3) nogen
+    merge m:1 $occupation year using `SES_occs', keep(3) nogen
 
     replace observations=floor(observations)
     
+    preserve
+    {
+        sort $occupation $education year
+        fillin $occupation $education year
+        
+        egen temp=sum(observations), by($occupation year)
+        generate in_year=temp>0
+        replace empshare=0 if in_year==1&missing(empshare)
+        by $occupation $education: generate d_empshare=empshare-empshare[_n-1]
 
+        keep if year==2017
+        
+        keep $occupation $education d_empshare
+        reshape wide d_empshare, i($occupation) j($education)
+
+        tempfile empshare_file
+        save `empshare_file'
+    }
+    restore
+    
     cap drop p_value*
     foreach educ in 1 2 3 {
         generate p_value`educ'=.
@@ -60,12 +78,12 @@
         }
         cap drop educ_level
     }
-
-
+    
+   
     keep $occupation p_value*
     duplicates drop 
 
-    merge m:1 $occupation using "data/additional_processing/file_step_up_correction", keepusing(d_empshare*)
+    merge m:1 $occupation using `empshare_file', keepusing(d_empshare*)
     
     duplicates  drop $occupation, force
     
@@ -94,6 +112,7 @@
         eststo `variable': regress `variable' ibn.bsoc00Agg if reject1&d_empshare1>0, nocons
     }
 
+    
     local table_name "results/tables/polarizing_occupations.tex"
     local table_title "Polarizing occupations: change in occupational employment shares by education group, 2001-2017"
     local coltitles `""Low""Mid""High""'
@@ -110,11 +129,10 @@
     save "data/additional_processing/increase_low_occupations", replace
 }
 
+/*
 *Is the employment share in these 9 occupation disappearing?
 {
     frames reset
-    global education educ_3_low
-    global occupation bsoc00Agg
 
     use "./data/temporary/LFS_industry_occ_file", clear
 
@@ -145,7 +163,7 @@
     
 
 
-    /*
+
     local table_name "results/tables/overall_employment_share_deskill.tex"
     local table_title "Employment share of deskilling occupations by year"
     local coltitles `""Employment share""'
@@ -182,14 +200,14 @@
     textablehead using `table_name', ncols(3) coltitles(`coltitles') title(`table_title') drop
     leanesttab low mid high using `table_name', append nostar fmt(3)
     textablefoot using `table_name'
-    */
+ 
 }
 
 *How do these occupations look in the skill space
 {
     do "code/process_SES/save_file_for_minimization.do"
 
-    keep if educ_3_low==1
+    keep if $education==1
 
     drop if year==1997
 
@@ -199,24 +217,9 @@
 
     drop _merge
 
-    local abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
-    local social		cpeople cteach  cspeech cpersuad cteamwk clisten
-    local routine		brepeat bvariety cplanme bme4 
-    local manual		chands cstrengt  cstamina
-    global index_list 	abstract social routine manual 
+    do "code/process_SES/compute_skill_indexes.do"
 
     foreach index in $index_list {
-        foreach variable in ``index'' {
-            summ `variable'
-            replace `variable'=(`variable'-`r(min)')/(`r(max)'-`r(min)')
-            summ `variable'
-            assert `r(min)'==0
-            assert `r(max)'==1
-        }
-    }
-
-    foreach index in $index_list {
-        egen `index'=rowmean(``index'')
         generate `index'l=asinh(`index')
     }
 
@@ -224,13 +227,13 @@
     label values interest_occ interest_occ
 
     foreach index in $index_list {
-        cap drop x_`index'
-        generate x_`index'=interest_occ
-        eststo `index'01: regress `index'l ibn.x_`index' if year==2001, vce(cl $occupation) 
-        eststo `index'17: regress `index'l ibn.x_`index' if year==2017, vce(cl $occupation) 
-        eststo `index'01d: regress `index'l i.x_`index' if year==2001, vce(cl $occupation) 
-        eststo `index'17d: regress `index'l i.x_`index' if year==2017, vce(cl $occupation) 
-        eststo `index'd: regress `index'l i.year##i.x_`index', vce(cl $occupation)
+        cap drop x_var
+        generate x_var=interest_occ
+        eststo `index'01: regress `index'l ibn.x_var if year==2001, vce(cl $occupation) nocons
+        eststo `index'17: regress `index'l ibn.x_var if year==2017, vce(cl $occupation) nocons
+        eststo `index'01d: regress `index'l i.x_var if year==2001, vce(cl $occupation) 
+        eststo `index'17d: regress `index'l i.x_var if year==2017, vce(cl $occupation) 
+        eststo `index'd: regress `index'l i.year##i.x_var, vce(cl $occupation)
     }
 
     grscheme, ncolor(7) style(tableau)
@@ -261,8 +264,7 @@
     foreach index in $index_list {
         writebf using `table_name', text(`index')
         leanesttab `index'01 `index'17 using `table_name', not append noobs nostar
-        leanesttab `index'01d `index'17d using `table_name', keep(1.interest_occ) coeflabel(1.interest_occ "Difference")  append noobs nostar
-    
+        leanesttab `index'01d `index'17d using `table_name', keep(1.x_var) coeflabel(1.x_var "Difference")  append noobs nostar
     }
     textablefoot using `table_name'
 }

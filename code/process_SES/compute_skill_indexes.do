@@ -1,11 +1,11 @@
-local abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
-local social		cpeople  cteamwk clisten  cspeech cpersuad  cteach
-local routine		brepeat bme4 bvariety cplanme 
-local manual		chands cstrengt  cstamina
+global abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
+global social		cpeople  cteamwk clisten  cspeech cpersuad  cteach
+global routine		brepeat bme4 bvariety cplanme 
+global manual		chands cstrengt  cstamina
 global index_list   manual social routine abstract 
 
 
-local variable_list  `manual' `routine' `abstract' `social' 
+local variable_list  $manual $routine $abstract $social
 
 foreach variable in `variable_list' {
     summ `variable'
@@ -15,7 +15,7 @@ foreach variable in `variable_list' {
 }
 
 foreach index in $index_list {
-    egen `index'=rowmean(``index'')
+    egen `index'=rowmean(${`index'})
 }
 
 

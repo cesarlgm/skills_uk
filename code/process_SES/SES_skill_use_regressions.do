@@ -11,6 +11,7 @@
 *===============================================================================
 *===============================================================================
 
+global education educ_3_mid
 
 use "data/temporary/filtered_dems_SES", clear
 drop if missing(gwtall)
@@ -25,32 +26,11 @@ merge m:1 bsoc00Agg using  "data/temporary/SES_occupation_key", nogen
 
 keep if  n_years==4
 
-rename educ_3_low education
+rename $education education
 rename bsoc00Agg occupation
 
 
-*First I compute the skill indexes
-local abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canalyse
-local social		cpeople cteach  cspeech cpersuad cteamwk clisten
-local routine		brepeat bvariety cplanme bme4 
-local manual		chands cstrengt  cstamina
-global index_list 	manual routine abstract social   
-
-cap drop $index_list
-
-local variable_list  `manual' `routine' `abstract' `social' 
-
-foreach variable in `variable_list' {
-	summ `variable'
-	replace `variable'=(`variable'-`r(min)')/(`r(max)'-`r(min)')
-	summ `variable'
-	assert `r(min)'==0
-	assert `r(max)'==1
-}
-
-foreach index in $index_list {
-	egen `index'=rowmean(``index'')
-}
+do "code/process_SES/compute_skill_indexes.do"
 
 
 eststo clear

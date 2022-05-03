@@ -1,6 +1,4 @@
 
-local education `1'
-
 
 
 use "data/temporary/filtered_dems_SES", clear
@@ -88,8 +86,8 @@ drop bme4
 rename temp bme4
 
 
-keep bsoc00Agg `education' year `variable_list' gwtall 
-order  bsoc00Agg `education' year `variable_list' 
+keep bsoc00Agg  $education year `variable_list' gwtall 
+order  bsoc00Agg $education year `variable_list' 
 
 
 export delimited "data/additional_processing/file_for_minimization.csv", ///

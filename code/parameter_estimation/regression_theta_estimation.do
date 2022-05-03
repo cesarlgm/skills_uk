@@ -22,7 +22,7 @@ gcollapse (mean) $index_list (count) obs=chands, by(occupation year education)
     
 *Dropping observations that I don't need
 drop if year==1997
-keep if  inlist(year,2001,2017)
+*keep if  inlist(year,2001,2017)
 
 *Setting panel dataset
 {
@@ -72,6 +72,7 @@ foreach index in $index_list {
     eststo reg: regress y_var i.education#c.x_manual i.education#c.x_social i.education#c.x_routine i.education#c.x_abstract $weight, nocons vce(cl occupation)
 }
 
+
 generate skill_sum=.
 forvalues education=1/$n_educ {
     local social`education':    display %9.2fc      _b[`education'.education#c.x_social]
@@ -112,7 +113,7 @@ matrix list costs
     estpost tabstat pi_routine pi_manual pi_social, stat(mean sd p25 p75) columns(stat)
 
     local   table_name "results/tables/pi_variation_global_base_pooled.tex"
-    local   table_title "Variation of $\pi_{jt}$, squares"
+    local   table_title "Variation of $\pi_{jt}$, baseline. pooled"
     esttab . using `table_name', ///
         cells("mean(fmt(2)) sd(fmt(2)) p25(fmt(2)) p75(fmt(2))") ///
         unstack label booktabs nomtitles replace ///
