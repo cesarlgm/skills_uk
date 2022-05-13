@@ -18,7 +18,7 @@ global n_educ: word count of `r(levels)'
 global n_educ=$n_educ-1
 
 *Collapsing the dataset
-gcollapse (mean) $index_list (count) obs=chands, by(occupation year education)
+gcollapse (mean) $index_list *_i (count) obs=chands, by(occupation year education)
     
 *Dropping observations that I don't need
 drop if year==1997
@@ -35,7 +35,7 @@ drop if year==1997
 *Creating log and dlog of skills
 foreach index in $index_list {
     *generate l_`index'=log(`index'+$normalization)
-    generate l_`index'=asinh(`index')
+    generate l_`index'=`index'_i //asinh(`index')
     generate d_l_`index'=d.l_`index'
 }
 

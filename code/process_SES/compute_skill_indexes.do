@@ -16,6 +16,7 @@ foreach variable in `variable_list' {
 
 foreach index in $index_list {
     egen `index'=rowmean(${`index'})
+    generate `index'_i=asinh(`index')
 }
 
 
