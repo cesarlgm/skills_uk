@@ -1,12 +1,57 @@
-global normalization .000001
+global normalization    .000001
 global reference        abstract
 global not_reference    manual
 global weight          
 global education        educ_3_mid
 
-*New regression approach
 
-do "code/parameter_estimation/create_skills_dataset.do"
+*Creating the SES database
+do "code/process_SES/save_file_for_minimization.do" $education
+do "code/process_SES/compute_skill_indexes.do"
+
+rename $education education
+rename $occupation occupation
+
+levelsof education
+global n_educ: word count of `r(levels)'
+global n_educ=$n_educ-1
+
+*Collapsing the dataset
+gcollapse (mean) $index_list *_i (count) obs=chands, by(occupation year education)
+    
+*Dropping observations that I don't need
+drop if year==1997
+*keep if  inlist(year,2001,2017)
+
+*Setting panel dataset
+{
+    egen group_id=group(occupation education)
+    egen time=group(year)
+
+    xtset group_id time
+}
+
+*Creating log and dlog of skills
+foreach index in $index_list {
+    *generate l_`index'=log(`index'+$normalization)
+    generate l_`index'=`index'_i //asinh(`index')
+    generate d_l_`index'=d.l_`index'
+}
+
+drop if year==2001
+
+*I compute -dlogS_ijt+dlogS_manualjt
+foreach index in $index_list {
+    generate  y_d_l_`index'=-d_l_`index'+d_l_$reference
+}
+
+*Compute pi_{ijt} and the dependent variable: dlogS_ijt+\pi_{ijt}
+foreach index in manual social routine abstract {    
+    gegen pi_`index'=    mean(y_d_l_`index') if !missing(y_d_l_`index') $weight, by(occupation year)
+
+    generate y_`index'=d_l_`index'+ pi_`index'
+}
+
 
 generate x_manual=  manual*pi_manual
 generate x_social=  social*pi_social
@@ -14,7 +59,7 @@ generate x_routine= routine*pi_routine
 generate x_abstract=abstract*pi_abstract
 
 
-gstats winsor y_* x_*, cut(20 80) replace
+*gstats winsor y_* x_*, cut(20 80) replace
 
 keep occupation education year y_* x_*  $index_list pi_* obs
 rename (y_manual y_social y_abstract y_routine) (y_1 y_2 y_3 y_4)

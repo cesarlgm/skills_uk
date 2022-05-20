@@ -10,6 +10,35 @@
 \begin{document}
 \maketitle
 
+\section{New approach (v2):}
+\subsection{Model equations}
+For each worker, it holds that:
+\beqn
+\label{eqn:indiv1}
+\Delta \ln S_i&=& \frac{\sigma}{\sigma-1}\left[\sum_k \frac{S_k\theta^e_k}{w} \Delta \ln A_k-\Delta \ln A_i\right]\\
+\label{eqn:indiv2}
+\Delta \ln S_i - \Delta \ln S_k&=&\frac{\sigma}{\sigma-1}\left[    \Delta \ln A_k-   \Delta \ln A_i \right]
+\eeqn
+
+And for each job:
+\beqn
+\Delta \ln \frac{q_e(J)}{q_{e^\prime}(J)}&=&\sum_i\left (\frac{\partial \ln y^*_e(J)}{\partial \ln A_{iJ}}-\frac{\partial \ln y^*_{e^\prime}(J)}{\partial \ln A_{iJ}}\right)\Delta \ln A_{iJ}\\
+&&+\Delta \ln \left [\frac{q_e^{Tot}}{q_{e^\prime}^{Tot}}\frac{\sum_{J^\prime}P(J^\prime)y^*_{e^\prime}(J^\prime)e^{\xi_{J^\prime}}}{\sum_{J^\prime}P(J^\prime)y^*_{e}(J^\prime)e^{\xi_{J^\prime}}}\right] \notag
+\eeqn
+\subsection{Estimating equations}
+Dropping time subscripts, and aggregating \eqref{eqn:indiv1} and \eqref{eqn:indiv2} at the job-education cell and assuming that $E(w)=1$, we have:
+\beqn
+\Delta \overline{ \ln S^e_{iJe}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJ}} \Delta \ln A_{kJ}-\Delta \ln A_{iJ}\right)\\
+\Delta \overline{\ln S^e_{iJe}}-\Delta \overline{\ln S^e_{\text{abstract},eJ}}&=&-\frac{\sigma}{\sigma-1}\Delta \ln A_{iJ}
+\eeqn
+were we imposed that $(\Delta\ln A_{abstract,J})_t=0$ . This gives us our estimating equations:
+\beqn
+\Delta \overline{ \ln S^e_{iJe}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJ}} \Delta \ln A_{kJ}-\Delta \ln A_{iJ}\right)+\varepsilon_{iJe}\\
+\Delta \overline{\ln S^e_{iJe}}-\Delta \overline{\ln S^e_{\text{abstract}eJ}}&=&-\frac{\sigma_J}{\sigma_J-1}\Delta \ln A_{iJ} + \nu_{iJe}\\
+\Delta  \left[\ln \frac{q_e(J)}{q_{e^\prime}(J)}\right]&=&\sum_k\left(\theta_k^e \overline{S_{kJe}}-\theta_k^{e^\prime} \overline{S_{kJe^\prime}}\right)\Delta \ln A_k+const_{e,e^\prime}+\eta_{e,e'}
+\eeqn
+
+
 \section{New approach:}
 \benu 
 	\item Let $S_{ijet}$ be the . Estimate $\Delta\ln A_i$ using:
@@ -28,6 +57,7 @@
 	\beqns
 		\Delta \ln S_{ijet}+\pi_{ijt}&=&\sum_k \theta_{ei}S_{kjet}\pi_{kjt}
 	\eeqns
+
 \eenu 
 
 \subsection{What are the new estimates of $\theta_{jt}$}

@@ -1,0 +1,241 @@
+%2multibyte Version: 5.50.0.2960 CodePage: 65001
+
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{Codepage=65001}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Created=Tuesday, March 29, 2022 15:20:13}
+%TCIDATA{LastRevised=Tuesday, March 29, 2022 17:24:50}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Standard LaTeX Article">}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\begin{document}
+
+Let's start with our usual skill choice problem. 
+One dimension we want to leave open is individual heterogeneity in the skill constraint. 
+That is, we think of relative weights $\theta^e$ as given by the worker's education group but the total constraint $w$
+as heterogeneous on the individual level and potentially correlated with education and job choice.
+Also, we're letting $A$ vary by job.
+
+For reference, $J$ is a job, $i$ and $j$ are skill dimensions, $n$ and $m$ are workers, and various $e$s are education levels.
+
+\section{Le Within}
+
+Given a job $J$, a worker with education $e$ solves
+
+\begin{eqnarray}
+\max y(A\circ S,J)\\
+\text{s.t.} ~~ \sum_iS_i\theta_i^e\leq w.
+\end{eqnarray}
+
+The first order condition in dimension $i$ is
+
+\begin{equation}
+A_iy^\prime_i (A\circ S^*,J)= \lambda \theta^e_i.
+\end{equation}
+
+
+Now, assume a CES production function
+
+\begin{equation}
+y(A\circ S, J)=\left (\sum_i J_i(A_iS_i)^\sigma\right)^{\frac 1 \sigma}.
+\end{equation}
+
+Our first-order condition is now
+
+\begin{equation}
+J_iS_i^{\sigma-1}A_i^\sigma \left (\sum_k J_k(A_kS_k)^\sigma\right)^{\frac {1-\sigma} \sigma}=\lambda \theta^e_i.
+\end{equation}
+
+Dividing across different skills and raising to the power $\frac{1}{\sigma-1}$, we have
+
+\begin{equation}
+\frac{S_k}{S_i}=\left(\frac{J_k}{J_i}\right)^{-\frac 1 {\sigma-1}} \left(\frac{A_k}{A_i}\right)^{-\frac \sigma {\sigma-1}} \left(\frac{\theta_k^e}{\theta_i^e}\right)^{\frac 1 {\sigma-1}}
+\end{equation}
+
+Let's multiply both sides with $\theta_i^e$.
+
+\begin{equation}
+\frac{\theta_k^e S_k}{S_i}=\left(\frac{J_k}{J_i}\right)^{-\frac 1 {\sigma-1}} \left(\frac{A_k}{A_i}\right)^{-\frac \sigma {\sigma-1}}  \left(\frac{\theta_k^e}{\theta_i^e}\right)^{\frac {1}{\sigma-1}}
+\end{equation}
+
+Now, let's sum across $i$s and use the fact that $\sum_i\theta_i^eS_i=w$. Rearranging,
+
+
+\begin{equation}
+S_i=\frac{J_i^{-\frac{1}{\sigma-1}}A_i^{-\frac{\sigma}{\sigma-1}}(\theta_i^e)^{\frac{1}{\sigma-1}}}{\sum_k J_k^{-\frac{1}{\sigma-1}}A_k^{-\frac{\sigma}{\sigma-1}}(\theta_k^e)^{\frac{\sigma}{\sigma-1}}}w
+\end{equation}
+
+... which looks terrible. Instead of losing hope, take a derivative with respect to $A_k$ where $k \neq i$.
+
+\begin{equation}
+\frac{dS_i}{dA_k}=\frac{\sigma}{\sigma-1} \frac{J_i^{-\frac{1}{\sigma-1}}A_i^{-\frac{\sigma}{\sigma-1}}(\theta_i^e)^{\frac{1}{\sigma-1}}}{\sum_l J_l^{-\frac{1}{\sigma-1}}A_l^{-\frac{\sigma}{\sigma-1}}(\theta_l^e)^{\frac{\sigma}{\sigma-1}}}w
+\frac{J_k^{-\frac{1}{\sigma-1}}A_k^{-\frac{\sigma}{\sigma-1}-1}(\theta_k^e)^{\frac{\sigma}{\sigma-1}}}{\sum_l J_l^{-\frac{1}{\sigma-1}}A_l^{-\frac{\sigma}{\sigma-1}}(\theta_l^e)^{\frac{\sigma}{\sigma-1}}}
+\end{equation}
+which simplifies, rather miraculously, to
+
+
+
+\begin{equation}
+\frac{dS_i}{d\ln A_k}=\frac{\sigma}{\sigma-1}\frac{S_i S_k\theta_k^e}{w}.
+\end{equation}
+
+
+Similarly, we have that
+
+\begin{equation}
+\frac{dS_i}{d\ln A_i}=\frac{\sigma}{\sigma-1}\frac{S_i^2\theta_i^e}{w}-\frac{\sigma}{\sigma-1}S_i.
+\end{equation}
+
+
+
+Thus, we have for each worker and each skill dimension $i$ a first-order expansion of the form
+
+\begin{equation}\label{basiceq}
+\Delta \ln S_i= \frac{\sigma}{\sigma-1}\left[\sum_k \frac{S_k\theta^e_k}{w} \Delta \ln A_k-\Delta \ln A_i\right]
+\end{equation}
+
+Notice this bakes in a few things we like - the Slutsky symmetry property, for instance. Now, there's just one problem - $w$ is heterogeneous at the individual level, whereas we don't have panel data.
+
+
+Subtracting across different dimensions, we have
+
+
+
+
+\begin{equation}
+\Delta \ln S_i - \Delta \ln S_k=\frac{\sigma}{\sigma-1}\left[    \Delta \ln A_k-   \Delta \ln A_i \right]
+\end{equation}
+
+This time around, we're allowing $A$ to vary at the job level; so we'll be writing $A_{iJ}$ for the technological coefficient of skill $i$ in job $J$. Of course, these equations have quite a bit of redundancy, as everything is HOD0. So, let's pick a skill - manual - and set $\Delta \ln A_{\text{manual}J}=0$ in every job. \vspace{3mm}\\
+
+Unfortunately, we don't observe individual-level skill changes. So we can't actually compute $\Delta \ln S_i$. But, under the assumption that the distribution of $w$ is the same within the occupation-education-job cell before and after the change, we can instead sum across workers within the occ-ed-job cell.
+
+
+
+Thus in period $t$ for workers in job $J$ with education $e$ in skill $i\not =\text{manual}$ we have
+
+\begin{equation}
+\Delta \overline{\ln S^e_{iJetn}}-\Delta \overline{\ln S^e_{\text{manual}eJtn}} =-\frac{\sigma}{\sigma-1}(\Delta \ln A_{iJ})_t= -\pi_{iJt}.
+\end{equation}
+As we now are in a position to produce one estimate of $\pi_{iJt}$ for each education group, though, we take a simple average.
+
+\begin{equation}\label{pihat}
+\hat{\pi}_{iJt}=\frac{1}{3}\sum_{e}\left[\Delta \overline{\ln S^e_{\text{manual}eJtn}}-\Delta \overline{\ln S^e_{iJetn}} \right]
+\end{equation}
+
+Now, we plug (\ref{pihat}) into (\ref{basiceq}) and have 
+
+\begin{equation}
+\Delta \overline{ \ln S^e_{iJetn}}+\hat{\pi}_{iJt}= \sum_k \frac{S_{kJ}\theta^e_k}{w} \hat{\pi}_{kJt}.
+\end{equation}
+This must hold at the \textit{individual} level, as the model predicts that $\frac{S_{kn}\theta^e_k}{w_n}$ is constant over individuals in the occupation-education cell. Therefore,
+\begin{eqnarray}
+\frac{1}{N_{Jet}}\sum_n^{N_{Jet}} S_{kJetn}\theta^e_k=
+\frac{1}{N_{Jet}}\sum_n^{N_{Jet}} \frac{S_{kJetn}\theta^e_k}{w_n}w_n=
+\frac{S_{k}\theta^e_k}{w}\frac{1}{N_{Jet}}\sum_n^{N_{Jet}} w_n
+\end{eqnarray}
+so that using the fact that we've assumed $E[w_n]=1$ in every job, 
+\begin{eqnarray}
+\theta_k^e \overline{S_{kJetn}}=\frac{1}{N_{Jet}}\sum_n^{N_{Jet}} S_{kn}\theta^e_k=\frac{S_{k}\theta^e_k}{w}
+\end{eqnarray}
+finally arriving at our regression equation
+\begin{equation}
+\Delta \overline{ \ln S^e_{iJetn}}+\hat{\pi}_{iJt}= \sum_k\theta_k^e \overline{S_{kJetn}}\hat{\pi}_{kJt}
+\end{equation}
+
+\textbf{Concern: we're assuming not just that the average ability within each group is $\bar{w}=1$ but that this
+is true of the average ability within each occ-educ pair. This is actually falsifiable with our data alone, as we can
+compute this within-occ average using observed Ss and our estimated $\theta$s. There are alternatives. We could iterate,
+solving for $\theta$s and computing individual $w$s, plugging them back in to (16) and so on. I know iterating thetas left
+a bad taste in our mouth last time around, but \textit{this time is different}...}
+
+\section{Le Between: Discrete Choice of the Proletariat}
+
+Unlike in the DOT paper, we want a theory of sorting across jobs other than indifference. To that end, we'll employ a discrete
+choice framework in which a worker $n$ in job $J$ with wage $w_J$ gets utility
+
+\begin{equation}
+\ln w_J + \xi_J+\eta_{Jn}
+\end{equation}
+where $\xi_J$ is a parameter expressing a common preference for job $J$, and $\eta_{Jn}$ expresses a combination of idiosyncratic preference for and productivity in $J$ and is i.i.d Gumbel-distributed.
+
+Thus, the probability job $J$ is chosen by a worker of type $e$ is equal to
+
+\begin{equation}
+\frac{w_e(J)e^{\xi_J}}{\sum_{J^\prime}w_e(J^\prime)e^{\xi_{J^\prime}}}
+\end{equation}
+
+Where do wages come from? As workers solve the problem in [crossref], and each intermediate output $J$ is priced by the market somehow,
+$w_e(J)=y_e^*(J)P(J)$. Therefore the ratio of $e$ workers in job $J$ to those in $J^\prime$ is
+
+\begin{equation}
+\frac{q_e(J)}{q_e(J^\prime)}=\frac{P(J)y^*_e(J) e^{\xi_{J}}}{P(J^\prime)y^*_e(J^\prime)e^{\xi_{J^\prime}}}
+\end{equation}
+
+Summing across jobs, if the total amount of workers of type $e$ is $q_e^{Total}$, we get
+
+\begin{equation}
+q_e(J)=\frac{P(J)y^*_e(J) e^{\xi_{J}}}{\sum_{J^\prime}P(J^\prime)y^*_e(J^\prime)e^{\xi_{J^\prime}}}q_e^{Tot}
+\end{equation}
+
+
+Instead of imposing assumptions and estimating the discrete choice modl at hand, we take a different tack: comparing across types.
+
+\begin{equation}
+\frac{q_e(J)}{q_{e^\prime}(J)}=\frac{y^*_e(J)}{y^*_{e^\prime}(J)}\frac{q_e^{Tot}}{q_{e^\prime}^{Tot}}\frac{\sum_{J^\prime}P(J^\prime)y^*_{e^\prime}(J^\prime)e^{\xi_{J^\prime}}}{\sum_{J^\prime}P(J^\prime)y^*_{e}(J^\prime)e^{\xi_{J^\prime}}}
+\end{equation}
+
+From here, we can exploit changes over time.
+\begin{eqnarray}
+\Delta \ln \frac{q_e(J)}{q_{e^\prime}(J)}=\sum_i\left (\frac{\partial \ln y^*_e(J)}{\partial \ln A_{iJ}}-\frac{\partial \ln y^*_{e^\prime}(J)}{\partial \ln A_{iJ}}\right)\Delta \ln A_{iJ}\\
++\Delta \ln \left [\frac{q_e^{Tot}}{q_{e^\prime}^{Tot}}\frac{\sum_{J^\prime}P(J^\prime)y^*_{e^\prime}(J^\prime)e^{\xi_{J^\prime}}}{\sum_{J^\prime}P(J^\prime)y^*_{e}(J^\prime)e^{\xi_{J^\prime}}}\right] 
+\end{eqnarray}
+Using the envelope theorem, and noticing that the last term is a constant across $J$, we arrive at
+
+\begin{equation}
+\Delta \ln \frac{q_e(J)}{q_{e^\prime}(J)}=\sum_i\left (\frac{S_{iJetn}\theta_i^e}{w_{en}}-\frac{S_{iJe^\prime tn}\theta_i^{e^\prime}}{w_{e^\prime n}}\right)\Delta \ln A_{iJ}+const
+\end{equation}
+
+For our purposes, we'll use the mean $S\theta/w$ within the educ-occ cell. Substituting in $\pi$,
+
+\begin{equation}
+\Delta \left[\ln \frac{q_e(J)}{q_{e^\prime}(J)}\right]_t= \beta_J\sum_k\left(\theta_k^e \overline{S_{kJetn}}-\theta_k^{e^\prime} \overline{S_{kJe^\prime tn}}\right)\hat{\pi}_{kJt}+const_{e,e^\prime,t}
+\end{equation}
+
+The interpretation here is that $\beta_J=\frac{\sigma-1}{\sigma}$, which may or may not be interesting to know. A test of our model is that each $\sigma_J<1$. More importantly, this will allow us to test our model's goodness of fit. Or something.
+
+
+
+\end{document}

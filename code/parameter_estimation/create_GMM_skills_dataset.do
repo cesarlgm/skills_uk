@@ -40,8 +40,6 @@ foreach index in $index_list {
     label var `index'   "Average `index'"
 }
 
-drop if year==2001
-
 frames copy default equation1
 frames change equation1
 *Creating equation 1 dataset
@@ -49,8 +47,8 @@ frames change equation1
     local counter=1
     foreach index in $index_list {
         preserve  
-        keep year education occupation l_`index' $index_list
-        rename l_`index' y_var
+        keep year education occupation d_l_`index' $index_list
+        rename d_l_`index' y_var
         generate skill=`counter'
         tempfile skill`counter'
         save `skill`counter''
@@ -78,11 +76,19 @@ frames change equation1
     foreach index in $index_list {
         preserve
         generate a_`index'=d_l_`index'-d_l_$reference
-        keep a_`index' occupation education year
+        keep a_`index' occupation education year obs
+        egen time=group(year)
+        egen group_id=group(occupation education)
+        xtset group_id time
         rename a_`index' y_var
+        rename obs obs_`index'
+        generate l_obs_`index'=l.obs_`index'
         generate skill=`counter'
         tempfile a_dataset`counter'
         generate equation=2
+        rename obs_`index' obs
+        rename l_obs_`index' l_obs_
+        drop group_id time
         save `a_dataset`counter''
         restore
         local ++counter
@@ -92,6 +98,8 @@ frames change equation1
     forvalues counter=1/4{ 
         append using `a_dataset`counter''
     }
+
+    drop if missing(y_var)
     tempfile equation2
     save `equation2'
 }
@@ -99,5 +107,8 @@ frames change equation1
 clear 
 append using `equation1'
 append using `equation2'
+
+
+drop if year==2001
 
 save "data/additional_processing/gmm_skills_dataset", replace
