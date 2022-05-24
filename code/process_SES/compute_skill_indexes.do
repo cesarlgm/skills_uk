@@ -2,7 +2,7 @@ global abstract 		cwritelg clong  ccalca cpercent cstats cplanoth csolutn canaly
 global social		cpeople  cteamwk clisten  cspeech cpersuad  cteach
 global routine		brepeat bme4 bvariety cplanme 
 global manual		chands cstrengt  cstamina
-global index_list   manual social routine abstract 
+
 
 
 local variable_list  $manual $routine $abstract $social

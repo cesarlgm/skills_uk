@@ -153,14 +153,21 @@ global n_skills=4
 
     sort occupation
 
-    rename beta_j parameter 
-    
     generate source_name="beta"
+
 
     tempfile beta_file
     save `beta_file'
 }
 
+{
+    use `beta_file', clear
+    rename sigma_j parameter
+
+    replace source_name="sigma_j"
+    tempfile beta_file_p
+    save `beta_file_p'
+}
 
 *Create the file with the initial values
 {
@@ -176,13 +183,29 @@ global n_skills=4
     generate source_name="pi"
 
     sort occupation year skill
+
+    merge m:1 occupation using `beta_file', keep(3)
+
+    generate A_ij=((sigma_j-1)/sigma_j)*parameter
+
+    keep occupation year skill source_name A_ij
+    replace source_name="A_ij"
+    rename A_ij parameter
+
+    append using `beta_file_p'
+
     append using `theta_file'
-    append using `beta_file'
-    generate parameter_no=_n
 
-    save "data/additional_processing/initial_values_file_key", replace
+    generate identifier=""
+    foreach variable in occupation year skill education {
+        tostring `variable', replace force
+    }
+    replace  identifier=occupation+"."+year+"."+skill   if source_name=="A_ij"
+    replace  identifier=occupation                      if source_name=="sigma_j"
+    replace  identifier=education+"."+skill             if source_name=="theta"
 
-    keep parameter parameter_no source_name
+    keep source_name parameter identifier
+    generate parameter_id=_n
 
     save "data/additional_processing/initial_values_file", replace
 }

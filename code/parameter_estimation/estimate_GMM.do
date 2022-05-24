@@ -18,5 +18,10 @@ global ed_reference     1
 
 *Next I compute the initial values
 {
-    
+    do "code/parameter_estimation/create_GMM_initial_values.do"
+}
+
+*Next I start setting up the program
+{
+    do "code/parameter_estimation/compute_GMM.do"
 }

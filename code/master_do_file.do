@@ -14,7 +14,7 @@ global education educ_3_mid
 global occupation bsoc00Agg
 global wage_cuts  10 90
 global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
-
+global index_list   manual social routine abstract 
 
 *===============================================================================
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
