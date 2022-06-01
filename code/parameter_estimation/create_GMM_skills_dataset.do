@@ -112,3 +112,12 @@ append using `equation2'
 drop if year==2001
 
 save "data/additional_processing/gmm_skills_dataset", replace
+
+
+use "data/additional_processing/gmm_skills_dataset", clear
+keep if equation==1
+keep occupation year education $index_list y_var skill
+duplicates drop
+reshape wide y_var $index_list, i(occupation education skill) j(year)
+reshape wide y_var* manual* social* routine* abstract*, i(education skill) j(occupation)
+reshape wide y_var* manual* social* routine* abstract*, i(skill) j(education)

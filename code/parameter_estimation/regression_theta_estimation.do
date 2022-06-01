@@ -2,7 +2,7 @@ global normalization    .000001
 global reference        abstract
 global not_reference    manual
 global weight          
-global education        educ_3_mid
+global education        educ_4
 
 
 *Creating the SES database
@@ -59,7 +59,7 @@ generate x_routine= routine*pi_routine
 generate x_abstract=abstract*pi_abstract
 
 
-*gstats winsor y_* x_*, cut(20 80) replace
+gstats winsor y_* x_*, cut(20 80) replace
 
 keep occupation education year y_* x_*  $index_list pi_* obs
 rename (y_manual y_social y_abstract y_routine) (y_1 y_2 y_3 y_4)
@@ -74,6 +74,9 @@ foreach index in $index_list {
 
 generate skill_sum=.
 forvalues education=1/$n_educ {
+    global c_social`education'= _b[`education'.education#c.x_social]
+    global c_$not_reference`education'= _b[`education'.education#c.x_$not_reference]
+    global c_routine`education'=_b[`education'.education#c.x_routine]
     local social`education':    display %9.2fc      _b[`education'.education#c.x_social]
     local $not_reference`education':  display %9.2fc      _b[`education'.education#c.x_$not_reference]
     local routine`education':   display %9.2fc      _b[`education'.education#c.x_routine]
@@ -83,6 +86,14 @@ forvalues education=1/$n_educ {
 generate y_skill_sum=1-skill_sum
 
 eststo $reference: regress y_skill_sum ibn.education#c.$reference if skill==1 $weight, nocons vce(cl occupation)
+
+generate total_skill=.
+forvalues education=1/$n_educ {
+    global c_$reference`education'=_b[`education'.education#c.$reference]
+    replace total_skill=_b[`education'.education#c.$reference]*$reference+skill_sum if education==`education'
+}
+
+
 
 forvalues education=1/$n_educ{
     local  $reference`education':    display %9.2fc      _b[`education'.education#c.$reference]

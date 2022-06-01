@@ -16,6 +16,8 @@ global wage_cuts  10 90
 global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
 global index_list   manual social routine abstract 
 
+adopath + "code/parameter_estimation"
+
 *===============================================================================
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
 *===============================================================================
