@@ -26,12 +26,13 @@ foreach education in $educ_lev {
                 qui summ  `index' if occ_id==`job'&year_id==`year'  
                 if `r(N)'!=0 {
                     qui generate `index'`education'_`job'`year'=0
-                    qui replace `index'`education'_`job'`year'= `index' if occ_id==`job'&year_id==`year'
+                    qui replace `index'`education'_`job'`year'= `index' if occ_id==`job'&year_id==`year'&equation==1
                 }
             }
         }
     }
 }
+
 
 global first_var manual1_11
 global last_var abstract3_1553
@@ -57,6 +58,24 @@ foreach education in $educ_lev {
     }
 }
 
+
+*Creating equation 2 variables
+*I think this part doesn't make a difference. I should ask Kevin about this.
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            foreach year in $years {
+                foreach index in $index_list {
+                    qui summ  `index' if occ_id==`job'&year_id==`year'  
+                    if `r(N)'!=0 {
+                        qui generate ts_`index'`education'_`job'`year'=0
+                        qui replace ts_`index'`education'_`job'`year'= `index' if occ_id==`job'&year_id==`year'&equation==2
+                    }
+                }
+            }
+        }
+    }
+
+
 qui ds i_$first_var-i_$last_var
 global names_dummy "`r(varlist)'"
 
@@ -67,6 +86,10 @@ forvalues j=1/`r(total_parameters)' {
 }
 
 equation_1_error, at(trial) job_index(job_index)
+
+total_skill_error, at(trial)
+
+
 
 /*
 count_parameters

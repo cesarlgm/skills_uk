@@ -69,55 +69,26 @@ frames change equation1
     save `equation1'
 }
 
-*Creating equation 2 dataset
-{
-    frames change default
-    local counter=1
-    foreach index in $index_list {
-        preserve
-        generate a_`index'=d_l_`index'-d_l_$reference
-        keep a_`index' occupation education year obs
-        egen time=group(year)
-        egen group_id=group(occupation education)
-        xtset group_id time
-        rename a_`index' y_var
-        rename obs obs_`index'
-        generate l_obs_`index'=l.obs_`index'
-        generate skill=`counter'
-        tempfile a_dataset`counter'
-        generate equation=2
-        rename obs_`index' obs
-        rename l_obs_`index' l_obs_
-        drop group_id time
-        save `a_dataset`counter''
-        restore
-        local ++counter
-    }
-
-    clear
-    forvalues counter=1/4{ 
-        append using `a_dataset`counter''
-    }
-
-    drop if missing(y_var)
-    tempfile equation2
-    save `equation2'
-}
-
 clear 
 append using `equation1'
-append using `equation2'
-
 
 drop if year==2001
 
+preserve 
+    replace y_var=1
+    replace equation=2
+    duplicates drop occupation education year, force
+    tempfile total_skill
+    save `total_skill'
+restore 
+append using `total_skill'
+
+label define equation 1 "Skills equation" 2 "Total sum of skills restriction" 3 "Employment equation"
+label values equation equation
+
+generate temp=1 if equation==1
+egen in_eqn_1=max(temp), by(occupation)
+drop if missing(in_eqn_1)|in_eqn_1==0
+
 save "data/additional_processing/gmm_skills_dataset", replace
 
-
-use "data/additional_processing/gmm_skills_dataset", clear
-keep if equation==1
-keep occupation year education $index_list y_var skill
-duplicates drop
-reshape wide y_var $index_list, i(occupation education skill) j(year)
-reshape wide y_var* manual* social* routine* abstract*, i(education skill) j(occupation)
-reshape wide y_var* manual* social* routine* abstract*, i(skill) j(education)
