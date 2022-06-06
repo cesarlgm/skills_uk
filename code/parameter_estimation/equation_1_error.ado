@@ -11,22 +11,18 @@ program define equation_1_error, rclass
         local if &`if'
     } 
     
-    *First I count parameters
-    qui count_parameters
+    *First I count parameters and divite the parameter vector into its components and extract the results
+    {
+        qui divide_parameters, parameters(`at')
 
-    local n_skills=`r(n_skills)'
-    local n_sigma=`r(n_sigma_j)'
-    local n_theta=`r(n_theta)'
-    local n_lambda=`r(n_d_ln_A)'
-    local n_educ=`r(n_educ)'
-    local n_ln_A=`r(n_A_educ)'
+        foreach number in n_skills n_sigma n_theta n_lambda n_educ n_ln_A {
+            local `number'=`r(`number')'
+        }
 
-    local theta_vector
-
-    *First I split the vector of parameters into their defining parts
-    matrix define sigma=`at'[1..`n_sigma',1]
-    matrix define theta=`at'[`n_sigma'+1..`n_theta'+`n_sigma',1]
-    matrix define raw_lambda=`at'[`n_theta'+`n_sigma'+1..`n_lambda'+`n_theta'+`n_sigma',1]
+        matrix define sigma=r(sigma)
+        matrix define theta=r(theta)
+        matrix define raw_lambda=r(raw_lambda)
+    }
 
     *Next I expand the lambda vector by imposing the 0 restriction
     {
