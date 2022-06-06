@@ -1,22 +1,48 @@
 use "data/additional_processing/gmm_skills_dataset", clear
+append using "data/additional_processing/gmm_employment_dataset"
+
+*Making sure I have the right amount of jobs
+{
+    drop if missing(y_var)
+
+    generate temp=1 if equation==1
+    egen     in_eqn_1=max(temp), by(occupation)
+
+    drop if in_eqn_1!=1
+
+    unique occupation
+    assert `r(unique)'==155
+
+    cap drop in_eqn_1
+    cap drop temp
+}
+
 
 sort education equation       occupation  year skill
-
-drop if missing(y_var)
 
 egen occ_id=group(occupation)
 egen year_id=group(year)
 
 *Creating gmm error equations:
-levelsof occ_id
-global jobs "`r(levels)'"
+{
+    levelsof occ_id
+    global jobs "`r(levels)'"
 
-levelsof year_id 
-global years "`r(levels)'"
+    levelsof year_id 
+    global years "`r(levels)'"
 
-levelsof education 
-global educ_lev "`r(levels)'"
+    levelsof education 
+    global educ_lev "`r(levels)'"
 
+    qui summ education 
+    *Defining globals
+    global n_educ=`r(max)'
+    di "$n_educ"
+
+    qui summ skill
+    global n_skills=`r(max)'
+    di "$n_skills"
+}
 
 *Dataset creation
 {
@@ -57,8 +83,8 @@ global educ_lev "`r(levels)'"
     }
 
 
-*Creating equation 2 variables
-*I think this part doesn't make a difference. I should ask Kevin about this.
+    *Creating equation 2 variables
+    *I think this part doesn't make a difference. I should ask Kevin about this.
     foreach education in $educ_lev {
         foreach job in $jobs {
             foreach year in $years {
@@ -73,17 +99,45 @@ global educ_lev "`r(levels)'"
         }
     }
 
+    *Creating equation 3 variables
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            foreach year in $years {
+               forvalues index=1/$n_skills {
+                    qui summ  index`index' if occ_id==`job'&year_id==`year'  
+                    if `r(N)'!=0 {
+                        qui generate ee_index`index'_`education'_`job'`year'=0
+                        qui replace ee_index`index'_`education'_`job'`year'= index`index' if occ_id==`job'&year_id==`year'&equation==3
+
+                        qui generate ee_index`index'_`education'_`job'`year'_d=0
+                        qui replace ee_index`index'_`education'_`job'`year'_d= indexd`index' if occ_id==`job'&year_id==`year'&equation==3
+                    }
+                }
+            }
+        }
+    }
+
+    order *_d, last
+
+    egen ee_group_id=group(education education_d) if equation==3
+
+    levelsof ee_group_id
+    foreach pair in `r(levels)' {
+        generate x_`pair'=0
+        replace x_`pair'=1 if ee_group_id==`pair'
+    }
+
+    label var x_1 "Low/High"
+    label var x_2 "Mid/Low"
+    label var x_3 "High/Mid"
+
+    save "data/additional_processing/final_GMM_dataset", replace
 }
 
+/*
 
-*Defining globals
+
 {
-    qui summ education 
-    *Defining globals
-    global n_educ=`r(max)'
-    di "$n_educ"
-
-
     global first_var manual1_11
     global last_var abstract3_1553
 
@@ -102,6 +156,8 @@ matrix define trial=J(`r(total_parameters)',1,.)
 forvalues j=1/`r(total_parameters)' {
     matrix define trial[`j',1]=`j'
 }
+
+/*
 
 equation_1_error, at(trial) job_index(job_index)
 

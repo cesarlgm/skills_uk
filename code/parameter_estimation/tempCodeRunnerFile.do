@@ -1,2 +1,1 @@
- get_ts_vec_length
-    global ts_length=`r(length1)'/4
+save "data/additional_processing/final_GMM_dataset", replace
