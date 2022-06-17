@@ -5,6 +5,7 @@ program define expand_lambda, rclass
     version 14.2
     syntax, lambda_vec(name) n_skills(integer)
 
+
     local final_lambda_size=rowsof(`lambda_vec')/(`n_skills'-1)*`n_skills'
 
     matrix define expanded_lambda=J(`final_lambda_size',1,0)
@@ -19,3 +20,4 @@ program define expand_lambda, rclass
 
     return matrix expanded_lambda=expanded_lambda
 end
+

@@ -18,6 +18,8 @@ global index_list   manual social routine abstract
 
 adopath + "code/parameter_estimation"
 
+/*
+
 *===============================================================================
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
 *===============================================================================

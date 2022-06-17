@@ -87,8 +87,8 @@ program define equation_1_error, rclass
 
     *Finally I compute the full error
     {   
-        cap drop equation_error
-        generate equation_error=y_var-`error_1'+`error_2'  if equation==1`if'
+        cap drop gmm_error
+        generate gmm_error=y_var-`error_1'+`error_2'  if equation==1`if'
     }
 
 end

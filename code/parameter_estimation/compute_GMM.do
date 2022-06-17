@@ -1,30 +1,58 @@
-use "data/additional_processing/gmm_skills_dataset", clear
-append using "data/additional_processing/gmm_employment_dataset"
+{ 
+    *Including only jobs I have observations for
+    use "data/additional_processing/gmm_skills_dataset", clear
 
-*Making sure I have the right amount of jobs
-{
+
     drop if missing(y_var)
+    sort equation occupation year education
 
-    generate temp=1 if equation==1
-    egen     in_eqn_1=max(temp), by(occupation)
+    keep if equation==1
 
-    drop if in_eqn_1!=1
+    egen n_obs=count(manual) if equation==1, by(occupation year )
 
-    unique occupation
-    assert `r(unique)'==155
+    drop if n_obs==4
 
-    cap drop in_eqn_1
-    cap drop temp
+
+    keep occupation year 
+
+    duplicates drop 
+
+    tempfile job_filter
+    save `job_filter'
 }
 
+{
+    use "data/additional_processing/gmm_employment_dataset", clear
+    drop if missing(y_var)
+    keep if equation==3
 
-sort education equation       occupation  year skill
+    keep occupation year 
+    duplicates drop 
+
+    tempfile employment_filter
+    save `employment_filter'
+}
+
+use "data/additional_processing/gmm_skills_dataset", clear
+
+append using "data/additional_processing/gmm_employment_dataset"
+
+
+merge m:1 occupation year using `job_filter', keep(3) nogen
+merge m:1 occupation year using `employment_filter', keep(3) nogen 
+
+sort equation education  occupation  year skill
 
 egen occ_id=group(occupation)
 egen year_id=group(year)
 
+unique occupation
+global n_jobs=`r(unique)'
+
+
+
 *Creating gmm error equations:
-{
+qui {
     levelsof occ_id
     global jobs "`r(levels)'"
 
@@ -44,36 +72,44 @@ egen year_id=group(year)
     di "$n_skills"
 }
 
+
+/*
 *Dataset creation
 {
-    foreach education in $educ_lev {
+    
+    local var_counter=0
+    di "Expanding equation 1 variables", as result
+    qui foreach education in $educ_lev {
         foreach job in $jobs {
             foreach year in $years {
+                qui summ  year if occ_id==`job'&year_id==`year'
                 foreach index in $index_list {
-                    qui summ  `index' if occ_id==`job'&year_id==`year'  
                     if `r(N)'!=0 {
                         qui generate `index'`education'_`job'`year'=0
                         qui replace `index'`education'_`job'`year'= `index' if occ_id==`job'&year_id==`year'&equation==1
+                        local ++var_counter
                     }
                 }
             }
         }
     }
 
+    di "`var_counter' variables were generated."
 
-    qui ds $first_var-$last_var
-    global names "`r(varlist)'"
-
-    foreach education in $educ_lev {
+    local var_counter=0
+    di "Creating equation 1 dummies", as result
+    qui foreach education in $educ_lev {
         foreach job in $jobs {
             foreach year in $years {
                 local counter=1
                 local index_counter
+                qui summ  year if occ_id==`job'&year_id==`year'&equation==1
                 foreach index in $index_list {
-                    qui summ  `index' if occ_id==`job'&year_id==`year'
                     if `r(N)'!=0 {
                         qui generate i_`index'`education'_`job'`year'=0
                         qui replace i_`index'`education'_`job'`year'=-1 if education==`education'&occ_id==`job'&year_id==`year'&skill==`counter'
+                    
+                        local ++var_counter
                     }
                     
                     local ++counter
@@ -82,40 +118,50 @@ egen year_id=group(year)
         }
     }
 
+    di "`var_counter' variables were generated."
 
+    local var_counter=0
+    di "Creating omega restriction variables", as result
     *Creating equation 2 variables
     *I think this part doesn't make a difference. I should ask Kevin about this.
-    foreach education in $educ_lev {
+    qui foreach education in $educ_lev {
         foreach job in $jobs {
             foreach year in $years {
+                qui summ  year if occ_id==`job'&year_id==`year'&equation==2
                 foreach index in $index_list {
-                    qui summ  `index' if occ_id==`job'&year_id==`year'  
                     if `r(N)'!=0 {
                         qui generate ts_`index'`education'_`job'`year'=0
                         qui replace ts_`index'`education'_`job'`year'= `index' if occ_id==`job'&year_id==`year'&equation==2
+                        local ++var_counter
                     }
                 }
             }
         }
     }
 
+
+    local var_counter=0
+    di "`var_counter' variables were generated."
+
+    di "Expanding employment equation variables", as result
     *Creating equation 3 variables
     foreach education in $educ_lev {
         foreach job in $jobs {
             foreach year in $years {
-               forvalues index=1/$n_skills {
-                    qui summ  index`index' if occ_id==`job'&year_id==`year'  
+               qui summ  year if occ_id==`job'&year_id==`year'&equation==3
+               forvalues index=1/$n_skills {  
                     if `r(N)'!=0 {
                         qui generate ee_index`index'_`education'_`job'`year'=0
                         qui replace ee_index`index'_`education'_`job'`year'= index`index' if occ_id==`job'&year_id==`year'&equation==3
 
                         qui generate ee_index`index'_`education'_`job'`year'_d=0
                         qui replace ee_index`index'_`education'_`job'`year'_d= indexd`index' if occ_id==`job'&year_id==`year'&equation==3
+                        local var_counter=`var_counter'+2
                     }
                 }
             }
         }
-    }
+    }   
 
     order *_d, last
 
@@ -123,23 +169,44 @@ egen year_id=group(year)
 
     levelsof ee_group_id
     foreach pair in `r(levels)' {
-        generate x_`pair'=0
-        replace x_`pair'=1 if ee_group_id==`pair'
+        foreach year in $years {
+            generate x_`pair'`year'=0
+            replace x_`pair'`year'=1 if ee_group_id==`pair'&year_id==`year'
+        }
     }
 
-    label var x_1 "Low/High"
-    label var x_2 "Mid/Low"
-    label var x_3 "High/Mid"
-
+    foreach year in $years {
+        label var x_1`year' "Low/High"
+        label var x_2`year' "Mid/Low"
+        label var x_3`year' "High/Mid"
+    }
     save "data/additional_processing/final_GMM_dataset", replace
 }
 
-/*
 
-
+use "data/additional_processing/final_GMM_dataset", clear
+*Setting variable names
 {
     global first_var manual1_11
-    global last_var abstract3_1553
+    global last_var abstract3_${n_jobs}3
+
+    global ee_first_var ee_index1_1_11
+    global ee_last_var ee_index4_3_${n_jobs}3
+
+    qui ds $ee_first_var-$ee_last_var
+    global ee_names `r(varlist)'
+
+    qui ds x_*
+    global x_names `r(varlist)'
+
+    global ee_first_var_d ee_index1_1_11_d
+    global ee_last_var_d ee_index4_3_${n_jobs}3_d
+
+    qui ds $ee_first_var_d-$ee_last_var_d
+    global ee_names_d `r(varlist)'
+
+    qui ds $first_var-$last_var
+    global names "`r(varlist)'"
 
     qui ds i_$first_var-i_$last_var
     global names_dummy "`r(varlist)'"
@@ -148,14 +215,24 @@ egen year_id=group(year)
     global ts_names "`r(varlist)'"
 
     get_ts_vec_length
-    global ts_length=`r(length1)'/4
+    global ts_length=`r(length1)'
 }
+
+local trial:  word count $ts_names
+di `trial'
 
 count_parameters
 matrix define trial=J(`r(total_parameters)',1,.)
 forvalues j=1/`r(total_parameters)' {
     matrix define trial[`j',1]=`j'
 }
+
+count_parameters
+
+get_job_indexes, nda(`r(n_d_ln_A)')
+
+equation_1_error, at(trial)
+
 
 /*
 
@@ -166,9 +243,7 @@ total_skill_error, at(trial)
 
 
 /*
-count_parameters
 
-get_job_indexes, nda(`r(n_d_ln_A)')
 
 matrix define job_index=r(job_index)
 

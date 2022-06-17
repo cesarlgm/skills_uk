@@ -10,59 +10,66 @@
 \begin{document}
 \maketitle
 
+
+\section{A refresher on GMM}
+
+In GMM we consider parameters that are defined by a set of orthogonality conditions:
+\beqns
+	\expect{\psi(w,\theta)}{}=0
+\eeqns
+where 
+\bitem
+	\item $w$ is a $p$ random vector
+	\item $\psi$ is a $r\times 1$ vector of functions.
+	\item $\theta$ is a $k\times 1$ vector of unknown parameters.
+\eitem 
+
+We have a sample of $N$ observations. GMM estimation is based in minimizing the quadratic form:
+\beqns
+\hat{\theta}=\text{argmin}_{c\in \Theta} b_N(c)'A_Nb_N(c)
+\eeqns
+where
+\beqns
+b_N(c)=\frac{1}{N}\sum_{n=1}^N\psi(w_n,c)
+\eeqns
+
+\section{Translating to the problem at hand:}
+Let 
+\beqns
+	\sigma&=&\left(\sigma_1, \dots, \sigma_J\right)	\\
+	\theta&=&\left(\theta_1^l, \theta_2^l \dots \theta_4^h\right) \\
+	\Lambda&=&\left(\Delta \ln A_{1t}^l, \Delta \ln A_{2t}^l, \Delta \ln A_{3t}^l,\Delta \ln A_{1t+1}^l \dots \Delta \ln A_{3T}^h\right)
+\eeqns
 \section{New approach (v2):}
 \subsection{Model equations}
-For each worker, it holds that:
-\beqn
-\label{eqn:indiv1}
-\Delta \ln S_{ijt}&=& \frac{\sigma_j}{\sigma_j-1}\left[\sum_k \frac{S_{kt}\theta^e_k}{w} \Delta \ln A_{kt}-\Delta \ln A_{it}\right]\\
-\label{eqn:indiv2}
-\Delta \ln S_{ijt} - \Delta \ln S_{kjt}&=&\frac{\sigma}{\sigma-1}\left[    \Delta \ln A_{kt}-   \Delta \ln A_{it} \right]
-\eeqn
-
-And for each job:
-\beqn
-\Delta \ln \frac{q_e(J)}{q_{e^\prime}(J)}&=&\sum_i\left (\frac{\partial \ln y^*_e(J)}{\partial \ln A_{iJ}}-\frac{\partial \ln y^*_{e^\prime}(J)}{\partial \ln A_{iJ}}\right)\Delta \ln A_{iJ}\\
-&&+\Delta \ln \left [\frac{q_e^{Tot}}{q_{e^\prime}^{Tot}}\frac{\sum_{J^\prime}P(J^\prime)y^*_{e^\prime}(J^\prime)e^{\xi_{J^\prime}}}{\sum_{J^\prime}P(J^\prime)y^*_{e}(J^\prime)e^{\xi_{J^\prime}}}\right] \notag
-\eeqn
-\subsection{Estimating equations}
-For each job and time period:
+At the job level it holds that:
 \beqn
 \label{eq:skills_eq}
 \Delta \overline{ \ln S^e_{iJet}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJt}} \Delta \ln A_{kJt}-\Delta \ln A_{iJt}\right)+\varepsilon_{iJet}\\
-\eeqn
-
-and for each job and $e$ $e'$ combination it holds:
-\beqn
+\label{eq:total_sum}
+1&=&\sum_k\theta_k^e\overline{S_{keJt}}+\nu_{jet}\\
 \label{eq:employment_eq}
-\Delta  \left[\ln \frac{q_{eJt}}{q_{e^\prime}_{eJt}}\right]&=&\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e\prime} \overline{S_{kJe\prime t}}\right)\Delta \ln A_{kt}+const_{e,e^\prime t}+\eta_{ee't}
+\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\Delta \ln A_{kjt}+const_{e,e't}+\eta_{ee'jt}
 \eeqn
-Let $X_{jet}$ be the matrix $\iota\otimes[\bar{S}_{1ejt}_{j}\dots\bar{S}_{Kejt}_{j}]$. From \eqref{eq:skills_eq} we obtain $E\times J\times T$ moment equations of the form:
-\beqns
-	E(X_{jet}\varepsilon_{jet})
-\eeqns
+\subsection{Moment equations}
+We need to estimate:
+\bitem
+	\item $E\times K$ investment cost parameters $\theta$
+	\item $(K-1)\times J\times T$ productivity change terms $\Delta \ln A_{kjt}$
+	\item $J$ elasticity of substitution parameters $\sigma_j$.
+	\item $3\times T$ education pair constants.
+\eitem 
+Let us count moments. Let $\iota_K$ be a vector of ones of dimension $K$. Define $Z'_{jet}=\iota_K\otimes[\overline{S_{1eJt}}\dots \overline{S_{KeJt}}]$. From \eqref{eq:skills_eq} we have $K\times J\times T$ moment equations:
+\beqn
+	\expect{Z_{jet}\varepsilon_{jet}}{} 
+\eeqn
+from \eqref{eq:total_sum} we have $K\times E\times J\times T$ moments:
+\beqn
+\expect{Z_{jet}\nu_{jet}}{} 
+\eeqn
+Finally, from equation \eqref{eq:employment_eq} we obtain $J\times T$ equations. \red{is this right?}.
 
 
-\section{New approach:}
-\benu 
-	\item Let $S_{ijet}$ be the . Estimate $\Delta\ln A_i$ using:
-	\beqns
-		\Delta \ln S_{ijet}-\Delta \ln S_{iket}&=&\frac{\sigma_j}{\sigma_j-1}\left(\Delta\ln A_{ikt}-\Delta\ln A_{ijt}\right)
-	\eeqns
-	differencing across skills and assuming that the productivity growth of manual skills $\Delta\ln A_{1j}=0$
-	\beqns
-		\Delta \ln S_{ijet}-\Delta \ln S_{1jet}&=&-\frac{\sigma_j}{\sigma_j-1} \Delta\ln A_{ijt}=-\pi_{ijt}
-	\eeqns
-	$\hat{\pi}_{jt}$ are simple occupation-year averages:
-	\beqns
-	\hat{\pi}_{ijt}=\frac{1}{3}\sum_e	\left(\Delta \ln S_{1jet}-\Delta \ln S_{ijet}\right)
-	\eeqns
-	\item I can use estimates from above, in combination with equation (12), and the assumption $\bar{w}=1$ to estimate:
-	\beqns
-		\Delta \ln S_{ijet}+\pi_{ijt}&=&\sum_k \theta_{ei}S_{kjet}\pi_{kjt}
-	\eeqns
-
-\eenu 
 
 \subsection{What are the new estimates of $\theta_{jt}$}
 \input{../results/tables/theta_estimates.tex}
