@@ -10,195 +10,246 @@
 \begin{document}
 \maketitle
 
+%
+%\section{A refresher on GMM}
+%
+%In GMM we consider parameters that are defined by a set of orthogonality conditions:
+%\beqns
+%	\expect{\psi(w,\theta)}{}=0
+%\eeqns
+%where 
+%\bitem
+%	\item $w$ is a $p$ random vector
+%	\item $\psi$ is a $r\times 1$ vector of functions.
+%	\item $\theta$ is a $k\times 1$ vector of unknown parameters.
+%\eitem 
+%
+%We have a sample of $N$ observations. GMM estimation is based in minimizing the quadratic form:
+%\beqns
+%\hat{\theta}=\text{argmin}_{c\in \Theta} b_N(c)'A_Nb_N(c)
+%\eeqns
+%where
+%\beqns
+%b_N(c)=\frac{1}{N}\sum_{n=1}^N\psi(w_n,c)
+%\eeqns
+%
+%\section{Translating to the problem at hand:}
+%Let 
+%\beqns
+%	\sigma&=&\left(\sigma_1, \dots, \sigma_J\right)	\\
+%	\theta&=&\left(\theta_1^l, \theta_2^l \dots \theta_4^h\right) \\
+%   \Lambda&=&\left(\Delta \ln A_{1t}^l, \Delta \ln A_{2t}^l, \Delta \ln
+%   A_{3t}^l,\Delta \ln A_{1t+1}^l \dots \Delta \ln A_{3T}^h\right)
+%\eeqns
 
-\section{A refresher on GMM}
 
-In GMM we consider parameters that are defined by a set of orthogonality conditions:
-\beqns
-	\expect{\psi(w,\theta)}{}=0
-\eeqns
-where 
-\bitem
-	\item $w$ is a $p$ random vector
-	\item $\psi$ is a $r\times 1$ vector of functions.
-	\item $\theta$ is a $k\times 1$ vector of unknown parameters.
-\eitem 
-
-We have a sample of $N$ observations. GMM estimation is based in minimizing the quadratic form:
-\beqns
-\hat{\theta}=\text{argmin}_{c\in \Theta} b_N(c)'A_Nb_N(c)
-\eeqns
-where
-\beqns
-b_N(c)=\frac{1}{N}\sum_{n=1}^N\psi(w_n,c)
-\eeqns
-
-\section{Translating to the problem at hand:}
-Let 
-\beqns
-	\sigma&=&\left(\sigma_1, \dots, \sigma_J\right)	\\
-	\theta&=&\left(\theta_1^l, \theta_2^l \dots \theta_4^h\right) \\
-	\Lambda&=&\left(\Delta \ln A_{1t}^l, \Delta \ln A_{2t}^l, \Delta \ln A_{3t}^l,\Delta \ln A_{1t+1}^l \dots \Delta \ln A_{3T}^h\right)
-\eeqns
 \section{New approach (v2):}
 \subsection{Model equations}
 At the job level it holds that:
 \beqn
-\label{eq:skills_eq}
-\Delta \overline{ \ln S^e_{iJet}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJt}} \Delta \ln A_{kJt}-\Delta \ln A_{iJt}\right)+\varepsilon_{iJet}\\
-\label{eq:total_sum}
-1&=&\sum_k\theta_k^e\overline{S_{keJt}}+\nu_{jet}\\
-\label{eq:employment_eq}
-\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\Delta \ln A_{kjt}+const_{e,e't}+\eta_{ee'jt}
+%\Delta \overline{ \ln S^e_{iJet}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJt}} \Delta \ln A_{kJt}-\Delta \ln A_{iJt}\right) \label{eq:skills_eq} \\ 
+\Delta \overline{ \ln S^e_{iJet}}-\Delta \overline{ \ln S^e_{kJet}}&=&\frac{\sigma_J}{\sigma_j-1}\left(\Delta \ln
+A_{kJt}-\Delta \ln A_{iJt} \right)  \label{eq:pi_equation} \\ 
+1&=&\sum_k\theta_k^e\overline{S_{keJt}}  \label{eq:total_sum} \\  
+\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\Delta \ln A_{kjt}+const_{e,e't} \label{eq:employment_eq} 
 \eeqn
-\subsection{Moment equations}
-We need to estimate:
+\paragraph*{Note:} in equation \eqref{eq:employment_eq} there is always a
+redundant pairwise comparison. Note that $\Delta  \left[\ln
+\frac{q_{eJt}}{q_{e'Jt}}\right]-\Delta  \left[\ln \frac{q_{e'Jt}}{q_{e^\star
+Jt}}\right]=\Delta  \left[\ln
+\frac{q_{eJt}}{q_{e^\star Jt}}\right]$
+
+\subsection{Building GMM}
+In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods.
 \bitem
-	\item $E\times K$ investment cost parameters $\theta$
-	\item $(K-1)\times J\times T$ productivity change terms $\Delta \ln A_{kjt}$
-	\item $J$ elasticity of substitution parameters $\sigma_j$.
-	\item $3\times T$ education pair constants.
+%	\item \textbf{Equation (1)}: 
+%	Let $x_{ejt}$ be the row vector $\begin{pmatrix}
+%		S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}
+%	\end{pmatrix}$.  Define the matrix $X_{ejt}$ as the 4$\times$4 matrix containing the skill indexes by education. For simplicity, I have ignored the bars in the notation.
+%	\beqns
+%		X_{ejt}&=&\begin{pmatrix}S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
+%							S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
+%							S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
+%							S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
+%		\end{pmatrix}=\begin{pmatrix}
+%		x_{ejt} \\
+%		x_{ejt}\\
+%		x_{ejt}\\
+%	x_{ejt}	\end{pmatrix}
+%	\eeqns
+%	Let $X$ be the matrix stacking all the $X_{ejt}$ in some order that for now is irrelevant. The only thing that matters is that I use the same order across all definitions. This matrix is of dimension $N\times4$.
+%	\beqns
+%		X&=&\begin{pmatrix}	X_{111} \\\
+%		\vdots \\\
+%	 X_{3JT}\end{pmatrix}
+%	\eeqns
+% 	Let $I_e$ be the $N\times4$ matrix with columns given by education level $e$ dummies:
+% 	\beqns
+% 		I_e&=&\begin{pmatrix}\iota_e&\iota_e&\iota_e&\iota_e\end{pmatrix}
+% 	\eeqns
+% 	The set of instruments for equation 1 is then:
+% 	\beqn
+% 	 		Z_1&=&\begin{pmatrix}I_1\odot X& I_2\odot X &I_3\odot X \end{pmatrix} \label{eq:equation1Z}
+%	\eeqn
+	\item \textbf{Equation \eqref{eq:pi_equation}}: set of instruments are a set of
+	occupation by year doummies $Z_2$.
+	\item \textbf{Equation \eqref{eq:total_sum}}: let $\tilde{X_e}$ be the $N_e\times 4$ matrix stacking all the $x_{ejt}$ for education level $e$. The instruments for equation 2 are the block diagonal matrix with elements $\tilde{X_e}$:
+	\beqns
+		Z_3&=&\begin{pmatrix}
+			\tilde{X_1} & 0 &0 \\
+			0 & \tilde{X_2} & 0 \\
+			0 & 0 &\tilde{X_3}
+		\end{pmatrix}
+	\eeqns
+	\item \textbf{Equation \eqref{eq:employment_eq}} let $\bar{X}$ be the matrix stacking the row vectors $\begin{pmatrix}x_{1jt}&x_{2jt}&x_{3jt}\end{pmatrix}$. Let $C$ be the matrix containing education-pair$\times$T dummies. Instruments for equation 3 are:
+	\beqn
+		Z_4&=&\begin{pmatrix}
+			\bar{X} & C
+		\end{pmatrix}
+	\eeqn
+	\item \textbf{Putting it all together:} let $u_l$ be the stacked (in the appropriate order) vector of equation $l$ errors. Define:
+	\beqns
+		Z'&=&\begin{pmatrix}
+			Z_1' & 0 & 0  & 0\\
+			0 & Z_2' & 0 & 0 \\
+			0 & 0 & Z_3' & 0 \\
+			0 & 0 & 0 & Z_4' \\	
+	\end{pmatrix}\\
+		u&=&\begin{pmatrix}
+		u_1\\ u_2 \\ u_3 \\ u_4
+		\end{pmatrix}
+	\eeqns
+	the moment equations form the model are given by $\expect{Z'u}{}=0$.
 \eitem 
-Let us count moments. Let $\iota_K$ be a vector of ones of dimension $K$. Define $Z'_{jet}=\iota_K\otimes[\overline{S_{1eJt}}\dots \overline{S_{KeJt}}]$. From \eqref{eq:skills_eq} we have $K\times J\times T$ moment equations:
-\beqn
-	\expect{Z_{jet}\varepsilon_{jet}}{} 
-\eeqn
-from \eqref{eq:total_sum} we have $K\times E\times J\times T$ moments:
-\beqn
-\expect{Z_{jet}\nu_{jet}}{} 
-\eeqn
-Finally, from equation \eqref{eq:employment_eq} we obtain $J\times T$ equations. \red{is this right?}.
-
-
-
-\subsection{What are the new estimates of $\theta_{jt}$}
-\input{../results/tables/theta_estimates.tex}
-
-\subsection{How do the $\pi_{jt}$ look like?}
-$\pi_{jt}$ are simple occupation-year averages:
-\beqns
-	\hat{\pi}_{jt}=\sum_e	\left(\Delta \ln S_{ijet}-\Delta \ln S_{1ket}\right)
-\eeqns
-$\Rightarrow$  any difference across education groups comes from occupational distribution.
-
-\input{../results/tables/pi_variation_global_base_pooled.tex}
-\input{../results/tables/pi_variation_global_base_all.tex}
-\input{../results/tables/pi_variation_global_squares_pooled.tex}
-\input{../results/tables/pi_variation_global_squares_all.tex}
-
-\section{Exploring the scales}
-\input{../results/figures/pi_indexes.tex}
-\FloatBarrier
-\input{../results/figures/scale_100.tex}
-\input{../results/figures/scale_75.tex}
-\input{../results/figures/scale_25.tex}
-\input{../results/figures/scale_0.tex}
-\FloatBarrier
-\section{Jobs are done differently by different education groups}
-
-We regress skill use in the job on education dummies $d_{ejt}$, and occupation fixed effects $\lambda_j$.
-\beqns
-	S_{it}=\sum_{e=1}^{3}\beta_e d_{eit}+\lambda_j+\lambda_t+\varepsilon_{it}
-\eeqns
-
-\input{../results/tables/skill_use_within_jobs.tex}
-
-
-\section{Some jobs are polarizing}
-Figure [] depicts the change in occupational employment share by education group. The yellow arrows show jobs in which the share of the \red{low education} group increased.
-
-Table \ref{tab:pol_occ} shows jobs in which the shares of employment of low and high education groups are increasing.
-
-
-Table \ref{fig:relative_use} shows low education people in the polarizing occupations used less social and more manual skills than the average occupation. Moreover, over time, the become less routine and more abstract.
-
-\input{../results/tables/polarizing_occupations.tex}
-
-\input{../results/figures/empshare_in_polarizing_occupations.tex}
-
-\input{../results/figures/skill_use_polarizing_occ}
-
-\newcommand{\ntimes}{4 }
-
-\section{Estimating $\theta$}
-zLet $j$ and $e$ index occupation and education respectively. The specification is:
-\beqns
-	\Delta \ln w_{jet}=\lambda_j+\sum_{i=1}^{4}\beta_{ei}S_{iejt}+ \varepsilon_{ejt}
-\eeqns
-I get the $\theta$s computing $\theta_{ei}=\beta_{ei}/\beta_{1i}$.
-{\tiny \input{../results/tables/theta_wage_d_l_hourpay}}
-{\tiny \input{../results/tables/theta_wage_d_l_wkpay}}
-
-\href{https://www.dropbox.com/s/dnt84rs90zac1h9/t_stats.txt?dl=0}{Occupations with increasing low share}
-
-\input{../results/tables/up_low_occ}
-\input{../results/tables/overall_employment_share_deskill}
-\input{../results/tables/deskilling_occ_educ_shares}
-\input{../results/tables/deskilling_occ_educ_shares_fe}
-
-
-\begin{figure}
-	\caption{Change in employment shares: 2001-2017}
-	\addfig{1}{../results/figures/direction_triangle}
-\end{figure}
-
-\FloatBarrier
-\href{https://www.dropbox.com/s/pxkgmtnkhq6c0j1/deskilling_occupations.txt?dl=0}{Occupations in yellow}
-\begin{figure}
-\caption{Abstract, Routine and Manual}
-\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra12_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-\ContinuedFloat
-\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra13_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-\ContinuedFloat
-\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra23_}{2001}{2017}}
-\end{figure}
-
-\begin{figure}
-	\caption{Social, Routine and Manual}
-	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs12_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-	\ContinuedFloat
-	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs13_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-	\ContinuedFloat
-	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs23_}{2001}{2017}}
-\end{figure}
-
-
-\begin{figure}
-	\caption{Abstract, Routine and Social}
-	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra12_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-	\ContinuedFloat
-	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra13_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-	\ContinuedFloat
-	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra23_}{2001}{2017}}
-\end{figure}
-
-
-\begin{figure}
-	\caption{Abstract, Social and Manual}
-	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa12_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-	\ContinuedFloat
-	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa13_}{2001}{2017}}
-\end{figure}
-\begin{figure}
-	\ContinuedFloat
-	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa23_}{2001}{2017}}
-\end{figure}
-
-\FloatBarrier
+%
+%\subsection{What are the new estimates of $\theta_{jt}$}
+%\input{../results/tables/theta_estimates.tex}
+%
+%\subsection{How do the $\pi_{jt}$ look like?}
+%$\pi_{jt}$ are simple occupation-year averages:
+%\beqns
+%	\hat{\pi}_{jt}=\sum_e	\left(\Delta \ln S_{ijet}-\Delta \ln S_{1ket}\right)
+%\eeqns
+%$\Rightarrow$  any difference across education groups comes from occupational distribution.
+%
+%\input{../results/tables/pi_variation_global_base_pooled.tex}
+%\input{../results/tables/pi_variation_global_base_all.tex}
+%\input{../results/tables/pi_variation_global_squares_pooled.tex}
+%\input{../results/tables/pi_variation_global_squares_all.tex}
+%
+%\section{Exploring the scales}
+%\input{../results/figures/pi_indexes.tex}
+%\FloatBarrier
+%\input{../results/figures/scale_100.tex}
+%\input{../results/figures/scale_75.tex}
+%\input{../results/figures/scale_25.tex}
+%\input{../results/figures/scale_0.tex}
+%\FloatBarrier
+%\section{Jobs are done differently by different education groups}
+%
+%We regress skill use in the job on education dummies $d_{ejt}$, and occupation fixed effects $\lambda_j$.
+%\beqns
+%	S_{it}=\sum_{e=1}^{3}\beta_e d_{eit}+\lambda_j+\lambda_t+\varepsilon_{it}
+%\eeqns
+%
+%\input{../results/tables/skill_use_within_jobs.tex}
+%
+%
+%\section{Some jobs are polarizing}
+%Figure [] depicts the change in occupational employment share by education group. The yellow arrows show jobs in which the share of the \red{low education} group increased.
+%
+%Table \ref{tab:pol_occ} shows jobs in which the shares of employment of low and high education groups are increasing.
+%
+%
+%Table \ref{fig:relative_use} shows low education people in the polarizing occupations used less social and more manual skills than the average occupation. Moreover, over time, the become less routine and more abstract.
+%
+%\input{../results/tables/polarizing_occupations.tex}
+%
+%\input{../results/figures/empshare_in_polarizing_occupations.tex}
+%
+%\input{../results/figures/skill_use_polarizing_occ}
+%
+%\newcommand{\ntimes}{4 }
+%
+%\section{Estimating $\theta$}
+%zLet $j$ and $e$ index occupation and education respectively. The specification is:
+%\beqns
+%	\Delta \ln w_{jet}=\lambda_j+\sum_{i=1}^{4}\beta_{ei}S_{iejt}+ \varepsilon_{ejt}
+%\eeqns
+%I get the $\theta$s computing $\theta_{ei}=\beta_{ei}/\beta_{1i}$.
+%{\tiny \input{../results/tables/theta_wage_d_l_hourpay}}
+%{\tiny \input{../results/tables/theta_wage_d_l_wkpay}}
+%
+%\href{https://www.dropbox.com/s/dnt84rs90zac1h9/t_stats.txt?dl=0}{Occupations with increasing low share}
+%
+%\input{../results/tables/up_low_occ}
+%\input{../results/tables/overall_employment_share_deskill}
+%\input{../results/tables/deskilling_occ_educ_shares}
+%\input{../results/tables/deskilling_occ_educ_shares_fe}
+%
+%
+%\begin{figure}
+%	\caption{Change in employment shares: 2001-2017}
+%	\addfig{1}{../results/figures/direction_triangle}
+%\end{figure}
+%
+%\FloatBarrier
+%\href{https://www.dropbox.com/s/pxkgmtnkhq6c0j1/deskilling_occupations.txt?dl=0}{Occupations in yellow}
+%\begin{figure}
+%\caption{Abstract, Routine and Manual}
+%\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra12_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%\ContinuedFloat
+%\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra13_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%\ContinuedFloat
+%\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mra23_}{2001}{2017}}
+%\end{figure}
+%
+%\begin{figure}
+%	\caption{Social, Routine and Manual}
+%	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs12_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%	\ContinuedFloat
+%	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs13_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%	\ContinuedFloat
+%	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_mrs23_}{2001}{2017}}
+%\end{figure}
+%
+%
+%\begin{figure}
+%	\caption{Abstract, Routine and Social}
+%	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra12_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%	\ContinuedFloat
+%	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra13_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%	\ContinuedFloat
+%	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_sra23_}{2001}{2017}}
+%\end{figure}
+%
+%
+%\begin{figure}
+%	\caption{Abstract, Social and Manual}
+%	\subfloat[Low-mid]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa12_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%	\ContinuedFloat
+%	\subfloat[Low-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa13_}{2001}{2017}}
+%\end{figure}
+%\begin{figure}
+%	\ContinuedFloat
+%	\subfloat[Mid-High]{\animategraphics[loop,controls,width=\linewidth]{1}{../results/figures/border_triangle_msa23_}{2001}{2017}}
+%\end{figure}
+%
+%\FloatBarrier
 %
 %\section{Estimating $\theta$}
 %\label{sec:model}

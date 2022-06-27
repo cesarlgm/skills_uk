@@ -7,7 +7,7 @@
 
     keep if equation==1
 
-    egen n_obs=count(manual) if equation==1, by(occupation year )
+    egen n_obs=count(manual) if equation==1, by(occupation year)
 
     drop if n_obs==4
 
@@ -31,6 +31,33 @@
     tempfile employment_filter
     save `employment_filter'
 }
+
+*Files for instrument
+{
+    use "data/additional_processing/gmm_employment_dataset", clear
+    drop if missing(y_var)
+        
+    preserve
+        keep occupation education_d year indexd*
+        forvalues skill=1/4 {
+            rename indexd`skill' index`skill'
+        }
+        rename education_d education
+
+        tempfile denominator
+        save `denominator'
+    restore
+
+    keep occupation education index1-index4 year
+    append using `denominator'
+
+    duplicates drop 
+
+    reshape wide index*, i(occupation year) j(education)
+    
+    *By doing this, I realized 
+}
+
 
 use "data/additional_processing/gmm_skills_dataset", clear
 
@@ -116,6 +143,48 @@ foreach job in $jobs {
     }
 }
 
+
+cap drop e1d_*
+
+*Occupation dummies
+xi , prefix(e1d_) noomit i.occupation*i.year
+cap drop e1d_occupat*
+cap drop e1d_year*
+
+foreach variable of varlist e1d_* { 
+    replace `variable'=0 if equation!=1
+}
+
+cap drop e2_index_*
+foreach education in $educ_lev {
+    local index_counter=1
+    foreach index in $index_list {
+        generate e2_index_`index_counter'_`education'=0
+        qui replace e2_index_`index_counter'_`education'=`index' if equation==2 & education==`education'
+        local ++index_counter
+    }
+}
+
+cap drop e3_index_*
+foreach education in $educ_lev {
+    local index_counter=1
+    foreach index in $index_list {
+        tempvar temporary
+        egen `temporary'=mean(index`')
+        qui replace e3n_index_`index_counter'_`education'=index`index_counter' if equation==3&education==`education'
+        local ++index_counter
+    }
+}
+
+cap drop e3d_index_*
+foreach education in $educ_lev {
+    local index_counter=1
+    foreach index in $index_list {
+        generate e3d_index_`index_counter'_`education'=0
+        qui replace e3d_index_`index_counter'_`education'=index`index_counter' if equation==3&education_d==`education'
+        local ++index_counter
+    }
+}
 
 
 
@@ -224,6 +293,8 @@ drop ee_group_id
 egen ee_group_id=group(education education_d year)
 order ee_group_id, after(education_d)
 
+
+order e1_* e2_*, last
 
 save "data/additional_processing/gmm_example_dataset", replace
 

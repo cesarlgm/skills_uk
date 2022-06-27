@@ -8,6 +8,9 @@ data_path="data/additional_processing/gmm_example_dataset.csv";
 
 data=readtable(data_path);
 
+
+%%
+
 %Extracting y_var vector
 y_var=get_y_var(data);
 s_matrix=get_s_matrix(data);
