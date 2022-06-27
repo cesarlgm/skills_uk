@@ -39,14 +39,11 @@ trial_vector=transpose(1:n_total_parameters);
 [e1_indexes,e3_indexes]=get_occ_indexes(data);
 
 %%
-
-result=create_linear_vector(trial_vector,size_vector,e1_occ_index);
+result=create_linear_vector(trial_vector,size_vector,e1_indexes,e3_indexes);
 %%
  
 %%
-new=create_moment_error(trial_vector,y_var,s_matrix,size_vector,e1_occ_index, ... 
-    e1_educ_index,e1_d_ln_a_index,e3_a_index, ... 
-    e3n_educ_index,e3d_educ_index)
+new=create_moment_error(trial_vector,y_var,s_matrix,size_vector,e1_indexes,e3_indexes)
   
 %%
 

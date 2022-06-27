@@ -130,14 +130,15 @@ cap drop e1d_*
 {
     levelsof skill
     foreach skill in `r(levels)' {
-            qui xi , prefix(e1s`skill') noomit i.occ_id*i.year
+            qui xi , prefix(e1s`skill') noomit i.occ_id*i.year_id
             cap drop e1s`skill'occ_id_*
             cap drop e1s`skill'year*
             foreach variable of varlist e1s`skill'* { 
                 qui replace `variable'=0 if equation!=1 | skill!=`skill'
+                qui replace `variable'=-1 if `variable'==1
                 qui summ `variable'
 
-                if `r(max)'==0 {
+                if `r(min)'==0 {
                     qui drop `variable'
                 }
 

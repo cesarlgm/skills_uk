@@ -69,5 +69,12 @@
         local ++counter
     }
 
+    egen  n_pair=count(education), by(occupation year)
+    order n_pair, after(education_d)
+
+    drop if education==1&education_d==3&n_pair==3
+
+    drop n_pair
+
     save "data/additional_processing/gmm_employment_dataset", replace
 }
