@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  27 JUN 2022 10:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  27 JUN 2022 16:26
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -1211,18 +1211,38 @@ Overfull \hbox (16.92761pt too wide) in paragraph at lines 56--61
 [1
 
 {C:/Users/thecs/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-(documentation.aux)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\hbox' on input line 165.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mathsurround' on input line 165.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\z@' on input line 165.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\unskip' on input line 165.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@italiccorr' on input line 165.
+
+[3] [4] (documentation.aux)
 Package rerunfilecheck Info: File `documentation.out' has not changed.
-(rerunfilecheck)             Checksum: A7F79100B4BACFA6BC62D9F199F7C1BF;400.
+(rerunfilecheck)             Checksum: 45AE78304F12F92FC06F13EAA45B50C3;854.
  ) 
 Here is how much of TeX's memory you used:
- 31671 strings out of 478864
- 651501 string characters out of 2846731
- 1082021 words of memory out of 3000000
- 49010 multiletter control sequences out of 15000+600000
+ 31686 strings out of 478864
+ 651675 string characters out of 2846731
+ 1083024 words of memory out of 3000000
+ 49015 multiletter control sequences out of 15000+600000
  413849 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 92i,14n,136p,639b,908s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 92i,14n,136p,639b,923s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
 tcrm0700.pk> <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
 ec/dpi600\tcrm1200.pk> <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
@@ -1242,9 +1262,9 @@ AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:
 msy6.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmsy8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb>
-Output written on documentation.pdf (2 pages, 157554 bytes).
+Output written on documentation.pdf (4 pages, 170204 bytes).
 PDF statistics:
- 147 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 178 PDF objects out of 1000 (max. 8388607)
+ 19 named destinations out of 1000 (max. 500000)
+ 157 words of extra memory for PDF output out of 10000 (max. 10000000)
 

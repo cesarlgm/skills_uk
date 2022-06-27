@@ -24,7 +24,8 @@ function [e1_indexes, e3_indexes]=...
     e1_indexes=cell(4,1);
     e1_indexes{1,1}=e1_occ_index;
     e1_indexes{2,1}=e1_code;
-    e1_indexes{3,1}=e1_d_ln_a_index;
+    e1_indexes{3,1}=dlnA_index;
+    e1_indexes{4,1}=e1_d_ln_a_index;
 
      %Creating index vectors for equation 2
      splitted_e3=split(eqn_3_indexes_n,"_");
@@ -49,10 +50,6 @@ function [e1_indexes, e3_indexes]=...
      splitted_e3=split(eqn_3_indexes_d,"_");
      e3d_educ_index=str2double(splitted_e3(:,4));
 
-     e3_indexes=cell(4,1);
-     e3_indexes{1,1}=e3_code;
-     e3_indexes{2,1}=e3_a_index;
-     e3_indexes{3,1}=e3n_educ_index;
-     e3_indexes{4,1}=e3d_educ_index;
-     
+     e3_indexes=cell(5,1);
+     e3_indexes{1,1}=
 end

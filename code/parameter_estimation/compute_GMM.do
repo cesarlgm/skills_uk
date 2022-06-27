@@ -74,13 +74,13 @@ merge m:1 occupation year using `employment_filter', keep(3) nogen
 
 drop if missing(y_var)
 
-sort equation education  occupation  year skill
+sort equation skill occupation  year   education    
 
 tempvar temp
 tempvar y_ref
 
 generate `temp'=y_var if  skill==4 & equation==1
-egen `y_ref'=max(`temp') if equation==1, by(occupation year)
+egen `y_ref'=max(`temp') if equation==1, by(occupation year education)
 
 replace y_var=y_var-`y_ref'
 
@@ -89,6 +89,10 @@ foreach variable in $index_list {
 }
 
 drop if skill==$ref_skill_num
+
+cap drop `temp'
+cap drop `y_ref'
+
 
 egen occ_id=group(occupation)
 egen year_id=group(year)
@@ -118,19 +122,31 @@ qui {
 }
 
 *Dataset creation
-{
+*{
 
 cap drop e1d_*
 
 *Occupation dummies
 {
-    xi , prefix(e1d_) noomit i.occupation*i.year
-    cap drop e1d_occupat*
-    cap drop e1d_year*
-    foreach variable of varlist e1d_* { 
-        replace `variable'=0 if equation!=1
+    levelsof skill
+    foreach skill in `r(levels)' {
+            qui xi , prefix(e1s`skill') noomit i.occ_id*i.year
+            cap drop e1s`skill'occ_id_*
+            cap drop e1s`skill'year*
+            foreach variable of varlist e1s`skill'* { 
+                qui replace `variable'=0 if equation!=1 | skill!=`skill'
+                qui summ `variable'
+
+                if `r(max)'==0 {
+                    qui drop `variable'
+                }
+
+                cap rename `variable' `variable'_`skill'        
+            }
+        
     }
 }
+
 
 cap drop e2_index_*
 foreach education in $educ_lev {
@@ -213,8 +229,6 @@ foreach education in $educ_lev {
             }  
        }
     }
-}
-
 }
 
 
