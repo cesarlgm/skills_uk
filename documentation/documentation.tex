@@ -129,9 +129,9 @@ In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods.
 		\Delta \ln A_{121} \\
 		\Delta \ln A_{131} \\
 		\vdots \\
-			\Delta \ln A_{4JT-2} \\
-		\Delta \ln A_{4JT-1} \\
-		\Delta \ln A_{4JT} \\
+			\Delta \ln A_{3JT-2} \\
+		\Delta \ln A_{3JT-1} \\
+		\Delta \ln A_{3JT} \\
 	\end{pmatrix}\text{\vspace{1cm}}
 	\Theta=\begin{pmatrix}
 	 \theta_{1}^1 \\
@@ -165,23 +165,6 @@ I defined the model parameter vector as
 \subsection{Equation \eqref{eq:pi_equation}}
 \benu
 	\item Order observations by skill, education, occupation, and year.
-	\item I reorder $\Lambda$ by skill, as follows:
-	\beqns
-		\Lambda_1&=&\begin{pmatrix}
-			\Delta \ln A_{111} \\
-			\Delta \ln A_{121} \\
-			\vdots \\
-			\Delta  \ln A_{1JT}
-		\end{pmatrix}
-	\eeqns
-	indexes loop over year, job and education. The reordered $\Lambda$ is given by:
-	\beqns
-		\Lambda^r=\begin{pmatrix}
-				\Lambda_1\\
-				\Lambda_2 \\
-				\Lambda_3
-		\end{pmatrix}
-	\eeqns
 	\item Create vector $\tilde{\Sigma}$
 	\beqns
 		\tilde{\Sigma}=\begin{pmatrix}
@@ -191,18 +174,18 @@ I defined the model parameter vector as
 			\sigma_J
 		\end{pmatrix}
 	\eeqns
-	this vector of is has the same dimensions as $\Lambda^r$. It places all elements of $\Sigma$ in the ``right'' order \red{I should say what the right order is here}.
+	this vector of is has the same dimensions as $\Lambda$. It places all elements of $\Sigma$ in the ``right'' order \red{I should say what the right order is here}.
 	\item Define $D$ as a matrix of dimensions $(E\times J \times T)\times(J\times T)$. Define $Z_1$ as:
 	\beqns
-		Z_1&=&\begin{pmatrix}
-			D & 0 &0 \\
-			0 & D &0 \\
-			0 & 0 &D \\
+		X_1&=&\begin{pmatrix}
+			-D & 0 &0 \\
+			0 & -D &0 \\
+			0 & 0 &-D \\
 		\end{pmatrix}
 	\eeqns
 	This matrix contains occupation by year dummies. Equation \eqref{eq:pi_equation} can be written as:
 	\beqns
-		y_1=Z_1\times (\Lambda^r\odot \tilde{\Sigma})
+		y_1=X_1\times (\Lambda\odot \tilde{\Sigma})
 	\eeqns
 	where $y_1$ was defined in the appropriate order.
 \eenu
