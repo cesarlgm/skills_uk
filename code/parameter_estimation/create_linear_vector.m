@@ -1,12 +1,6 @@
 function result=create_linear_vector(parameter_vector,size_vector, ...
-        e1_indexes, e3_indexes)
+        e1_job_index,e3_a_index,e3n_educ_index,e3d_educ_index)
     
-    %Extracting info from the arrays
-    e1_job_index=e1_indexes{1};
-    e3_a_index=e3_indexes{2};
-    e3n_educ_index=e3_indexes{3};
-    e3d_educ_index=e3_indexes{4};
-        
     %Split parameter vector into parameter type
     splitted_vector=assign_parameters(parameter_vector,size_vector);
 

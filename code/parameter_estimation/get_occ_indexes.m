@@ -1,5 +1,5 @@
 %This function identifies the ordering of the parameter vectors
-function [e1_indexes, e3_indexes]=...
+function [e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index]=...
     get_occ_indexes(data)
     names=transpose(data.Properties.VariableNames);
 
@@ -47,10 +47,4 @@ function [e1_indexes, e3_indexes]=...
      %Denominator indexes
      splitted_e3=split(eqn_3_indexes_d,"_");
      e3d_educ_index=str2double(splitted_e3(:,4));
-
-     e3_indexes=cell(4,1);
-     e3_indexes{1,1}=e3_code;
-     e3_indexes{2,1}=e3_a_index;
-     e3_indexes{3,1}=e3n_educ_index;
-     e3_indexes{4,1}=e3d_educ_index; 
 end

@@ -80,9 +80,12 @@ tempvar temp
 tempvar y_ref
 
 generate `temp'=y_var if  skill==4 & equation==1
+
 egen `y_ref'=max(`temp') if equation==1, by(occupation year education)
 
-replace y_var=y_var-`y_ref'
+replace y_var=y_var-`y_ref' if equation==1
+
+replace y_var=1 if equation==2
 
 foreach variable in $index_list {
     replace `variable'=`variable'-$ref_skill_name
@@ -181,17 +184,14 @@ foreach education in $educ_lev {
 }
 
 
-local var_counter=0
 di "Creating omega restriction variables", as result
 *Creating equation 2 variables
-*I think this part doesn't make a difference. I should ask Kevin about this.
-qui foreach education in $educ_lev {
+foreach education in $educ_lev {
     qui summ  year if education==`education'&equation==2
     foreach index in $index_list {
         if `r(N)'!=0 {
-            qui generate ts_`index'`education'=0
-            qui replace ts_`index'`education'= `index' if education==`education'&equation==2
-            local ++var_counter
+            generate ts_`index'`education'=0
+            replace ts_`index'`education'= `index' if education==`education'&equation==2
         }
     }
 }
@@ -256,12 +256,12 @@ foreach year in $years {
 
 br education education_d year x*
 
+drop x_11 x_13
+
 drop ee_group_id
 egen ee_group_id=group(education education_d year)
 order ee_group_id, after(education_d)
 
-
-order  e2_*, last
 
 save "data/additional_processing/gmm_example_dataset", replace
 
