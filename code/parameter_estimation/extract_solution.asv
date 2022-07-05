@@ -16,17 +16,14 @@ function [theta_matrix,comparative]=extract_solution(solution, size_vector)
     theta_matrix=transpose(theta_matrix);
 
     row_names={'Low','Mid','High'};
-    col_names={'Manual','Social','Routine','Abstract'};
+    col_names={'Manual','Routine','Abstract','Social'};
     
     theta_matrix=array2table(theta_matrix,'VariableNames', col_names,'RowNames',row_names);
 
     
     %Next I compute the comparative advantage
     comparative=theta_matrix;
-    comparative.Manual=theta_matrix.Manual./theta_matrix.Manual;
-    comparative.Social=theta_matrix.Social./theta_matrix.Manual;
-    comparative.Routine=theta_matrix.Routine./theta_matrix.Manual;
-    comparative.Abstract=theta_matrix.Abstract./theta_matrix.Manual;
+    comparative(:,manual)
 
 end
 

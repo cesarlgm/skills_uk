@@ -1,0 +1,33 @@
+clear
+
+cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assistantship/ukData';
+addpath('code/parameter_estimation/','data');
+
+options = optimoptions('fmincon','Display','iter');
+
+
+data_path="data/additional_processing/gmm_example_dataset.csv";
+%% 
+
+data=readtable(data_path);
+    
+
+[z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
+    e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index,lower_bound, ...
+    upper_bound]= extract_data_matrices(data);
+
+%%
+
+%Vector for trying things
+trial_vector=0.5*ones(n_total_parameters,1);
+
+%%
+
+error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
+
+
+[solution,MSE]=fmincon(fun,trial_vector,[],[],[],[],lower_bound, ...
+           upper_bound,[],options);
+
+
+%%

@@ -10,7 +10,7 @@ set scheme s1color, permanently
 
 cd "C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData"
 
-global education educ_3_mid
+global education educ_3_low
 global occupation bsoc00Agg
 global wage_cuts  10 90
 global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
@@ -18,8 +18,8 @@ global index_list   manual social routine abstract
 
 adopath + "code/parameter_estimation"
 
-/*
 
+/*
 *===============================================================================
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
 *===============================================================================

@@ -67,7 +67,6 @@ use "data/additional_processing/gmm_skills_dataset", clear
 
 append using "data/additional_processing/gmm_employment_dataset"
 
-
 merge m:1 occupation year using `job_filter', keep(3) nogen
 merge m:1 occupation year using `employment_filter', keep(3) nogen 
 
@@ -88,7 +87,7 @@ replace y_var=y_var-`y_ref' if equation==1
 replace y_var=1 if equation==2
 
 foreach variable in $index_list {
-    replace `variable'=`variable'-$ref_skill_name
+    replace `variable'=`variable'-$ref_skill_name if equation==1
 }
 
 drop if skill==$ref_skill_num
@@ -163,7 +162,7 @@ foreach education in $educ_lev {
 }
 
 
-cap drop e3_index_*
+cap drop e3n_index_*
 foreach education in $educ_lev {
     local index_counter=1
     foreach index in $index_list {
@@ -234,8 +233,22 @@ foreach education in $educ_lev {
 
 
 
+di "Expanding employment equation variables", as result
+*Creating equation 3 variables
 
-order en_* ed_*, last
+foreach variable of varlist index1-index4 {
+    rename `variable' ezn_`variable'
+    replace  ezn_`variable'=0 if missing(ezn_`variable')
+}
+
+foreach variable of varlist indexd1-indexd4 {
+    rename `variable' ezd_`variable'
+    replace  ezd_`variable'=0 if missing(ezd_`variable')
+}
+
+
+
+order en_* ed_* ezn_* ezd_*, last
 order education_d, after(education)
 egen ee_group_id=group(education education_d) if equation==3
 
@@ -249,14 +262,14 @@ foreach pair in `r(levels)' {
 }
 
 foreach year in $years {
-    label var x_1`year' "Low/High"
-    label var x_2`year' "Mid/Low"
-    label var x_3`year' "High/Mid"
+    cap label var x_1`year' "Low/High"
+    cap label var x_2`year' "Mid/Low"
+    cap label var x_3`year' "High/Mid"
 }
 
 br education education_d year x*
 
-drop x_11 x_13
+*drop x_11 x_13
 
 drop ee_group_id
 egen ee_group_id=group(education education_d year)

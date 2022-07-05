@@ -6,6 +6,7 @@ use "data/temporary/filtered_dems_SES", clear
 replace cplanoth=6-cplanoth
 
 rename edlev edlevLFS
+
 do "code/process_LFS/create_education_variables.do"
 
 

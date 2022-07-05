@@ -98,6 +98,9 @@ function solution= solve_skill_problem(skill_path,empshare_path,index_compositio
     
     fun=@(p)error_wrapper(p, data,observation_trackers,computation_information);
 
+    [solution,MSE]=fmincon(fun,trial_vector,parameter_restriction_matrix,restriction_b,[],[],lower_bounds, ...
+               upper_bounds,[],options);
+
     %Create solution array goes into the shelf now, while I figure this out
     %[solution_array,MSE_array,n_educ]= ...
      %   create_solution_array(fun, n_initial_cond, ...

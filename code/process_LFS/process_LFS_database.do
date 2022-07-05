@@ -25,6 +25,7 @@ di "Appending LFS databases"
 *Then I create the append all the LFS
 do "code/process_LFS/append_LFS.do"  
 
+/*
 *=======================================================================
 *Identifying polarizing jobs
 *=======================================================================

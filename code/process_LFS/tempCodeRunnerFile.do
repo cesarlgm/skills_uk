@@ -1,10 +1,5 @@
-    use "./data/temporary/LFS_industry_occ_file", clear
+do "code/process_LFS/create_collapsed_LFS.do"
 
-
-    tab $education year if inlist(year, 2001,2017) [aw=people], col nofreq
-
-    gcollapse (sum) people obs, by($occupation  year $education)
-
-    egen total_people=sum(people), by(year $occupation)
-
-    generate empshare=people/total_people
+di "Appending LFS databases"
+*Then I create the append all the LFS
+do "code/process_LFS/append_LFS.do"  

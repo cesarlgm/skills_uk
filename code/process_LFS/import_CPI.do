@@ -1,5 +1,5 @@
 *Importing CPI
-import excel "data/raw/cpi.xlsx", sheet("data") firstrow clear
+import excel "data/raw/cpi.xls", sheet("cpi") firstrow clear
 
 rename quarter date
 

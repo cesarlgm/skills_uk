@@ -14,8 +14,13 @@ global ed_reference     1
     do "code/parameter_estimation/create_GMM_skills_dataset.do"
 
     do "code/parameter_estimation/create_GMM_employment_dataset.do"
+
+    do "code/create_initial_condition_vector.do"
 }
 
+
+
+/*
 *Next I compute the initial values
 {
     do "code/parameter_estimation/create_GMM_initial_values.do"
