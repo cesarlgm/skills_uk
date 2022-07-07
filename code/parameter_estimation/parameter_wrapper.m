@@ -5,7 +5,7 @@ clear
 
 %%
 
-options = optimoptions('fmincon','Display','iter','MaxFunctionEvaluations',100000);
+options = optimoptions('fmincon','Display','iter','MaxFunctionEvaluations',1000000);
 
 
 
@@ -50,3 +50,7 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 %%
 
 [theta_matrix,comp_advg]=extract_solution(solution,size_vector);
+
+%%
+
+[init_matrix,init_advg]=extract_solution(init_sol_vec,size_vector);

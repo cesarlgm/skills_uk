@@ -1,6 +1,8 @@
 global ref_skill_num    4
 global ref_skill_name   abstract
 
+
+
 { 
     *Including only jobs I have observations for
     use "data/additional_processing/gmm_skills_dataset", clear
