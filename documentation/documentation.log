@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  5 JUL 2022 11:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  12 JUL 2022 12:51
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -1232,17 +1232,23 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\@@italiccorr' on input line 165.
 
 [3] (documentation.aux)
-Package rerunfilecheck Info: File `documentation.out' has not changed.
-(rerunfilecheck)             Checksum: 45AE78304F12F92FC06F13EAA45B50C3;854.
+
+Package rerunfilecheck Warning: File `documentation.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `documentation.out':
+(rerunfilecheck)             Before: 45AE78304F12F92FC06F13EAA45B50C3;854
+(rerunfilecheck)             After:  FA2BAAC48AAADDB085CDE953989E105A;854.
  ) 
 Here is how much of TeX's memory you used:
- 31684 strings out of 478864
- 651663 string characters out of 2846731
- 1083024 words of memory out of 3000000
- 49015 multiletter control sequences out of 15000+600000
+ 31685 strings out of 478864
+ 651677 string characters out of 2846731
+ 1084065 words of memory out of 3000000
+ 49016 multiletter control sequences out of 15000+600000
  413849 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 92i,14n,136p,639b,898s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 92i,14n,136p,639b,908s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
 tcrm0700.pk> <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
 ec/dpi600\tcrm1200.pk> <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
@@ -1262,7 +1268,7 @@ AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:
 msy6.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmsy8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb>
-Output written on documentation.pdf (3 pages, 168487 bytes).
+Output written on documentation.pdf (3 pages, 169276 bytes).
 PDF statistics:
  171 PDF objects out of 1000 (max. 8388607)
  17 named destinations out of 1000 (max. 500000)

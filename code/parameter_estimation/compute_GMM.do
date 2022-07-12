@@ -285,3 +285,23 @@ egen ln_alpha=group(occupation skill year)
 order ln_alpha, after(equation)
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 
+
+*This part of the code didn't work
+/*
+{
+    keep if equation==2
+
+    egen group_id=group(occupation education)
+    xtset group_id year_id
+
+    foreach variable in $index_list { 
+        generate d_`variable'=d.`variable'
+    }
+
+    generate d_y_var=0
+    generate d_y_var_3=-d_manual
+
+
+    regress d_y_var_3 i.education#c.(d_routine d_abstract d_social), nocons
+}
+*/
