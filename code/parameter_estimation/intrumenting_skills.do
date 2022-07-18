@@ -2,6 +2,8 @@ set seed 100
 
 global reference manual
 
+global weight [aw=obs]
+
 do "code/process_SES/save_file_for_minimization.do" $education
 
 generate random_number=runiform()
@@ -76,7 +78,27 @@ rename y_ y_var
     keep if sample_half==1
     merge 1:1 occupation education year skill using `instruments', keep(3)
 
-    ivreg2 y_var (i.education#c.(x_social x_routine x_abstract)=i.education#c.(z_pi_social z_pi_routine z_pi_abstract))  $weight, nocons 
+    ivreg2 y_var (i.education#c.(x_social x_routine x_abstract)=i.education#c.(z_pi_social z_pi_routine z_pi_abstract)) , nocons first
+    generate in_regression=e(sample)
 
-    ivreg2 y_var i.education#c.(x_social x_routine x_abstract)  $weight, nocons 
+    foreach variable in social routine abstract {
+        forvalues education=1/3 {
+            generate z_pi_`variable'_`education'=0 if in_regression==1
+            replace z_pi_`variable'_`education'=z_pi_`variable' if education==`education'&in_regression
+
+            generate x_`variable'_`education'=0 if in_regression==1
+            replace x_`variable'_`education'=x_`variable' if education==`education'&in_regression==1
+        }
+    }
+
+    ivreg2 y_var (x_*_1 x_*_2 x_*_3=z_*_1 z_*_2 z_*_3) , nocons first
+
+    
+    foreach variable in social routine abstract {
+        forvalues education=1/3 {
+            regress x_`variable'_`education' z_pi_*_1 z_pi_*_2 z_pi_*_3 if in_regression==1, nocons
+        }
+    }
+
+    ivreg2 y_var i.education#c.(x_social x_routine x_abstract)  $weight, nocons  
 }
