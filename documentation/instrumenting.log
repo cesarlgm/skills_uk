@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  28 JUL 2022 10:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  19 JUL 2022 09:32
 entering extended mode
-**./documentation.tex
-(documentation.tex
+**./instrumenting.tex
+(instrumenting.tex
 LaTeX2e <2021-06-01>
 L3 programming layer <2021-06-01>
 (C:\Users\thecs\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.cls
@@ -1110,50 +1110,28 @@ Package siunitx Info: Option "table-align-text-post" has been deprecated in
 (siunitx)             
 (siunitx)             Use "table-align-text-after" as a replacement.
 
-) (documentation.aux
+) (instrumenting.aux)
+\openout1 = `instrumenting.aux'.
 
-LaTeX Warning: Label `fig:key' multiply defined.
-
-
-LaTeX Warning: Label `fig:key' multiply defined.
-
-
-LaTeX Warning: Label `fig:key' multiply defined.
-
-
-LaTeX Warning: Label `fig:key' multiply defined.
-
-
-LaTeX Warning: Label `fig:key' multiply defined.
-
-
-LaTeX Warning: Label `fig:key' multiply defined.
-
-
-LaTeX Warning: Label `fig:key' multiply defined.
-
-)
-\openout1 = `documentation.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-Package hyperref Info: Link coloring ON on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+Package hyperref Info: Link coloring ON on input line 8.
 
 (C:\Users\thecs\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.st
 y
@@ -1169,12 +1147,12 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count362
 )
-LaTeX Info: Redefining \ref on input line 10.
-LaTeX Info: Redefining \pageref on input line 10.
-LaTeX Info: Redefining \nameref on input line 10.
- (documentation.out) (documentation.out)
+LaTeX Info: Redefining \ref on input line 8.
+LaTeX Info: Redefining \pageref on input line 8.
+LaTeX Info: Redefining \nameref on input line 8.
+ (instrumenting.out) (instrumenting.out)
 \@outlinefile=\write4
-\openout4 = `documentation.out'.
+\openout4 = `instrumenting.out'.
 
 
 (C:\Users\thecs\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pd
@@ -1212,394 +1190,56 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 10.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
+or `english'. on input line 8.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 10.
 
 
 (C:\Users\thecs\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
 
 
 (C:\Users\thecs\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (16.92761pt too wide) in paragraph at lines 56--61
- []\OT1/cmr/bx/n/12 Note: \OT1/cmr/m/n/12 in equa-tion [] there is al-ways a re
--dun-dant pair-wise com-par-i-son. Note that $ [] \OMS/cmsy/m/n/12  
- []
+(../results/tables/instrument_lag_table_1.tex)
+(../results/tables/instrument_lag_table_2.tex)
+(../results/tables/instrument_lag_table_3.tex) [1
 
-[1
-
-{C:/Users/thecs/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 165.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 165.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 165.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 165.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 165.
-
-(../results/figures/average_manual.tex
-<../results/figures/average_chands.png, id=104, 1148.29pt x 835.12pt>
-File: ../results/figures/average_chands.png Graphic file (type png)
-<use ../results/figures/average_chands.png>
-Package pdftex.def Info: ../results/figures/average_chands.png  used on input l
-ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cstrengt.png, id=105, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cstrengt.png Graphic file (type png)
-<use ../results/figures/average_cstrengt.png>
-Package pdftex.def Info: ../results/figures/average_cstrengt.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cstamina.png, id=106, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cstamina.png Graphic file (type png)
-<use ../results/figures/average_cstamina.png>
-Package pdftex.def Info: ../results/figures/average_cstamina.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
- [3])
-(../results/figures/average_routine.tex
-<../results/figures/average_brepeat.png, id=115, 1148.29pt x 835.12pt>
-File: ../results/figures/average_brepeat.png Graphic file (type png)
-<use ../results/figures/average_brepeat.png>
-Package pdftex.def Info: ../results/figures/average_brepeat.png  used on input 
-line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_bme4.png, id=116, 1148.29pt x 835.12pt>
-File: ../results/figures/average_bme4.png Graphic file (type png)
-<use ../results/figures/average_bme4.png>
-Package pdftex.def Info: ../results/figures/average_bme4.png  used on input lin
-e 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_bvariety.png, id=117, 1148.29pt x 835.12pt>
-File: ../results/figures/average_bvariety.png Graphic file (type png)
-<use ../results/figures/average_bvariety.png>
-Package pdftex.def Info: ../results/figures/average_bvariety.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cplanme.png, id=118, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cplanme.png Graphic file (type png)
-<use ../results/figures/average_cplanme.png>
-Package pdftex.def Info: ../results/figures/average_cplanme.png  used on input 
-line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-) (../results/figures/average_social.tex
-<../results/figures/average_cpeople.png, id=119, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cpeople.png Graphic file (type png)
-<use ../results/figures/average_cpeople.png>
-Package pdftex.def Info: ../results/figures/average_cpeople.png  used on input 
-line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cteamwk.png, id=120, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cteamwk.png Graphic file (type png)
-<use ../results/figures/average_cteamwk.png>
-Package pdftex.def Info: ../results/figures/average_cteamwk.png  used on input 
-line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_clisten.png, id=121, 1148.29pt x 835.12pt>
-File: ../results/figures/average_clisten.png Graphic file (type png)
-<use ../results/figures/average_clisten.png>
-Package pdftex.def Info: ../results/figures/average_clisten.png  used on input 
-line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cspeech.png, id=122, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cspeech.png Graphic file (type png)
-<use ../results/figures/average_cspeech.png>
-Package pdftex.def Info: ../results/figures/average_cspeech.png  used on input 
-line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cpersuad.png, id=123, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cpersuad.png Graphic file (type png)
-<use ../results/figures/average_cpersuad.png>
-Package pdftex.def Info: ../results/figures/average_cpersuad.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cteach.png, id=124, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cteach.png Graphic file (type png)
-<use ../results/figures/average_cteach.png>
-Package pdftex.def Info: ../results/figures/average_cteach.png  used on input l
-ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-) (../results/figures/average_abstract.tex
-<../results/figures/average_cwritelg.png, id=125, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cwritelg.png Graphic file (type png)
-<use ../results/figures/average_cwritelg.png>
-Package pdftex.def Info: ../results/figures/average_cwritelg.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_clong.png, id=126, 1148.29pt x 835.12pt>
-File: ../results/figures/average_clong.png Graphic file (type png)
-<use ../results/figures/average_clong.png>
-Package pdftex.def Info: ../results/figures/average_clong.png  used on input li
-ne 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_ccalca.png, id=127, 1148.29pt x 835.12pt>
-File: ../results/figures/average_ccalca.png Graphic file (type png)
-<use ../results/figures/average_ccalca.png>
-Package pdftex.def Info: ../results/figures/average_ccalca.png  used on input l
-ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cpercent.png, id=128, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cpercent.png Graphic file (type png)
-<use ../results/figures/average_cpercent.png>
-Package pdftex.def Info: ../results/figures/average_cpercent.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cstats.png, id=129, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cstats.png Graphic file (type png)
-<use ../results/figures/average_cstats.png>
-Package pdftex.def Info: ../results/figures/average_cstats.png  used on input l
-ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cplanoth.png, id=130, 1148.29pt x 835.12pt>
-File: ../results/figures/average_cplanoth.png Graphic file (type png)
-<use ../results/figures/average_cplanoth.png>
-Package pdftex.def Info: ../results/figures/average_cplanoth.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_csolutn.png, id=131, 1148.29pt x 835.12pt>
-File: ../results/figures/average_csolutn.png Graphic file (type png)
-<use ../results/figures/average_csolutn.png>
-Package pdftex.def Info: ../results/figures/average_csolutn.png  used on input 
-line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_canalyse.png, id=132, 1148.29pt x 835.12pt>
-File: ../results/figures/average_canalyse.png Graphic file (type png)
-<use ../results/figures/average_canalyse.png>
-Package pdftex.def Info: ../results/figures/average_canalyse.png  used on input
- line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-) [4 <../results/figures/average_chands.png (PNG copy)> <../results/figures/ave
-rage_cstrengt.png (PNG copy)> <../results/figures/average_cstamina.png (PNG cop
-y)> <../results/figures/average_brepeat.png (PNG copy)> <../results/figures/ave
-rage_bme4.png (PNG copy)> <../results/figures/average_bvariety.png (PNG copy)> 
-<../results/figures/average_cplanme.png (PNG copy)>] [5 <../results/figures/ave
-rage_cpeople.png (PNG copy)> <../results/figures/average_cteamwk.png (PNG copy)
-> <../results/figures/average_clisten.png (PNG copy)> <../results/figures/avera
-ge_cspeech.png (PNG copy)> <../results/figures/average_cpersuad.png (PNG copy)>
- <../results/figures/average_cteach.png (PNG copy)>] [6 <../results/figures/ave
-rage_cwritelg.png (PNG copy)> <../results/figures/average_clong.png (PNG copy)>
- <../results/figures/average_ccalca.png (PNG copy)> <../results/figures/average
-_cpercent.png (PNG copy)> <../results/figures/average_cstats.png (PNG copy)> <.
-./results/figures/average_cplanoth.png (PNG copy)> <../results/figures/average_
-csolutn.png (PNG copy)> <../results/figures/average_canalyse.png (PNG copy)>]
-(../results/figures/distribution_manual.tex
-<../results/figures/distribution_chands.png, id=174, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_chands.png Graphic file (type png)
-<use ../results/figures/distribution_chands.png>
-Package pdftex.def Info: ../results/figures/distribution_chands.png  used on in
-put line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cstrengt.png, id=175, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cstrengt.png Graphic file (type png)
-<use ../results/figures/distribution_cstrengt.png>
-Package pdftex.def Info: ../results/figures/distribution_cstrengt.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cstamina.png, id=176, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cstamina.png Graphic file (type png)
-<use ../results/figures/distribution_cstamina.png>
-Package pdftex.def Info: ../results/figures/distribution_cstamina.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-)
-(../results/figures/distribution_routine.tex
-<../results/figures/distribution_brepeat.png, id=177, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_brepeat.png Graphic file (type png)
-<use ../results/figures/distribution_brepeat.png>
-Package pdftex.def Info: ../results/figures/distribution_brepeat.png  used on i
-nput line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_bme4.png, id=178, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_bme4.png Graphic file (type png)
-<use ../results/figures/distribution_bme4.png>
-Package pdftex.def Info: ../results/figures/distribution_bme4.png  used on inpu
-t line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_bvariety.png, id=179, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_bvariety.png Graphic file (type png)
-<use ../results/figures/distribution_bvariety.png>
-Package pdftex.def Info: ../results/figures/distribution_bvariety.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cplanme.png, id=180, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cplanme.png Graphic file (type png)
-<use ../results/figures/distribution_cplanme.png>
-Package pdftex.def Info: ../results/figures/distribution_cplanme.png  used on i
-nput line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-)
-(../results/figures/distribution_social.tex
-<../results/figures/distribution_cpeople.png, id=181, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cpeople.png Graphic file (type png)
-<use ../results/figures/distribution_cpeople.png>
-Package pdftex.def Info: ../results/figures/distribution_cpeople.png  used on i
-nput line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cteamwk.png, id=182, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cteamwk.png Graphic file (type png)
-<use ../results/figures/distribution_cteamwk.png>
-Package pdftex.def Info: ../results/figures/distribution_cteamwk.png  used on i
-nput line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_clisten.png, id=183, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_clisten.png Graphic file (type png)
-<use ../results/figures/distribution_clisten.png>
-Package pdftex.def Info: ../results/figures/distribution_clisten.png  used on i
-nput line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cspeech.png, id=184, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cspeech.png Graphic file (type png)
-<use ../results/figures/distribution_cspeech.png>
-Package pdftex.def Info: ../results/figures/distribution_cspeech.png  used on i
-nput line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cpersuad.png, id=185, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cpersuad.png Graphic file (type png)
-<use ../results/figures/distribution_cpersuad.png>
-Package pdftex.def Info: ../results/figures/distribution_cpersuad.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cteach.png, id=186, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cteach.png Graphic file (type png)
-<use ../results/figures/distribution_cteach.png>
-Package pdftex.def Info: ../results/figures/distribution_cteach.png  used on in
-put line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-) (../results/figures/distribution_abstract.tex
-<../results/figures/distribution_cwritelg.png, id=187, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cwritelg.png Graphic file (type png)
-<use ../results/figures/distribution_cwritelg.png>
-Package pdftex.def Info: ../results/figures/distribution_cwritelg.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_clong.png, id=188, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_clong.png Graphic file (type png)
-<use ../results/figures/distribution_clong.png>
-Package pdftex.def Info: ../results/figures/distribution_clong.png  used on inp
-ut line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_ccalca.png, id=189, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_ccalca.png Graphic file (type png)
-<use ../results/figures/distribution_ccalca.png>
-Package pdftex.def Info: ../results/figures/distribution_ccalca.png  used on in
-put line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cpercent.png, id=190, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cpercent.png Graphic file (type png)
-<use ../results/figures/distribution_cpercent.png>
-Package pdftex.def Info: ../results/figures/distribution_cpercent.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cstats.png, id=191, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cstats.png Graphic file (type png)
-<use ../results/figures/distribution_cstats.png>
-Package pdftex.def Info: ../results/figures/distribution_cstats.png  used on in
-put line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_cplanoth.png, id=192, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_cplanoth.png Graphic file (type png)
-<use ../results/figures/distribution_cplanoth.png>
-Package pdftex.def Info: ../results/figures/distribution_cplanoth.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_csolutn.png, id=193, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_csolutn.png Graphic file (type png)
-<use ../results/figures/distribution_csolutn.png>
-Package pdftex.def Info: ../results/figures/distribution_csolutn.png  used on i
-nput line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/distribution_canalyse.png, id=194, 1148.29pt x 835.12pt>
-File: ../results/figures/distribution_canalyse.png Graphic file (type png)
-<use ../results/figures/distribution_canalyse.png>
-Package pdftex.def Info: ../results/figures/distribution_canalyse.png  used on 
-input line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-) [7
-
- <../results/figures/distribution_chands.png (PNG copy)> <../results/figures/di
-stribution_cstrengt.png (PNG copy)> <../results/figures/distribution_cstamina.p
-ng (PNG copy)> <../results/figures/distribution_brepeat.png (PNG copy)> <../res
-ults/figures/distribution_bme4.png (PNG copy)> <../results/figures/distribution
-_bvariety.png (PNG copy)> <../results/figures/distribution_cplanme.png (PNG cop
-y)>] [8 <../results/figures/distribution_cpeople.png (PNG copy)> <../results/fi
-gures/distribution_cteamwk.png (PNG copy)> <../results/figures/distribution_cli
-sten.png (PNG copy)> <../results/figures/distribution_cspeech.png (PNG copy)> <
-../results/figures/distribution_cpersuad.png (PNG copy)> <../results/figures/di
-stribution_cteach.png (PNG copy)>] [9 <../results/figures/distribution_cwritelg
-.png (PNG copy)> <../results/figures/distribution_clong.png (PNG copy)> <../res
-ults/figures/distribution_ccalca.png (PNG copy)> <../results/figures/distributi
-on_cpercent.png (PNG copy)> <../results/figures/distribution_cstats.png (PNG co
-py)> <../results/figures/distribution_cplanoth.png (PNG copy)> <../results/figu
-res/distribution_csolutn.png (PNG copy)> <../results/figures/distribution_canal
-yse.png (PNG copy)>] (documentation.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `documentation.out' has not changed.
-(rerunfilecheck)             Checksum: 92B65D7F4060D14FD816C428303F69A0;1184.
+{C:/Users/thecs/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] (instru
+menting.aux)
+Package rerunfilecheck Info: File `instrumenting.out' has not changed.
+(rerunfilecheck)             Checksum: 07E5D0A6CCB62E2293FC9FC095E6C889;280.
  ) 
 Here is how much of TeX's memory you used:
- 32262 strings out of 478864
- 674887 string characters out of 2846731
- 1083122 words of memory out of 3000000
- 49464 multiletter control sequences out of 15000+600000
- 414158 words of font info for 68 fonts, out of 8000000 for 9000
+ 31682 strings out of 478864
+ 652376 string characters out of 2846731
+ 1088865 words of memory out of 3000000
+ 49012 multiletter control sequences out of 15000+600000
+ 413849 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 92i,14n,136p,985b,898s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 92i,12n,136p,477b,900s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
 tcrm0700.pk> <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
 ec/dpi600\tcrm1200.pk> <C:\Users\thecs\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
 /jknappen/ec/dpi600\tcrm1000.pk><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/thecs/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/thecs/AppDat
-a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users
-/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.
-pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi6.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmmi8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/thecs/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/thecs/AppData/Loc
-al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/thecs
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/
-Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmsy6.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on documentation.pdf (9 pages, 2238598 bytes).
+rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/thecs/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/User
+s/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12
+.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmmi8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr10.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/thecs/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/thecs/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/thecs
+/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:
+/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+msy8.pfb>
+Output written on instrumenting.pdf (2 pages, 136075 bytes).
 PDF statistics:
- 325 PDF objects out of 1000 (max. 8388607)
- 76 named destinations out of 1000 (max. 500000)
- 391 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 128 PDF objects out of 1000 (max. 8388607)
+ 7 named destinations out of 1000 (max. 500000)
+ 125 words of extra memory for PDF output out of 10000 (max. 10000000)
 

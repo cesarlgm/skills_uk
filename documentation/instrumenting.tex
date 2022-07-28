@@ -1,0 +1,34 @@
+\documentclass[a4paper, 12pt]{article}
+\input{commandspreamble.tex}
+\usepackage{tabularx}
+
+\title{Code documentation}
+\author{C\'esar Garro-Mar\'in\thanks{Boston University, email: \href{mailto:cesarlgm@bu.edu}{cesarlgm@bu.edu}}} 
+
+\begin{document}
+	\maketitle
+	
+
+	\section{New approach (v2):}
+	\subsection{Model equations}
+	At the job level it holds that:
+	\beqn
+	%\Delta \overline{ \ln S^e_{iJet}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJt}} \Delta \ln A_{kJt}-\Delta \ln A_{iJt}\right) \label{eq:skills_eq} \\ 
+	\Delta \overline{ \ln S^e_{ijet}}+\hat{\pi}_{ijt}&=& \sum_k \theta_k^e\overline{S_{kejt}}\hat{\pi}_{kjt}\label{eq:pi_equation}
+	\eeqn
+	\paragraph{Instruments}
+	\bitem
+		\item \textbf{Option 1:} instrumenting $\overline{S_{keJt}}\hat{\pi}_{kJT}$ with $\overline{S_{keJt-1}}\hat{\pi}_{kJt-1}$.
+	
+		First stage driven by correlation of $\hat{\pi}_{kJt}$
+		
+		
+		\input{../results/tables/instrument_lag_table_1.tex}\\
+		\input{../results/tables/instrument_lag_table_2.tex}\\
+		\input{../results/tables/instrument_lag_table_3.tex}
+	\eitem 
+		\bibliographystyle{apalike}
+		%\bibliography{../../../../CentralLibrary/Papers/library}{}
+		
+	\end{document}
+	
