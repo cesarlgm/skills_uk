@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  28 JUL 2022 10:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  29 JUL 2022 15:35
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -1254,139 +1254,139 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\@@italiccorr' on input line 165.
 
 (../results/figures/average_manual.tex
-<../results/figures/average_chands.png, id=104, 1148.29pt x 835.12pt>
+<../results/figures/average_chands.png, id=104, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_chands.png Graphic file (type png)
 <use ../results/figures/average_chands.png>
 Package pdftex.def Info: ../results/figures/average_chands.png  used on input l
 ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cstrengt.png, id=105, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cstrengt.png, id=105, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cstrengt.png Graphic file (type png)
 <use ../results/figures/average_cstrengt.png>
 Package pdftex.def Info: ../results/figures/average_cstrengt.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cstamina.png, id=106, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cstamina.png, id=106, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cstamina.png Graphic file (type png)
 <use ../results/figures/average_cstamina.png>
 Package pdftex.def Info: ../results/figures/average_cstamina.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
  [3])
 (../results/figures/average_routine.tex
-<../results/figures/average_brepeat.png, id=115, 1148.29pt x 835.12pt>
+<../results/figures/average_brepeat.png, id=115, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_brepeat.png Graphic file (type png)
 <use ../results/figures/average_brepeat.png>
 Package pdftex.def Info: ../results/figures/average_brepeat.png  used on input 
 line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_bme4.png, id=116, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_bme4.png, id=116, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_bme4.png Graphic file (type png)
 <use ../results/figures/average_bme4.png>
 Package pdftex.def Info: ../results/figures/average_bme4.png  used on input lin
 e 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_bvariety.png, id=117, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_bvariety.png, id=117, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_bvariety.png Graphic file (type png)
 <use ../results/figures/average_bvariety.png>
 Package pdftex.def Info: ../results/figures/average_bvariety.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cplanme.png, id=118, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cplanme.png, id=118, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cplanme.png Graphic file (type png)
 <use ../results/figures/average_cplanme.png>
 Package pdftex.def Info: ../results/figures/average_cplanme.png  used on input 
 line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
 ) (../results/figures/average_social.tex
-<../results/figures/average_cpeople.png, id=119, 1148.29pt x 835.12pt>
+<../results/figures/average_cpeople.png, id=119, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cpeople.png Graphic file (type png)
 <use ../results/figures/average_cpeople.png>
 Package pdftex.def Info: ../results/figures/average_cpeople.png  used on input 
 line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cteamwk.png, id=120, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cteamwk.png, id=120, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cteamwk.png Graphic file (type png)
 <use ../results/figures/average_cteamwk.png>
 Package pdftex.def Info: ../results/figures/average_cteamwk.png  used on input 
 line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_clisten.png, id=121, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_clisten.png, id=121, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_clisten.png Graphic file (type png)
 <use ../results/figures/average_clisten.png>
 Package pdftex.def Info: ../results/figures/average_clisten.png  used on input 
 line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cspeech.png, id=122, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cspeech.png, id=122, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cspeech.png Graphic file (type png)
 <use ../results/figures/average_cspeech.png>
 Package pdftex.def Info: ../results/figures/average_cspeech.png  used on input 
 line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cpersuad.png, id=123, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cpersuad.png, id=123, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cpersuad.png Graphic file (type png)
 <use ../results/figures/average_cpersuad.png>
 Package pdftex.def Info: ../results/figures/average_cpersuad.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cteach.png, id=124, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cteach.png, id=124, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cteach.png Graphic file (type png)
 <use ../results/figures/average_cteach.png>
 Package pdftex.def Info: ../results/figures/average_cteach.png  used on input l
 ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 ) (../results/figures/average_abstract.tex
-<../results/figures/average_cwritelg.png, id=125, 1148.29pt x 835.12pt>
+<../results/figures/average_cwritelg.png, id=125, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cwritelg.png Graphic file (type png)
 <use ../results/figures/average_cwritelg.png>
 Package pdftex.def Info: ../results/figures/average_cwritelg.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_clong.png, id=126, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_clong.png, id=126, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_clong.png Graphic file (type png)
 <use ../results/figures/average_clong.png>
 Package pdftex.def Info: ../results/figures/average_clong.png  used on input li
 ne 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_ccalca.png, id=127, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_ccalca.png, id=127, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_ccalca.png Graphic file (type png)
 <use ../results/figures/average_ccalca.png>
 Package pdftex.def Info: ../results/figures/average_ccalca.png  used on input l
 ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cpercent.png, id=128, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cpercent.png, id=128, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cpercent.png Graphic file (type png)
 <use ../results/figures/average_cpercent.png>
 Package pdftex.def Info: ../results/figures/average_cpercent.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cstats.png, id=129, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cstats.png, id=129, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cstats.png Graphic file (type png)
 <use ../results/figures/average_cstats.png>
 Package pdftex.def Info: ../results/figures/average_cstats.png  used on input l
 ine 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_cplanoth.png, id=130, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_cplanoth.png, id=130, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cplanoth.png Graphic file (type png)
 <use ../results/figures/average_cplanoth.png>
 Package pdftex.def Info: ../results/figures/average_cplanoth.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_csolutn.png, id=131, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_csolutn.png, id=131, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_csolutn.png Graphic file (type png)
 <use ../results/figures/average_csolutn.png>
 Package pdftex.def Info: ../results/figures/average_csolutn.png  used on input 
 line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
-<../results/figures/average_canalyse.png, id=132, 1148.29pt x 835.12pt>
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
+<../results/figures/average_canalyse.png, id=132, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_canalyse.png Graphic file (type png)
 <use ../results/figures/average_canalyse.png>
 Package pdftex.def Info: ../results/figures/average_canalyse.png  used on input
  line 5.
-(pdftex.def)             Requested size: 156.5826pt x 113.87045pt.
+(pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1597,7 +1597,7 @@ sy10.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmsy6.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 
 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on documentation.pdf (9 pages, 2238598 bytes).
+Output written on documentation.pdf (9 pages, 3018368 bytes).
 PDF statistics:
  325 PDF objects out of 1000 (max. 8388607)
  76 named destinations out of 1000 (max. 500000)

@@ -12,7 +12,7 @@ grscheme, ncolor(6) style(tableau)
     gcollapse (mean) chands-clisten, by(education)
 
     foreach variable of varlist chands-clisten {
-        tw scatter `variable' education, yscale(range(0 1)) ylab(0(.1)1) ytitle(Average answer) xlab(1(1)3) title(`variable')
+        tw connected `variable' education, yscale(range(0 1)) ylab(0(.1)1) ytitle(Average answer) xlab(1(1)3) title(`variable')
         graph export "results/figures/average_`variable'.png", replace
     }
 
