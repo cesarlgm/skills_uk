@@ -29,13 +29,12 @@ init_sol_vec=table2array(init_sol(:,'estimate'));
     
 %%
 
-[z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
-    e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index,lower_bound, ...
+[z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, lower_bound, ...
     upper_bound]= extract_data_matrices(data);
 
 %%
 
-error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
+error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_occ_index);
 
 %%
 
