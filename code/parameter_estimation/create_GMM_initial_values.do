@@ -1,16 +1,40 @@
 *Compute GMM initial values
 global n_skills=4
+global ref_skill_num    4
+global ref_skill_name   abstract
+global not_reference    manual
 
 *Part 1: compute pi_ijt
 {
-    use "data/additional_processing/gmm_skills_dataset", clear
+    use "data/additional_processing/gmm_example_dataset", clear
+
+    
+    tempvar temp
+    tempvar y_ref
+
+    generate `temp'=y_var if  skill==4 & equation==1
+
+    egen `y_ref'=max(`temp') if equation==1, by(occupation year education)
+
+    replace y_var=y_var-`y_ref' if equation==1
+
+    replace y_var=1 if equation==2
+
+    foreach variable in $index_list {
+        replace `variable'=`variable'-$ref_skill_name if equation==1
+    }
+
+    cap drop `temp'
+    cap drop `y_ref'
+
+
 
     local lbe : value label education
 
     levelsof education
     global n_educ: word count of `r(levels)'
     global n_educ=$n_educ-1
-    keep if equation==2
+    keep if equation==1
 
     *Computing weights
 
@@ -72,9 +96,9 @@ global n_skills=4
             }
             generate y_skill_sum=1-skill_sum
         
-            eststo $reference: regress y_skill_sum ibn.education#c.$reference if skill==1 $weight, nocons vce(cl occupation)
+            eststo $ref_skill_name: regress y_skill_sum ibn.education#c.$ref_skill_name $weight if skill==1 , nocons vce(cl occupation)
             forvalues education=1/$n_educ{
-                local  $reference`education'= _b[`education'.education#c.$reference]
+                local  $ref_skill_name`education'= _b[`education'.education#c.$ref_skill_name]
             }
         }
         
@@ -108,67 +132,6 @@ global n_skills=4
     save `theta_file'
 }
 
-
-
-*Part 3: compute the beta_j
-
-*Some preliminary details
-{
-    *Fixing thetas
-    {
-        use `theta_file', clear
-        rename education education_d
-        rename parameter parameter_d
-        tempfile theta_file_d
-        save `theta_file_d'
-    }
-}
-
-{
-    use  "data/additional_processing/gmm_employment_dataset", clear
-    reshape long index indexd, i(occupation education education_d year)  j(skill)
-
-    merge m:1 education skill using `theta_file', keep(3) nogen
-    merge m:1 education_d skill using `theta_file_d', keep(3) nogen
-    merge m:1 occupation skill year using `pi_employment', keep(3) nogen
-
-    generate x_skill=(parameter*index-parameter_d*indexd)*pi
-    
-    keep occupation education education_d year skill y_var x_skill
-    reshape wide x_skill, i(occupation education education_d year) j(skill)
-
-    egen x_var=rowtotal(x_*)
-    egen pair_id=group(education education_d)
-
-    reghdfe y_var ibn.occupation#c.x_var, absorb(pair_id) nocons
-
-    regsave
-
-    generate sigma_j=1/(1-coef)
-
-    extcodes, coefname(occupation)
-
-    rename coef beta_j
-    keep occupation beta_j sigma_j
-
-    sort occupation
-
-    generate source_name="beta"
-
-
-    tempfile beta_file
-    save `beta_file'
-}
-
-{
-    use `beta_file', clear
-    rename sigma_j parameter
-
-    replace source_name="sigma_j"
-    tempfile beta_file_p
-    save `beta_file_p'
-}
-
 *Create the file with the initial values
 {
     use `pi_file', clear
@@ -180,19 +143,9 @@ global n_skills=4
     reshape long pi, i(occupation year) j(skill)
     rename pi parameter
 
-    generate source_name="pi"
+    generate source_name="pi_ij"
 
     sort occupation year skill
-
-    merge m:1 occupation using `beta_file', keep(3)
-
-    generate A_ij=((sigma_j-1)/sigma_j)*parameter
-
-    keep occupation year skill source_name A_ij
-    replace source_name="A_ij"
-    rename A_ij parameter
-
-    append using `beta_file_p'
 
     append using `theta_file'
 
@@ -200,12 +153,18 @@ global n_skills=4
     foreach variable in occupation year skill education {
         tostring `variable', replace force
     }
-    replace  identifier=occupation+"."+year+"."+skill   if source_name=="A_ij"
-    replace  identifier=occupation                      if source_name=="sigma_j"
+    replace  identifier=occupation+"."+year+"."+skill   if source_name=="pi_ij"
     replace  identifier=education+"."+skill             if source_name=="theta"
 
+
+    generate param_number=_n
+    replace param_number=_n-3000 if source_name=="theta"
+    sort param_number
+    
     keep source_name parameter identifier
     generate parameter_id=_n
 
     save "data/additional_processing/initial_values_file", replace
+    export delimited using  "data/additional_processing/initial_estimates.csv", replace
+
 }

@@ -1,16 +1,17 @@
 
 
 %%
-clear
+clear;
 
 %%
 
-options = optimoptions('fmincon','Display','iter','MaxFunctionEvaluations',1000000);
+options = optimoptions('fmincon','Display','iter','MaxFunctionEvaluations',1000000,'PlotFcn',@optimplotfval);
 
 
 
 cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
+%% 
 
 
 
@@ -24,27 +25,26 @@ init_sol=readtable(sol_path);
 
 
 %%
-init_sol_vec=table2array(init_sol(:,'estimate'));
+init_sol_vec=table2array(init_sol(:,'parameter'));
 
     
 %%
 
-[z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, lower_bound, ...
-    upper_bound]= extract_data_matrices(data);
+[z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_code, ...
+    lower_bound, upper_bound]= extract_data_matrices(data);
+
+    %%
+
+error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_dln_a_index,e1_educ_index);
 
 %%
 
-error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_occ_index);
-
-%%
-
-[solution,MSE]=fmincon(error_solve,init_sol_vec,[],[],[],[],lower_bound, ...
-           upper_bound,[],options);
+[solution,MSE]=fmincon(error_solve,init_sol_vec,[],[],[],[],lower_bound, upper_bound,[],options);
 
 %%
 
 [solution,MSE]=fmincon(error_solve,solution,[],[],[],[],lower_bound, ...
-           upper_bound,[],options);
+           [],[],options);
 
 %%
 

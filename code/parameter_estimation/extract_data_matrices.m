@@ -11,7 +11,7 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     size_vector=[n_theta;n_ln_A_effective];
 
     lower_bound=vertcat(zeros(n_theta,1),-Inf*ones(n_total_parameters-n_theta,1));
-    upper_bound=vertcat(ones(n_theta,1),Inf*ones(n_total_parameters-n_theta,1));
+    upper_bound=vertcat(Inf*ones(n_theta,1),Inf*ones(n_total_parameters-n_theta,1));
 
     %I get the data matrices
     y_matrix=get_y_var(data);
