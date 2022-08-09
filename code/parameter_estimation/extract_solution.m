@@ -1,16 +1,16 @@
-function [theta_matrix,comparative]=extract_solution(solution, size_vector)
+function [theta_matrix,comparative,pi]=extract_solution(solution, size_vector)
     %Split parameter vector into parameter type
     splitted_vector=assign_parameters(solution,size_vector);
 
     %Extracting dlnA vector
     %First I create the full restricted dlna
-    d_ln_a=splitted_vector{2};
+    pi=splitted_vector{2};
 
     %Now I get the theta vector
     theta=splitted_vector{1};
 
     %Sigma vector
-    sigmas=splitted_vector{3};
+    %sigmas=splitted_vector{3};
 
     theta_matrix=reshape(theta,4,3);
     theta_matrix=transpose(theta_matrix);

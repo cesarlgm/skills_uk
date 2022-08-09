@@ -154,11 +154,12 @@ esttab fs_*_3 using "results/tables/instrument_lag_table_3.tex", keep(*_3) $tabl
         gegen pi_`index'_a2=    mean(y_d_l_`index'_a2) if !missing(y_d_l_`index'_a2) , by(occupation year)
 
 
-        generate y_`index'=d_l_`index'_a1+ pi_`index'_a1
+        *generate y_`index'=d_l_`index'_a1+ pi_`index'_a1
     }
 
 
     foreach index in $index_list {
+        generate 
         generate x_`index'=`index'_a1*pi_`index'_a1
         generate z_`index'=`index'_a2*pi_`index'_a2
     }
@@ -183,13 +184,15 @@ esttab fs_*_3 using "results/tables/instrument_lag_table_3.tex", keep(*_3) $tabl
             replace z_e_`variable'_`education'=z_`variable' if education==`education'&in_regression
 
             generate x_e_`variable'_`education'=0 if in_regression==1
-            replace x_e_`variable'_`education'=x_`variable' if education==`education'&in_regression==1
+
         }
     }
 
+    
     foreach variable in $index_list {
         forvalues education=1/3 {
             eststo fs_`variable'_`education': regress x_e_`variable'_`education' z_e_* if in_regression==1, nocons
+            eststo fsc_`variable'_`education': regress
         }
     }
 
@@ -277,9 +280,9 @@ drop if n_educ<3
 
     *Compute pi_{ijt} and the dependent variable: dlogS_ijt+\pi_{ijt}
     foreach index in manual social routine abstract {    
-        gegen pi_`index'=    mean(y_d_l_`index') if !missing(y_d_l_`index') , by(occupation year)
+        gegen pi_`index'=    mean(y_d_l_`index') if !missing(y_d_l_`index') , by(occupation education year)
 
-        generate y_`index'=d_l_`index'+ pi_`index'
+        generate y_`index'=d_l_`index'
     }
 
     foreach skill in $index_list { 
@@ -329,21 +332,50 @@ drop if n_educ<3
             generate x_e_`variable'_`education'=0 if in_regression==1
             replace x_e_`variable'_`education'=x_`variable' if education==`education'&in_regression==1
             
+            generate pi_e_`variable'_`education'=0 
+            replace pi_e_`variable'_`education'=pi_`variable'  if education==`education'&in_regression==1
         }
     }   
 
+
     foreach variable in $index_list {
+        cap drop pi_hat_`variable'
+        generate  pi_hat_`variable'=.
         forvalues education=1/3 {
             eststo fs_`variable'_`education': regress x_e_`variable'_`education' z*_e_* if in_regression==1, nocons
+            eststo fspi_`variable'_`education': regress pi_e_`variable'_`education' z*_e_* if in_regression==1, nocons
+
+            tempvar pi_`variable'_`education'
+            predict `pi_`variable'_`education''
+            replace pi_hat_`variable'=`pi_`variable'_`education'' if e(sample)==1&education==`education'
         }
     }
 
-    esttab fs_manual*  fs_routine* fs_social*,  stat(F) 
+    
+    ivreg2 y_var (x_e_manual_1 x_e_manual_2 x_e_manual_3 x_e_social_1 x_e_social_2 x_e_social_3 x_e_routine_1 x_e_routine_2 x_e_routine_3 =z1_e_manual_1 z2_e_manual_1 z1_e_manual_2 z2_e_manual_2 z1_e_manual_3 z2_e_manual_3 z1_e_social_1 z2_e_social_1 z1_e_social_2 z2_e_social_2 z1_e_social_3 z2_e_social_3 z1_e_routine_1 z2_e_routine_1 z1_e_routine_2 z2_e_routine_2 z1_e_routine_3 z2_e_routine_3), robust nocons  cluster(occupation)  first
+    cap drop in_regression
+    generate in_regression=e(sample)
 
+    generate pi_hat=.
+    replace pi_hat=pi_hat_abstract if skill==4&in_regression==1
+    replace pi_hat=pi_hat_routine if skill==3&in_regression==1
+    replace pi_hat=pi_hat_social if skill==2&in_regression==1
+    replace pi_hat=pi_hat_manual if skill==1&in_regression==1
+
+    generate pi=.
+    replace pi=pi_abstract if skill==4&in_regression
+    replace pi=pi_routine if skill==3&in_regression
+    replace pi=pi_social if skill==2&in_regression
+    replace pi=pi_manual if skill==1&in_regression
+
+    replace y_var=y_var+pi_hat if in_regression==1
+
+    esttab fs_manual*  fs_routine* fs_social*,  stat(F) 
 
     ivreg2 y_var (x_e_manual_1 x_e_manual_2 x_e_manual_3 x_e_social_1 x_e_social_2 x_e_social_3 x_e_routine_1 x_e_routine_2 x_e_routine_3 =z1_e_manual_1 z2_e_manual_1 z1_e_manual_2 z2_e_manual_2 z1_e_manual_3 z2_e_manual_3 z1_e_social_1 z2_e_social_1 z1_e_social_2 z2_e_social_2 z1_e_social_3 z2_e_social_3 z1_e_routine_1 z2_e_routine_1 z1_e_routine_2 z2_e_routine_2 z1_e_routine_3 z2_e_routine_3), robust nocons  cluster(occupation)  first
     cap drop in_regression
     generate in_regression=e(sample)
+
     
 
     generate skill_sum=.
@@ -351,9 +383,9 @@ drop if n_educ<3
         global c_social`education'= _b[x_e_social_`education']
         global c_manual`education'= _b[x_e_manual_`education']
         global c_routine`education'=_b[x_e_routine_`education']
-        local social`education':    display %9.2fc      _b[x_e_social_`education']
-        local manual`education':  display %9.2fc      _b[x_e_manual_`education']
-        local routine`education':   display %9.2fc      _b[x_e_routine_`education']
+        local social`education':    display %9.3fc      _b[x_e_social_`education']
+        local manual`education':  display %9.3fc      _b[x_e_manual_`education']
+        local routine`education':   display %9.3fc      _b[x_e_routine_`education']
         replace skill_sum=_b[x_e_manual_`education']*manual+_b[x_e_social_`education']*social+_b[x_e_routine_`education']*routine if education==`education'
     }
 

@@ -21,12 +21,16 @@ global ref_skill_name   abstract
         *Including only jobs I have observations for
         use "data/additional_processing/gmm_skills_dataset", clear
 
-        *keep if inlist(occupation, 1112,1121,1122)
+        cap drop skill_sum
+        generate skill_sum=26.6893959439257*manual+47.4324378083784*social+42.5900598551701*routine+25.0523127821848*abstract if education==1
+        replace skill_sum=50.6893959439257*manual+19.4324378083784*social+58.5900598551701*routine+49.0523127821848*abstract if education==2
+        replace skill_sum=51.6893959439257*manual+69.4324378083784*social+23.5900598551701*routine+13.0523127821848*abstract if education==3
+
+        keep if inlist(occupation, 1112,1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
 
-        keep if equation==1
 
         egen n_obs=count(manual) if equation==1, by(occupation year)
 
@@ -119,7 +123,7 @@ global ref_skill_name   abstract
         di "$n_skills"
     }
 
-    keep if equation==1
+    keep if inlist(equation,1,2)
     keep occupation-equation occ_id year_id
 
 
@@ -137,7 +141,7 @@ global ref_skill_name   abstract
     qui forvalues education=1/$n_educ {
         foreach job in $jobs {
             foreach year in $years {
-                qui summ  year if occ_id==`job'&year_id==`year'&education==`education'
+                qui summ  year if occ_id==`job'&year_id==`year'&education==`education'&equation==1
                 local index_counter=1
                     foreach index in $index_list {
                         if `r(N)'!=0 {
@@ -164,7 +168,7 @@ global ref_skill_name   abstract
             foreach index in $index_list {
                 if `r(N)'!=0 {
                     qui generate i_`index'_`job'_`year'=0
-                    qui replace i_`index'_`job'_`year'=-1 if occ_id==`job'&year_id==`year'&skill==`counter'
+                    qui replace i_`index'_`job'_`year'=-1 if occ_id==`job'&year_id==`year'&skill==`counter'&equation==1
                 
                     local ++var_counter
                 }
@@ -175,11 +179,37 @@ global ref_skill_name   abstract
     }
 
 
+    cap drop e2_index_*
+    forvalues education=1/$n_educ {
+        local index_counter=1
+        foreach index in $index_list {
+            generate e2_index_`index_counter'_`education'=0
+            qui replace e2_index_`index_counter'_`education'=`index' if equation==2 & education==`education'
+            local ++index_counter
+        }
+    }
 
-    sort education occupation year skill  
+
+    di "Creating omega restriction variables", as result
+    *Creating equation 2 variables
+    foreach education in $educ_lev {
+    qui summ  year if education==`education'&equation==2
+    foreach index in $index_list {
+        if `r(N)'!=0 {
+            generate ts_`index'`education'=0
+            replace ts_`index'`education'= `index' if education==`education'&equation==2
+        }
+    }
+    }
+
+
+    *Here I filter the jobs that 
+
+
+    sort equation education occupation year skill  
+
 
 /*
-
 di "Expanding employment equation variables", as result
 *Creating equation 3 variables
 
