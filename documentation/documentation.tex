@@ -1,4 +1,4 @@
-\left( \documentclass[a4paper, 12pt]{article}
+\documentclass[a4paper, 12pt]{article}
 \input{commandspreamble.tex}
 \usepackage{tabularx}
 \defcitealias{NationalAcademyofSciences.CommitteeonOccupationalClassificationandAnalysis.1971}{National Academy of Sciences, 1971}
@@ -44,6 +44,11 @@
 
 
 \section{New approach (v2):}
+\subsection{Counting parameters}
+\beqns
+\Delta \overline{ \ln S^e_{ijet}}&=&\frac{\sigma_j}{\sigma_j-1} \left(\sum_k \theta_{ke}\overline{S_{kejt}} \Delta \ln A_{kjt}-\Delta \ln A_{ijt}\right)+\varepsilon_{iej} \label{eq:skills_eq} 
+\eeqns
+We have $12JT$ observations, and we need to identify $4JT$ $\pi$ parameters, and $12\theta$. So, my take on this is that we have the right number of observations, but it is unclear to me what is identifying what.
 \subsection{Model equations}
 At the job level it holds that:
 \beqn

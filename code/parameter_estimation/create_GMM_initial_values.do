@@ -8,7 +8,9 @@ global not_reference    manual
 {
     use "data/additional_processing/gmm_example_dataset", clear
 
-    
+    cap drop _*
+    cap drop `y_ref'
+
     tempvar temp
     tempvar y_ref
 

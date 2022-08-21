@@ -26,7 +26,7 @@ global ref_skill_name   abstract
         replace skill_sum=50.6893959439257*manual+19.4324378083784*social+58.5900598551701*routine+49.0523127821848*abstract if education==2
         replace skill_sum=51.6893959439257*manual+69.4324378083784*social+23.5900598551701*routine+13.0523127821848*abstract if education==3
 
-        keep if inlist(occupation, 1112,1121,1122)
+        *keep if inlist(occupation, 1112,1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -96,6 +96,8 @@ global ref_skill_name   abstract
     sort equation skill occupation  year   education   
 
 
+
+
     egen occ_id=group(occupation)
     egen year_id=group(year)
 
@@ -126,6 +128,11 @@ global ref_skill_name   abstract
     keep if inlist(equation,1,2)
     keep occupation-equation occ_id year_id
 
+    tempvar temp
+    gegen `temp'=nunique(education) if equation==1, by(occupation)
+    egen n_education=max(`temp'), by(occupation)
+
+    keep if n_education==3
 
 }
 
@@ -260,7 +267,7 @@ save "data/additional_processing/gmm_example_dataset", replace
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 
 cap drop ln_alpha
-egen ln_alpha=group(occupation skill year)
+egen ln_alpha=group(occupation skill year) if equation==1
 order ln_alpha, after(equation)
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 

@@ -5,7 +5,7 @@ clear;
 
 %%
 
-options = optimoptions('fmincon','Display','iter','MaxFunctionEvaluations',1000000);
+options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',2000000);
 
 
 
@@ -33,7 +33,8 @@ init_sol_vec=table2array(init_sol(:,'parameter'));
 [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_code, ...
     lower_bound, upper_bound]= extract_data_matrices(data);
 
-    %%
+
+%%
 
 error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_dln_a_index,e1_educ_index);
 

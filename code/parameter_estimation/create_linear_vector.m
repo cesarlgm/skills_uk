@@ -49,5 +49,5 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     theta_pi=e_1_full_d_ln_a.*full_theta;
     eqn1part_2=d_ln_a;
 
-    result=vertcat(theta_pi,eqn1part_2);
+    result=vertcat(theta_pi,eqn1part_2,theta);
 end

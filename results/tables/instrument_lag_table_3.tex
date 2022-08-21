@@ -1,0 +1,24 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\toprule
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+            &\multicolumn{1}{c}{Manual}&\multicolumn{1}{c}{Social}&\multicolumn{1}{c}{Routine}&\multicolumn{1}{c}{fs\_abstract\_3}\\
+\midrule
+z\_e\_manual\_3&        0.76\sym{***}&       -0.00         &       -0.04\sym{***}&        0.00         \\
+            &      (0.01)         &      (0.00)         &      (0.01)         &         (.)         \\
+\addlinespace
+z\_e\_social\_3&        0.03\sym{*}  &        0.99\sym{***}&        0.02\sym{*}  &        0.00         \\
+            &      (0.01)         &      (0.00)         &      (0.01)         &         (.)         \\
+\addlinespace
+z\_e\_routine\_3&        0.11\sym{***}&        0.03\sym{***}&        0.95\sym{***}&        0.00         \\
+            &      (0.02)         &      (0.00)         &      (0.01)         &         (.)         \\
+\midrule
+F           &      473.17         &    13497.79         &     1297.97         &           .         \\
+r2          &        0.52         &        0.97         &        0.75         &           .         \\
+N           &     3948.00         &     3948.00         &     3948.00         &     3948.00         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
