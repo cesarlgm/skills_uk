@@ -18,8 +18,7 @@ function result=create_linear_vector(parameter_vector,size_vector,...
 
     %Extracting dlnA vector
     %Under the current version, d_ln_a here stands for pi.
-    %These pi are no longer restricted. I truly have for pi parameters by
-    %year-education-job cell
+    %Abstract pi's are restricted to be zero.
     d_ln_a=splitted_vector{2};
 
     %Creates the skill by job full dlnA vector 

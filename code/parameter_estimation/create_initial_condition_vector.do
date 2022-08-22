@@ -42,7 +42,7 @@ regsave
     save `pi_file'
 restore
 
-
+/*
 regress y_var ts_* if equation==2, nocon
 
 regsave
