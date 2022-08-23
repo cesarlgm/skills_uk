@@ -21,7 +21,13 @@ global ref_skill_name   abstract
         *Including only jobs I have observations for
         use "data/additional_processing/gmm_skills_dataset", clear
 
-        *keep if inlist(occupation, 1112,1121,1122)
+        cap drop temp
+        *Filtering by number of education levels in the job
+        gegen temp=nunique(education) if equation==1, by(occupation year)
+        egen n_educ=max(temp), by(occupation year)
+        keep if n_educ==3
+
+        keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -203,9 +209,82 @@ drop if equation==1&skill==$ref_skill_num
     }
     }
 
+
+    cap drop z_*
+    forvalues educ=1/3 {
+        foreach index in $index_list {
+            if "`index'"!="$ref_skill_name" {
+                cap drop temp 
+                cap drop z_`index'_e`educ'
+                generate temp=`index' if education==`educ'
+                egen z_`index'_e`educ'=max(temp), by(occupation year)
+                cap drop temp 
+            }
+        }
+    }
+
+    foreach index in $index_list {
+        if "`index'"!="$ref_skill_name" {
+            generate z_`index'_1=.
+            replace z_`index'_1=z_`index'_e2 if education==1&equation==1
+            replace z_`index'_1=z_`index'_e1 if inlist(education,2,3)&equation==1
+
+            generate z_`index'_2=.
+            replace z_`index'_2=z_`index'_e2 if education==3&equation==1
+            replace z_`index'_2=z_`index'_e3 if inlist(education,1,2)&equation==1
+        }
+    }
+
+
+
+    *Creating skill levels of other education levels
+    qui forvalues education=1/$n_educ {
+        foreach job in $jobs {
+            foreach year in $years {
+                qui summ  year if occ_id==`job'&year_id==`year'&education==`education'&equation==1
+                local index_counter=1
+                    foreach index in $index_list {
+                        if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
+                            qui generate z1s_1_`index_counter'_`education'_`job'_`year'=0
+                            qui replace z1s_1_`index_counter'_`education'_`job'_`year'= z_`index'_1 if occ_id==`job'&year_id==`year'&equation==1&education==`education'
+                            
+
+                            qui generate z1s_2_`index_counter'_`education'_`job'_`year'=0
+                            qui replace z1s_2_`index_counter'_`education'_`job'_`year'= z_`index'_2 if occ_id==`job'&year_id==`year'&equation==1&education==`education'
+                            local ++var_counter
+                        }
+                        local ++index_counter
+                    }
+            }
+        }
+    }
+
+
+
+
+    local drop_counter=0
+    *Note: I made sure that I was not excluding 1 education level fully.
+    foreach variable of varlist z1s* {
+        cap qui summ `variable'
+        if `r(max)'==0 {    
+            drop `variable'
+            local ++drop_counter
+        }
+
+    }
+    di "`drop_counter'"
+
+
+    order e1s_* z1s_* i_* ts_*, last
     
     *Here I filter the jobs that 
     sort equation education occupation year skill  
+
+
+
+    *Adding line for inst
+
+
 
     /*
 

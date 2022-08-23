@@ -4,6 +4,6 @@ function z_matrix=get_z_matrix(data)
     %Instruments for third equation are 
     names=transpose(data.Properties.VariableNames);
 
-    z_names=startsWith(names,["e1s","i_","ts_"]);
+    z_names=startsWith(names,["z1s_","i_","ts_"]);
     z_matrix=table2array(data(:,z_names));
 end

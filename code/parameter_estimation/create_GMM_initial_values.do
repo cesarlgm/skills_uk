@@ -11,6 +11,13 @@ global not_reference    manual
         *Including only jobs I have observations for
         use "data/additional_processing/gmm_skills_dataset", clear
 
+        cap drop temp
+        *Filtering by number of education levels in the job
+        gegen temp=nunique(education) if equation==1, by(occupation year)
+        egen n_educ=max(temp), by(occupation year)
+        keep if n_educ==3
+
+
         *keep if inlist(occupation, 1112,1121,1122)
 
         drop if missing(y_var)
@@ -358,6 +365,8 @@ global not_reference    manual
 
     keep source_name parameter identifier
     generate parameter_id=_n
+
+    replace parameter=0.01 if parameter<0&source_name=="theta"
 
     save "data/additional_processing/initial_values_file", replace
     export delimited using  "data/additional_processing/initial_estimates.csv", replace
