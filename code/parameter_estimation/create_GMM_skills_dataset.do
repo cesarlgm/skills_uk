@@ -18,6 +18,7 @@ drop if year==1997
 *Collapsing at the occupation-education-year level
 gcollapse (mean) $index_list *_i (count) obs=chands, by(occupation year education)
     
+
 *Uncomment this to do long differences
 *keep if  inlist(year,2001,2017)
 
@@ -47,7 +48,7 @@ frames change equation1
     local counter=1
     foreach index in $index_list {
         preserve  
-        keep year education occupation d_l_`index' $index_list
+        keep year education occupation d_l_`index' $index_list obs
         rename d_l_`index' y_var
         generate skill=`counter'
         tempfile skill`counter'

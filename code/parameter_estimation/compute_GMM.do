@@ -217,47 +217,62 @@ drop if equation==1&skill==$ref_skill_num
                 cap drop temp 
                 cap drop z_`index'_e`educ'
                 generate temp=`index' if education==`educ'
+                generate temp_size=obs if education==`educ'
                 egen z_`index'_e`educ'=max(temp), by(occupation year)
+                egen zs_`index'_e`educ'=sum(temp_size), by(occupation year)
                 cap drop temp 
             }
         }
     }
 
+
     foreach index in $index_list {
         if "`index'"!="$ref_skill_name" {
             generate z_`index'_1=.
+            generate zs_`index'_1=.
             replace z_`index'_1=z_`index'_e2 if education==1&equation==1
+            replace zs_`index'_1=zs_`index'_e2 if education==1&equation==1
             replace z_`index'_1=z_`index'_e1 if inlist(education,2,3)&equation==1
+            replace zs_`index'_1=zs_`index'_e1 if inlist(education,2,3)&equation==1
+
 
             generate z_`index'_2=.
+            generate zs_`index'_2=.
             replace z_`index'_2=z_`index'_e2 if education==3&equation==1
+            replace zs_`index'_2=zs_`index'_e2 if education==3&equation==1
             replace z_`index'_2=z_`index'_e3 if inlist(education,1,2)&equation==1
-        }
-    }
+            replace zs_`index'_2=zs_`index'_e3 if inlist(education,1,2)&equation==1
+     
+            egen zt_`index'=rowtotal(zs_`index'_1 zs_`index'_2)
 
+            generate zw_`index'_1= zs_`index'_1/ zt_`index'
+            generate zw_`index'_2= zs_`index'_2/ zt_`index'
+        
+        
+            generate zv_`index'=zw_`index'_1*z_`index'_1+zw_`index'_2*z_`index'_2 if equation==1
+        }
+     
+    }
 
 
     *Creating skill levels of other education levels
-    qui forvalues education=1/$n_educ {
-        foreach job in $jobs {
-            foreach year in $years {
-                qui summ  year if occ_id==`job'&year_id==`year'&education==`education'&equation==1
-                local index_counter=1
-                    foreach index in $index_list {
-                        if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
-                            qui generate z1s_1_`index_counter'_`education'_`job'_`year'=0
-                            qui replace z1s_1_`index_counter'_`education'_`job'_`year'= z_`index'_1 if occ_id==`job'&year_id==`year'&equation==1&education==`education'
-                            
-
-                            qui generate z1s_2_`index_counter'_`education'_`job'_`year'=0
-                            qui replace z1s_2_`index_counter'_`education'_`job'_`year'= z_`index'_2 if occ_id==`job'&year_id==`year'&equation==1&education==`education'
-                            local ++var_counter
-                        }
-                        local ++index_counter
+    
+    foreach job in $jobs {
+        foreach year in $years {
+            qui summ  year if occ_id==`job'&year_id==`year'&equation==1
+            local index_counter=1
+                foreach index in $index_list {
+                    if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
+                        qui generate z1s_1_`index_counter'_`education'_`job'_`year'=0
+                        qui replace z1s_1_`index_counter'_`education'_`job'_`year'= z_`index'_1 if occ_id==`job'&year_id==`year'&equation==1&education==`education'
+                        
+                        local ++var_counter
                     }
-            }
+                    local ++index_counter
+                }
         }
     }
+
 
 
 
