@@ -13,7 +13,7 @@ global not_reference    manual
 
         cap drop temp
         *Filtering by number of education levels in the job
-        gegen temp=nunique(education) if equation==1, by(occupation year)
+        gegen temp=nunique(education) if equation==1&!missing(y_var), by(occupation year)
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 

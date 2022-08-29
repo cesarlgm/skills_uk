@@ -23,11 +23,11 @@ global ref_skill_name   abstract
 
         cap drop temp
         *Filtering by number of education levels in the job
-        gegen temp=nunique(education) if equation==1, by(occupation year)
+        gegen temp=nunique(education) if equation==1&!missing(y_var), by(occupation year)
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        keep if inlist(occupation, 1121,1122)
+        *keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -261,19 +261,17 @@ drop if equation==1&skill==$ref_skill_num
         foreach year in $years {
             qui summ  year if occ_id==`job'&year_id==`year'&equation==1
             local index_counter=1
-                foreach index in $index_list {
-                    if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
-                        qui generate z1s_1_`index_counter'_`education'_`job'_`year'=0
-                        qui replace z1s_1_`index_counter'_`education'_`job'_`year'= z_`index'_1 if occ_id==`job'&year_id==`year'&equation==1&education==`education'
-                        
-                        local ++var_counter
-                    }
-                    local ++index_counter
+            foreach index in $index_list {
+                if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
+                    qui generate z1s_`index_counter'_`job'_`year'=0
+                    qui replace z1s_`index_counter'_`job'_`year'= zv_`index' if occ_id==`job'&year_id==`year'&equation==1
+                    
+                    local ++var_counter
                 }
+                local ++index_counter
+            }
         }
     }
-
-
 
 
 
@@ -287,15 +285,13 @@ drop if equation==1&skill==$ref_skill_num
         }
 
     }
-    di "`drop_counter'"
+    di "Null variables:  `drop_counter'"
 
 
     order e1s_* z1s_* i_* ts_*, last
     
     *Here I filter the jobs that 
     sort equation education occupation year skill  
-
-
 
     *Adding line for inst
 
