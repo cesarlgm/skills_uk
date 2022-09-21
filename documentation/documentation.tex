@@ -69,16 +69,14 @@ In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods.
 \bitem
 	\item \textbf{Equation (1)}: 
 	Let $x_{ejt}$ be the row vector $\begin{pmatrix}
-		S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}
-	\end{pmatrix}$.  Define the matrix $X_{ejt}$ as the 4$\times$4 matrix containing the skill indexes by education. For simplicity, I have ignored the bars in the notation.
+		S_{1ejt}&S_{2ejt}&S_{3ejt}
+	\end{pmatrix}$.  Define the matrix $X_{ejt}$ as the 3$\times$3 matrix containing the skill indexes by education. This matrix excludes the reference skill. For simplicity, I have ignored the bars in the notation.
 	\beqns
-		X_{ejt}&=&\begin{pmatrix}S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
-							S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
-							S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
-							S_{1ejt}&S_{2ejt}&S_{3ejt}&S_{4ejt}\\
+		X_{ejt}&=&\begin{pmatrix}S_{1ejt}&S_{2ejt}&S_{3ejt}\\
+							S_{1ejt}&S_{2ejt}&S_{3ejt}\\
+							S_{1ejt}&S_{2ejt}&S_{3ejt}
 		\end{pmatrix}=\begin{pmatrix}
 		x_{ejt} \\
-		x_{ejt}\\
 		x_{ejt}\\
 	x_{ejt}	\end{pmatrix}
 	\eeqns
@@ -88,10 +86,6 @@ In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods.
 		\vdots \\\
 	 X_{3JT}\end{pmatrix}
 	\eeqns
- 	Let $I_e$ be the $N\times4$ matrix with columns given by education level $e$ dummies:
- 	\beqns
- 		I_e&=&\begin{pmatrix}\iota_e&\iota_e&\iota_e&\iota_e\end{pmatrix}
- 	\eeqns
  	The set of instruments for equation 1 is then:
  	\beqn
  	 		Z_1&=&\begin{pmatrix}I_1\odot X& I_2\odot X &I_3\odot X \end{pmatrix} \label{eq:equation1Z}

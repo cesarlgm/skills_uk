@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  3 AUG 2022 09:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  20 SEP 2022 21:43
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -1235,38 +1235,38 @@ Overfull \hbox (16.92761pt too wide) in paragraph at lines 61--66
 {C:/Users/thecs/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 170.
+(hyperref)                removing `\hbox' on input line 168.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 170.
+(hyperref)                removing `\mathsurround' on input line 168.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 170.
+(hyperref)                removing `\z@' on input line 168.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 170.
+(hyperref)                removing `\unskip' on input line 168.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 170.
+(hyperref)                removing `\@@italiccorr' on input line 168.
 
 (../results/figures/average_manual.tex
-<../results/figures/average_chands.png, id=108, 1759.57375pt x 1278.7775pt>
+<../results/figures/average_chands.png, id=107, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_chands.png Graphic file (type png)
 <use ../results/figures/average_chands.png>
 Package pdftex.def Info: ../results/figures/average_chands.png  used on input l
 ine 5.
 (pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
-<../results/figures/average_cstrengt.png, id=109, 1759.57375pt x 1278.7775pt>
+<../results/figures/average_cstrengt.png, id=108, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cstrengt.png Graphic file (type png)
 <use ../results/figures/average_cstrengt.png>
 Package pdftex.def Info: ../results/figures/average_cstrengt.png  used on input
  line 5.
 (pdftex.def)             Requested size: 156.5826pt x 113.79718pt.
-<../results/figures/average_cstamina.png, id=110, 1759.57375pt x 1278.7775pt>
+<../results/figures/average_cstamina.png, id=109, 1759.57375pt x 1278.7775pt>
 File: ../results/figures/average_cstamina.png Graphic file (type png)
 <use ../results/figures/average_cstamina.png>
 Package pdftex.def Info: ../results/figures/average_cstamina.png  used on input
@@ -1572,7 +1572,7 @@ Package rerunfilecheck Info: File `documentation.out' has not changed.
 Here is how much of TeX's memory you used:
  32265 strings out of 478864
  674931 string characters out of 2846731
- 1088155 words of memory out of 3000000
+ 1083155 words of memory out of 3000000
  49466 multiletter control sequences out of 15000+600000
  414158 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1597,7 +1597,7 @@ sy10.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmsy6.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 
 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on documentation.pdf (9 pages, 3020250 bytes).
+Output written on documentation.pdf (9 pages, 3020357 bytes).
 PDF statistics:
  329 PDF objects out of 1000 (max. 8388607)
  77 named destinations out of 1000 (max. 500000)
