@@ -138,7 +138,7 @@ global ref_skill_name   abstract
 }
 
 
-drop if equation==1&skill==$ref_skill_num
+*drop if equation==1
 
 *Now I expand the dataset with all the variables I need to create the GMM errors
 *Added zero restriction
@@ -349,7 +349,7 @@ save "data/additional_processing/gmm_example_dataset", replace
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 
 cap drop ln_alpha
-egen ln_alpha=group(occupation skill year) if equation==1
+egen ln_alpha=group(occupation skill year) if equation==1&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 
