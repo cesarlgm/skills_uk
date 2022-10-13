@@ -48,15 +48,15 @@
 \beqns
 \Delta \overline{ \ln S^e_{ijet}}&=&\frac{\sigma_j}{\sigma_j-1} \left(\sum_k \theta_{ke}\overline{S_{kejt}} \Delta \ln A_{kjt}-\Delta \ln A_{ijt}\right)+\varepsilon_{iej} \label{eq:skills_eq} 
 \eeqns
-We have $12JT$ observations, and we need to identify $4JT$ $\pi$ parameters, and $12\theta$. So, my take on this is that we have the right number of observations, but it is unclear to me what is identifying what.
+We have $12JT$ observations, and we need to identify $3JT$ $\pi$ parameters, and $12\theta$. 
 \subsection{Model equations}
 At the job level it holds that:
-\beqn
+\beqns
 %\Delta \overline{ \ln S^e_{iJet}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJt}} \Delta \ln A_{kJt}-\Delta \ln A_{iJt}\right) \label{eq:skills_eq} \\ 
-\Delta \overline{ \ln S^e_{ijet}}&=&\frac{\sigma_j}{\sigma_j-1} \left(\sum_k \theta_{ke}\overline{S_{kejt}} \Delta \ln A_{kjt}-\Delta \ln A_{ijt}\right)+\varepsilon_{iej} \\
-1&=&\sum_k\theta_k^e\overline{S_{keJt}}  \label{eq:total_sum} \\  
+\Delta \overline{ \ln S^e_{ijet}}&=&\frac{\sigma_j}{\sigma_j-1} \left(\sum_k \theta_{ke}\overline{S_{kejt}} \Delta \ln A_{kjt}-\Delta \ln A_{ijt}\right) \\
+1&=&\sum_k\theta_k^e\overline{S_{keJt}}  \label{eq:total_sum} 
 %\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\Delta \ln A_{kjt}+const_{e,e't} \label{eq:employment_eq} 
-\eeqn
+\eeqns
 %\paragraph*{Note:} in equation \eqref{eq:employment_eq} there is always a
 %redundant pairwise comparison. Note that $\Delta  \left[\ln
 %\frac{q_{eJt}}{q_{e'Jt}}\right]-\Delta  \left[\ln \frac{q_{e'Jt}}{q_{e^\star
@@ -123,8 +123,33 @@ In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods. We n
 	
 	I choose parameters $\theta$ to minimize the quadratic form:
 	\beqn
-		\min_{\theta} \frac{1}{N}\left(u'Z'(Z'Z)^{-1}Zu\right)
+		\min_{\theta} \frac{1}{N}\left(u'Z(Z'Z)^{-1}Z'u\right)
 	\eeqn
+
+	\subsection{Calculating the gradient}
+	\paragraph{Reminder:}
+	\beqns
+		\frac{\partial Q}{\partial x}=x'(A+A')
+	\eeqns
+	I can write the quadratic from as:
+	\beqns
+	 Q(\gamma)&=&\frac{1}{N}\left(u(\gamma)'Z(Z'Z)^{-1}Z'u(\gamma)\right)
+	\eeqns
+	then,
+	\beqns
+		\frac{\partial Q(\gamma)}{\partial \gamma}&=&\frac{2}{N}\left(\frac{\partial u(\gamma)}{\partial \gamma}\right)'Z(Z'Z)^{-1}Zu(\gamma)
+	\eeqns
+	now, I start element by element:
+	\beqns
+		\frac{\partial \Delta \ln S_{iejt}}{\partial \ln A_{kjt}}&=&\theta_{ke}S_{kejt}\\
+		\frac{\partial \Delta \ln S_{iejt}}{\partial \ln A_{ijt}}&=&\theta_{ie}S_{iejt}-1\\
+		\frac{\partial \Delta \ln S_{iejt}}{\partial \ln \theta_{ke}}&=&S_{kjt}\Delta \ln A_{kjt}
+	\eeqns
+	for the sum to 1 restrictions we have:
+	\beqns
+		\frac{\partial g_{ejt}(\gamma)}{\partial \theta_{ke}}&=&-S_{kejt}
+	\eeqns
+	\red{next thing to do: write the gradient}
 \eitem 
 %\section{How did I write the code?}
 %\subsection{Basic definitions}
