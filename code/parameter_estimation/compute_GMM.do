@@ -17,7 +17,8 @@ global ref_skill_name   abstract
 
 *Final dataset touches
 {
-    { 
+ 
+   { 
         *Including only jobs I have observations for
         use "data/additional_processing/gmm_skills_dataset", clear
 
@@ -216,10 +217,10 @@ global ref_skill_name   abstract
             if "`index'"!="$ref_skill_name" {
                 cap drop temp 
                 cap drop z_`index'_e`educ'
-                generate temp=`index' if education==`educ'
-                generate temp_size=obs if education==`educ'
-                egen z_`index'_e`educ'=max(temp), by(occupation year)
-                egen zs_`index'_e`educ'=sum(temp_size), by(occupation year)
+                generate temp=`index' if education==`educ' & equation==1
+                generate temp_size=obs if education==`educ' & equation==1
+                egen z_`index'_e`educ'=max(temp), by(skill occupation year)
+                egen zs_`index'_e`educ'=sum(temp_size), by(skill occupation year)
                 cap drop temp 
             }
         }
@@ -228,6 +229,11 @@ global ref_skill_name   abstract
 
     foreach index in $index_list {
         if "`index'"!="$ref_skill_name" {
+            
+            *z_`index'_e gives the index
+            *zs_`index'_e gives the occupation size
+
+
             generate z_`index'_1=.
             generate zs_`index'_1=.
             replace z_`index'_1=z_`index'_e2 if education==1&equation==1
@@ -254,6 +260,9 @@ global ref_skill_name   abstract
      
     }
 
+    order occupation  year skill education manual social routine abstract z*_1 z*_2 zv*, first
+    sort equation skill  occupation year  education
+
 
     *Creating skill levels of other education levels
     
@@ -273,7 +282,10 @@ global ref_skill_name   abstract
         }
     }
 
+    *Note 10/13/22 this bit seems to be ok
 
+
+    *I also verified that the depednet variable is constructed appropriately
 
     local drop_counter=0
     *Note: I made sure that I was not excluding 1 education level fully.
@@ -343,15 +355,21 @@ order ee_group_id, after(education_d)
 
 */
 
+order e1s* i_* e2*, last
 
 save "data/additional_processing/gmm_example_dataset", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
-
 cap drop ln_alpha
 egen ln_alpha=group(occupation skill year) if equation==1&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
+
+
+
+*y_var is appropriate set to 1 for equatip¡on 2
+
+
 
 
 *This part of the code didn't work
