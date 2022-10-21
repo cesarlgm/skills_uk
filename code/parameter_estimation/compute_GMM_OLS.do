@@ -210,57 +210,7 @@ global ref_skill_name   abstract
     }
     }
 
-
-    cap drop z_*
-    forvalues educ=1/3 {
-        foreach index in $index_list {
-            if "`index'"!="$ref_skill_name" {
-                cap drop temp 
-                cap drop z_`index'_e`educ'
-                generate temp=`index' if education==`educ' & equation==1
-                generate temp_size=obs if education==`educ' & equation==1
-                egen z_`index'_e`educ'=max(temp), by(skill occupation year)
-                egen zs_`index'_e`educ'=sum(temp_size), by(skill occupation year)
-                cap drop temp 
-            }
-        }
-    }
-
-
-    foreach index in $index_list {
-        if "`index'"!="$ref_skill_name" {
-            
-            *z_`index'_e gives the index
-            *zs_`index'_e gives the occupation size
-
-
-            generate z_`index'_1=.
-            generate zs_`index'_1=.
-            replace z_`index'_1=z_`index'_e2 if education==1&equation==1
-            replace zs_`index'_1=zs_`index'_e2 if education==1&equation==1
-            replace z_`index'_1=z_`index'_e1 if inlist(education,2,3)&equation==1
-            replace zs_`index'_1=zs_`index'_e1 if inlist(education,2,3)&equation==1
-
-
-            generate z_`index'_2=.
-            generate zs_`index'_2=.
-            replace z_`index'_2=z_`index'_e2 if education==3&equation==1
-            replace zs_`index'_2=zs_`index'_e2 if education==3&equation==1
-            replace z_`index'_2=z_`index'_e3 if inlist(education,1,2)&equation==1
-            replace zs_`index'_2=zs_`index'_e3 if inlist(education,1,2)&equation==1
-     
-            egen zt_`index'=rowtotal(zs_`index'_1 zs_`index'_2)
-
-            generate zw_`index'_1= zs_`index'_1/ zt_`index'
-            generate zw_`index'_2= zs_`index'_2/ zt_`index'
-        
-        
-            generate zv_`index'=zw_`index'_1*z_`index'_1+zw_`index'_2*z_`index'_2 if equation==1
-        }
-     
-    }
-
-    order occupation  year skill education manual social routine abstract z*_1 z*_2 zv*, first
+    order occupation  year skill education manual social routine abstract, first
     sort equation skill  occupation year  education
 
 
@@ -273,7 +223,7 @@ global ref_skill_name   abstract
             foreach index in $index_list {
                 if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
                     qui generate z1s_`index_counter'_`job'_`year'=0
-                    qui replace z1s_`index_counter'_`job'_`year'= zv_`index' if occ_id==`job'&year_id==`year'&equation==1
+                    qui replace z1s_`index_counter'_`job'_`year'= `index' if occ_id==`job'&year_id==`year'&equation==1
                     
                     local ++var_counter
                 }
@@ -357,13 +307,13 @@ order ee_group_id, after(education_d)
 
 order e1s* i_* e2*, last
 
-save "data/additional_processing/gmm_example_dataset", replace
+save "data/additional_processing/gmm_example_dataset_ols", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
 egen ln_alpha=group(occupation skill year) if equation==1&skill!=$ref_skill_num
 order ln_alpha, after(equation)
-export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
+export delimited using  "data/additional_processing/gmm_example_dataset_ols.csv", replace
 
 
 
