@@ -6,7 +6,7 @@
 % -	create_moment_error
 
 function e_squared=get_quadratic_form(parameter,z_matrix,y_var,s_matrix,size_vector,e1_dln_a_index,e1_educ_index)
-    n_parameters=size(parameter,1);
+    n_parameters=size(z_matrix,2);
     %First I compute the errors
     e_vector=create_moment_error(parameter,y_var,s_matrix,size_vector,e1_dln_a_index,e1_educ_index);
     z_prime_z_inv=eye(n_parameters)/(transpose(z_matrix)*z_matrix);

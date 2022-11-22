@@ -15,6 +15,11 @@ global ref_skill_num    4
 global ref_skill_name   abstract
 
 
+*global index_list   manual social routine abstract 
+global index_list   manual social abstract 
+
+
+
 *Final dataset touches
 {
  
@@ -28,7 +33,7 @@ global ref_skill_name   abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        *keep if inlist(occupation, 1121,1122)
+        *keep if inlist(occupation, 1112,1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -97,7 +102,10 @@ global ref_skill_name   abstract
 
     sort equation skill occupation  year   education   
 
-
+    *============================================================================
+    *COMMENT THIS LINE IF I AM USING FOUR SKILLS
+    *============================================================================
+    drop if skill==3
 
 
     egen occ_id=group(occupation)
@@ -138,6 +146,9 @@ global ref_skill_name   abstract
 
 }
 
+*=========================================================================================
+*REDOING ROUTINE INDEX
+*=========================================================================================
 
 *drop if equation==1
 
@@ -152,7 +163,7 @@ global ref_skill_name   abstract
                 qui summ  year if occ_id==`job'&year_id==`year'&education==`education'&equation==1
                 local index_counter=1
                     foreach index in $index_list {
-                        if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
+                        if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
                             qui generate e1s_`index_counter'_`education'_`job'_`year'=0
                             qui replace e1s_`index_counter'_`education'_`job'_`year'= `index' if occ_id==`job'&year_id==`year'&equation==1&education==`education'
                             local ++var_counter
@@ -174,7 +185,7 @@ global ref_skill_name   abstract
             local index_counter
             qui summ  year if occ_id==`job'&year_id==`year'
             foreach index in $index_list {
-                if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
+                if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
                     qui generate i_`index'_`job'_`year'=0
                     qui replace i_`index'_`job'_`year'=-1 if occ_id==`job'&year_id==`year'&skill==`counter'&equation==1
                 
@@ -215,19 +226,20 @@ global ref_skill_name   abstract
 
 
     *Creating skill levels of other education levels
-    
-    foreach job in $jobs {
-        foreach year in $years {
-            qui summ  year if occ_id==`job'&year_id==`year'&equation==1
-            local index_counter=1
-            foreach index in $index_list {
-                if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
-                    qui generate z1s_`index_counter'_`job'_`year'=0
-                    qui replace z1s_`index_counter'_`job'_`year'= `index' if occ_id==`job'&year_id==`year'&equation==1
-                    
-                    local ++var_counter
+    forvalues education=1/$n_educ{
+        foreach job in $jobs {
+            foreach year in $years {
+                qui summ  year if occ_id==`job'&year_id==`year'&equation==1
+                local index_counter=1
+                foreach index in $index_list {
+                    if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
+                        cap qui generate z1s_`index_counter'_`education'=0
+                        qui replace z1s_`index_counter'_`education'= `index' if occ_id==`job'&year_id==`year'&education==`education'&equation==1
+                        
+                        local ++var_counter
+                    }
+                    local ++index_counter
                 }
-                local ++index_counter
             }
         }
     }
@@ -305,16 +317,18 @@ order ee_group_id, after(education_d)
 
 */
 
-order e1s* i_* e2*, last
+order e1s*  z1s_* i_* e2*  ts_*, last
 
 save "data/additional_processing/gmm_example_dataset_ols", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
-egen ln_alpha=group(occupation skill year) if equation==1&skill!=$ref_skill_num
+egen ln_alpha=group(occupation skill year) if equation==1 //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 export delimited using  "data/additional_processing/gmm_example_dataset_ols.csv", replace
 
+keep if equation==1 
+export delimited using  "data/additional_processing/gmm_example_dataset_ols_norest.csv", replace
 
 
 *y_var is appropriate set to 1 for equatip¡on 2
@@ -340,4 +354,23 @@ export delimited using  "data/additional_processing/gmm_example_dataset_ols.csv"
 
     regress d_y_var_3 i.education#c.(d_routine d_abstract d_social), nocons
 }
+*/
+
+
+*==================================================================================================
+*CORRELATIONS
+*==================================================================================================
+/*
+use "data/additional_processing/gmm_example_dataset_ols", clear
+keep occupation year y_var skill education manual social routine abstract equation
+keep if equation==1
+
+reshape wide y_var , i(occupation year education) j(skill)
+
+rename (y_var1 y_var2 y_var3 y_var4) (y_manual y_social y_routine y_abstract)
+pwcorr y_*
+pwcorr manual social routine abstract
+
+reghdfe y_abstract manual routine abstract social, absorb(occupation)
+reghdfe y_routine manual routine abstract social, absorb(occupation)
 */

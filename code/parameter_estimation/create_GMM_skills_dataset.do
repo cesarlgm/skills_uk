@@ -43,6 +43,8 @@ foreach index in $index_list {
 
 frames copy default equation1
 frames change equation1
+
+
 *Creating equation 1 dataset
 {
     local counter=1
@@ -56,10 +58,12 @@ frames change equation1
         local ++counter
         restore
     }
+
     clear
     forvalues i=1/4 {
         append using `skill`i''
     }
+    
     label define skill 1 "manual" 2 "social" 3 "routine" 4 "abstract"
     label values skill skill
 

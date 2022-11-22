@@ -3,7 +3,7 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
 
     %Defining number of parameters I need to compute:
     n_ln_A_effective=max(table2array(data(:,"ln_alpha")));
-    n_theta=12;
+    n_theta=9;
     n_total_parameters=n_theta+n_ln_A_effective;
 
     %size vector gives the info necessary to split the parameter vector

@@ -54,10 +54,11 @@ global not_reference    manual
     {
         use "data/additional_processing/gmm_employment_dataset", clear
         drop if missing(y_var)
-            
+
+
         preserve
             keep occupation education_d year indexd*
-            forvalues skill=1/4 {
+            foreach skill in 1 2 3 4  {
                 rename indexd`skill' index`skill'
             }
             rename education_d education
@@ -85,6 +86,10 @@ global not_reference    manual
 
     drop if missing(y_var)
 
+    *============================================================================
+    *COMMENT THIS LINE IF I AM USING FOUR SKILLS
+    *============================================================================
+    drop if skill==3
     sort equation skill occupation  year   education   
 
 
@@ -256,12 +261,13 @@ global not_reference    manual
 
     rename pi1 pi_manual
     rename pi2 pi_social
-    rename pi3 pi_routine
+    *rename pi3 pi_routine
     rename pi4 pi_abstract
 
     tempfile pi_file
     save `pi_file'
 }
+
 
 *Part 2: compute thetas
 {
@@ -276,7 +282,7 @@ global not_reference    manual
         }
 
         generate y_var_init=.
-        forvalues skill=1/4 {
+        foreach skill in 1 2 3 {
             local index: word `skill' of $index_list 
             replace y_var_init=y_var+pi_`index' if skill==`skill'
         }
@@ -291,8 +297,8 @@ global not_reference    manual
             forvalues education=1/$n_educ {
                 local social`education'=            _b[`education'.education#c.x_social]
                 local $not_reference`education'=     _b[`education'.education#c.x_$not_reference]
-                local routine`education'=           _b[`education'.education#c.x_routine]
-                replace skill_sum=_b[`education'.education#c.x_social]*social+_b[`education'.education#c.x_abstract]*abstract+_b[`education'.education#c.x_routine]*routine if education==`education'
+                *local routine`education'=           _b[`education'.education#c.x_routine]
+                replace skill_sum=_b[`education'.education#c.x_social]*social+_b[`education'.education#c.x_abstract]*abstract /*+_b[`education'.education#c.x_routine]*routine */ if education==`education'
             }
             generate y_skill_sum=1-skill_sum
         
@@ -312,7 +318,7 @@ global not_reference    manual
         generate skill=.
         generate parameter=.
         forvalues educ=1/$n_educ {
-            forvalues skill=1/$n_skills {
+            foreach skill in 1 2 3 {
                 replace education=`educ' if _n==`counter'
                 replace skill=`skill' if _n==`counter'
                 local skill_name: word `skill' of $index_list 
@@ -356,8 +362,9 @@ global not_reference    manual
     replace  identifier=occupation+"."+year+"."+skill   if source_name=="pi_ij"
     replace  identifier=education+"."+skill             if source_name=="theta"
 
-    drop if skill=="4" & source_name=="pi_ij"
+    
     *Drop this is parameters are not restricted
+    *drop if skill=="4" & source_name=="pi_ij"
 
     generate param_number=_n
     replace param_number=_n-3000 if source_name=="theta"
@@ -367,6 +374,8 @@ global not_reference    manual
     generate parameter_id=_n
 
     replace parameter=0.01 if parameter<0&source_name=="theta"
+
+    drop if missing(parameter)
 
     save "data/additional_processing/initial_values_file", replace
     export delimited using  "data/additional_processing/initial_estimates.csv", replace

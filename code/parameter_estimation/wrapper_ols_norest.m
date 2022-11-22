@@ -5,7 +5,7 @@ clear;
 
 %%
 
-options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',500000);
+options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',2000000);
 
 
 
@@ -15,7 +15,7 @@ addpath('code/parameter_estimation/','data');
 
 
 
-data_path="data/additional_processing/gmm_example_dataset_ols.csv";
+data_path="data/additional_processing/gmm_example_dataset_ols_norest.csv";
 sol_path="data/additional_processing/initial_estimates.csv";
 
 %% 

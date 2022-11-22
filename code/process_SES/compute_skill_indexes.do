@@ -27,6 +27,13 @@ foreach variable in `variable_list' {
 
 foreach index in $index_list {
     egen `index'=rowmean(${`index'})
+    
+    *In this line I reverse the routine index
+    if "`index'"=="routine" {
+        replace `index'=1-`index'
+    }
+
+    *This compute the inverse hyperbolic sine
     generate `index'_i=asinh(`index')
 }
 

@@ -14,10 +14,13 @@ This do file creates the dataset I need to execute the GMM code in matlab
 global ref_skill_num    4
 global ref_skill_name   abstract
 
+*global index_list   manual social routine abstract 
+global index_list   manual social abstract 
+
+
 
 *Final dataset touches
 {
- 
    { 
         *Including only jobs I have observations for
         use "data/additional_processing/gmm_skills_dataset", clear
@@ -28,7 +31,7 @@ global ref_skill_name   abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        *keep if inlist(occupation, 1121,1122)
+        keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -152,7 +155,7 @@ global ref_skill_name   abstract
                 qui summ  year if occ_id==`job'&year_id==`year'&education==`education'&equation==1
                 local index_counter=1
                     foreach index in $index_list {
-                        if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
+                        if `r(N)'!=0  /* & "`index'"!="$ref_skill_name" */   {
                             qui generate e1s_`index_counter'_`education'_`job'_`year'=0
                             qui replace e1s_`index_counter'_`education'_`job'_`year'= `index' if occ_id==`job'&year_id==`year'&equation==1&education==`education'
                             local ++var_counter
@@ -174,7 +177,7 @@ global ref_skill_name   abstract
             local index_counter
             qui summ  year if occ_id==`job'&year_id==`year'
             foreach index in $index_list {
-                if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
+                if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
                     qui generate i_`index'_`job'_`year'=0
                     qui replace i_`index'_`job'_`year'=-1 if occ_id==`job'&year_id==`year'&skill==`counter'&equation==1
                 
@@ -214,7 +217,7 @@ global ref_skill_name   abstract
     cap drop z_*
     forvalues educ=1/3 {
         foreach index in $index_list {
-            if "`index'"!="$ref_skill_name" {
+            *if "`index'"!="$ref_skill_name" {
                 cap drop temp 
                 cap drop z_`index'_e`educ'
                 generate temp=`index' if education==`educ' & equation==1
@@ -222,18 +225,16 @@ global ref_skill_name   abstract
                 egen z_`index'_e`educ'=max(temp), by(skill occupation year)
                 egen zs_`index'_e`educ'=sum(temp_size), by(skill occupation year)
                 cap drop temp 
-            }
+            *}
         }
     }
 
 
     foreach index in $index_list {
-        if "`index'"!="$ref_skill_name" {
+        *if "`index'"!="$ref_skill_name" {
             
             *z_`index'_e gives the index
             *zs_`index'_e gives the occupation size
-
-
             generate z_`index'_1=.
             generate zs_`index'_1=.
             replace z_`index'_1=z_`index'_e2 if education==1&equation==1
@@ -253,19 +254,28 @@ global ref_skill_name   abstract
 
             generate zw_`index'_1= zs_`index'_1/ zt_`index'
             generate zw_`index'_2= zs_`index'_2/ zt_`index'
-        
-        
+
             generate zv_`index'=zw_`index'_1*z_`index'_1+zw_`index'_2*z_`index'_2 if equation==1
-        }
+        *}
      
     }
+
+
+    forvalues education=1/$n_educ {
+        foreach index in $index_list {
+            generate z1s_`index'_`education'=0
+            qui replace z1s_`index'_`education'=zv_`index' if equation==1 & education==`education'
+        }
+    }
+
+
 
     order occupation  year skill education manual social routine abstract z*_1 z*_2 zv*, first
     sort equation skill  occupation year  education
 
 
     *Creating skill levels of other education levels
-    
+    /* 
     foreach job in $jobs {
         foreach year in $years {
             qui summ  year if occ_id==`job'&year_id==`year'&equation==1
@@ -281,12 +291,13 @@ global ref_skill_name   abstract
             }
         }
     }
+    */
 
     *Note 10/13/22 this bit seems to be ok
 
 
     *I also verified that the depednet variable is constructed appropriately
-
+    /*
     local drop_counter=0
     *Note: I made sure that I was not excluding 1 education level fully.
     foreach variable of varlist z1s* {
@@ -297,8 +308,10 @@ global ref_skill_name   abstract
         }
 
     }
+    */
     di "Null variables:  `drop_counter'"
 
+    drop zv_*
 
     order e1s_* z1s_* i_* ts_*, last
     
@@ -355,13 +368,13 @@ order ee_group_id, after(education_d)
 
 */
 
-order e1s* i_* e2*, last
+order e1s* i_* e2* ts_*, last
 
 save "data/additional_processing/gmm_example_dataset", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
-egen ln_alpha=group(occupation skill year) if equation==1&skill!=$ref_skill_num
+egen ln_alpha=group(occupation skill year) if equation==1 //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 

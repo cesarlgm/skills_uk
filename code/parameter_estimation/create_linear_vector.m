@@ -30,6 +30,7 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     %skill and year.
 
     %I get these indexes in the function get_occ_indexes
+    %e_1_full_d_ln_a=d_ln_a;
     e_1_full_d_ln_a=assign_thetas(d_ln_a,e1_d_ln_a_index);
 
 
