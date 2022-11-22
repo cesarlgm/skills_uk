@@ -15,8 +15,8 @@ global ref_skill_num    4
 global ref_skill_name   abstract
 
 
-*global index_list   manual social routine abstract 
-global index_list   manual social abstract 
+global index_list   manual social routine abstract 
+*global index_list   manual social abstract 
 
 
 
@@ -105,7 +105,7 @@ global index_list   manual social abstract
     *============================================================================
     *COMMENT THIS LINE IF I AM USING FOUR SKILLS
     *============================================================================
-    drop if skill==3
+    *drop if skill==3
 
 
     egen occ_id=group(occupation)
@@ -360,7 +360,7 @@ export delimited using  "data/additional_processing/gmm_example_dataset_ols_nore
 *==================================================================================================
 *CORRELATIONS
 *==================================================================================================
-/*
+
 use "data/additional_processing/gmm_example_dataset_ols", clear
 keep occupation year y_var skill education manual social routine abstract equation
 keep if equation==1
@@ -373,4 +373,3 @@ pwcorr manual social routine abstract
 
 reghdfe y_abstract manual routine abstract social, absorb(occupation)
 reghdfe y_routine manual routine abstract social, absorb(occupation)
-*/
