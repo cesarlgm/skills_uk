@@ -23,9 +23,9 @@ function [e1_code,e1_d_ln_a_index,e1_educ_index]=...
     %%dlnA_index gives the indexes in the dlnA vector
     [~,~,e1_d_ln_a_index]=unique(e1_code);
 
-    theta_code=[11;12;13;21;22;23;31;32;33];
+    %theta_code=[11;12;13;21;22;23;31;32;33];
 
-    %theta_code=[11;12;13;14;21;22;23;24;31;32;33;34];
+    theta_code=[11;12;13;14;21;22;23;24;31;32;33;34];
 
     %This part fixes the issue with the theta indexes in e1 when the pi's
     %are restricted to be zero

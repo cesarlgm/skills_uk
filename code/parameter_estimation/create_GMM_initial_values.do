@@ -18,7 +18,7 @@ global not_reference    manual
         keep if n_educ==3
 
 
-        keep if inlist(occupation, 1112,1121,1122)
+        *keep if inlist(occupation, 1112,1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education

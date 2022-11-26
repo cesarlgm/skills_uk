@@ -40,7 +40,7 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 
 %%
     
-[solution,MSE]=fmincon(error_solve,init_sol_vec,[],[],[],[],lower_bound, upper_bound,[],options);
+[solution,MSE]=fmincon(error_solve,init_sol_ols,[],[],[],[],lower_bound, upper_bound,[],options);
 
 %%
 

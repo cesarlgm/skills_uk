@@ -14,8 +14,8 @@ This do file creates the dataset I need to execute the GMM code in matlab
 global ref_skill_num    4
 global ref_skill_name   abstract
 
-*global index_list   manual social routine abstract 
-global index_list   manual social abstract 
+global index_list   manual social routine abstract 
+*global index_list   manual social abstract 
 
 
 
@@ -31,7 +31,7 @@ global index_list   manual social abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        keep if inlist(occupation, 1121,1122)
+        *keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
