@@ -38,13 +38,25 @@ init_sol_vec=table2array(init_sol(:,'parameter'));
 
 error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_dln_a_index,e1_educ_index);
 
+
 %%
-    
-[solution,MSE]=fmincon(error_solve,init_sol_ols,[],[],[],[],lower_bound, upper_bound,[],options);
+%Constraining manual to be the same
+A_rest=zeros(2,n_total_parameters);
+A_rest(:,1)=1;
+A_rest(1,5)=-1;
+A_rest(2,9)=-1;
+b_rest=zeros(2,1);
+
+%%
+%Here I import 
+%%
+
+[solution,MSE]=fmincon(error_solve,initial_sol_gmm,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
+
 
 %%
 
-[solution,MSE]=fmincon(error_solve,solution,[],[],[],[],lower_bound, ...
+[solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, ...
            [],[],options);
 
 %%
