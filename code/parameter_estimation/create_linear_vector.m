@@ -44,10 +44,27 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     %I assign thetas accorduing to the appropriate education level
     full_theta=assign_thetas(theta,e1_educ_index);
     
-    
+
+    %Now I get the paramaters of the third equation
+    sigmas=splitted_vector{3};
+    comparison=splitted_vector{4};
+    beta_inv=sigmas./(sigmas-1);
+
     %Parameters equation 1
     theta_pi=e_1_full_d_ln_a.*full_theta;
     eqn1part_2=d_ln_a;
 
-    result=vertcat(theta_pi,eqn1part_2,theta);
+    %Now I start with assigning dlna job lines
+    full_e3_a_vector=assign_thetas(d_ln_a,e3_a_index);
+
+    %Now I assign thetas to the e3 parameter vectors
+    full_e3n_theta=assign_thetas(theta,e3n_educ_index);
+    full_e3d_theta=assign_thetas(theta,e3d_educ_index);
+
+
+    %Parameters equation 3
+    e3_num=full_e3_a_vector.*full_e3n_theta;
+    e3_den=full_e3_a_vector.*full_e3d_theta;
+
+    result=vertcat(theta_pi,eqn1part_2,theta,e3_num,e3_den,comparison);
 end
