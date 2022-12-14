@@ -72,6 +72,7 @@
     egen  n_pair=count(education), by(occupation year)
     order n_pair, after(education_d)
 
+    *This drops the pair that is redundant
     drop if education==1&education_d==3&n_pair==3
 
     drop n_pair

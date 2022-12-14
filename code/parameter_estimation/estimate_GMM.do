@@ -6,7 +6,7 @@ global reference        abstract
 global skill_ref_no     4
 global not_reference    manual
 global weight          
-global education        educ_3_mid
+global education        educ_3_low
 global ed_reference     1
 
 *First I create the datasets

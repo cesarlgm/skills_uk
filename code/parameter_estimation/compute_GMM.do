@@ -130,15 +130,15 @@ global index_list   manual social routine abstract
         di "$n_skills"
     }
 
-    keep if inlist(equation,1,2)
-    keep occupation-equation occ_id year_id
+
+    *keep if inlist(equation,1,2)
+    *keep occupation-equation occ_id year_id
 
     tempvar temp
     gegen `temp'=nunique(education) if equation==1, by(occupation)
     egen n_education=max(`temp'), by(occupation)
 
     keep if n_education==3
-
 }
 
 
@@ -201,6 +201,29 @@ global index_list   manual social routine abstract
     }
 
 
+    cap drop e3n_index_*
+    foreach education in $educ_lev {
+        local index_counter=1
+        foreach index in $index_list {
+            generate e3n_index_`index_counter'_`education'=0
+            qui replace e3n_index_`index_counter'_`education'=index`index_counter' if equation==3&education==`education'
+            local ++index_counter
+        }
+    }
+
+    cap drop e3d_index_*
+    foreach education in $educ_lev {
+        local index_counter=1
+        foreach index in $index_list {
+            generate e3d_index_`index_counter'_`education'=0
+            qui replace e3d_index_`index_counter'_`education'=index`index_counter' if equation==3&education_d==`education'
+            local ++index_counter
+        }
+    }
+
+
+
+
     di "Creating omega restriction variables", as result
     *Creating equation 2 variables
     foreach education in $educ_lev {
@@ -212,6 +235,8 @@ global index_list   manual social routine abstract
         }
     }
     }
+
+
 
 
     cap drop z_*
@@ -274,43 +299,6 @@ global index_list   manual social routine abstract
     sort equation skill  occupation year  education
 
 
-    *Creating skill levels of other education levels
-    /* 
-    foreach job in $jobs {
-        foreach year in $years {
-            qui summ  year if occ_id==`job'&year_id==`year'&equation==1
-            local index_counter=1
-            foreach index in $index_list {
-                if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
-                    qui generate z1s_`index_counter'_`job'_`year'=0
-                    qui replace z1s_`index_counter'_`job'_`year'= zv_`index' if occ_id==`job'&year_id==`year'&equation==1
-                    
-                    local ++var_counter
-                }
-                local ++index_counter
-            }
-        }
-    }
-    */
-
-    *Note 10/13/22 this bit seems to be ok
-
-
-    *I also verified that the depednet variable is constructed appropriately
-    /*
-    local drop_counter=0
-    *Note: I made sure that I was not excluding 1 education level fully.
-    foreach variable of varlist z1s* {
-        cap qui summ `variable'
-        if `r(max)'==0 {    
-            drop `variable'
-            local ++drop_counter
-        }
-
-    }
-    */
-    di "Null variables:  `drop_counter'"
-
     drop zv_*
 
     order e1s_* z1s_* i_* ts_*, last
@@ -321,54 +309,54 @@ global index_list   manual social routine abstract
     *Adding line for inst
 
 
+    *====================================================================================
+    *EQUATION 3 INSTRUMENTS
+    *====================================================================================
 
-    /*
+    di "Expanding employment equation variables", as result
+    *Creating equation 3 variables
 
-di "Expanding employment equation variables", as result
-*Creating equation 3 variables
-
-foreach variable of varlist index1-index4 {
-    rename `variable' ezn_`variable'
-    replace  ezn_`variable'=0 if missing(ezn_`variable')
-}
-
-foreach variable of varlist indexd1-indexd4 {
-    rename `variable' ezd_`variable'
-    replace  ezd_`variable'=0 if missing(ezd_`variable')
-}
-
-
-
-order en_* ed_* ezn_* ezd_*, last
-order education_d, after(education)
-egen ee_group_id=group(education education_d) if equation==3
-
-
-levelsof ee_group_id
-foreach pair in `r(levels)' {
-    foreach year in $years {
-        generate x_`pair'`year'=0
-        replace x_`pair'`year'=1 if ee_group_id==`pair'&year_id==`year'
+    foreach variable of varlist index1-index4 {
+        rename `variable' ezn_`variable'
+        replace  ezn_`variable'=0 if missing(ezn_`variable')
     }
-}
 
-foreach year in $years {
-    cap label var x_1`year' "Low/High"
-    cap label var x_2`year' "Mid/Low"
-    cap label var x_3`year' "High/Mid"
-}
+    foreach variable of varlist indexd1-indexd4 {
+        rename `variable' ezd_`variable'
+        replace  ezd_`variable'=0 if missing(ezd_`variable')
+    }
 
-br education education_d year x*
 
-*drop x_11 x_13
 
-drop ee_group_id
-egen ee_group_id=group(education education_d year)
-order ee_group_id, after(education_d)
+    order e3n_* e3d_* ezn_* ezd_*, last
+    order education_d, after(education)
+    egen ee_group_id=group(education education_d) if equation==3
 
-*/
 
-order e1s* i_* e2* ts_*, last
+    levelsof ee_group_id
+    foreach pair in `r(levels)' {
+        foreach year in $years {
+            generate x_`pair'`year'=0
+            replace x_`pair'`year'=1 if ee_group_id==`pair'&year_id==`year'
+        }
+    }
+
+    foreach year in $years {
+        cap label var x_1`year' "Low/High"
+        cap label var x_2`year' "Mid/Low"
+        cap label var x_3`year' "High/Mid"
+    }
+
+    br education education_d year x*
+
+    *drop x_11 x_13
+
+    drop ee_group_id
+    egen ee_group_id=group(education education_d year)
+    order ee_group_id, after(education_d)
+
+
+    order e1s* i_* e2* ts_* e3n_* e3d_* ezn_* ezd_* x_*, last
 
 save "data/additional_processing/gmm_example_dataset", replace
 
@@ -379,28 +367,3 @@ order ln_alpha, after(equation)
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 
 
-
-*y_var is appropriate set to 1 for equatip¡on 2
-
-
-
-
-*This part of the code didn't work
-/*
-{
-    keep if equation==2
-
-    egen group_id=group(occupation education)
-    xtset group_id year_id
-
-    foreach variable in $index_list { 
-        generate d_`variable'=d.`variable'
-    }
-
-    generate d_y_var=0
-    generate d_y_var_3=-d_manual
-
-
-    regress d_y_var_3 i.education#c.(d_routine d_abstract d_social), nocons
-}
-*/
