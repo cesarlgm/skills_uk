@@ -221,7 +221,11 @@ global index_list   manual social routine abstract
         }
     }
 
+    *High education groups are never in the denominator
+    drop e3d_*_3
 
+    *Low education groups are never in the numerator
+    drop e3n_*_1
 
 
     di "Creating omega restriction variables", as result
@@ -364,6 +368,9 @@ save "data/additional_processing/gmm_example_dataset", replace
 cap drop ln_alpha
 egen ln_alpha=group(occupation skill year) if equation==1 //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
+
+drop __000000
+
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 
 

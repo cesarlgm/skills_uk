@@ -4,11 +4,13 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     %Defining number of parameters I need to compute:
     n_ln_A_effective=max(table2array(data(:,"ln_alpha")));
     n_theta=12;
+    n_sigma=max(table2array(data(:,"occ_id")));
+    n_comparison=max(table2array(data(:,"ee_group_id")));
     n_total_parameters=n_theta+n_ln_A_effective;
 
     %size vector gives the info necessary to split the parameter vector
     %into parts
-    size_vector=[n_theta;n_ln_A_effective];
+    size_vector=[n_theta;n_ln_A_effective;n_sigma;n_comparison];
 
     lower_bound=vertcat(zeros(n_theta,1),-Inf*ones(n_total_parameters-n_theta,1));
     upper_bound=vertcat(Inf*ones(n_theta,1),Inf*ones(n_total_parameters-n_theta,1));

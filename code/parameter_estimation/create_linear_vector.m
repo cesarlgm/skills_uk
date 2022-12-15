@@ -11,13 +11,12 @@
 %Dropped all references to equation 3 and 2 from the linear parameter vector
 %Modified form of equation 1.
 function result=create_linear_vector(parameter_vector,size_vector,...
-    e1_d_ln_a_index,e1_educ_index)
+    e1_d_ln_a_index,e1_educ_index,e3_a_index,e3n_educ_index,e3d_educ_index)
     
     %Split parameter vector into parameter type
     splitted_vector=assign_parameters(parameter_vector,size_vector);
 
     %Extracting dlnA vector
-    %Under the current version, d_ln_a here stands for pi.
     %Abstract pi's are restricted to be zero.
     d_ln_a=splitted_vector{2};
 
@@ -46,13 +45,21 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     
 
     %Now I get the paramaters of the third equation
+    
+    %theta parameters
     sigmas=splitted_vector{3};
+    %Pairwise comparison 
     comparison=splitted_vector{4};
+
+
+    %Creates vector of betas
     beta_inv=sigmas./(sigmas-1);
+    %I assign the betas to the full error vector
+    full_beta=assign_sigmas(beta_inv,e1_job_index);
+
 
     %Parameters equation 1
     theta_pi=e_1_full_d_ln_a.*full_theta;
-    eqn1part_2=d_ln_a;
 
     %Now I start with assigning dlna job lines
     full_e3_a_vector=assign_thetas(d_ln_a,e3_a_index);
@@ -66,5 +73,5 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     e3_num=full_e3_a_vector.*full_e3n_theta;
     e3_den=full_e3_a_vector.*full_e3d_theta;
 
-    result=vertcat(theta_pi,eqn1part_2,theta,e3_num,e3_den,comparison);
+    result=vertcat(theta_pi,theta,e3_num,e3_den,comparison);
 end
