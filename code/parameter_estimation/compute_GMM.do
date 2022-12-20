@@ -31,7 +31,7 @@ global index_list   manual social routine abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        *keep if inlist(occupation, 1121,1122)
+        keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -211,6 +211,7 @@ global index_list   manual social routine abstract
         }
     }
 
+
     cap drop e3d_index_*
     foreach education in $educ_lev {
         local index_counter=1
@@ -220,6 +221,8 @@ global index_list   manual social routine abstract
             local ++index_counter
         }
     }
+
+
 
     *High education groups are never in the denominator
     drop e3d_*_3
@@ -240,6 +243,69 @@ global index_list   manual social routine abstract
     }
     }
 
+
+
+    di "Expanding employment equation variables", as result
+    
+    *Creating equation 3 variables
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            foreach year in $years {
+                qui summ  year if occ_id==`job'&year_id==`year'&equation==3&education==`education'
+                forvalues index=1/$n_skills {  
+                    if `r(N)'!=0 {
+                        generate en_index_`index'_`education'_`job'_`year'=0
+                        replace  en_index_`index'_`education'_`job'_`year'= index`index' if occ_id==`job'&year_id==`year'&education==`education'&equation==3
+                        local var_counter=`var_counter'+1
+                    }
+                }
+            }
+        }
+    }
+
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            foreach year in $years {
+                qui summ  year if occ_id==`job'&year_id==`year'&equation==3&education_d==`education'
+                forvalues index=1/$n_skills {  
+                    if `r(N)'!=0 {
+                        generate ed_index_`index'_`education'_`job'_`year'=0
+                        replace  ed_index_`index'_`education'_`job'_`year'= indexd`index' if occ_id==`job'&year_id==`year'&education_d==`education'&equation==3
+                        local var_counter=`var_counter'+1
+                    }
+                }  
+        }
+        }
+    }
+    
+
+    di "Expanding employment equation variables", as result
+    *Creating equation 3 variables
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            qui summ  year if occ_id==`job'&equation==3&education==`education'
+            forvalues index=1/$n_skills {  
+                if `r(N)'!=0 {
+                    cap generate ezn_index_`index'_`job'=0
+                    replace  ezn_index_`index'_`job'= index`index' if occ_id==`job'&education==`education'&equation==3
+                    local var_counter=`var_counter'+1
+                }
+            }
+        }
+    }
+
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            qui summ  year if occ_id==`job'&equation==3&education_d==`education'
+            forvalues index=1/$n_skills {  
+                if `r(N)'!=0 {
+                    cap generate ezd_index_`index'_`job'=0
+                    replace  ezd_index_`index'_`job'= indexd`index' if occ_id==`job'&education_d==`education'&equation==3
+                    local var_counter=`var_counter'+1
+                }
+            }
+        }
+    }
 
 
 
@@ -320,19 +386,7 @@ global index_list   manual social routine abstract
     di "Expanding employment equation variables", as result
     *Creating equation 3 variables
 
-    foreach variable of varlist index1-index4 {
-        rename `variable' ezn_`variable'
-        replace  ezn_`variable'=0 if missing(ezn_`variable')
-    }
-
-    foreach variable of varlist indexd1-indexd4 {
-        rename `variable' ezd_`variable'
-        replace  ezd_`variable'=0 if missing(ezd_`variable')
-    }
-
-
-
-    order e3n_* e3d_* ezn_* ezd_*, last
+    order en_* ed_* ezn_* ezd_*, last
     order education_d, after(education)
     egen ee_group_id=group(education education_d) if equation==3
 
@@ -360,13 +414,13 @@ global index_list   manual social routine abstract
     order ee_group_id, after(education_d)
 
 
-    order e1s* i_* e2* ts_* e3n_* e3d_* ezn_* ezd_* x_*, last
+    order e1s* i_* e2* ts_* en_* ed_* ezn_* ezd_* x_*, last
 
 save "data/additional_processing/gmm_example_dataset", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
-egen ln_alpha=group(occupation skill year) if equation==1 //&skill!=$ref_skill_num
+egen ln_alpha=group(occupation skill year) if inlist(equation,1,3) //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 
 drop __000000

@@ -11,7 +11,7 @@
 %Dropped all references to equation 3 and 2 from the linear parameter vector
 %Modified form of equation 1.
 function result=create_linear_vector(parameter_vector,size_vector,...
-    e1_d_ln_a_index,e1_educ_index,e3_a_index,e3n_educ_index,e3d_educ_index)
+    e1_d_ln_a_index,e1_educ_index,e1_job_index,e3_a_index,e3n_educ_index,e3d_educ_index)
     
     %Split parameter vector into parameter type
     splitted_vector=assign_parameters(parameter_vector,size_vector);
@@ -59,7 +59,8 @@ function result=create_linear_vector(parameter_vector,size_vector,...
 
 
     %Parameters equation 1
-    theta_pi=e_1_full_d_ln_a.*full_theta;
+    theta_pi=e_1_full_d_ln_a.*full_theta.*full_beta;
+    eqn1part_2=d_ln_a;
 
     %Now I start with assigning dlna job lines
     full_e3_a_vector=assign_thetas(d_ln_a,e3_a_index);
@@ -73,5 +74,5 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     e3_num=full_e3_a_vector.*full_e3n_theta;
     e3_den=full_e3_a_vector.*full_e3d_theta;
 
-    result=vertcat(theta_pi,theta,e3_num,e3_den,comparison);
+    result=vertcat(theta_pi,eqn1part_2,theta,e3_num,e3_den,comparison);
 end

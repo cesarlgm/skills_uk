@@ -4,6 +4,7 @@
 %SETTING THE PATHS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear;
+
 %%
 
 options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',2000000);
@@ -35,43 +36,32 @@ load("code/parameter_estimation/restricted_gmm_same_manual.mat",'solution');
 
 
 %I add initial values for sigma + comparison vectors
-sigma_init=-.5*ones(size_vector(3,1)+size_vector(4,1),1);
+sigma_init=0.5*ones(size_vector(3,1)+size_vector(4,1),1);
 
-initial_vector=vertcat(solution,sigma_init);
-
-clear 'solution' 'sigma_init'
-
+initial_vector=sigma_init
 
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%ANNONYMIZING THE FUNCTION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix, ...
     size_vector,e1_dln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%CONSTRAINING MANUAL TO BE THE SAME ACROSS ALL EDUCATION GROUPS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%Constraining manual to be the same
 A_rest=zeros(2,n_total_parameters);
 A_rest(:,1)=1;
 A_rest(1,5)=-1;
 A_rest(2,9)=-1;
 b_rest=zeros(2,1);
 
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%SOLVE THE PROBLEM
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[solution,MSE]=fmincon(error_solve,initial_vector,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
+init=.25*ones(n_total_parameters,1);
 
 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%GET STANDARD ERRORS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Here I import 
+%%
 
-[se,V]=get_standard_errors(solution);
+[solution,MSE]=fmincon(error_solve,init,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
+
 
 %%
 
