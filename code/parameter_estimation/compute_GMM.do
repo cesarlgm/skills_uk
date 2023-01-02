@@ -31,7 +31,7 @@ global index_list   manual social routine abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        keep if inlist(occupation, 1121,1122)
+        *keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -247,6 +247,9 @@ global index_list   manual social routine abstract
 
     di "Expanding employment equation variables", as result
     
+    *New instruments: sum of skills
+
+
     *Creating equation 3 variables
     foreach education in $educ_lev {
         foreach job in $jobs {
@@ -281,31 +284,29 @@ global index_list   manual social routine abstract
 
     di "Expanding employment equation variables", as result
     *Creating equation 3 variables
-    foreach education in $educ_lev {
-        foreach job in $jobs {
-            qui summ  year if occ_id==`job'&equation==3&education==`education'
-            forvalues index=1/$n_skills {  
-                if `r(N)'!=0 {
-                    cap generate ezn_index_`index'_`job'=0
-                    replace  ezn_index_`index'_`job'= index`index' if occ_id==`job'&education==`education'&equation==3
-                    local var_counter=`var_counter'+1
-                }
-            }
+
+    foreach job in $jobs {
+        qui summ  year if occ_id==`job'&equation==3
+        if `r(N)'!=0 {
+            cap generate ezn_index_`job'=0
+            ereplace  ezn_index_`job'= rowtotal(index*) if occ_id==`job'&equation==3
+            replace ezn_index_`job'=0 if missing(ezn_index_`job')
+            local var_counter=`var_counter'+1
+        }
+    }
+    
+
+
+    foreach job in $jobs {
+        qui summ  year if occ_id==`job'&equation==3
+        if `r(N)'!=0 {
+            cap generate ezd_index_`job'=0
+            ereplace  ezd_index_`job'= rowtotal(indexd*) if occ_id==`job'&equation==3
+            replace ezd_index_`job'=0 if missing(ezd_index_`job')
+            local var_counter=`var_counter'+1
         }
     }
 
-    foreach education in $educ_lev {
-        foreach job in $jobs {
-            qui summ  year if occ_id==`job'&equation==3&education_d==`education'
-            forvalues index=1/$n_skills {  
-                if `r(N)'!=0 {
-                    cap generate ezd_index_`index'_`job'=0
-                    replace  ezd_index_`index'_`job'= indexd`index' if occ_id==`job'&education_d==`education'&equation==3
-                    local var_counter=`var_counter'+1
-                }
-            }
-        }
-    }
 
 
 
@@ -360,6 +361,9 @@ global index_list   manual social routine abstract
         foreach index in $index_list {
             generate z1s_`index'_`education'=0
             qui replace z1s_`index'_`education'=zv_`index' if equation==1 & education==`education'
+
+            generate s1s_`index'_`education'=0
+            qui replace s1s_`index'_`education'=`index' if equation==1 & education==`education'
         }
     }
 
@@ -424,6 +428,9 @@ egen ln_alpha=group(occupation skill year) if inlist(equation,1,3) //&skill!=$re
 order ln_alpha, after(equation)
 
 drop __000000
+
+egen occ_index_3=group(occupation)
+replace occ_index_3=0 if equation!=3
 
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 

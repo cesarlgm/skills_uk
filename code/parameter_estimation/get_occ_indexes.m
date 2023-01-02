@@ -1,5 +1,5 @@
 %This function identifies the ordering of the parameter vectors
-function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index]=...
+function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_theta_index,e3d_theta_index,e3_occ_index]=...
     get_occ_indexes(data)
     names=transpose(data.Properties.VariableNames);
 
@@ -54,8 +54,12 @@ function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ
     %Education indexes
     %Numerator indexes
     e3n_educ_index=str2double(splitted_e3(:,4));
+    [e3n_theta_index,e3n_theta_id]=findgroups(e3n_educ_index*10+e3_skill_index);
+    e3n_theta_index=e3n_theta_index+4
 
     %Denominator indexes
     splitted_e3=split(eqn_3_indexes_d,"_");
     e3d_educ_index=str2double(splitted_e3(:,4));
+    [e3d_theta_index,e3d_theta_id]=findgroups(e3d_educ_index*10+e3_skill_index);
+
 end

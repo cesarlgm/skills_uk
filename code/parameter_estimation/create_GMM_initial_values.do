@@ -334,6 +334,68 @@ global not_reference    manual
     save `theta_file'
 }
 
+
+*Part 3: compute the beta_j
+*Some preliminary details
+{
+    *Fixing thetas
+    {
+        use `theta_file', clear
+        rename education education_d
+        rename parameter parameter_d
+        tempfile theta_file_d
+        save `theta_file_d'
+    }
+}
+
+{
+    use  "data/additional_processing/gmm_employment_dataset", clear
+    reshape long index indexd, i(occupation education education_d year)  j(skill)
+
+    merge m:1 education skill using `theta_file', keep(3) nogen
+    merge m:1 education_d skill using `theta_file_d', keep(3) nogen
+    merge m:1 occupation skill year using `pi_employment', keep(3) nogen
+
+    generate x_skill=(parameter*index-parameter_d*indexd)*pi
+    
+    keep occupation education education_d year skill y_var x_skill
+    reshape wide x_skill, i(occupation education education_d year) j(skill)
+
+    egen x_var=rowtotal(x_*)
+    egen pair_id=group(education education_d)
+
+    reghdfe y_var ibn.occupation#c.x_var, absorb(pair_id) nocons
+
+    regsave
+
+    replace coef=-.01 if coef>0
+
+    generate sigma_j=1/(1-coef)
+
+    extcodes, coefname(occupation)
+
+    rename coef beta_j
+    keep occupation beta_j sigma_j
+
+    sort occupation
+
+    generate source_name="beta"
+
+
+    tempfile beta_file
+    save `beta_file'
+}
+
+{
+    use `beta_file', clear
+    rename beta_j parameter
+
+    replace source_name="beta_j"
+    tempfile beta_file_p
+    save `beta_file_p'
+}
+
+
 *Create the file with the initial values
 {
     use `pi_file', clear
@@ -351,12 +413,16 @@ global not_reference    manual
 
     append using `theta_file'
 
+    append using `beta_file_p'
+
+    
     generate identifier=""
     foreach variable in occupation year skill education {
         tostring `variable', replace force
     }
     replace  identifier=occupation+"."+year+"."+skill   if source_name=="pi_ij"
     replace  identifier=education+"."+skill             if source_name=="theta"
+    replace  identifier=occupation                      if source_name=="beta_j"
 
     
     *Drop this is parameters are not restricted
@@ -373,5 +439,4 @@ global not_reference    manual
 
     save "data/additional_processing/initial_values_file", replace
     export delimited using  "data/additional_processing/initial_estimates.csv", replace
-
 }

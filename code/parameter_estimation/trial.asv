@@ -1,9 +1,0 @@
-
-
-
-
-[e1_code,e1_dlna_index,e1_educ_index,e3_a_index,e3n_educ_index,e3d_educ_index]=get_occ_indexes(data);
-
-
-create_linear_vector(parameter_vector,size_vector, ... 
-        e1_dln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);

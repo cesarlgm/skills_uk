@@ -6,7 +6,7 @@
 clear;
 %%
 
-options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',2000000);
+options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',100000);
 
 cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
@@ -19,14 +19,26 @@ sol_path="data/additional_processing/initial_estimates.csv";
 
 data=readtable(data_path);
 init_sol=readtable(sol_path);
+init_sol_vec=vertcat(table2array(init_sol(:,'parameter')),zeros(6,1));
 
-    
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %EXTRACTING DATA FOR CALCULATIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_code,e1_occ_index, ...
-    lower_bound, upper_bound, e3_a_index,e3n_educ_index,e3d_educ_index]= extract_data_matrices(data);
+    lower_bound, upper_bound, e3_a_index,e3n_educ_index,e3d_educ_index, ...
+    e3_occ_index]= extract_data_matrices(data);
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%EXTRACTING DATA FOR STANDARD ERRORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+[sd_matrix,z_indexes,i_indexes,sd2_matrix,num3s,den3s,...
+    comparison,num_z,den_z,e3job_index]=extract_sd_matrix(data);
+
+
+
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %SETTING UP INITIAL VALUES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,13 +46,31 @@ init_sol=readtable(sol_path);
 load("code/parameter_estimation/restricted_gmm_same_manual.mat",'solution');
 
 
-%I add initial values for sigma + comparison vectors
-sigma_init=-.5*ones(size_vector(3,1)+size_vector(4,1),1);
 
-initial_vector=vertcat(solution,sigma_init);
+splitted_vector=assign_parameters(solution,size_vector(1:2));
+theta=splitted_vector{1};
+pi=splitted_vector{2};
 
-clear 'solution' 'sigma_init'
+%%
 
+%splitted_vector=assign_parameters(transpose(1:36),size_vector(1:2));
+%theta=splitted_vector{1};
+%pi=splitted_vector{2};
+
+chi_zero=get_beta_inv_zero(theta,pi,num3s,den3s,e3_a_index,e3n_educ_index,e3d_educ_index,e3job_index,y_matrix,comparison);
+
+get_chi=@(p)get_beta_inv_init(p,theta,pi,num3s,den3s,e3_a_index,e3n_educ_index,e3d_educ_index,e3job_index,y_matrix,comparison,num_z,den_z);
+
+init_chi=fmincon(get_chi,chi_zero,[],[],[],[],[], ...
+           [],[],options);
+
+
+%%
+initial_vector=vertcat(solution,chi_init);
+
+clear 'solution' 
+
+sigma_init=ones(size(chi_init))./(1-chi_init);
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,7 +78,8 @@ clear 'solution' 'sigma_init'
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix, ...
-    size_vector,e1_dln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
+    size_vector,e1_dln_a_index,e1_educ_index,e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,3 +116,7 @@ b_rest=zeros(2,1);
 %%
 
 [init_matrix,init_advg,init_pi]=extract_solution(init_sol_vec,size_vector);
+
+
+%%
+

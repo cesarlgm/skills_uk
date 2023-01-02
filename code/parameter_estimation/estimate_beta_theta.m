@@ -14,9 +14,9 @@ function [beta,obs_tracker,job_type_index]=estimate_beta_theta(deviations)
     n_obs=size(skill_deviations,1);
     n_educ=length(unique(job_type_index));
 
- % Constant no longer included in the estimation
- %   %STEP 2: I add column of ones to estimate the constant
- %  skill_deviations=horzcat(ones(n_obs,1),skill_deviations);
+     % Constant no longer included in the estimation
+     %   %STEP 2: I add column of ones to estimate the constant
+     %  skill_deviations=horzcat(ones(n_obs,1),skill_deviations);
 
     %STEP 3: restructure the matrix to estimate different parameters for
     %each education level.
