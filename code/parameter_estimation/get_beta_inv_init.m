@@ -37,7 +37,7 @@ function q_error=get_beta_inv_init(beta,theta,pi,e3n,e3d, ...
 
     e3indexes=e3job_obs~=0;
 
-    n_obs=sum(e3indexes);
+    n_obs=size(x_matrix,1);
 
     numz=num_z(e3indexes,:);
     denz=den_z(e3indexes,:);

@@ -6,7 +6,7 @@
 clear;
 %%
 
-options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',100000);
+options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',300000,'OptimalityTolerance',1e-4);
 
 cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
@@ -58,19 +58,24 @@ pi=splitted_vector{2};
 %pi=splitted_vector{2};
 
 chi_zero=get_beta_inv_zero(theta,pi,num3s,den3s,e3_a_index,e3n_educ_index,e3d_educ_index,e3job_index,y_matrix,comparison);
+%%
 
 get_chi=@(p)get_beta_inv_init(p,theta,pi,num3s,den3s,e3_a_index,e3n_educ_index,e3d_educ_index,e3job_index,y_matrix,comparison,num_z,den_z);
-
+%%
 init_chi=fmincon(get_chi,chi_zero,[],[],[],[],[], ...
+           [],[],options);
+
+%%
+init_chi=fmincon(get_chi,init_chi,[],[],[],[],[], ...
            [],[],options);
 
 
 %%
-initial_vector=vertcat(solution,chi_init);
+initial_vector=vertcat(solution,init_chi);
 
-clear 'solution' 
+%clear 'solution' 
 
-sigma_init=ones(size(chi_init))./(1-chi_init);
+sigma_init=ones(size(init_chi))./(1-init_chi);
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,7 +100,7 @@ b_rest=zeros(2,1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %SOLVE THE PROBLEM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[solution,MSE]=fmincon(error_solve,initial_vector,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
+[solution,MSE]=fmincon(error_solve,initial_vector,[],[],A_rest,b_rest,lower_bound, [],[],options);
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,8 +111,7 @@ b_rest=zeros(2,1);
 
 %%
 
-[solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, ...
-           [],[],options);
+[solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, [],[],options);
 
 %%
 
