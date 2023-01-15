@@ -50,65 +50,20 @@
 \eeqns
 We have $12JT$ observations, and we need to identify $3JT$ $\pi$ parameters, and $12\theta$. 
 \subsection{Model equations}
-At the job level it holds that:
+Let $\pi_{kjt}=\frac{\sigma_j}{\sigma_j-1}\Delta \ln A_{kjt}$ and $\beta_j=\frac{\sigma_j-1}{\sigma_j}$. At the job level it holds that:
 \beqns
 %\Delta \overline{ \ln S^e_{iJet}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJt}} \Delta \ln A_{kJt}-\Delta \ln A_{iJt}\right) \label{eq:skills_eq} \\ 
-\Delta \overline{ \ln S^e_{ijet}}&=&\frac{\sigma_j}{\sigma_j-1} \left(\sum_k \theta_{ke}\overline{S_{kejt}} \Delta \ln A_{kjt}-\Delta \ln A_{ijt}\right) \\
+\Delta \overline{ \ln S^e_{ijet}}&=&\sum_k \theta_{ke}\overline{S_{kejt}} \pi_{kjt}-\pi_{ijt} \\
 1&=&\sum_k\theta_k^e\overline{S_{keJt}}  \label{eq:total_sum} \\
-\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\Delta \ln A_{kjt}+const_{e,e't} \label{eq:employment_eq} 
+\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\beta_j\left[\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\pi_{kjt}\right]+const_{e,e't} \label{eq:employment_eq} 
 \eeqns
-%\paragraph*{Note:} in equation \eqref{eq:employment_eq} there is always a
-%redundant pairwise comparison. Note that $\Delta  \left[\ln
-%\frac{q_{eJt}}{q_{e'Jt}}\right]-\Delta  \left[\ln \frac{q_{e'Jt}}{q_{e^\star
-%Jt}}\right]=\Delta  \left[\ln
-%\frac{q_{eJt}}{q_{e^\star Jt}}\right]$
 
 \subsection{Building GMM}
 In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods. We normalize $\Delta \ln A_{4jt}=0, \forall j, t$ 
 \bitem
 	\item \textbf{Equation (1)}: 
-	instruments for this equation are skills by job matrices. More specifically, let $x_{ejt}$ be the row vector $\begin{pmatrix}
-		S_{1ejt}&S_{2ejt}&S_{3ejt}
-	\end{pmatrix}$.  Define the matrix $X_{ejt}$ as the $4\times$3 matrix containing the skill indexes by education. This matrix excludes the reference skill. For simplicity, I have ignored the bars in the notation.
-	\beqns
-		X_{ejt}&=&\begin{pmatrix}S_{1ejt}&S_{2ejt}&S_{3ejt}\\
-							S_{1ejt}&S_{2ejt}&S_{3ejt}\\
-							S_{1ejt}&S_{2ejt}&S_{3ejt} \\
-							S_{1ejt}&S_{2ejt}&S_{3ejt} \\
-		\end{pmatrix}=\begin{pmatrix}
-		x_{ejt} \\
-		x_{ejt}\\
-	x_{ejt}	\\
-	x_{ejt}		\end{pmatrix}
-	\eeqns
-	Let $X_e$ be the block-diagonal matrix with $X_{ejt}$ in the diagonal.
-	\beqns
-		X_e&=&\begin{pmatrix}	X_{e11} & \boldsymbol{0} & \dots &  0 \\
-			 \boldsymbol{0} & X_{e12} & \dots& 0 \\
-		 	\vdots \\
-			 \boldsymbol{0} & \boldsymbol{0}& \dots & X_{eJT} \\
-		\end{pmatrix}
-	\eeqns
- 	The set of instruments for equation 1 is then:
- 	\beqn
- 	 		Z_1&=&\begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} \label{eq:equation1Z}
-	\eeqn
-	\item \textbf{Equation \eqref{eq:total_sum}}: instruments for the sum to restriction are the skill indexes by education level. Let  $\tilde{x}_{ejt}$ be the row vector $\begin{pmatrix}
-		S_{1ejt}&S_{2ejt}&S_{3ejt} & S_{4ejt}
-	\end{pmatrix}$ and let $\tilde{X_e}$ be the $N_e\times 4$ matrix stacking all the $\tilde{x}_{ejt}$ for education level $e$. The instruments for equation 2 are the block diagonal matrix with elements $\tilde{X_e}$:
-	\beqns
-		Z_2&=&\begin{pmatrix}
-			\tilde{X_1} & 0 &0 \\
-			0 & \tilde{X_2} & 0 \\
-			0 & 0 &\tilde{X_3}
-		\end{pmatrix}
-	\eeqns
-%	\item \textbf{Equation \eqref{eq:employment_eq}} let $\bar{X}$ be the matrix stacking the row vectors $\begin{pmatrix}x_{1jt}&x_{2jt}&x_{3jt}\end{pmatrix}$. Let $C$ be the matrix containing education-pair$\times$T dummies. Instruments for equation 3 are:
-%	\beqn
-%		Z_4&=&\begin{pmatrix}
-%			\bar{X} & C
-%		\end{pmatrix}
-%	\eeqn
+	instruments for this equation are the average skill of the other education group in that job, and skill-job-time dummies. 
+	
 	\item \textbf{Putting it all together:} let $u_l$ be the stacked vector of equation $l$ errors. Define:
 	\beqns
 		Z&=&\begin{pmatrix}

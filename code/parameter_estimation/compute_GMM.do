@@ -53,8 +53,15 @@ global index_list   manual social routine abstract
 
     {
         use "data/additional_processing/gmm_employment_dataset", clear
+
         drop if missing(y_var)
         keep if equation==3
+
+        *Checking number of times I observe the job
+        egen n_times_n=count(year), by(occupation education education_d)
+        egen n_times_d=count(year), by(occupation education education_d)
+
+        keep if n_times_d==3&n_times_d==3
 
         keep occupation year 
         duplicates drop 
@@ -100,7 +107,10 @@ global index_list   manual social routine abstract
 
     sort equation skill occupation  year   education   
 
+    egen n_times_n=count(year) if equation==3, by(occupation education education_d)
+    egen n_times_d=count(year) if equation==3, by(occupation education education_d)
 
+    drop if equation==3&n_times_n!=3&n_times_d!=3
 
 
     egen occ_id=group(occupation)
@@ -282,27 +292,55 @@ global index_list   manual social routine abstract
     }
     
 
+    *=========================================================================================================
+    *COMPUTING INSTRUMENTS FOR THE THIRD EQUATION
+    *=========================================================================================================
+
     di "Expanding employment equation variables", as result
     *Creating equation 3 variables
 
     foreach job in $jobs {
         qui summ  year if occ_id==`job'&equation==3
         if `r(N)'!=0 {
+            cap generate ezn_index_`job'_temp1=0
+            ereplace  ezn_index_`job'_temp1= rowtotal(index*) if occ_id==`job'&equation==3
+            replace ezn_index_`job'_temp1=0 if missing(ezn_index_`job'_temp1)
+           
+
+            cap generate ezn_index_`job'_temp2=0
+            ereplace  ezn_index_`job'_temp2= sum( ezn_index_`job'_temp1) if equation==3, by(occupation education education_d)
+            replace ezn_index_`job'_temp2=0 if missing(ezn_index_`job'_temp2)
+
             cap generate ezn_index_`job'=0
-            ereplace  ezn_index_`job'= rowtotal(index*) if occ_id==`job'&equation==3
+            replace  ezn_index_`job'=  0.5*(ezn_index_`job'_temp2-ezn_index_`job'_temp1) if occ_id==`job'&equation==3
             replace ezn_index_`job'=0 if missing(ezn_index_`job')
+
+            drop ezn_*_temp*
+
             local var_counter=`var_counter'+1
         }
     }
     
 
-
+    
     foreach job in $jobs {
         qui summ  year if occ_id==`job'&equation==3
         if `r(N)'!=0 {
+            cap generate ezd_index_`job'_temp1=0
+            ereplace  ezd_index_`job'_temp1= rowtotal(indexd*) if occ_id==`job'&equation==3
+            replace ezd_index_`job'_temp1=0 if missing(ezd_index_`job'_temp1)
+
+            cap generate ezd_index_`job'_temp2=0
+            ereplace  ezd_index_`job'_temp2= sum( ezd_index_`job'_temp1) if equation==3, by(occupation education education_d)
+            replace ezd_index_`job'_temp2=0 if missing(ezd_index_`job'_temp2)
+
             cap generate ezd_index_`job'=0
-            ereplace  ezd_index_`job'= rowtotal(indexd*) if occ_id==`job'&equation==3
+            replace  ezd_index_`job'=  0.5*(ezd_index_`job'_temp2-ezd_index_`job'_temp1) if occ_id==`job'&equation==3
             replace ezd_index_`job'=0 if missing(ezd_index_`job')
+
+
+            drop ezd_*_temp*
+
             local var_counter=`var_counter'+1
         }
     }
@@ -382,10 +420,6 @@ global index_list   manual social routine abstract
 
     *Adding line for inst
 
-
-    *====================================================================================
-    *EQUATION 3 INSTRUMENTS
-    *====================================================================================
 
     di "Expanding employment equation variables", as result
     *Creating equation 3 variables
