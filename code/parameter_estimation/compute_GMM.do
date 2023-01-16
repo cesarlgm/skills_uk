@@ -339,7 +339,7 @@ global index_list   manual social routine abstract
             replace ezd_index_`job'=0 if missing(ezd_index_`job')
 
 
-            drop ezd_*_temp*
+            *drop ezd_*_temp*
 
             local var_counter=`var_counter'+1
         }
