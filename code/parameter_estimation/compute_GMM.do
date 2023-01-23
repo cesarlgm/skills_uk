@@ -96,21 +96,34 @@ global index_list   manual social routine abstract
 
 
     use "data/additional_processing/gmm_skills_dataset", clear
-
     append using "data/additional_processing/gmm_employment_dataset"
 
     merge m:1 occupation year using `job_filter', keep(3) nogen
     merge m:1 occupation year using `employment_filter', keep(3) nogen 
-
-
     drop if missing(y_var)
 
     sort equation skill occupation  year   education   
 
-    egen n_times_n=count(year) if equation==3, by(occupation education education_d)
-    egen n_times_d=count(year) if equation==3, by(occupation education education_d)
+    { 
+        egen n_times_n=count(year) if equation==3, by(occupation education education_d)
+        egen n_times_d=count(year) if equation==3, by(occupation education education_d)
 
-    drop if equation==3&n_times_n!=3&n_times_d!=3
+        drop if equation==3&n_times_n!=3&n_times_d!=3
+
+        *This filter drops some jobs in the third euqation. I need to drop tem again from the first equation
+        preserve
+        {
+            keep if equation==3
+            keep occupation year
+            duplicates drop 
+            tempfile second_occ_filter
+            save `second_occ_filter'
+        }
+        restore 
+        merge m:1 occupation year using  `second_occ_filter', keep(3) nogen 
+    }
+
+
 
 
     egen occ_id=group(occupation)
@@ -456,15 +469,23 @@ global index_list   manual social routine abstract
 
 save "data/additional_processing/gmm_example_dataset", replace
 
+use "data/additional_processing/gmm_example_dataset", clear
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
+cap drop __000000
+
 egen ln_alpha=group(occupation skill year) if inlist(equation,1,3) //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 
-drop __000000
+cap drop __000000
 
 egen occ_index_3=group(occupation)
 replace occ_index_3=0 if equation!=3
+
+gstats winsor y_var if equation==1, cut(5 95) gen(temp1)
+gstats winsor y_var if equation==3, cut(5 95) gen(temp2) by(education education_d)
+replace y_var=temp1 if equation==1
+replace y_var=temp2 if equation==3
 
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 

@@ -1,5 +1,4 @@
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %SETTING THE PATHS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,10 +42,10 @@ init_sol_vec=vertcat(table2array(init_sol(:,'parameter')),zeros(6,1));
 %SETTING UP INITIAL VALUES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Here I extract the solution I got in the previous 
-load("code/parameter_estimation/restricted_gmm_same_manual.mat",'solution');
+load("code/parameter_estimation/current_state_three_eq.mat",'solution');
 
 
-solution=solution(1:eq1_param);
+%solution=solution(1:eq1_param);
 
 
 %%
@@ -84,7 +83,6 @@ sigma_init=ones(size(init_chi))./(1-init_chi);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %ANNONYMIZING THE FUNCTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix, ...
     size_vector,e1_dln_a_index,e1_educ_index,e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
 
@@ -115,6 +113,11 @@ b_rest=zeros(2,1);
 %%
 
 [solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, [],[],options);
+
+%[solution,MSE]=fmincon(error_solve,solution,[],[],[],[],lower_bound, [],[],options);
+
+%%
+solution=0.5*ones(1)
 
 %%
 

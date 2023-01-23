@@ -1,60 +1,44 @@
+%fixing problem with beta
 
-%%
-var_matrix=create_gmm_var(data,parameter,size_vector, ...
-         e1_educ_index,e1_dln_a_index,e3_a_index,e3_occ_index,e3n_educ_index,... 
-         e3d_educ_index,z_matrix,y_matrix,s_matrix);
-
-
-%% 
+%Assign the vector of pi's to the equation
+full_e3_pi_vector=assign_thetas(pi,e3_a_index);
 
 
 %%
-[sd_matrix,z_indexes,i_indexes,sd2_matrix,num3s,den3s,comparison,num_z,den_z,e3job_index]=extract_sd_matrix(data);
+%Next I assign the vector of thetas
+full_e3n_theta=assign_thetas(theta,e3n_educ_index);
+full_e3d_theta=assign_thetas(theta,e3d_educ_index);
 
-
-%%
-de_eq1=get_de_eq1(sd_matrix,theta, ...
-    e1_educ_index,e1_dln_a_index,i_indexes,size_vector,e1_full_pi);
-
-
-%%
-d_matrix=create_d_matrix(z_matrix,z_indexes,i_indexes,n_total_parameters,de_eq1);
-
-%%
-de_eq3=get_de_eq3(parameter,num3s,den3s,comparison,e3_a_index,e3_occ_index,e3n_educ_index,e3d_educ_index,size_vector,e3job_index);
-%%
-d_matrix=create_d_matrix(z_matrix,z_indexes,i_indexes);
-
-%% 
-
-parameter=transpose(1:44);
-
-splitted_vector=assign_parameters(parameter,size_vector);
-
-%Assign theta and pi vector
-theta=splitted_vector{1};
-pi_vector=splitted_vector{2};
-
-%Get the full vector of pi parameters
-
-
-%%
-index_matrix=get_sd_second_part(sd_matrix,theta,e1_educ_index,e1_dln_a_index,i_indexes,size_vector,e1_full_pi);
+%Next I compute the numerator and denominators parts of the equation
+numerator=  num3s*(full_e3n_theta.*full_e3_pi_vector);
+denominator=den3s*(full_e3d_theta.*full_e3_pi_vector);
 
 %%
 
-sd2_matrix=get_de_eq2(sd2_matrix,size_vector);
+%Now I compute the left hand side of the equation
+x_part_1_temp=numerator-denominator;
 
 
 %%
-full_pi=get_d_matrix(parameter,z_matrix,sd_matrix,size_vector,e1_dln_a_index);
+%Now I create as many columns as jobs there are
+n_jobs=max(e3job_index);
+
+x_part_1=zeros(size(e3job_index,1),n_jobs);
+
+%%
+for i=1:n_jobs
+    x_part_1(e3job_index==i,i)=x_part_1_temp(e3job_index==i,1);
+end
+
+
+%%
+x_matrix=horzcat(x_part_1,comparison);
+
+
+X=x_matrix(e3job_index>0,:);
 
 %%
 
-sd_first_part=reshape_pi_vector(full_pi,e1_educ_index,sd_matrix,z_matrix);
+Y=y_matrix(e3job_obs>0,:);
 
-%%
-
-
-
-a=get_sd_second_part(sd_matrix,theta,e1_educ_index,e1_d_ln_a_index)
+init_chi=(transpose(X)*X)\transpose(X)*Y;
