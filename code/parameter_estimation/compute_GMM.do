@@ -211,7 +211,6 @@ global index_list   manual social routine abstract
             }
         }
     }
-
     
     cap drop e2_index_*
     forvalues education=1/$n_educ {
@@ -220,6 +219,26 @@ global index_list   manual social routine abstract
             generate e2_index_`index_counter'_`education'=0
             qui replace e2_index_`index_counter'_`education'=`index' if equation==2 & education==`education'
             local ++index_counter
+        }
+    }
+
+    *====================================================================================================================
+    *ADDING ADDITIONAL INSTRUMENTS FOR EQUATION 3
+    *====================================================================================================================
+    foreach job in $jobs {
+        foreach year in $years {
+            local counter=1
+            local index_counter
+            qui summ  year if occ_id==`job'&year_id==`year'
+            foreach index in $index_list {
+                if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
+                    qui generate e3pi_`index'_`job'_`year'=0
+                    qui replace e3pi_`index'_`job'_`year'= `index'  if occ_id==`job'&year_id==`year'&skill==`counter'&equation==1
+                
+                    local ++var_counter
+                }
+                local ++counter
+            }
         }
     }
 
@@ -467,6 +486,8 @@ global index_list   manual social routine abstract
 
     order e1s* i_* e2* ts_* en_* ed_* ezn_* ezd_* x_*, last
 
+    drop ezd_*_temp*
+
 save "data/additional_processing/gmm_example_dataset", replace
 
 use "data/additional_processing/gmm_example_dataset", clear
@@ -486,6 +507,9 @@ gstats winsor y_var if equation==1, cut(5 95) gen(temp1)
 gstats winsor y_var if equation==3, cut(5 95) gen(temp2) by(education education_d)
 replace y_var=temp1 if equation==1
 replace y_var=temp2 if equation==3
+
+
+*keep if inlist(equation,2,3)
 
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 
