@@ -42,8 +42,8 @@ init_sol_vec=vertcat(table2array(init_sol(:,'parameter')),zeros(6,1));
 %Here I extract the solution I got in the previous 
 load("code/parameter_estimation/current_state_three_eq.mat",'solution');
 
-%eq1_param=sum(size_vector(1:2));
-%solution=solution(1:eq1_param);
+eq1_param=sum(size_vector(1:2));
+solution=solution(1:eq1_param);
 
 %%
 

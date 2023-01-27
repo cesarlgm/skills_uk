@@ -222,25 +222,6 @@ global index_list   manual social routine abstract
         }
     }
 
-    *====================================================================================================================
-    *ADDING ADDITIONAL INSTRUMENTS FOR EQUATION 3
-    *====================================================================================================================
-    foreach job in $jobs {
-        foreach year in $years {
-            local counter=1
-            local index_counter
-            qui summ  year if occ_id==`job'&year_id==`year'
-            foreach index in $index_list {
-                if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
-                    qui generate e3pi_`index'_`job'_`year'=0
-                    qui replace e3pi_`index'_`job'_`year'= `index'  if occ_id==`job'&year_id==`year'&skill==`counter'&equation==1
-                
-                    local ++var_counter
-                }
-                local ++counter
-            }
-        }
-    }
 
 
     cap drop e3n_index_*
@@ -330,52 +311,33 @@ global index_list   manual social routine abstract
 
     di "Expanding employment equation variables", as result
     *Creating equation 3 variables
-
-    foreach job in $jobs {
-        qui summ  year if occ_id==`job'&equation==3
-        if `r(N)'!=0 {
-            cap generate ezn_index_`job'_temp1=0
-            ereplace  ezn_index_`job'_temp1= rowtotal(index*) if occ_id==`job'&equation==3
-            replace ezn_index_`job'_temp1=0 if missing(ezn_index_`job'_temp1)
-           
-
-            cap generate ezn_index_`job'_temp2=0
-            ereplace  ezn_index_`job'_temp2= sum( ezn_index_`job'_temp1) if equation==3, by(occupation education education_d)
-            replace ezn_index_`job'_temp2=0 if missing(ezn_index_`job'_temp2)
-
-            cap generate ezn_index_`job'=0
-            replace  ezn_index_`job'=  0.5*(ezn_index_`job'_temp2-ezn_index_`job'_temp1) if occ_id==`job'&equation==3
-            replace ezn_index_`job'=0 if missing(ezn_index_`job')
-
-            drop ezn_*_temp*
-
-            local var_counter=`var_counter'+1
+    *Corrected instruments for the third equation, now I use skill indexes in numerator and skill indexes in denominator
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            qui summ  year if occ_id==`job'&equation==3&education==`education'
+                forvalues index=1/$n_skills {  
+                if `r(N)'!=0 {
+                    generate ezn_index_`index'_`education'_`job'=0
+                    replace  ezn_index_`index'_`education'_`job'= index`index' if occ_id==`job'&education==`education'&equation==3
+                }
+            }
         }
     }
-    
-
-    
-    foreach job in $jobs {
-        qui summ  year if occ_id==`job'&equation==3
-        if `r(N)'!=0 {
-            cap generate ezd_index_`job'_temp1=0
-            ereplace  ezd_index_`job'_temp1= rowtotal(indexd*) if occ_id==`job'&equation==3
-            replace ezd_index_`job'_temp1=0 if missing(ezd_index_`job'_temp1)
-
-            cap generate ezd_index_`job'_temp2=0
-            ereplace  ezd_index_`job'_temp2= sum( ezd_index_`job'_temp1) if equation==3, by(occupation education education_d)
-            replace ezd_index_`job'_temp2=0 if missing(ezd_index_`job'_temp2)
-
-            cap generate ezd_index_`job'=0
-            replace  ezd_index_`job'=  0.5*(ezd_index_`job'_temp2-ezd_index_`job'_temp1) if occ_id==`job'&equation==3
-            replace ezd_index_`job'=0 if missing(ezd_index_`job')
-
-
-            *drop ezd_*_temp*
-
-            local var_counter=`var_counter'+1
+        
+    foreach education in $educ_lev {
+        foreach job in $jobs {
+            qui summ  year if occ_id==`job'&equation==3&education_d==`education'
+                forvalues index=1/$n_skills {  
+                if `r(N)'!=0 {
+                    generate ezd_index_`index'_`education'_`job'=0
+                    replace  ezd_index_`index'_`education'_`job'= indexd`index' if occ_id==`job'&education_d==`education'&equation==3
+                }
+            }
         }
     }
+        
+    *========================================================================================
+        
 
 
 
@@ -486,7 +448,7 @@ global index_list   manual social routine abstract
 
     order e1s* i_* e2* ts_* en_* ed_* ezn_* ezd_* x_*, last
 
-    drop ezd_*_temp*
+    cap drop ezd_*_temp*
 
 save "data/additional_processing/gmm_example_dataset", replace
 
