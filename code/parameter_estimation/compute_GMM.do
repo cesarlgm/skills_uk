@@ -31,7 +31,7 @@ global index_list   manual social routine abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        *keep if inlist(occupation, 1121,1122)
+        *keep if inlist(occupation, 1121,1122,1131, 1135)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -310,8 +310,24 @@ global index_list   manual social routine abstract
     *=========================================================================================================
 
     di "Expanding employment equation variables", as result
+    
     *Creating equation 3 variables
     *Corrected instruments for the third equation, now I use skill indexes in numerator and skill indexes in denominator
+    
+    *First I create job by year instruments
+    foreach job in $jobs {
+        foreach year in $years {
+            qui summ  year if occ_id==`job'&equation==3&year_id==`year'
+            if `r(N)'!=0 {
+                generate e3jy_`job'_`year'=0
+                replace  e3jy_`job'_`year'=1 if occ_id==`job'&year_id==`year'&equation==3
+            }
+        }
+    }
+
+
+
+    /*
     foreach education in $educ_lev {
         foreach job in $jobs {
             qui summ  year if occ_id==`job'&equation==3&education==`education'
@@ -335,12 +351,9 @@ global index_list   manual social routine abstract
             }
         }
     }
+    */
         
     *========================================================================================
-        
-
-
-
 
     cap drop z_*
     forvalues educ=1/3 {
@@ -418,9 +431,21 @@ global index_list   manual social routine abstract
     di "Expanding employment equation variables", as result
     *Creating equation 3 variables
 
-    order en_* ed_* ezn_* ezd_*, last
+    order en_* ed_* e3jy_*  , last
     order education_d, after(education)
     egen ee_group_id=group(education education_d) if equation==3
+
+
+    foreach job in $jobs {
+        levelsof ee_group_id
+        foreach pair in `r(levels)' {
+            qui summ  year if occ_id==`job'&equation==3&ee_group_id==`pair'
+            if `r(N)'!=0 {
+                generate e3jep_`job'_`pair'=0
+                replace  e3jep_`job'_`pair'=1 if occ_id==`job'&ee_group_id==`pair'&equation==3
+            }
+        }
+    }
 
 
     levelsof ee_group_id
@@ -441,12 +466,12 @@ global index_list   manual social routine abstract
 
     *drop x_11 x_13
 
-    drop ee_group_id
-    egen ee_group_id=group(education education_d year)
-    order ee_group_id, after(education_d)
+    cap drop eey_group_id
+    egen eey_group_id=group(education education_d year)
+    order eey_group_id, after(education_d)
 
 
-    order e1s* i_* e2* ts_* en_* ed_* ezn_* ezd_* x_*, last
+    order e1s* i_* e2* ts_* en_* ed_* e3jy_* e3jep_* x_*, last
 
     cap drop ezd_*_temp*
 
@@ -471,7 +496,9 @@ replace y_var=temp1 if equation==1
 replace y_var=temp2 if equation==3
 
 
-*keep if inlist(equation,2,3)
+drop e3jy_1_*
+drop e3jep_*_1
+drop e3jep_1_2
 
 export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
 

@@ -7,7 +7,7 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     n_ln_A_effective=max(table2array(data(:,"ln_alpha")));
     n_theta=12;
     n_sigma=max(table2array(data(:,"occ_id")));
-    n_comparison=max(table2array(data(:,"ee_group_id")));
+    n_comparison=max(table2array(data(:,"eey_group_id")));
     n_total_parameters=n_theta+n_ln_A_effective+n_sigma+n_comparison;
 
     %size vector gives the info necessary to split the parameter vector
