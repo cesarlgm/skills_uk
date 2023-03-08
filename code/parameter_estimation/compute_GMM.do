@@ -100,9 +100,6 @@ global index_list   manual social routine abstract
 
     sort equation skill occupation  year   education   
 
-
-
-
     egen occ_id=group(occupation)
     egen year_id=group(year)
 

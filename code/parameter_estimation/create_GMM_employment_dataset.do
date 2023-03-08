@@ -32,7 +32,7 @@
     gcollapse (sum) people (count) obs=people, by(occupation  year education)
 
     preserve
-    drop obs 
+    rename obs obs_d
     rename people people_d
     rename education denominator
     tempfile denominator
@@ -53,7 +53,7 @@
     rename denominator education_d
 
     order occupation education education_d year
-    keep occupation education education_d year y_var
+    keep occupation education education_d year y_var obs* people*
 
     generate equation=3
 
