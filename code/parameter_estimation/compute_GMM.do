@@ -376,7 +376,8 @@ save "data/additional_processing/gmm_example_dataset", replace
 cap drop ln_alpha
 egen ln_alpha=group(occupation skill year) if equation==1 //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
-export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
+
+export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace nolabel
 
 
 
