@@ -1,5 +1,7 @@
 *Create equation three graph
 
+
+*==========================================================================================
 import excel "data\output\theta_estimates.xlsx", sheet("Sheet1") firstrow clear
 
 drop code 
@@ -74,4 +76,14 @@ tw (scatter y_var sums, msymbol(o) mcolor(ebblue%30)) (lfit  y_var sums), ytitle
 tw (scatter y_var sums [aw=weight2], msymbol(o) mcolor(ebblue%30)) (lfit  y_var sums), ytitle("LHS") xtitle("RHS")
 
 
+*======================================================================================================================
+*Graph of errors
+*======================================================================================================================
+
+regress y_var c.sums#i.occupation i.ee_group_id
+predict y_hat
+
+tw (scatter y_var y_hat, msymbol(o) mcolor(ebblue%30)) ///
+    (lfit  y_var y_var), ytitle("Actual values") xtitle("Predicted values") ///
+    legend( ring(0) pos(11) order(2 "45º degree line"))
 
