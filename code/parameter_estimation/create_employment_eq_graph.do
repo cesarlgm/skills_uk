@@ -57,7 +57,53 @@ generate weight2=people*people_d/(people+people_d)
 
 egen sums=rowtotal(diff*)
 
-tw scatter y_var sums
+*==========================================================================
+*Initial graph of the sums versus the ratio
+*==========================================================================
+tw scatter y_var sums, ///
+    xtitle("{&sum}(S{sub:eijt}-S{sub:e'ijt}){&pi}{sub:jt}") ///
+    ytitle("ln(q{sub:ejt})-ln(q{sub:e'jt})") ///
+    mcolor(ebblue%30)
+
+*==========================================================================
+*Graph of the sums versus the residuals
+*==========================================================================
+cap drop y_hat
+cap drop residuals
+cap drop ee_group_id
+
+egen ee_group_id=group(education education_d year) if equation==3
+regress y_var c.sums#i.occupation i.ee_group_id
+predict y_hat
+predict residuals, resid
+
+
+tw scatter residuals sums, msymbol(o) ///
+     xtitle("{&sum}(S{sub:eijt}-S{sub:e'ijt}){&pi}{sub:jt}") ///
+    ytitle("Residuals") ///
+    mcolor(ebblue%30)
+
+*==========================================================================
+*Flagging outliers
+*==========================================================================
+summarize residuals, d
+generate outlier=!inrange(residuals,`r(p10)',`r(p90)')
+generate big_occ=floor(occupation/100)
+
+tw (kdensity sums if outlier, lcolor(black)) (kdensity sums if !outlier, lcolor(gold)),  legend(order(1 "Outlier" 2 "Not outlier"))
+
+*==========================================================================
+*Occupations
+*==========================================================================
+
+table big_occ outlier
+
+generate outlier_occ=inlist(big_occ,21,34,52,53,54,82)
+
+
+
+
+/*
 
 egen ee_group_id=group(education education_d year) if equation==3
 
@@ -79,11 +125,27 @@ tw (scatter y_var sums [aw=weight2], msymbol(o) mcolor(ebblue%30)) (lfit  y_var 
 *======================================================================================================================
 *Graph of errors
 *======================================================================================================================
+cap drop y_hat
+cap drop residuals
 
 regress y_var c.sums#i.occupation i.ee_group_id
 predict y_hat
+predict residuals, resid
+
 
 tw (scatter y_var y_hat, msymbol(o) mcolor(ebblue%30)) ///
     (lfit  y_var y_var), ytitle("Actual values") xtitle("Predicted values") ///
     legend( ring(0) pos(11) order(2 "45º degree line"))
 
+
+*======================================================================================================================
+*Flagging outliers
+*======================================================================================================================
+cap drop residp
+fasterxtile  residp=residuals, nquantiles(100)  
+
+generate outlier=!inrange(residp,6,94)
+
+tab education education_d if outlier
+
+tab occupation if outlier
