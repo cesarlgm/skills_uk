@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  13 OCT 2022 16:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.7)  6 APR 2023 10:43
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -1207,6 +1207,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/Users/thecs/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
+Package hyperref Warning: Suppressing link with empty target on input line 96.
+
+
 Package hyperref Warning: No destination for bookmark of \addcontentsline,
 (hyperref)                destination is added on input line 131.
 
@@ -1216,9 +1219,9 @@ Package rerunfilecheck Info: File `documentation.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  31693 strings out of 478864
- 651731 string characters out of 2846731
- 1080972 words of memory out of 3000000
- 49019 multiletter control sequences out of 15000+600000
+ 651737 string characters out of 2846731
+ 1080989 words of memory out of 3000000
+ 49020 multiletter control sequences out of 15000+600000
  416311 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  92i,17n,136p,639b,931s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1236,12 +1239,13 @@ ublic/amsfonts/cm/cmr12.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/thecs/AppData/Local/Programs/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/thecs/AppData/Loca
 l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/thecs
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:
-/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb>
-Output written on documentation.pdf (3 pages, 146335 bytes).
+/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:
+/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+msy8.pfb><C:/Users/thecs/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
+msfonts/symbols/msbm10.pfb>
+Output written on documentation.pdf (3 pages, 156420 bytes).
 PDF statistics:
- 150 PDF objects out of 1000 (max. 8388607)
- 14 named destinations out of 1000 (max. 500000)
+ 153 PDF objects out of 1000 (max. 8388607)
+ 13 named destinations out of 1000 (max. 500000)
  149 words of extra memory for PDF output out of 10000 (max. 10000000)
 
