@@ -214,7 +214,6 @@ global index_list   manual social routine abstract
 
     *EQUATION 2 VARIABLES
     *==============================================
-    /*
     *SKILL INDEXES
     cap drop e2_index_*
     forvalues education=1/$n_educ {
@@ -250,7 +249,6 @@ global index_list   manual social routine abstract
             local ++index_counter
         }
     }
-    */
 
 
     *High education groups are never in the denominator

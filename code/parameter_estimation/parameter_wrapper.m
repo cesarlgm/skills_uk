@@ -13,7 +13,7 @@ addpath('code/parameter_estimation/','data');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %GETTING DATA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-data_path="data/additional_processing/gmm_example_dataset.csv";
+data_path="data/additional_processing/gmm_example_dataset_winsor.csv";
 sol_path="data/additional_processing/initial_estimates.csv";
 
 data=readtable(data_path);
