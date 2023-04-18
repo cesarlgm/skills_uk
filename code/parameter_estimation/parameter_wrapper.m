@@ -7,7 +7,7 @@ clear;
 
 options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',500000,'OptimalityTolerance',1e-6);
 
-cd 'C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assistantship/ukData';
+cd 'C:/Users/thecs/Dropbox (Boston University)/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
