@@ -1,0 +1,4 @@
+\begin{figure}[!h]
+\caption{Comparison of routine measures}
+\subfloat[Original measure]{\includegraphics[width=.3333333333333333\textwidth]{../output/densitySep2AggWeightedOccOr}} \subfloat[Routine PC dummy]{\includegraphics[width=.3333333333333333\textwidth]{../output/densitySep2AggWeightedOccDum}} \subfloat[Routine PC continuous]{\includegraphics[width=.3333333333333333\textwidth]{../output/densitySep2AggWeightedOccCont}} \\ 
+\end{figure}

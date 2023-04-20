@@ -422,8 +422,6 @@ global index_list   manual social routine abstract
 
 
     drop zv_*
-
-    order e1s_* z1s_* i_* ts_*, last
     
     *Here I filter the jobs that 
     sort equation education occupation year skill  
@@ -434,7 +432,6 @@ global index_list   manual social routine abstract
     di "Expanding employment equation variables", as result
     *Creating equation 3 variables
 
-    order en_* ed_* e3jy_*  , last
     order education_d, after(education)
     egen ee_group_id=group(education education_d) if equation==3
 
@@ -474,7 +471,7 @@ global index_list   manual social routine abstract
     order eey_group_id, after(education_d)
 
 
-    order e1s* i_* ts_* en_* ed_* e3jy_* e3jep_* x_*, last
+    order e1s* z1s_* i_*  ts_* e2_* en_* ed_* e3jy_* e3jep_* x_*, last
 
     cap drop ezd_*_temp*
 
@@ -503,6 +500,6 @@ drop e3jy_1_*
 drop e3jep_*_1
 drop e3jep_1_2
 
-export delimited using  "data/additional_processing/gmm_example_dataset.csv", replace
+export delimited using  "data/additional_processing/gmm_example_dataset_winsor.csv", replace
 
 

@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+
+\begin{table}[tbp] \centering
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\begin{tabularx}{\textwidth}{lCC}
+
+\toprule
+{lowMid}&{lowHigh}&{midHigh} \tabularnewline
+\midrule\addlinespace[1.5ex]
+3217 pharmaceutical dispensers&3131 it operations technicians&1121 prod. works \\& maintenance managers \tabularnewline
+8215 driving instructors&3566 statutory examiners&1142 customer care managers \tabularnewline
+8117 mtl mkng \\& treating procss operatve&3132 it user support technicians&3531 estimators, valuers and assessors \tabularnewline
+5232 vehicle body builders and repairers&1152 office managers&3532 brokers \tabularnewline
+5414 tailors and dressmakers&4135 library assistants \\& clerks&2127 production and process engineers \tabularnewline
+6211 sports and leisure assistants&4111 civil service executive officers&3218 medical and dental technicians \tabularnewline
+3312 police offcrs (sergeant and below)&5245 comp engineer, installn \\& maintnce&3511 air traffic controllers \tabularnewline
+5319 construction trades n.e.c.&4114 officers non-gov organisations&3113 engineering technicians \tabularnewline
+5422 printers&6113 dental nurses&1122 managers in construction \tabularnewline
+5234 vehicle spray painters&1239 mngers and prop. in other srvcs nec&3122 draughtspersons \tabularnewline
+\bottomrule \addlinespace[1.5ex]
+
+\end{tabularx}
+\end{table}
+\end{document}
