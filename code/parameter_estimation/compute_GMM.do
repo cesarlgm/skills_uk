@@ -308,6 +308,34 @@ global index_list   manual social routine abstract
     }
     
 
+    *===================================================================================
+    *Creating 2 digit occupation
+    *===================================================================================
+    generate occ2dig=floor(occupation/100)
+
+    *Adding 2-digit occupation fixed effects
+    local var_counter=0
+    foreach job in $jobs {
+        foreach year in $years {
+            local counter=1
+            local index_counter
+            qui summ  year if occ_id==`job'&year_id==`year'
+            foreach index in $index_list {
+                if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
+                    qui generate i_`index'_`job'_`year'=0
+                    qui replace i_`index'_`job'_`year'=1 if occ_id==`job'&year_id==`year'&skill==`counter'&equation==1
+                
+                    local ++var_counter
+                }
+                
+                local ++counter
+            }
+        }
+    }
+    
+    *Ask this bit to Kevin
+
+
     *=========================================================================================================
     *INSTRUMENTS
     *=========================================================================================================
