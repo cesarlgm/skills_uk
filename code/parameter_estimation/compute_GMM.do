@@ -311,8 +311,15 @@ global index_list   manual social routine abstract
     *===================================================================================
     *Creating 2 digit occupation
     *===================================================================================
-    generate occ2dig=floor(occupation/100)
+    generate occ2dig=floor(occupation/100) if equation==3
 
+    xi i.occ2dig, pre(o_)
+
+    foreach variable of varlist o_* {
+        replace `variable'=0 if missing(`variable')
+    }
+
+    /*
     *Adding 2-digit occupation fixed effects
     local var_counter=0
     foreach job in $jobs {
@@ -334,7 +341,7 @@ global index_list   manual social routine abstract
     }
     
     *Ask this bit to Kevin
-
+    */
 
     *=========================================================================================================
     *INSTRUMENTS
