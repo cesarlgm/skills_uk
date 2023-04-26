@@ -31,7 +31,7 @@ global index_list   manual social routine abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        *keep if inlist(occupation, 1121,1122,1131, 1135)
+        *keep if inrange(occupation, 1121,2211)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -319,29 +319,6 @@ global index_list   manual social routine abstract
         replace `variable'=0 if missing(`variable')
     }
 
-    /*
-    *Adding 2-digit occupation fixed effects
-    local var_counter=0
-    foreach job in $jobs {
-        foreach year in $years {
-            local counter=1
-            local index_counter
-            qui summ  year if occ_id==`job'&year_id==`year'
-            foreach index in $index_list {
-                if `r(N)'!=0 /*& "`index'"!="$ref_skill_name"*/ {
-                    qui generate i_`index'_`job'_`year'=0
-                    qui replace i_`index'_`job'_`year'=1 if occ_id==`job'&year_id==`year'&skill==`counter'&equation==1
-                
-                    local ++var_counter
-                }
-                
-                local ++counter
-            }
-        }
-    }
-    
-    *Ask this bit to Kevin
-    */
 
     *=========================================================================================================
     *INSTRUMENTS
@@ -506,7 +483,7 @@ global index_list   manual social routine abstract
     order eey_group_id, after(education_d)
 
 
-    order e1s* z1s_* i_*  ts_* e2_* en_* ed_* e3jy_* e3jep_* x_*, last
+    order e1s* z1s_* i_*  ts_* e2_* en_* ed_* e3jy_* e3jep_* x_* o_*, last
 
     cap drop ezd_*_temp*
 
@@ -524,6 +501,7 @@ cap drop __000000
 
 egen occ_index_3=group(occupation)
 replace occ_index_3=0 if equation!=3
+egen occ_fe_index=group(occ2dig)
 
 gstats winsor y_var if equation==1, cut(5 95) gen(temp1)
 gstats winsor y_var if equation==3, cut(5 95) gen(temp2) by(education education_d)

@@ -65,7 +65,7 @@ init_chi=fmincon(get_chi,chi_zero,[],[],[],[],[], ...
 
 
 %%
-initial_vector=vertcat(solution,init_chi);
+initial_vector=vertcat(solution,init_chi,ones(size_vector(5),1));
 
 %clear 'solution' 
 

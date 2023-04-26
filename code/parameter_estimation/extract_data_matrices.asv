@@ -8,15 +8,15 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     n_theta=12;
     n_sigma=max(table2array(data(:,"occ_id")));
     n_comparison=max(table2array(data(:,"eey_group_id")));
-    n_occ_fe=max(table2array(data(:,"occ_fe_index")))-1;
+    n_occ_fe=max(table2array(data(:,"occ_fe_index")));
     n_total_parameters=n_theta+n_ln_A_effective+n_sigma+n_comparison+n_occ_fe;
 
     %size vector gives the info necessary to split the parameter vector
     %into parts
-    size_vector=[n_theta;n_ln_A_effective;n_sigma;n_comparison;n_occ_fe];
+    size_vector=[n_theta;n_ln_A_effective;n_sigma;n_comparison,n_occ_fe];
 
-    lower_bound=vertcat(zeros(n_theta,1),-Inf*ones(n_ln_A_effective,1),-Inf*ones(n_sigma,1),-Inf*ones(n_comparison+n_occ_fe,1));
-    upper_bound=vertcat(Inf*ones(n_theta,1),Inf*ones(n_ln_A_effective,1),Inf*ones(n_sigma,1),Inf*ones(n_comparison+n_occ_fe,1));
+    lower_bound=vertcat(zeros(n_theta,1),-Inf*ones(n_ln_A_effective,1),-Inf*ones(n_sigma,1),-Inf*ones(n_comparison,1));
+    upper_bound=vertcat(Inf*ones(n_theta,1),Inf*ones(n_ln_A_effective,1),Inf*ones(n_sigma,1),Inf*ones(n_comparison,1));
 
     %I get the data matrices
     y_matrix=get_y_var(data);

@@ -52,6 +52,11 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     %Pairwise comparison 
     comparison=splitted_vector{4};
 
+    %----------------------------------------------------------------------
+    %Occupation fixed-effects for the third equation
+    %----------------------------------------------------------------------
+    occ_fe=splitted_vector{5};
+
 
     %I assign the betas to the full error vector
     full_beta_inv=assign_sigmas(beta_inv,e3_job_index);
@@ -69,8 +74,9 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     full_e3d_theta=assign_thetas(theta,e3d_educ_index);
 
 
+
     e3_num=full_e3_a_vector.*full_e3n_theta.*full_beta_inv;
     e3_den=-1*full_e3_a_vector.*full_e3d_theta.*full_beta_inv;
 
-    result=vertcat(theta_pi,eqn1part_2,theta,e3_num,e3_den,comparison);
+    result=vertcat(theta_pi,eqn1part_2,theta,e3_num,e3_den,comparison,occ_fe);
 end

@@ -1,3 +1,1 @@
-    foreach variable of varlist o_* {
-        replace `variable'=0 if missing(`variable')
-    }
+egen occ_fe_index=group(occ2dig)
