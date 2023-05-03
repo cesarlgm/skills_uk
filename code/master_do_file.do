@@ -1,3 +1,10 @@
+*=====================================================================================
+*MAIN DO FILE
+
+*Description: this do file executes all the programs required for the paper
+*Author: César Garro-Marín
+*=====================================================================================
+
 clear all
 clear matrix
 set more off, permanently
@@ -19,7 +26,21 @@ global index_list   manual social routine abstract
 adopath + "code/parameter_estimation"
 
 
-/*
+
+*===============================================================================
+*PROCESSING DATABASES
+*===============================================================================
+do "code/process_databases.do"
+
+*===============================================================================
+*CREATE GRAPHS AND FIGURES
+*===============================================================================
+*Arrows graph
+do "code/tables_figures/create_occ_arrow_graph.do"
+
+do "code/tables_figures/people_do_jobs_differently.do"
+
+
 *===============================================================================
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
 *===============================================================================

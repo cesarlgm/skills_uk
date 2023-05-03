@@ -8,7 +8,7 @@ library('ggtern')
 
 alpha=.4
 
-setwd("C:/Users/thecs/Dropbox (Boston University)/boston_university/8-Research Assistantship/ukData")
+setwd("C:/Users/thecs/Dropbox (Boston University)/1_boston_university/8-Research Assistantship/ukData")
 dataset <- read.csv("./data/additional_processing/empshares_graphs.csv")
 
 directions <- dataset$deskilling
