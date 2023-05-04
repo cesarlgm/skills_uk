@@ -5,13 +5,13 @@
 	Purpose: 	regressions tables focussing on different measures of routine 
 				pc use.
 	
-	output: 
+	output: skill_use_within_jobs
 
 */
 *===============================================================================
 *===============================================================================
 
-global education educ_3_mid
+global education educ_3_low
 
 use "data/temporary/filtered_dems_SES", clear
 drop if missing(gwtall)

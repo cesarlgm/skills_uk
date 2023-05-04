@@ -36,9 +36,13 @@ do "code/process_databases.do"
 *CREATE GRAPHS AND FIGURES
 *===============================================================================
 *Arrows graph
+do "code/tables_figures/summaries.do"
+
 do "code/tables_figures/create_occ_arrow_graph.do"
 
 do "code/tables_figures/people_do_jobs_differently.do"
+
+
 
 
 *===============================================================================
