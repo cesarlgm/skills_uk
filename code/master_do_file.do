@@ -38,6 +38,8 @@ do "code/process_databases.do"
 *Arrows graph
 do "code/tables_figures/summaries.do"
 
+do "code/tables_figures/get_top_jobs.do"
+
 do "code/tables_figures/create_occ_arrow_graph.do"
 
 do "code/tables_figures/people_do_jobs_differently.do"
