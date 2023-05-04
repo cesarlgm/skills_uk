@@ -6,6 +6,7 @@ grscheme, ncolor(6) style(tableau)
 
     do "code/process_SES/compute_skill_indexes.do"
 
+
     rename $education education
 
 

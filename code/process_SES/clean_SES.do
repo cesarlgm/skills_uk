@@ -124,7 +124,7 @@ di "`cList'"
 
 eststo clear
 foreach variable in `cList' {
-	local	excludeList1 !inlist("`variable'", "cplanme", "cplanoth","cahead","cmytime", "crosspid")&!inlist("`variable'","cnoac1", "cnoac2", "cnoac3", "cnoac4", "cnoac5","country")
+	local	excludeList1 !inlist("`variable'", "cplanme","cahead","cmytime", "crosspid")&!inlist("`variable'","cnoac1", "cnoac2", "cnoac3", "cnoac4", "cnoac5","country")
 	if  `excludeList1' {
 		di "`variable'"
 		cap label drop `variable'
