@@ -1,13 +1,7 @@
-    do "code/process_SES/save_file_for_minimization.do" $education
+*cleans variables
+do "./code/process_SES/clean_SES.do"
 
-    do "code/process_SES/compute_skill_indexes.do"
+do "./code/process_SES/restrict_SES_sample.do" bsoc2000
 
-    rename $education education
+do "code/process_SES/create_SES_occupation_panel.do"
 
-
-    gcollapse (mean) chands-clisten, by(education)
-
-    foreach variable of varlist chands-clisten {
-        tw connected `variable' education, yscale(range(0 1)) ylab(0(.1)1) ytitle(Average answer) xlab(1(1)3) title(`variable')
-        graph export "results/figures/average_`variable'.png", replace
-    }
