@@ -1,9 +1,8 @@
----------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\
-> ukData\results/log_files/jobs_in_same_classification.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/jobs_in_same_classification.txt
   log type:  text
- opened on:  12 Apr 2022, 13:16:06
+ opened on:   4 May 2023, 11:07:08
 Share of core jobs that do not chage classification in consecutive waves, by type of core type job
 
 --------------------------
@@ -15,8 +14,7 @@ ype0      | mean(same_c~n)
         3 |       .7042801
 --------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\
-> ukData\results/log_files/jobs_in_same_classification.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/jobs_in_same_classification.txt
   log type:  text
- closed on:  12 Apr 2022, 13:16:06
----------------------------------------------------------------------------------------------------
+ closed on:   4 May 2023, 11:07:08
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
