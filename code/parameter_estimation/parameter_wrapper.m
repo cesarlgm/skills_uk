@@ -29,7 +29,7 @@ A_rest(2,9)=-1;
 b_rest=zeros(2,1);
 
 %Importing solution from GMM equation
-load("code/parameter_estimation/restricted_gmm_new.mat",'solution');
+load("code/pd arameter_estimation/restricted_gmm_new.mat",'solution');
 
 initial_sol=solution;
 %%
