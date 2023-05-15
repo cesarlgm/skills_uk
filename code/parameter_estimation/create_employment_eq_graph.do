@@ -57,6 +57,8 @@ generate weight2=people*people_d/(people+people_d)
 
 egen sums=rowtotal(diff*)
 
+
+
 *==========================================================================
 *Initial graph of the sums versus the ratio
 *==========================================================================
@@ -74,6 +76,28 @@ cap drop ee_group_id
 
 egen ee_group_id=group(education education_d year) if equation==3
 regress y_var c.sums#i.occupation i.ee_group_id
+
+*Getting parameter estimates
+*=================================
+regsave
+split var, parse(".")
+keep if var3=="sums"
+replace var1="1121" if var1=="1121b"
+destring var1, replace
+
+rename coef coefficient
+generate sigma_j=1/(1-coefficient)
+
+generate bad_parameter=sigma_j>1
+
+table bad_parameter
+
+
+/*
+*==========================================================================
+*Graph of the sums versus the residuals
+*==========================================================================
+
 predict y_hat
 predict residuals, resid
 
@@ -83,6 +107,8 @@ tw scatter residuals sums, msymbol(o) ///
     ytitle("Residuals") ///
     mcolor(ebblue%30)
 
+
+/*
 *==========================================================================
 *Flagging outliers
 *==========================================================================
