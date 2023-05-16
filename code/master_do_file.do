@@ -45,6 +45,12 @@ do "code/tables_figures/create_occ_arrow_graph.do"
 
 do "code/tables_figures/people_do_jobs_differently.do"
 
+do "code/tables_figures/create_skill_education_graphs.do"
+
+do "code/tables_figures/create_skill_correlations.do"
+
+
+
 *===============================================================================
 *ESTIMATE COSTS
 *===============================================================================
