@@ -17,8 +17,6 @@ set graphics on
 
 use "data/temporary/filtered_dems_SES", clear
 
-replace cplanoth=6-cplanoth
-
 do "code/aggregate_SOC2000.do"
 
 merge m:1 bsoc00Agg using  "data/temporary/SES_occupation_key", nogen 

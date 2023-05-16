@@ -1,8 +1,8 @@
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_composition.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/index_composition.txt
   log type:  text
- opened on:   4 Nov 2021, 12:38:51
+ opened on:  16 May 2023, 10:50:58
 
 . foreach index in `index_list' {
   2.         di "Variables in `index'"
@@ -12,20 +12,20 @@ Variables in abstract
 
               storage   display    value
 variable name   type    format     label      variable label
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 clong           float   %10.0g     clong      importance of: reading long documents
 cwritelg        float   %10.0g     cwritelg   importance of: writing long documents
 ccalca          float   %10.0g     ccalca     importance of: arithmetic (adding, subtracting, multiplying, dividing) (using ca
 cpercent        float   %10.0g     cpercent   importance of: arithmetic involving fractions (decimals, percentages, fractions)
 cstats          float   %10.0g     cstats     importance of: advanced mathematics/ statistics (using calculator/ computer if n
-cplanoth        float   %8.0g      cplanoth   importance of: planning the activities of others
+cplanoth        float   %10.0g     cplanoth   importance of: planning the activities of others
 csolutn         float   %10.0g     csolutn    importance of: thinking of solutions to problems
 canalyse        float   %10.0g     canalyse   importance of: analysing complex problems in depth
 Variables in social
 
               storage   display    value
 variable name   type    format     label      variable label
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 cpeople         float   %10.0g     cpeople    importance of: dealing with people
 cteach          float   %10.0g     cteach     importance of: teaching people (individuals or groups)
 cspeech         float   %10.0g     cspeech    importance of: making speeches/ presentations
@@ -36,7 +36,7 @@ Variables in routine
 
               storage   display    value
 variable name   type    format     label      variable label
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 brepeat         float   %8.0g      brepeat    how often work involves short repetitive tasks
 bvariety        float   %8.0g      bvariety   how much variety in job
 cplanme         float   %8.0g      cplanme    Importance of planning own act, bigger=less routine
@@ -45,14 +45,14 @@ Variables in manual
 
               storage   display    value
 variable name   type    format     label      variable label
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 chands          float   %10.0g     chands     importance of: skill or accuracy in using hands/fingers
 cstrengt        float   %10.0g     cstrengt   importance of: physical strength
 cstamina        float   %10.0g     cstamina   importance of: physical stamina
 
 . log close
       name:  <unnamed>
-       log:  c:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_files/index_composition.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/index_composition.txt
   log type:  text
- closed on:   4 Nov 2021, 12:38:51
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  16 May 2023, 10:50:58
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------

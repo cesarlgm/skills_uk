@@ -11,7 +11,7 @@
 *===============================================================================
 *===============================================================================
 
-global education educ_3_mid
+global education educ_3_low
 
 use "data/temporary/filtered_dems_SES", clear
 drop if missing(gwtall)

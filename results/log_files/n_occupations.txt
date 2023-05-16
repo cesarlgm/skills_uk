@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- opened on:   4 May 2023, 11:03:27
+ opened on:  16 May 2023, 10:44:58
 
 . tab n_years
 
@@ -20,5 +20,5 @@
       name:  <unnamed>
        log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/n_occupations.txt
   log type:  text
- closed on:   4 May 2023, 11:03:27
+ closed on:  16 May 2023, 10:44:58
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
