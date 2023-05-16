@@ -1,19 +1,14 @@
 *===============================================================================
 *PROCESSING SES DATA
 *===============================================================================
-local occupation 		`1'
-local filter			`2'
-local obsThresh			`3'
-local aggregateSOC		`4'
-local educationType		`5'
-local chosen_def		`6'
-
 
 *cleans variables
 do "./code/process_SES/clean_SES.do"
 
 do "./code/process_SES/restrict_SES_sample.do" bsoc2000
 
+
+/*
 do "code/process_SES/create_SES_occupation_panel.do"
 
 

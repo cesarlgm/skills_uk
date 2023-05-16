@@ -17,6 +17,7 @@
 *GETTING CORRELATIONS WITHIN INDEXES
 *========================================================
 
+eststo clear 
 *I set up filters to keep the number of occupations consistent across files
 { 
     *Including only jobs I have observations for
