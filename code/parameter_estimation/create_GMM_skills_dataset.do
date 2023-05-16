@@ -3,6 +3,7 @@ frames reset
 *Computing indexes
 {
     do "code/process_SES/save_file_for_minimization.do" $education
+    
     do "code/process_SES/compute_skill_indexes.do"
 
     rename $education education
@@ -14,6 +15,8 @@ frames reset
 }
 
 drop if year==1997
+
+pwcorr $abstract
 
 *Collapsing at the occupation-education-year level
 gcollapse (mean) $index_list *_i (count) obs=chands, by(occupation year education)
