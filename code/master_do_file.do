@@ -25,6 +25,7 @@ global index_list   manual social routine abstract
 
 adopath + "code/parameter_estimation"
 
+
 *===============================================================================
 *PROCESSING DATABASES
 *===============================================================================
