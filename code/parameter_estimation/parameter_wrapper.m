@@ -112,7 +112,7 @@ b_rest=zeros(2,1);
 %%
 load("code/parameter_estimation/current_solution.mat",'solution');
 
-
+%%
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
 
 %%
