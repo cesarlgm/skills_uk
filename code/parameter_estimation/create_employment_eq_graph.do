@@ -1,7 +1,6 @@
 *Create equation three graph
-
-
 *==========================================================================================
+
 import excel "data\output\theta_estimates.xlsx", sheet("Sheet1") firstrow clear
 
 drop code 
@@ -48,11 +47,11 @@ forvalues j=1/4 {
     generate diff`j'=temp`j'-tempd`j'
 }
 
-
+/*
 generate weight1=obs*obs_d/(obs+obs_d)
 
 generate weight2=people*people_d/(people+people_d)
-
+*/
 
 
 egen sums=rowtotal(diff*)

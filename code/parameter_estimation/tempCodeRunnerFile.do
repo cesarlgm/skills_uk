@@ -1,1 +1,3 @@
- do "code/process_SES/save_file_for_minimization.do" $education
+
+    regress y_var i.education#c.(manual social routine abstract), nocons
+
