@@ -115,7 +115,12 @@ b_rest=zeros(2,1);
 load("code/parameter_estimation/current_solution.mat",'solution');
 
 %%
-[theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
+[theta_matrix,comp_advg,pi,inv_sigma]=extract_solution(solution,size_vector);
+
+sigma=1./(1-inv_sigma);
+
+%%
+histogram(sigma)
 
 %%
 pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));

@@ -1,4 +1,4 @@
-function [theta_matrix,comparative,pi]=extract_solution(solution, size_vector)
+function [theta_matrix,comparative,pi,inv_sigma]=extract_solution(solution, size_vector)
     %Split parameter vector into parameter type
     splitted_vector=assign_parameters(solution,size_vector);
 
