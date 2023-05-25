@@ -95,6 +95,8 @@ b_rest=zeros(2,1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [solution,MSE]=fmincon(error_solve,initial_vector,[],[],A_rest,b_rest,lower_bound, [],[],options);
 
+
+
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %GET STANDARD ERRORS
@@ -116,8 +118,13 @@ load("code/parameter_estimation/current_solution.mat",'solution');
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
 
 %%
+pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
+pi_key=renamevars(pi_key,'ln_alpha','code');
 
-[init_matrix,init_advg,init_pi]=extract_solution(init_sol_vec,size_vector);
+[theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key);
+
+writetable(pi_table,"data/output/pi_estimates.xlsx")
+writetable(theta_table,"data/output/theta_estimates.xlsx")
 
 
 %%

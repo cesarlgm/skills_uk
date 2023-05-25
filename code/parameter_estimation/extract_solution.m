@@ -6,6 +6,8 @@ function [theta_matrix,comparative,pi]=extract_solution(solution, size_vector)
     %First I create the full restricted dlna
     pi=splitted_vector{2};
 
+    inv_sigma=splitted_vector{3};
+
     %Now I get the theta vector
     theta=splitted_vector{1};
 
