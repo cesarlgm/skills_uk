@@ -42,45 +42,44 @@
 %   A_{3t}^l,\Delta \ln A_{1t+1}^l \dots \Delta \ln A_{3T}^h\right)
 %\eeqns
 
-
-\section{New approach (v2):}
-\subsection{Counting parameters}
-\beqns
-\Delta \overline{ \ln S^e_{ijet}}&=&\frac{\sigma_j}{\sigma_j-1} \left(\sum_k \theta_{ke}\overline{S_{kejt}} \Delta \ln A_{kjt}-\Delta \ln A_{ijt}\right)+\varepsilon_{iej} \label{eq:skills_eq} 
-\eeqns
-We have $12JT$ observations, and we need to identify $3JT$ $\pi$ parameters, and $12\theta$. 
-\subsection{Model equations}
-Let $\pi_{kjt}=\frac{\sigma_j}{\sigma_j-1}\Delta \ln A_{kjt}$ and $\beta_j=\frac{\sigma_j-1}{\sigma_j}$. At the job level it holds that:
-\beqns
+\section{Estimation}
+We estimate the three-equation model:
+\beqn
 %\Delta \overline{ \ln S^e_{iJet}}&=&\frac{\sigma_J}{\sigma_J-1} \left(\sum_k \theta_k^e\overline{S_{keJt}} \Delta \ln A_{kJt}-\Delta \ln A_{iJt}\right) \label{eq:skills_eq} \\ 
 \Delta \overline{ \ln S^e_{ijet}}&=&\sum_k \theta_{ke}\overline{S_{kejt}} \pi_{kjt}-\pi_{ijt} \\
-1&=&\sum_k\theta_k^e\overline{S_{keJt}}  \label{eq:total_sum} \\
-\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\beta_j\left[\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\pi_{kjt}\right]+const_{e,e't} \label{eq:employment_eq} 
-\eeqns
+1&=&\sum_k\theta_k^e\overline{S_{kejt}}  \label{eq:total_sum} \\
+\Delta  \left[\ln \frac{q_{eJt}}{q_{e'Jt}}\right]&=&\beta_j\left[\sum_k\left(\theta_k^e \overline{S_{kJet}}-\theta_k^{e'} \overline{S_{kJe' t}}\right)\pi_{kjt}\right]+\gamma_{e,e't} \label{eq:employment_eq} 
+\eeqn
+where $\pi_{kjt}=\frac{\sigma_j}{\sigma_j-1}\Delta \ln A_{kjt}$ and $\beta_j=\frac{\sigma_j-1}{\sigma_j}$. 
 
-\subsection{Building GMM}
-In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods. We normalize $\Delta \ln A_{4jt}=0, \forall j, t$ 
+Let $\varepsilon_l$ be vector of stacked errors from equation $j$ and let $\varepsilon$ the vector of stacked errors of the full model ($\varepsilon=(\varepsilon_1,\varepsilon_2,\varepsilon_3)'$). We estimate the model parameters $\mu$ by GMM, minimizing the quadratic form:
+\beqn
+	Q=\varepsilon(\mu)'Z'Z\varepsilon(\mu)
+\eeqn 
+where $Z$ is the vector of instruments.
+\subsection{Instruments}
+The matrix of instruments $Z$ is a block-diagonal matrix with diagonal elements given by the matrix of instruments for each equation ($Z_l$). 
 \bitem
-	\item \textbf{Equation (1)}: 
-	instruments for this equation are the average skill of the other education group in that job, and skill-job-time dummies. 
-	
-	\item \textbf{Putting it all together:} let $u_l$ be the stacked vector of equation $l$ errors. Define:
+	\item \textbf{Equation 1 instruments:} we instrument the skill levels $\overline{S_{kejt}}$ with the size-weighted skill level of the other education groups in that job:
 	\beqns
-		Z&=&\begin{pmatrix}
-			Z_1 & 0 \\
-			0 & Z_2
-	\end{pmatrix}\\
-		u&=&\begin{pmatrix}
-		u_1\\ u_2 
-		\end{pmatrix}
+		\overline{S_{k-ejt}}=w_{e'jt}\overline{S_{ke'jt}}+w_{e''jt}\overline{S_{ke''jt}}
 	\eeqns
-	the moment equations form the model are given by $\expect{Z'u}{}=0$. 
-	
-	I choose parameters $\theta$ to minimize the quadratic form:
-	\beqn
-		\min_{\theta} \frac{1}{N}\left(u'Z(Z'Z)^{-1}Z'u\right)
-	\eeqn
+	where $w_{e'jt}$ is the employment share of education $e'$ in that job and year. We also include as instruments the appropriate set of --negative-- job by skill by year dummies. Therefore, $Z_2$ is a $12JT\times(12+4JT)$ matrix.
+	\item \textbf{Equation 2:} instruments for this equation are the skill levels by education level. Therefore, $Z_2$ is a $3JT\times12$ matrix.
+	\item \textbf{Equation 3 instruments:} there are three types of instruments for this equation: education pair dummies, job by year dummies, and job by education dummies. Thus, $Z_3$ is a $2JT\times(6+JT+JE)$ matrix. 
+\eitem
+\subsection{Identification}
+The GMM model is overidentified. In total we have $30 + 5JT + JE$ instruments to identify $18+4JT+J$ parameters.
 
+\subsection{Standard errors}
+The GMM estimates are distributed as follows:
+\beqns
+	\sqrt{N}(\hat\mu-\mu)\rightarrow N(0,V)
+\eeqns
+where $(D'D)^{-1}D'VD(D'D)^{-1}$, with $D$ the model gradient, and
+\beqns
+	\hat{V}=\frac{1}{N}\sum_{n=1}^N\varepsilon_n(\hat\mu)\varepsilon_n(\hat\mu)'
+\eeqns
 	\subsection{Calculating the gradient}
 	\paragraph{Reminder:}
 	\beqns
@@ -105,7 +104,7 @@ In our data we have 3 education levels, 4 skills, $J$ jobs and $T$ periods. We n
 		\frac{\partial g_{ejt}(\gamma)}{\partial \theta_{ke}}&=&-S_{kejt}
 	\eeqns
 	\red{next thing to do: write the gradient}
-\eitem 
+
 %\section{How did I write the code?}
 %\subsection{Basic definitions}
 %\beqns

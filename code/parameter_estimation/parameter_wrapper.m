@@ -102,8 +102,6 @@ b_rest=zeros(2,1);
 %GET STANDARD ERRORS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[se,V]=get_standard_errors(solution);
-
 %%
 
 [solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, [],[],options);
@@ -119,8 +117,9 @@ load("code/parameter_estimation/current_solution.mat",'solution');
 
 sigma=1./(1-inv_sigma);
 
-%%
-histogram(sigma)
+[se,V]=get_standard_errors(solution);
+
+
 
 %%
 pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));

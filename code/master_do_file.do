@@ -55,12 +55,16 @@ do "code/tables_figures/create_skill_correlations.do"
 *===============================================================================
 *ESTIMATE COSTS
 *===============================================================================
-*Create the datasets
+*Here I create the datasets to estimate the cost parameters
+*Skill datasets for the first two equations
 do "code/parameter_estimation/create_GMM_skills_dataset.do"
 
-qui do "code/parameter_estimation/create_GMM_employment_dataset.do"
+*Dataset of employment changes coming from the LFS
+do "code/parameter_estimation/create_GMM_employment_dataset.do"
 
-qui do "code/parameter_estimation/compute_GMM.do"
+*Output full dataset for matlab
+do "code/parameter_estimation/compute_GMM.do"
+
 
 
 
