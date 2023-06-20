@@ -16,7 +16,7 @@ replace educ_3_low=2 if    educ_4==1
 replace educ_3_low=educ_3_low-1 
 
 label define educ_3_low ///
-    1"GCSE C-" ///
+    1"GCSE A-" ///
     2 "A* level / trade" ///
     3 "Bachelor +"
 

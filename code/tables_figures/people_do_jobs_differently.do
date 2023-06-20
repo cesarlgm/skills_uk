@@ -82,8 +82,8 @@ keep if  n_years==4
 rename $education education
 rename bsoc00Agg occupation
 
-merge m:1 occupation using `job_filter', keep(3) nogen 
-merge m:1 occupation using `employment_filter', keep(3) nogen 
+*merge m:1 occupation using `job_filter', keep(3) nogen 
+*merge m:1 occupation using `employment_filter', keep(3) nogen 
 
 do "code/process_SES/compute_skill_indexes.do"
 
@@ -94,7 +94,7 @@ foreach index in $index_list {
 	eststo `index'n: reghdfe `index' i.education, absorb(year occupation) vce(cl occupation)
 }
 
-
+/*
 esttab *r, se
 esttab *n, se
 

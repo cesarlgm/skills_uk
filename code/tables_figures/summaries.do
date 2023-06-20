@@ -93,8 +93,8 @@ eststo clear
     rename $education education
     rename bsoc00Agg occupation
 
-    merge m:1 occupation using `job_filter', keep(3) nogen 
-    merge m:1 occupation using `employment_filter', keep(3) nogen 
+    *merge m:1 occupation using `job_filter', keep(3) nogen 
+    *merge m:1 occupation using `employment_filter', keep(3) nogen 
 
     do "code/process_SES/compute_skill_indexes.do"
 
@@ -106,7 +106,7 @@ eststo clear
     eststo clear
     foreach year in 2001 2017 {
         foreach skill in $index_list {
-        eststo `skill'`year': regress `skill' ibn.education if year==`year', nocons
+        eststo `skill'`year': regress `skill' ibn.education if year==`year' [aw=gwtall], nocons
         }
     }
 
@@ -126,7 +126,7 @@ eststo clear
     esttab abstract*, nostar not
 }
 
-/*
+
 *SUMMARY TABLES: EMPLOYMENT SHARES
 *===============================================================================
 use "./data/temporary/LFS_agg_database", clear

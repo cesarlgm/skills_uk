@@ -123,6 +123,13 @@
     esttab d_empshare1 d_empshare2 d_empshare3  using `table_name', f b(2) append booktabs label not noobs nomtitles plain collabels(none)
     textablefoot using `table_name', notes(`table_notes')
 
+    preserve
+    keep if d_empshare1>0
+    keep bsoc00Agg
+    duplicates drop
+    save "data/additional_processing/increase_low_occupations_all", replace
+    restore
+
     keep if  reject1&d_empshare1>0
     keep bsoc00Agg
     duplicates drop
@@ -202,7 +209,7 @@
     textablefoot using `table_name'
  
 }
-
+*/
 *How do these occupations look in the skill space
 {
     do "code/process_SES/save_file_for_minimization.do"
@@ -211,7 +218,7 @@
 
     drop if year==1997
 
-    merge m:1 $occupation using  "data/additional_processing/increase_low_occupations", keep(1 3)
+    merge m:1 $occupation using  "data/additional_processing/increase_low_occupations_all", keep(1 3)
 
     gen interest_occ=_merge==3
 
@@ -222,6 +229,7 @@
     foreach index in $index_list {
         generate `index'l=asinh(`index')
     }
+
 
     label define interest_occ 0 "All other" 1 "Increased low share"
     label values interest_occ interest_occ
@@ -236,6 +244,7 @@
         eststo `index'd: regress `index'l i.year##i.x_var, vce(cl $occupation)
     }
 
+    /*
     grscheme, ncolor(7) style(tableau)
     coefplot *01, ylabel(1 "Abstract" 2 "Social" 3 "Routine" 4 "Manual") drop(_cons) xline(0) legend(off) 
     graph export "results/figures/baseline_skill_use.png", replace
