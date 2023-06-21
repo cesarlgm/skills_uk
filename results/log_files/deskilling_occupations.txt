@@ -1,33 +1,46 @@
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_file
-> s/deskilling_occupations.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/deskilling_occupations.txt
   log type:  text
- opened on:   3 May 2022, 14:44:38
-.         unique $occupation
-Number of unique values of bsoc00Agg is  10
-Number of records is  10
-.         list bsoc00Agg empshare1 d_empshare1
+ opened on:  20 Jun 2023, 14:48:11
+.     unique $occupation
+Number of unique values of bsoc00Agg is  22
+Number of records is  22
+.     list bsoc00Agg empshare1 d_empshare1
 
      +------------------------------------------------------------------------------------+
      |                                                    bsoc00Agg   empsha~1   d_emps~1 |
      |------------------------------------------------------------------------------------|
-  1. |                          3223 speech and language therapists          0          0 |
-  2. |                        2129 engineering professionals n.e.c.   .0320217   .0011308 |
-  3. |    3111 laboratory, engineering, and quality assurance tech.   .0883369   .0025407 |
-  4. |                     2421 chartered and certified accountants   .0374095   .0027847 |
-  5. |                     9133 printing machine minders and assist   .2897526   .0042734 |
+  1. |                       1137 research and development managers   .0610938   .0061129 |
+  2. |                                            5412 upholsterers   .6348658   .0077258 |
+  3. |                                       5241 Electrical trades    .236803   .0089548 |
+  4. |                                       3229 therapists n.e.c.   .0863921   .0100684 |
+  5. |                     2441 public service administrative profs   .1471235   .0108569 |
      |------------------------------------------------------------------------------------|
-  6. | 2121 civil, mechanical, electrical and electronics engineers   .0273105   .0062488 |
-  7. |                     2434 chartrd surveyors (not qntity surv)   .0118337   .0099612 |
-  8. |                     3564 car. advis & voction guidnce spcils   .0129028   .0114886 |
-  9. |                    6221 Hairdressers And Related Occupations    .088994   .0228602 |
- 10. |                     2441 public service administrative profs     .02743   .0272734 |
+  6. |                     3551 conservat & environ protection offs   .0833056    .011463 |
+  7. |                        8214 taxi, cab drivers and chauffeurs   .6192691   .0139717 |
+  8. | 2121 civil, mechanical, electrical and electronics engineers   .0712477   .0157688 |
+  9. |             1122 managers in construction, mining and energy   .1736253   .0201071 |
+ 10. |                                          5231 Vehicle trades   .2506525   .0280593 |
+     |------------------------------------------------------------------------------------|
+ 11. |                       1114 sen. officials spec interest orgs   .0754583   .0372482 |
+ 12. |                     2434 chartrd surveyors (not qntity surv)   .0372036   .0453741 |
+ 13. |                        2129 engineering professionals n.e.c.   .0738391   .0497605 |
+ 14. |                      8135 tyre, exhaust and windscrn fitters   .7392882    .055316 |
+ 15. |                     9133 printing machine minders and assist   .5218078   .0565974 |
+     |------------------------------------------------------------------------------------|
+ 16. |                                         5321 building trades   .3933919   .0589173 |
+ 17. |                    6221 Hairdressers And Related Occupations   .2535389   .0589352 |
+ 18. |                                8215 Transport operatives nec   .5625998   .0608214 |
+ 19. |                                  5431 butchers, meat cutters   .6440338   .0664995 |
+ 20. |               5213 Metal forming, welding and related trades   .3575457   .0674947 |
+     |------------------------------------------------------------------------------------|
+ 21. |                            5312 bricklayers, masons, roofers   .2996444   .0771192 |
+ 22. |                                         5421 printing trades   .4732406   .0807233 |
      +------------------------------------------------------------------------------------+
-.         log close
+.     log close
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Boston University)\boston_university\8-Research Assistantship\ukData\results/log_file
-> s/deskilling_occupations.txt
+       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/deskilling_occupations.txt
   log type:  text
- closed on:   3 May 2022, 14:44:38
---------------------------------------------------------------------------------------------------------------------------
+ closed on:  20 Jun 2023, 14:48:11
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -20,7 +20,7 @@ drop if year==1997
 pwcorr $abstract
 
 *Collapsing at the occupation-education-year level
-gcollapse (mean) $index_list *_i (count) obs=chands, by(occupation year education)
+gcollapse (mean) $index_list *_i (count) obs=chands [fw=gwtall], by(occupation year education)
     
 
 *Uncomment this to do long differences

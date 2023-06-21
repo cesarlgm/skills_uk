@@ -44,7 +44,6 @@
     merge m:1 bsoc00Agg year using `SES_occs', keep(3) nogen
 
 
-
     keep if inlist(year, 2001, 2017)
 
     *Compute changes in employment shares between 2001 and 2017
@@ -55,15 +54,24 @@
         cap drop temp
     }
     
-    generate deskilling=(d_empshare1*2-d_empshare2-d_empshare3)/(sqrt(d_empshare1^2+d_empshare2^2+d_empshare3^2)*sqrt(6))
+    merge m:1 $occupation using  "data/additional_processing/increase_low_occupations_all", keep(1 3)
+    generate deskilled=_merge==3
+    cap drop _merge
 
-    generate angle=acos(deskilling)
+    merge m:1 $occupation using  "data/additional_processing/increase_low_occupations", keep(1 3)
+    generate survived=_merge==3
+    cap drop _merge
+
+
+    *generate deskilling=(d_empshare1*2-d_empshare2-d_empshare3)/(sqrt(d_empshare1^2+d_empshare2^2+d_empshare3^2)*sqrt(6))
+
+    *generate angle=acos(deskilling)
     
 
     export delimited using "data/additional_processing/empshares_graphs.csv", replace
 
     bysort $occupation: keep if _n==1
-    keep if deskilling>0
+    keep if deskilled>0
     gsort d_empshare1
 
     log using "results/log_files/deskilling_occupations.txt", replace text
@@ -71,6 +79,6 @@
     list bsoc00Agg empshare1 d_empshare1
     log close
 }
-
+/*
 *Creating the graph in R
 rscript using "code/process_SES/create_direction_graph.R"

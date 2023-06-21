@@ -124,8 +124,6 @@ global index_list   manual social routine abstract
     }
 
 
-
-
     egen occ_id=group(occupation)
     egen year_id=group(year)
 
@@ -499,6 +497,12 @@ replace y_var=temp2 if equation==3
 drop e3jy_1_*
 drop e3jep_*_1
 drop e3jep_1_2
+
+preserve
+    keep occupation
+    duplicates drop 
+    save "data/additional_processing/GMM_occupation_filter", replace
+restore
 
 export delimited using  "data/additional_processing/gmm_example_dataset_winsor.csv", replace
 
