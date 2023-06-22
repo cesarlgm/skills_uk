@@ -30,7 +30,7 @@ b_rest=zeros(2,1);
 
 %%
 %Importing solution from GMM equation
-load("code/pd arameter_estimation/restricted_gmm_new.mat",'solution');
+load("code/parameter_estimation/restricted_gmm_new.mat",'solution');
 
 initial_sol=solution;
 %%
@@ -52,7 +52,7 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
            [],[],options);
 
 %%
-
+load("code/parameter_estimation/current_solution_twoeq.mat",'solution');
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
 
 
