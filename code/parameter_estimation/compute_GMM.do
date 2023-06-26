@@ -61,7 +61,7 @@ global index_list   manual social routine abstract
         egen n_times_n=count(year), by(occupation education education_d)
         egen n_times_d=count(year), by(occupation education education_d)
 
-        keep if n_times_d==3&n_times_d==3
+        keep if n_times_d==3
 
         keep occupation year 
         duplicates drop 

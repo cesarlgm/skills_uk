@@ -45,6 +45,7 @@ foreach index in $index_list {
     label var `index'   "Average `index'"
 }
 
+
 frames copy default equation1
 frames change equation1
 
@@ -100,4 +101,6 @@ egen in_eqn_1=max(temp), by(occupation)
 drop if missing(in_eqn_1)|in_eqn_1==0
 
 save "data/additional_processing/gmm_skills_dataset", replace
+
+
 

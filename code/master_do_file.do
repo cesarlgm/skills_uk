@@ -65,7 +65,8 @@ do "code/parameter_estimation/create_GMM_employment_dataset.do"
 *Output full dataset for matlab
 do "code/parameter_estimation/compute_GMM.do"
 
-
+*Detail on occupations I am losing when I do two equation solution
+do "code/parameter_estimation/lost_occupations_detail.do"
 
 
 
