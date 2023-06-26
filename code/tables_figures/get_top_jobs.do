@@ -2,6 +2,7 @@
 *GETTING TOP AND BOTTOM JOBS BY SKILL
 *========================================================
 
+/*
 *I set up filters to keep the number of occupations consistent across files
 { 
     *Including only jobs I have observations for
@@ -52,7 +53,7 @@
     save `employment_filter'
 }
 
-
+*/
 
 
 global education educ_3_low
@@ -76,17 +77,17 @@ rename bsoc00Agg occupation
 
 do "code/process_SES/compute_skill_indexes.do"
 
-gcollapse (mean) $index_list, by(occupation)
+gcollapse (mean) $index_list [fw=gwtall], by(occupation)
 
-merge m:1 occupation using `job_filter', keep(3) nogen 
-merge m:1 occupation using `employment_filter', keep(3) nogen 
+*merge m:1 occupation using `job_filter', keep(3) nogen 
+*merge m:1 occupation using `employment_filter', keep(3) nogen 
 
 
 *Getting top and bottom jobs by skill
 foreach skill in $index_list {
     preserve
     gsort -`skill'
-    keep if inrange(_n,1,5)|inrange(_n,_N-5,_N)
+    keep if inrange(_n,1,5)|inrange(_n,_N-4,_N)
     export delimited occupation using "results/tables/occ_examples_`skill'", replace
     restore
 }

@@ -31,8 +31,6 @@ eststo clear
     drop if missing(gwtall)
 
 
-
-
     rename edlev edlevLFS
     do "code/process_LFS/create_education_variables.do"
 
@@ -82,7 +80,7 @@ eststo clear
 
     esttab abstract*, nostar not
 }
-/*
+
 
 *SUMMARY TABLES: EMPLOYMENT SHARES
 *===============================================================================
@@ -93,7 +91,7 @@ do "code/process_LFS/create_education_variables.do"
 rename $occupation occupation
 merge m:1 occupation using  `SES_occs', keep(3)
 
-collapse (mean) l_hourpay (sum) people [aw=people], by($education year)
+collapse (mean) l_hourpay (count) people [fw=people], by($education year)
 egen temp=sum(people), by(year)
 generate emp_share=people/temp 
 
@@ -101,7 +99,7 @@ keep if inlist(year, 2001,2017)
 
 table $education year, c(mean emp_share)
 
-
+/*
 
 *=========================================================================================================
 
@@ -173,13 +171,23 @@ use "./data/temporary/LFS_agg_database", clear
 do "code/process_LFS/create_education_variables.do"
 
 rename $occupation occupation 
+rename $education education
 merge m:1 occupation using  "data/additional_processing/GMM_occupation_filter", keep(3) nogen 
 
-collapse (mean) l_hourpay (sum) people [aw=people], by($education year)
+unique occupation
+
+
+
+*gcollapse (sum) people, by(education year)
+
+*tab education year [fw=people] if inlist(year,2001,2006,2012,2017)
+
+
+gcollapse (mean) l_hourpay (count) people [fw=people], by(education year)
 egen temp=sum(people), by(year)
 generate emp_share=people/temp 
 
 keep if inlist(year, 2001,2017)
 
-table $education year, c(mean emp_share)
+table education year, c(mean emp_share)
 
