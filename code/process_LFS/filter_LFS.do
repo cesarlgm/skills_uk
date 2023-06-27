@@ -37,9 +37,9 @@ keep if impliedExperience>=1
 	
 *Finally I filter people in the army
 if `year'<=2000{
-	*I am excluding people:
-	*With unknown occupation, in the armed forces, and vague categories such as
-	*all other labourers etc, all others (miscellaneous)
+	*I ach as
+	*all other labourers etc, all others (miscellaneous)m excluding people:
+	*With unknown occupation, in the armed forces, and vague categories su
 	drop if inlist(socmain, -9,-8, 150,151,600,601, 900,999)
 }
 else if (`year'==2001 & `quarter'!=1)|inrange(`year',2002,2010){
