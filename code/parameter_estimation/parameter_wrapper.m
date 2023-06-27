@@ -52,7 +52,8 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
            [],[],options);
 
 %%
-load("code/parameter_estimation/current_solution_twoeq.mat",'solution');
+%% 
+load("code/parameter_estimation/current_solution_twoeq_weighted.mat",'solution');
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
 
 
