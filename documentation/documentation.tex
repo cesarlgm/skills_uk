@@ -13,7 +13,7 @@
 \section{GMM standard errors}
 I minimize the quadratic form:
 \beqn
-Q=\psi(w,\mu)'A\psi(w,\mu)
+Q=\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)'A\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)
 \eeqn 
 The GMM estimates have a distribution of:
 \beqns
@@ -43,17 +43,69 @@ I will now describe how do I estimate each component of the variance covariance 
 
 
 \appendix
-\section{Notation and definitions}
-Let $K$ be the number of instruments from our GMM model. The model solves the moment equations:
+\section{Notation}
+Our GMM model is based on the moment equations:
 \beqns
-	Z\varepsilon(\mu)
+	\expect{\psi(w_i,\mu)}{}=0	
 \eeqns
-where $Z$ is a $N\times K$ matrix, and $\varepsilon(\mu)$ is a vector of length $K$.
-
-
-
+where:
+\bitem
+\item $w_i$ is the vector of data for observation $i$.
+\item $\psi$ is a $P\times 1$ vector of functions.
+\item $\mu$ is an $R\times 1$ vector of parameters. 
+\eitem 
+Our estimate is the solution to the problem:
+\beqns
+	\hat{\mu}=\arg\min_c\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)'A\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)
+\eeqns
+which we can write as:
+\beqns
+	\hat{\mu}=\arg\min_c\left(\frac{1}{N}\varepsilon(c)'Z\right)A\left(\frac{1}{N}Z'\varepsilon(c)\right)
+\eeqns
+where $\varepsilon(c)$ is the $N\times 1$ vector of errors of the model, and $Z$ is the $N\times P$ matrix of instruments. Here $N=N_1+N_2+N_3$ is the total number of observations and $N_i$ denotes the number of observations that belong to equation $i$. 
 \bibliographystyle{apalike}
 %\bibliography{../../../../CentralLibrary/Papers/library}{}
+
+\subsection{The gradient:}
+Our estimate of the gradient $D$ is:
+\beqns
+	\hat{D}=\frac{1}{N}\sum_{i=1}^N\frac{\partial \psi(w_l,\hat{\mu})}{\partial c'}
+\eeqns
+now, let us describe the form of this gradient in more detail. Each element of $\psi(w_l,c)$ is the function $z_{lp}\varepsilon_i(c)$, where $\varepsilon_l(c)$ is the error term for the $l$-th observation.   
+
+To avoid making the notation a mess, define the functions $J(l)$, $E(l)$, $T(l)$, and $I(l)$ which return the job, education level, year, and skill that correspond to observation $l$. In addition, for the third equation observations I define as $EET(l)$ as the function that returns the education pair-year cell of the observation.
+\beqns
+	\varepsilon_l(\mu)=\left\{\begin{array}{cc}
+		\Delta \overline{ \ln S_{ijet+1}}-\sum_k \theta_{ke}\overline{S_{kejt}} \pi_{kjt}+\pi_{ijt} & l\leq N_1 \\
+		1-\sum_k\theta_{ke}\overline{S_{kejt}}    & N_1<l\leq N_1+N_2	 \\
+		\Delta  \left[\ln \frac{q_{ejt+1}}{q_{e'jt+1}}\right]-\beta_j\left[\sum_k\left(\theta_{ke} \overline{S_{kjet}}-\theta_{ke'} \overline{S_{kje' t}}\right)\pi_{kjt}\right]-\gamma_{e,e't} & N_1+N_2<l\leq N 
+	\end{array}\right.
+\eeqns
+
+Note that the parameter vector $\mu$ has four types of parameters: $\theta_{ke}$, $\pi_{kjt}$, and $\beta_j$. Let us go case by case:
+\beqns
+	\frac{\partial\varepsilon_l(\mu)}{\partial \beta_j}&=&\left\{\begin{array}{lc}
+		-\beta_j\left[\sum_k\left(\theta_{ke} \overline{S_{kjet}}-\theta_{ke'} \overline{S_{kje' t}}\right)\pi_{kjt}\right] & N_1+N_2<l\leq N, j=J(l)\\
+		0& \text{otherwise}
+	\end{array}\right.\\
+\frac{\partial\varepsilon_l(\mu)}{\partial \gamma_{ee't}}&=&\left\{\begin{array}{lc}
+	-1 & N_1+N_2<l\leq N, (e,e',t)=EET(l)\\
+	0&  \text{otherwise}
+\end{array}\right.\\
+\frac{\partial\varepsilon_l(\mu)}{\partial \pi_{ijt}}&=&\left\{\begin{array}{lc}
+- \theta_{ie}\overline{S_{iejt}} & l\leq N_1, i\neq I(l), j=J(l), t=T(l) \\
+- \theta_{ie}\overline{S_{iejt}}+1 & l\leq N_1, i= I(l),j=J(l), t=T(l) \\
+-\beta_j\left(\theta_{ie} \overline{S_{ijet}}-\theta_{ie'} \overline{S_{ije' t}}\right) & N_1+N_2<l\leq N \\
+0 & \text{otherwise}
+\end{array}\right.\\
+\frac{\partial \varepsilon_l(\mu)}{\partial \theta_{ie}}&=&\left\{\begin{array}{lc}
+- \overline{S_{kejt}} \pi_{ijt} & l\leq N_1, e=E(l) \\
+	-\overline{S_{iejt}}    & N_1<l\leq N_1+N_2,	e=E(l) \\
+-\beta_j\theta_{ie}\overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (e,\cdot,\cdot)=EET(l)\\
+	\beta_j\theta_{ie} \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (\cdot,e,\cdot)=EET(l)\\
+	0 & \text{otherwise}
+\end{array}\right.
+\eeqns
 
 \end{document}
 
