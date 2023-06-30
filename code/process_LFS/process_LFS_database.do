@@ -20,6 +20,7 @@ do "code/process_LFS/create_collapsed_LFS.do"
 do "code/process_LFS/append_LFS.do"  
 
 
+
 /*
 *=======================================================================
 *Identifying polarizing jobs
@@ -27,6 +28,7 @@ do "code/process_LFS/append_LFS.do"
 do "code/process_LFS/identify_polarizing_jobs.do"
 
 do "code/process_LFS/step_up_correction.do"
+
 
 /*
 

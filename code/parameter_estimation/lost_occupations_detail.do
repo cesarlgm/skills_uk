@@ -29,7 +29,6 @@
 *======================================================================================================
 *SES DATA
 *======================================================================================================
-
 {
     do "code/process_SES/save_file_for_minimization.do" $education
    
@@ -43,6 +42,13 @@
     global n_educ: word count of `r(levels)'
     global n_educ=$n_educ-1
 }
+
+preserve
+    keep occupation 
+    duplicates drop
+    tempfile ses_occ
+    save `ses_occ'
+restore
 
 drop if year==1997
 
@@ -80,7 +86,15 @@ preserve
     tab education year [fw=people] if inlist(year,2001,2006,2012,2017)
 restore 
 
+merge m:1 occupation using `ses_occ', keep(3) nogen
+unique occupation
 
+preserve
+    gcollapse (sum) people, by(education year)
+
+    tab education year [fw=people] if inlist(year,2001,2006,2012,2017)
+
+restore
 
 merge m:1 occupation using `kept_occ', keep(3)
 

@@ -1,9 +1,3 @@
-*=====================================================================================
-*MAIN DO FILE
-
-*Description: this do file executes all the programs required for the paper
-*Author: César Garro-Marín
-*=====================================================================================
 
 clear all
 clear matrix

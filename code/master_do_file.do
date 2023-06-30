@@ -50,6 +50,8 @@ do "code/tables_figures/create_skill_education_graphs.do"
 
 do "code/tables_figures/create_skill_correlations.do"
 
+do "code/tables_figures/welch_index.do"
+
 
 
 *===============================================================================
