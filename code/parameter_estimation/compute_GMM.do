@@ -31,7 +31,7 @@ global index_list   manual social routine abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        *keep if inlist(occupation, 1121,1122)
+        keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -271,101 +271,52 @@ global index_list   manual social routine abstract
     sort equation skill  occupation year  education
 
 
-    *Creating skill levels of other education levels
-    /* 
+
+    di "Creating omega restriction variables", as result
+    *Creating equation 2 variables
+    foreach education in $educ_lev {
+    qui summ  year if education==`education'&equation==2
+    foreach index in $index_list {
+            if `r(N)'!=0 {
+                generate d1s_`index'`education'=0
+                replace d1s_`index'`education'= `index' if education==`education'&inlist(equation,1,2)
+            }
+        }
+    }
+
+
+    local var_counter=0
+    di "Expanding equation 1 variables", as result
     foreach job in $jobs {
         foreach year in $years {
             qui summ  year if occ_id==`job'&year_id==`year'&equation==1
             local index_counter=1
-            foreach index in $index_list {
-                if `r(N)'!=0 & "`index'"!="$ref_skill_name" {
-                    qui generate z1s_`index_counter'_`job'_`year'=0
-                    qui replace z1s_`index_counter'_`job'_`year'= zv_`index' if occ_id==`job'&year_id==`year'&equation==1
-                    
-                    local ++var_counter
+                foreach index in $index_list {
+                    if `r(N)'!=0  /* & "`index'"!="$ref_skill_name" */   {
+                        qui generate d2s_`index_counter'_`job'_`year'=0
+                        qui replace d2s_`index_counter'_`job'_`year'= 1 if occ_id==`job'&year_id==`year'&equation==1
+                        local ++var_counter
+                    }
+                    local ++index_counter
                 }
-                local ++index_counter
-            }
         }
     }
-    */
 
-    *Note 10/13/22 this bit seems to be ok
+    
 
 
-    *I also verified that the depednet variable is constructed appropriately
-    /*
-    local drop_counter=0
-    *Note: I made sure that I was not excluding 1 education level fully.
-    foreach variable of varlist z1s* {
-        cap qui summ `variable'
-        if `r(max)'==0 {    
-            drop `variable'
-            local ++drop_counter
-        }
-
-    }
-    */
     di "Null variables:  `drop_counter'"
 
     drop zv_*
 
-    order e1s_* z1s_* i_* ts_*, last
+    order e1s_* z1s_* i_* ts_* d1s_* d2s_*, last
     
     *Here I filter the jobs that 
     sort equation education occupation year skill  
 
-    *Adding line for inst
 
 
-
-    /*
-
-di "Expanding employment equation variables", as result
-*Creating equation 3 variables
-
-foreach variable of varlist index1-index4 {
-    rename `variable' ezn_`variable'
-    replace  ezn_`variable'=0 if missing(ezn_`variable')
-}
-
-foreach variable of varlist indexd1-indexd4 {
-    rename `variable' ezd_`variable'
-    replace  ezd_`variable'=0 if missing(ezd_`variable')
-}
-
-
-
-order en_* ed_* ezn_* ezd_*, last
-order education_d, after(education)
-egen ee_group_id=group(education education_d) if equation==3
-
-
-levelsof ee_group_id
-foreach pair in `r(levels)' {
-    foreach year in $years {
-        generate x_`pair'`year'=0
-        replace x_`pair'`year'=1 if ee_group_id==`pair'&year_id==`year'
-    }
-}
-
-foreach year in $years {
-    cap label var x_1`year' "Low/High"
-    cap label var x_2`year' "Mid/Low"
-    cap label var x_3`year' "High/Mid"
-}
-
-br education education_d year x*
-
-*drop x_11 x_13
-
-drop ee_group_id
-egen ee_group_id=group(education education_d year)
-order ee_group_id, after(education_d)
-
-*/
-
-order e1s* i_* e2* ts_*, last
+order e1s* i_* e2* ts_* d1s_* d2s_*, last
 
 save "data/additional_processing/gmm_example_dataset_twoeq", replace
 

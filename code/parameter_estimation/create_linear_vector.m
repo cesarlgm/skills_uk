@@ -37,6 +37,9 @@ function result=create_linear_vector(parameter_vector,size_vector,...
     %Now I get the theta vector
     theta=splitted_vector{1};
 
+
+  
+
     %I reorder the parameters in the "right order"
     %Parameters equation 1
     %Under the current form, these are just the pis

@@ -12,7 +12,7 @@ options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunct
 cd 'C:/Users/thecs/Dropbox (Boston University)/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
-data_path="data/additional_processing/gmm_example_dataset.csv";
+data_path="data/additional_processing/gmm_example_dataset_twoeq.csv";
 
 
 data=readtable(data_path);
@@ -51,8 +51,16 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 [solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, ...
            [],[],options);
 
+
 %%
-%% 
+%Creating standard errors
+solution=transpose(1:36);
+
+
+xi_matrix=get_xi_matrix(data,size_vector,solution);
+
+
+%%
 load("code/parameter_estimation/current_solution_twoeq_weighted.mat",'solution');
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
 

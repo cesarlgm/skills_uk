@@ -20,6 +20,7 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     %s is the matrix I use for multiplying with the parameters
     s_matrix=get_s_matrix(data);
 
+
     %These are the eoccupation indexes form equations 1 and 3s
     [e1_code,e1_dlna_index,e1_educ_index]=get_occ_indexes(data);
 end
