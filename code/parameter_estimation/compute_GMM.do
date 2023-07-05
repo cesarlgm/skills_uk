@@ -11,6 +11,9 @@ This do file creates the dataset I need to execute the GMM code in matlab
 
 */
 
+clear all
+set maxvar 10000
+
 global ref_skill_num    4
 global ref_skill_name   abstract
 
@@ -31,7 +34,7 @@ global index_list   manual social routine abstract
         egen n_educ=max(temp), by(occupation year)
         keep if n_educ==3
 
-        keep if inlist(occupation, 1121,1122)
+        *keep if inlist(occupation, 1121,1122)
 
         drop if missing(y_var)
         sort equation occupation year education
@@ -272,7 +275,9 @@ global index_list   manual social routine abstract
 
 
 
-    di "Creating omega restriction variables", as result
+    *==================================================================================================================
+    *Variables for the derivatives
+    *==================================================================================================================
     *Creating equation 2 variables
     foreach education in $educ_lev {
     qui summ  year if education==`education'&equation==2
@@ -302,6 +307,26 @@ global index_list   manual social routine abstract
         }
     }
 
+
+    *Next I add indexes for the pi derivatives
+    local var_counter=0
+    di "Expanding equation 1 variables", as result
+    foreach job in $jobs {
+        foreach year in $years {
+            qui summ  year if occ_id==`job'&year_id==`year'&equation==1
+            local index_counter=1
+                foreach index in $index_list {
+                    if `r(N)'!=0  /* & "`index'"!="$ref_skill_name" */   {
+                        qui generate de1s_`index_counter'_`job'_`year'=0
+                        qui replace de1s_`index_counter'_`job'_`year'= `index' if occ_id==`job'&year_id==`year'&equation==1
+                        local ++var_counter
+                    }
+                    local ++index_counter
+                }
+        }
+    }
+
+    
     
 
 
@@ -309,14 +334,14 @@ global index_list   manual social routine abstract
 
     drop zv_*
 
-    order e1s_* z1s_* i_* ts_* d1s_* d2s_*, last
+    order e1s_* z1s_* i_* ts_* d1s_* d2s_* de1s_*, last
     
     *Here I filter the jobs that 
     sort equation education occupation year skill  
 
 
 
-order e1s* i_* e2* ts_* d1s_* d2s_*, last
+order e1s_* i_* e2* ts_* d1s_* d2s_* de1s_*, last
 
 save "data/additional_processing/gmm_example_dataset_twoeq", replace
 

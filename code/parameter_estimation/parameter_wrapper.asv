@@ -33,12 +33,8 @@ b_rest=zeros(2,1);
 load("code/parameter_estimation/restricted_gmm_new.mat",'solution');
 
 initial_sol=solution;
-%%
-
 clear solution
 
-
-%%
 
 error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_dln_a_index,e1_educ_index);
 
@@ -46,13 +42,15 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 [solution,MSE]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
 
 
-%%
-
-[solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, ...
-           [],[],options);
 
 
 %%
+v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
+    e1_dln_a_index, e1_educ_index);
+
+variance_matrix=get_variance_matrix(z_matrix,v_estimate,data,size_vector,1,solution);
+
+standard_errors=get_standard_errors(variance_matrix);
 
 
 

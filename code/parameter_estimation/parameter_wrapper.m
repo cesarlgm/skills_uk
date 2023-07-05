@@ -18,6 +18,8 @@ data_path="data/additional_processing/gmm_example_dataset_twoeq.csv";
 data=readtable(data_path);
 
 
+n_obs=size(data,1);
+
 [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_code, ...
     lower_bound, upper_bound]= extract_data_matrices(data);
 
@@ -33,12 +35,8 @@ b_rest=zeros(2,1);
 load("code/parameter_estimation/restricted_gmm_new.mat",'solution');
 
 initial_sol=solution;
-%%
-
 clear solution
 
-
-%%
 
 error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_dln_a_index,e1_educ_index);
 
@@ -46,18 +44,22 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 [solution,MSE]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
 
 
-%%
-
-[solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, ...
-           [],[],options);
-
 
 %%
-%Creating standard errors
-solution=transpose(1:36);
+%Importing solution of the algorithm
+load("code/parameter_estimation/current_solution_twoeq_weighted.mat",'solution');
+[theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
 
 
-xi_matrix=get_xi_matrix(data,size_vector,solution);
+%%
+v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
+    e1_dln_a_index, e1_educ_index);
+
+%%
+variance_matrix=get_variance_matrix(z_matrix,v_estimate,data,size_vector,1,solution);
+%%
+standard_errors=get_standard_errors(variance_matrix,n_obs);
+[standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector);
 
 
 %%

@@ -1,7 +1,7 @@
 function xi_matrix=get_xi_matrix(data, size_vector, vector)
     names=transpose(data.Properties.VariableNames);
 
-    %Step 1: I separate the vector into its components
+    %Step 0: I separate the vector into its components
     splitted_vector=assign_parameters(vector,size_vector);
 
     %Extracting dlnA vector
@@ -9,7 +9,10 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
     theta=splitted_vector{1};
     d_ln_a=splitted_vector{2};
     
-    %Step 2: assign the pi's to each of the observations
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %COMPUTING DERIVATIVES WITH RESPECT TO  THETA
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %Step 1: assign the pi's to each of the observations
     %To do so, I first extract the matrix of indicators by job
     pi_names=startsWith(names,["d2s"]);
     pi_indicators=table2array(data(:,pi_names));
@@ -36,13 +39,38 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    skill_names=startsWith(names,["d1s"]);
    skill_temp=table2array(data(:,skill_names));
    
-   %Step 3: compute derivatives with respect to theta
+   %Step 2: compute derivatives with respect to theta
    %Multiply skill indexes by the pi's to compute derivatives in first
    %equation
    temp_matrix=skill_temp.*pi_matrix;
 
 
    %Replace the appropriate derivatives in the data matrix
-   xi_matrix=skill_temp;
-   xi_matrix(replace_index==1)=-temp_matrix(replace_index==1);
+   xi_matrix_1=skill_temp;
+   xi_matrix_1(replace_index==1)=-temp_matrix(replace_index==1);
+   
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %COMPUTE DERIVATIVES WITH RESPECT TO PI
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %Step 1: get the skills and the indicators
+   skill_matrix=table2array(data(:,startsWith(names,["de1s_"])));
+   dummy_matrix=table2array(data(:,startsWith(names,["i_"])));
+   
+   %the thetas are assigned wrongly
+   %Step 2: assign the thetas
+   [~,~,e1_educ_index]=get_occ_indexes(data);
+   theta_temp=assign_thetas(theta,e1_educ_index);
+
+   %Step 3: fix size of the theta vector
+   missing_zeros=size(skill_matrix,1)-size(theta_temp,1);
+   add_zeros=zeros(missing_zeros,1);
+   full_theta=vertcat(theta_temp,add_zeros);
+
+   %Step 4: create the copied thetas matrix
+   theta_matrix=repmat(full_theta,1,size(skill_matrix,2));
+
+   xi_matrix_2=-theta_matrix.*skill_matrix-dummy_matrix;
+
+   
+   xi_matrix=horzcat(xi_matrix_1,xi_matrix_2);
 end

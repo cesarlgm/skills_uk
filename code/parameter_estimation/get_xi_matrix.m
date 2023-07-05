@@ -52,6 +52,25 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    %COMPUTE DERIVATIVES WITH RESPECT TO PI
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %Step 1: get the skills and the indicators
+   skill_matrix=table2array(data(:,startsWith(names,["de1s_"])));
+   dummy_matrix=table2array(data(:,startsWith(names,["i_"])));
+   
+   %the thetas are assigned wrongly
+   %Step 2: assign the thetas
+   [~,~,e1_educ_index]=get_occ_indexes(data);
+   theta_temp=assign_thetas(theta,e1_educ_index);
 
-   xi_matrix=xi_matrix_1;
+   %Step 3: fix size of the theta vector
+   missing_zeros=size(skill_matrix,1)-size(theta_temp,1);
+   add_zeros=zeros(missing_zeros,1);
+   full_theta=vertcat(theta_temp,add_zeros);
+
+   %Step 4: create the copied thetas matrix
+   theta_matrix=repmat(full_theta,1,size(skill_matrix,2));
+
+   xi_matrix_2=-theta_matrix.*skill_matrix-dummy_matrix;
+
+   
+   xi_matrix=horzcat(xi_matrix_1,xi_matrix_2);
 end
