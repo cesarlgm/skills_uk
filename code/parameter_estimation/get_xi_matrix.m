@@ -46,7 +46,7 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
 
 
    %Replace the appropriate derivatives in the data matrix
-   xi_matrix_1=skill_temp;
+   xi_matrix_1=-skill_temp;
    xi_matrix_1(replace_index==1)=-temp_matrix(replace_index==1);
    
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -52,6 +52,8 @@ load("code/parameter_estimation/current_solution_twoeq_weighted.mat",'solution')
 
 
 %%
+trial=get_xi_matrix(data,size_vector,solution);
+%%
 v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
     e1_dln_a_index, e1_educ_index);
 
