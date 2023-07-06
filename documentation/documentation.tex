@@ -9,6 +9,26 @@
 
 \begin{document}
 \maketitle
+\section{Notation}
+Our GMM model is based on the moment equations:
+\beqns
+\expect{\psi(w_i,\mu)}{}=0	
+\eeqns
+where:
+\bitem
+\item $w_i$ is the vector of data for observation $i$.
+\item $\psi$ is a $P\times 1$ vector of functions.
+\item $\mu$ is an $R\times 1$ vector of parameters. 
+\eitem 
+Our estimate is the solution to the problem:
+\beqns
+\hat{\mu}=\arg\min_c\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)'A\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)
+\eeqns
+which we can write as:
+\beqns
+\hat{\mu}=\arg\min_c\left(\frac{1}{N}\varepsilon(w_i,c)'Z\right)A\left(\frac{1}{N}Z'\varepsilon(w_i,c)\right)
+\eeqns
+where $\varepsilon(w_i,c)$ is the $N\times 1$ vector of errors of the model, and $Z$ is the $N\times P$ matrix of instruments. Here $N=N_1+N_2+N_3$ is the total number of observations and $N_i$ denotes the number of observations that belong to equation $i$. The matrix $Z$ is structured so that the first $N_1$ observations correspond to the first equation, the next $N_2$ to the second, and so on and so forth. 
 
 \section{GMM standard errors}
 I minimize the quadratic form:
@@ -34,37 +54,11 @@ I will now describe how do I estimate each component of the variance covariance 
 \bitem 
 	\item \textbf{Estimating $V$:} our estimate is:
 	\beqns
-	\hat{V}=\frac{1}{{N}}\sum_{i=1}^N\expect{\psi(w_i,\hat{\mu})\psi(w_i,\hat{\mu})'}{}
+	\hat{V}=\frac{1}{{N}}\sum_{i=1}^N\psi(w_i,\hat{\mu})\psi(w_i,\hat{\mu})'
 	\eeqns
 	we compute this estimate this component in the function {\tt estimate\_v}
-	\item \textbf{Estimating $W$:} our weighting matrix is simple $(Z'Z)^{-1}$.
-	\item \textbf{Estimating $D$:} this is the gradient of the model's errors. We compute this matrix in the function {\tt estimate\_d}.
+	\item \textbf{Estimating $D$:} this is the gradient of the model's errors. 
 \eitem
-
-
-\appendix
-\section{Notation}
-Our GMM model is based on the moment equations:
-\beqns
-	\expect{\psi(w_i,\mu)}{}=0	
-\eeqns
-where:
-\bitem
-\item $w_i$ is the vector of data for observation $i$.
-\item $\psi$ is a $P\times 1$ vector of functions.
-\item $\mu$ is an $R\times 1$ vector of parameters. 
-\eitem 
-Our estimate is the solution to the problem:
-\beqns
-	\hat{\mu}=\arg\min_c\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)'A\left(\frac{1}{N}\sum_{i=1}^{N}\psi(w_i,c)\right)
-\eeqns
-which we can write as:
-\beqns
-	\hat{\mu}=\arg\min_c\left(\frac{1}{N}\varepsilon(c)'Z\right)A\left(\frac{1}{N}Z'\varepsilon(c)\right)
-\eeqns
-where $\varepsilon(c)$ is the $N\times 1$ vector of errors of the model, and $Z$ is the $N\times P$ matrix of instruments. Here $N=N_1+N_2+N_3$ is the total number of observations and $N_i$ denotes the number of observations that belong to equation $i$. 
-\bibliographystyle{apalike}
-%\bibliography{../../../../CentralLibrary/Papers/library}{}
 
 \subsection{The gradient:}
 Our estimate of the gradient $D$ is:
