@@ -85,7 +85,7 @@ To avoid making the notation a mess, define the functions $J(l)$, $E(l)$, $T(l)$
 Note that the parameter vector $\mu$ has four types of parameters: $\theta_{ke}$, $\pi_{kjt}$, and $\beta_j$. Let us go case by case:
 \beqns
 	\frac{\partial\varepsilon_l(\mu)}{\partial \beta_j}&=&\left\{\begin{array}{lc}
-		-\beta_j\left[\sum_k\left(\theta_{ke} \overline{S_{kjet}}-\theta_{ke'} \overline{S_{kje' t}}\right)\pi_{kjt}\right] & N_1+N_2<l\leq N, j=J(l)\\
+		-\left[\sum_k\left(\theta_{ke} \overline{S_{kjet}}-\theta_{ke'} \overline{S_{kje' t}}\right)\pi_{kjt}\right] & N_1+N_2<l\leq N, j=J(l)\\
 		0& \text{otherwise}
 	\end{array}\right.\\
 \frac{\partial\varepsilon_l(\mu)}{\partial \gamma_{ee't}}&=&\left\{\begin{array}{lc}
@@ -101,8 +101,8 @@ Note that the parameter vector $\mu$ has four types of parameters: $\theta_{ke}$
 \frac{\partial \varepsilon_l(\mu)}{\partial \theta_{ie}}&=&\left\{\begin{array}{lc}
 - \overline{S_{kejt}} \pi_{ijt} & l\leq N_1, e=E(l) \\
 	-\overline{S_{iejt}}    & N_1<l\leq N_1+N_2,	e=E(l) \\
--\beta_j\theta_{ie}\overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (e,\cdot,\cdot)=EET(l)\\
-	\beta_j\theta_{ie} \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (\cdot,e,\cdot)=EET(l)\\
+-\beta_j \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (e,\cdot,\cdot)=EET(l)\\
+	\beta_j  \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (\cdot,e,\cdot)=EET(l)\\
 	0 & \text{otherwise}
 \end{array}\right.
 \eeqns
