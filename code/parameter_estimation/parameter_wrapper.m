@@ -16,7 +16,12 @@ addpath('code/parameter_estimation/','data');
 data_path="data/additional_processing/gmm_example_dataset_winsor.csv";
 sol_path="data/additional_processing/initial_estimates.csv";
 
+
+
 data=readtable(data_path);
+
+n_obs=size(data,1);
+
 init_sol=readtable(sol_path);
 init_sol_vec=vertcat(table2array(init_sol(:,'parameter')),zeros(6,1));
 
@@ -112,12 +117,24 @@ b_rest=zeros(2,1);
 %%
 load("code/parameter_estimation/current_solution_weighted.mat",'solution');
 
+
+%%
+v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
+    e1_dln_a_index, e1_educ_index,e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
+
+%%
+variance_matrix=get_variance_matrix(z_matrix,v_estimate,data,size_vector,1,solution);
+%%
+standard_errors=get_standard_errors(variance_matrix,n_obs);
+[standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector);
+
+
+
+
 %%
 [theta_matrix,comp_advg,pi,inv_sigma]=extract_solution(solution,size_vector);
 
 sigma=1./(1-inv_sigma);
-
-[se,V]=get_standard_errors(solution);
 
 
 

@@ -469,7 +469,97 @@ global index_list   manual social routine abstract
     order eey_group_id, after(education_d)
 
 
-    order e1s* z1s_* i_*  ts_* e2_* en_* ed_* e3jy_* e3jep_* x_*, last
+    *========================================================================================================
+    *Variables for the standard errors
+    *========================================================================================================
+    di "Creating omega restriction variables", as result
+    *Creating equation 2 variables
+    foreach education in $educ_lev {
+        qui summ  year if education==`education'&equation==2
+        local skill_counter=1
+        foreach index in $index_list {
+            if `r(N)'!=0 {
+                generate d1s_`index'`education'=0
+                replace d1s_`index'`education'= `index' if education==`education'&inlist(equation,1,2)
+                replace d1s_`index'`education'=index`skill_counter'  if education==`education'&inlist(equation,3)
+                replace d1s_`index'`education'=-indexd`skill_counter'  if education_d==`education'&inlist(equation,3)
+                local ++skill_counter
+            }
+        }
+    }
+
+
+
+    *These are the indicators to assign pi to the derivatives with respect to theta
+    local var_counter=0
+    di "Expanding equation 1 variables", as result
+    foreach job in $jobs {
+        foreach year in $years {
+            qui summ  year if occ_id==`job'&year_id==`year'&equation==1
+            local index_counter=1
+                foreach index in $index_list {
+                    if `r(N)'!=0   {
+                        qui generate d2s_`index_counter'_`job'_`year'=0
+                        qui replace d2s_`index_counter'_`job'_`year'= 1 if occ_id==`job'&year_id==`year'&inlist(equation,1,3)
+                        local ++var_counter
+                    }
+                    local ++index_counter
+                }
+        }
+    }
+
+
+
+    *These are the indicators to assign betas to the derivatives with respect to theta
+    local var_counter=0
+    foreach job in $jobs {
+        qui summ  year if occ_id==`job'&equation==3
+            if `r(N)'!=0  /* & "`index'"!="$ref_skill_name" */   {
+                qui generate d3s_`job'=0
+                qui replace d3s_`job'= 1 if occ_id==`job'&inlist(equation,3)
+            }
+    }
+
+    *Next I add indexes for the pi derivatives
+    local var_counter=0
+    di "Expanding equation 1 variables", as result
+    foreach job in $jobs {
+        foreach year in $years {
+            qui summ  year if occ_id==`job'&year_id==`year'&equation==1
+            local index_counter=1
+                foreach index in $index_list {
+                    if `r(N)'!=0   {
+                        qui generate de1s_`index_counter'_`job'_`year'=0
+                        qui replace de1s_`index_counter'_`job'_`year'= `index' if occ_id==`job'&year_id==`year'&equation==1
+                        local ++var_counter
+                    }
+                    local ++index_counter
+                }
+        }
+    }
+
+    *Next I add indexes for the pi derivatives
+    local var_counter=0
+    di "Expanding equation 1 variables", as result
+    foreach job in $jobs {
+        foreach year in $years {
+            qui summ  year if occ_id==`job'&year_id==`year'&equation==1
+            local index_counter=1
+                foreach index in $index_list {
+                    if `r(N)'!=0  /* & "`index'"!="$ref_skill_name" */   {
+                        qui generate de2sn_`index_counter'_`job'_`year'=0
+                        qui replace de2sn_`index_counter'_`job'_`year'=index`index_counter' if occ_id==`job'&year_id==`year'&equation==3
+                        qui generate de2sd_`index_counter'_`job'_`year'=0
+                        qui replace de2sd_`index_counter'_`job'_`year'= indexd`index_counter' if occ_id==`job'&year_id==`year'&equation==3
+                        local ++var_counter
+                    }
+                    local ++index_counter
+                }
+        }
+    }
+
+
+    order e1s* z1s_* i_*  ts_* e2_* en_* ed_* e3jy_* e3jep_* x_* d1s_* d2s_*  de1s_*, last
 
     cap drop ezd_*_temp*
 
@@ -504,6 +594,6 @@ preserve
     save "data/additional_processing/GMM_occupation_filter", replace
 restore
 
-export delimited using  "data/additional_processing/gmm_example_dataset_winsor.csv", replace
+export delimited using  "data/additional_processing/gmm_example_dataset_winsor.csv", replace nolabel
 
 
