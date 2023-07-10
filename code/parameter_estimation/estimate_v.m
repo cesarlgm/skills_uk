@@ -1,3 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Author: César Garro-Marín
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%This function computes an estimate of the variance of the errors
+
+
 function V=estimate_v(parameter_vector,z_matrix,y_var,s_matrix,...
     size_vector,e1_dln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index)
     
@@ -10,6 +17,7 @@ function V=estimate_v(parameter_vector,z_matrix,y_var,s_matrix,...
     %Next I compute the PxN matrix with columns given by phi(w_i)
     b=transpose(z_matrix)*diag(errors);
 
-    %Finally I compute the estimate of the V matrix.
+    %Finally I compute the estimate of the V matrix. This is a P \times
+    %matrix
     V=(1/n_obs)*b*transpose(b);
 end

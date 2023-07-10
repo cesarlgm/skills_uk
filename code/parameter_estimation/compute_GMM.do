@@ -559,7 +559,7 @@ global index_list   manual social routine abstract
     }
 
 
-    order e1s* z1s_* i_*  ts_* e2_* en_* ed_* e3jy_* e3jep_* x_* d1s_* d2s_*  de1s_*, last
+    order e1s* z1s_* i_*  ts_* e2_* en_* ed_* e3jy_* e3jep_* x_* d1s_* d2s_*  de1s_*  de2sn_* de2sd_*, last
 
     cap drop ezd_*_temp*
 
