@@ -1,3 +1,10 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Author: César Garro-Marín
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%This function computes an estimate of the variance of the errors
+
+
 function V=estimate_v(parameter_vector,z_matrix,y_var,s_matrix,...
     size_vector,e1_dln_a_index,e1_educ_index,e1_occ_index)
     
