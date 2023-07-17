@@ -570,7 +570,7 @@ use "data/additional_processing/gmm_example_dataset", clear
 cap drop ln_alpha
 cap drop __000000
 
-egen ln_alpha=group(occupation skill year) if inlist(equation,1,3) //&skill!=$ref_skill_num
+egen ln_alpha=group(occupation year skill) if inlist(equation,1,3) //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 
 cap drop __000000

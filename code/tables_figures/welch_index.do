@@ -79,3 +79,6 @@ foreach variable in emp_share  {
 	}
 }
 
+
+*Finally, I also compute the simple correlation
+pwcorr emp_share*

@@ -1,0 +1,17 @@
+function [theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key)
+    %Step 1: separate vector into components
+    splitted_vector=assign_parameters(solution,size_vector);
+
+    theta=splitted_vector{1};
+    pi=splitted_vector{2};
+
+
+    %Step 2: add the estimates to the pi table
+    pi_key.estimate=pi;
+    pi_table=pi_key;
+    theta_table=pi_key;
+
+    %Step 3: add the thetas to the 
+
+
+end

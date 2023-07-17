@@ -25,7 +25,7 @@ n_obs=size(data,1);
 
 %%
 %SETTING UP INITIAL VALUES
-load("code/parameter_estimation/current_state_three_eq.mat",'solution');
+%load("code/parameter_estimation/current_state_three_eq.mat",'solution');
 
 
 %I annonymize the function
@@ -68,7 +68,6 @@ standard_errors=get_standard_errors(variance_matrix,n_obs);
 %EXTRACT THE PARAMETERS
 [theta_matrix,comp_advg,pi,inv_sigma]=extract_solution(solution,size_vector);
 
-sigma=1./(1-inv_sigma);
 
 
 
@@ -76,12 +75,17 @@ sigma=1./(1-inv_sigma);
 pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
 pi_key=renamevars(pi_key,'ln_alpha','code');
 
-[theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key);
+beta_key=unique(data(data.equation==1,{'occupation'}));
+%%
+
+[theta_table,pi_table,sigma_table]=write_parameter_table(solution,size_vector,pi_key,beta_key,standard_errors);
 
 
 %%
 writetable(pi_table,"data/output/pi_estimates.xlsx")
 writetable(theta_table,"data/output/theta_estimates.xlsx")
+writetable(sigma_table,"data/output/sigma_estimates.xlsx")
+
 
 
 %%
