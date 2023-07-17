@@ -82,9 +82,9 @@ beta_key=unique(data(data.equation==1,{'occupation'}));
 
 
 %%
-writetable(pi_table,"data/output/pi_estimates.xlsx")
-writetable(theta_table,"data/output/theta_estimates.xlsx")
-writetable(sigma_table,"data/output/sigma_estimates.xlsx")
+writetable(pi_table,"data/output/pi_estimates_threeeq.xlsx")
+writetable(theta_table,"data/output/theta_estimates_threeeq.xlsx")
+writetable(sigma_table,"data/output/sigma_estimates_threeeq.xlsx")
 
 
 
