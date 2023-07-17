@@ -578,7 +578,7 @@ cap drop __000000
 egen occ_index_3=group(occupation)
 replace occ_index_3=0 if equation!=3
 
-gstats winsor y_var if equation==1, cut(5 95) gen(temp1)
+*gstats winsor y_var if equation==1, cut(5 95) gen(temp1)
 gstats winsor y_var if equation==3, cut(5 95) gen(temp2) by(education education_d)
 replace y_var=temp1 if equation==1
 replace y_var=temp2 if equation==3
