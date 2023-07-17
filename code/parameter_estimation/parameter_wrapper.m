@@ -64,19 +64,15 @@ standard_errors=get_standard_errors(variance_matrix,n_obs);
 [standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector);
 
 
-%%
-load("code/parameter_estimation/current_solution_twoeq_weighted.mat",'solution');
-[theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
-
 
 %%
 %%Finally I create theta and pi tables to handle in Stata
 pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
 pi_key=renamevars(pi_key,'ln_alpha','code');
 
-[theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key);
+[theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key,standard_errors);
 
-writetable(pi_table,"data/output/pi_estimates.xlsx")
-writetable(theta_table,"data/output/theta_estimates.xlsx")
+writetable(pi_table,"data/output/pi_estimates_twoeq.xlsx")
+writetable(theta_table,"data/output/theta_estimates_twoeq.xlsx")
 
 %%

@@ -347,7 +347,7 @@ save "data/additional_processing/gmm_example_dataset_twoeq", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
-egen ln_alpha=group(occupation skill year) if equation==1 //&skill!=$ref_skill_num
+egen ln_alpha=group(occupation  year skill) if equation==1 //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 
 export delimited using  "data/additional_processing/gmm_example_dataset_twoeq.csv", replace nolabel
