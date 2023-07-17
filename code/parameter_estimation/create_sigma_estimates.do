@@ -1,19 +1,19 @@
 *Create equation three graph
 *==========================================================================================
+import excel "data\output\theta_estimates_twoeq.xlsx", sheet("Sheet1") firstrow clear
 
-import excel "data\output\theta_estimates.xlsx", sheet("Sheet1") firstrow clear
-
-drop code 
+drop theta_code se 
+rename estimate theta
 reshape wide theta, i(education) j(skill)
 
 
 tempfile theta
 save `theta'
 
-import excel "data\output\theta_estimates.xlsx", sheet("Sheet1") firstrow clear
+import excel "data\output\theta_estimates_twoeq.xlsx", sheet("Sheet1") firstrow clear
 
-drop code 
-rename theta theta_d
+drop theta_code se 
+rename estimate theta_d
 reshape wide theta, i(education) j(skill)
 
 rename education education_d
@@ -21,9 +21,10 @@ tempfile theta_d
 save `theta_d'
 
 
-import excel "data\output\pi_estimates.xlsx", sheet("Sheet1") firstrow clear
+import excel "data\output\pi_estimates_twoeq.xlsx", sheet("Sheet1") firstrow clear
 
-drop code 
+drop code se t
+rename estimate pi
 reshape wide pi, i(occupation year) j(skill)
 
 tempfile pi
@@ -74,23 +75,29 @@ cap drop residuals
 cap drop ee_group_id
 
 egen ee_group_id=group(education education_d year) if equation==3
-regress y_var c.sums#i.occupation i.ee_group_id
+regress y_var c.sums#i.occupation ibn.ee_group_id, nocons
 
 *Getting parameter estimates
 *=================================
 regsave
+
 split var, parse(".")
 keep if var3=="sums"
 replace var1="1121" if var1=="1121b"
 destring var1, replace
 
-rename coef coefficient
-generate sigma_j=1/(1-coefficient)
+rename var1 occupation 
 
-generate bad_parameter=sigma_j>1
+rename coef coefficient
+generate sigma=1/(1-coefficient)
+
+generate bad_parameter=sigma>1
 
 table bad_parameter
 
+keep occupation sigma bad_parameter
+
+save "data/output/sigma_twoeq", replace
 
 /*
 *==========================================================================
