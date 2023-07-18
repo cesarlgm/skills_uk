@@ -488,7 +488,9 @@ global index_list   manual social routine abstract
         }
     }
 
-
+    egen d1s_manual=rowtotal(d1s_manual*)
+    order d1s_manual, before(d1s_manual1)
+    drop d1s_manual1 d1s_manual2 d1s_manual3
 
     *These are the indicators to assign pi to the derivatives with respect to theta
     local var_counter=0

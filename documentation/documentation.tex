@@ -70,10 +70,16 @@ Let $\Xi$ be the $N\times R$ matrix with general term $\Xi_{lr}=\frac{\partial \
 Thus, we jut have to compute $\Xi_{lr}$. We need to compute derivatives with respect to four types of parameters: $\theta_{ke}$, $\pi_{kjt}$, and $\beta_j$:
 \beqns
 \frac{\partial \varepsilon_l(\mu)}{\partial \theta_{ie}}&=&\left\{\begin{array}{lc}
-	- \overline{S_{kejt}} \pi_{ijt} & l\leq N_1, e=E(l) \\
-	-\overline{S_{iejt}}    & N_1<l\leq N_1+N_2,	e=E(l) \\
-	-\beta_j \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (e,\cdot,\cdot)=EET(l)\\
-	\beta_j  \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (\cdot,e,\cdot)=EET(l)\\
+	- \overline{S_{kejt}} \pi_{ijt} & l\leq N_1, e=E(l), i\neq 1 \\
+	-\overline{S_{iejt}}    & N_1<l\leq N_1+N_2,	e=E(l), i\neq 1 \\
+	-\beta_j \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (e,\cdot,\cdot)=EET(l), i\neq 1\\
+	\beta_j  \overline{S_{ije t}}\pi_{ijt} & N_1+N_2<l\leq N, (\cdot,e,\cdot)=EET(l), i\neq 1\\
+	0 & \text{otherwise}
+\end{array}\right.\\
+\frac{\partial \varepsilon_l(\mu)}{\partial \theta_{1}}&=&\left\{\begin{array}{lc}
+	- \overline{S_{kejt}} \pi_{ijt} & l\leq N_1\\
+	-\overline{S_{iejt}}    & N_1<l\leq N_1+N_2\\
+	\beta_j  \overline{S_{ije t}}\pi_{ijt} 	-\beta_j \overline{S_{ije' t}}\pi_{ijt} & N_1+N_2<l\leq N\\
 	0 & \text{otherwise}
 \end{array}\right.\\
 \frac{\partial\varepsilon_l(\mu)}{\partial \pi_{ijt}}&=&\left\{\begin{array}{lc}
