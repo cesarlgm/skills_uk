@@ -99,5 +99,21 @@ Thus, we jut have to compute $\Xi_{lr}$. We need to compute derivatives with res
 \eeqns
 We compute $\Xi$ with the function {\tt get\_xi\_matrix}, and compute $\bar{V}$ with {\tt estimate\_v}. Finally, the function {\tt get\_standard\_errors} computes the standard errors.
 
+
+\subsection{Standard errors for $\sigma_j$ and $d\ln A_{ijt}$}
+The above derivation gives standard errors for $\beta_j=\frac{\sigma_j-1}{\sigma_j}$. Using the delta method, it is straightforward to compute standard errors for $\sigma_j=\frac{1}{1-\beta_j}$.
+\beqns
+	\sqrt{N}(\hat{\sigma_j}-\sigma_j)\rightarrow N\left(0,\text{var}(\sigma_j)\left[\frac{\partial \sigma_j}{\partial \beta_j }\right]^2\right)
+\eeqns
+where:
+\beqns
+	\left[\frac{\partial \sigma_j}{\partial \beta_j }\right]^2=\frac{1}{(1-\beta_j)^2}
+\eeqns
+By an analogous argument:
+\beqns
+	\sqrt{N}(\hat{d\ln A_{ijt}}-d\ln A_{ijt})\rightarrow N\left(0,G(\theta)'\tilde{V}G(\theta)\right)
+\eeqns
+where $\tilde{V}$ is the variance matrix of $\theta=(\pi_{ijt},\beta_j)'$ and $	G(\theta)=(\beta_j, \pi_{ijt})'$
+
 \end{document}
 

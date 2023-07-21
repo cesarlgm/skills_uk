@@ -52,11 +52,13 @@ b_rest=zeros(2,1);
 load("code/parameter_estimation/current_solution_weighted.mat",'solution');
 
 
-
+%%
 %COMPUTE THE STANDARD ERRORS
 v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
     e1_dln_a_index, e1_educ_index,e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
 
+
+%%
 variance_matrix=get_variance_matrix(z_matrix,v_estimate,data,size_vector,1,solution);
 
 standard_errors=get_standard_errors(variance_matrix,n_obs);

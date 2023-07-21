@@ -4,6 +4,8 @@
 
 %This function computes the matrix of derivatives of the errors \Xi.
 
+%Modification in progress: reflect the same manual restriction
+
 %It returns the \Xi matrix.
 function xi_matrix=get_xi_matrix(data, size_vector, vector)
     
@@ -24,10 +26,9 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
     theta=splitted_vector{1};
     d_ln_a=splitted_vector{2};  %Under current version, dlna are the pis
     beta=splitted_vector{3};
-    
+    n_rep_pi=size_vector(2)/4;
 
     %Now I compute derviatives element by each parameter type
-
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %DERIVATIVES WITH RESPECT TO THETA
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,22 +51,26 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
     n_pi=size_vector(2);
     n_theta=size_vector(1);
 
-    %The logic is as follows:
-    %pi indicators has the matrix of indicators that multiplied by pi would
-    %compute \sum_i pi_i. This is  not what I want. I want a matrix with 12 columns with the
-    %correct pi in each column. So,
 
-    %pi_temp is a vector that multiplied by pi returns the pi's of skill i,
-    %and zeros everywhere else.
+    %In this section of the codeI generate a matrix that has the appropiate
+    %pi's in each column to compute the derivatives with respect to theta
+    %for equations 1 and 3
 
-    %Then, pi_matrix*(pi_temp.*d_ln_a) returns a vector with the pi's of
-    %skill i.
+    %I need a Nx10 matrix.
 
-    %Then multiplied by the skill vector I get the appropriate set of pis
+    %These are the elements
+    %pi_matrix: result matrix I want.
+    %pi_indicators: indicators that multiplied by dlnA gives the sums of
+    %the dlnA
+    %pi_temp: matrix of indicators that multplied by dlnA gives only the
+    %pi's of a given skill.
+
     pi_matrix=zeros(size(data,1),n_theta-2);
     replace_index=zeros(size(data,1),n_theta-2);
     col_counter=1;
 
+    %This is a Nx12 matrix. Note that I need a Nx10 matrix to reflect the
+    %same manual restriction.
     for j=1:3
        for i=1:4
             pi_temp=zeros(n_pi,1);
@@ -77,17 +82,20 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
             col_counter=col_counter+1;
        end
     end
-   
+
+  
+   %Here is where I fix the sizing issue
    pi_matrix_final=zeros(size(pi_matrix,1),n_theta-2);
+   %The first column corresponds to manual, while the rest are the non-manual columns
+
    pi_matrix_final(:,1)=pi_matrix(:,1);
    pi_matrix_final(:,2:n_theta-2)=pi_matrix(:,[2:4,6:8,10:12]);
-
    replace_index_final=replace_index(:,[2:4,6:8,10:12]);
+   
 
    %Finally, I compute S_kejt*\pi_ijet. This completes the theta
    %derivatives for equation 1. For equation 3, I still need to add beta. 
    temp_matrix=skill_temp.*pi_matrix_final;
-
 
    %This is what I do here: assign the betas to the derivatives. Firt I
    %multiply a job indicator by the beta vector. Then I get the correct
@@ -111,14 +119,13 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    %Compute negative of the S_kejt*\pi_ijet
    xi_matrix_1=-skill_temp;
 
-   size(xi_matrix_1)
-   size(replace_index)
 
    %Replace derivatives of the second equation
-   xi_matrix_1(replace_index==1)=-temp_matrix(replace_index==1);
+   xi_matrix_1(replace_index_final==1)=-temp_matrix(replace_index_final==1);
 
    %Add the beta to derivatives of third equation
    xi_matrix_1=xi_matrix_1.*beta_matrix;
+
 
    %This completes the derivatives with respect to theta
 
