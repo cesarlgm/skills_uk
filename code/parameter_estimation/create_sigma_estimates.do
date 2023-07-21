@@ -88,14 +88,30 @@ destring var1, replace
 
 rename var1 occupation 
 
-rename coef coefficient
-generate sigma=1/(1-coefficient)
+rename coef beta
+generate sigma=1/(1-beta)
 
 generate bad_parameter=sigma>1
 
 table bad_parameter
 
-keep occupation sigma bad_parameter
+keep occupation beta sigma bad_parameter stderr
+
+order occupation sigma stderr bad_parameter
+
+rename stderr beta_se
+
+generate sigma_se=abs((1/(1-beta))*beta_se)
+
+drop beta beta_se
+
+generate sigma_t_one=(sigma-1)/sigma_se
+generate significant_one=sigma_t_one>1.644854
+
+generate sigma_t_zero=sigma/sigma_se
+generate significant_zero=abs(sigma_t_zero)>1.644854
+
+tab significant_zero
 
 save "data/output/sigma_twoeq", replace
 
