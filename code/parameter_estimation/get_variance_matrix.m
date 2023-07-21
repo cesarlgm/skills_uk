@@ -24,7 +24,7 @@ function variance_matrix=get_variance_matrix(z_matrix,V_matrix,data,size_vector,
     
 
       %I compute "bread": the matrix (\hat{D}'A\hat{D})^-1
-      bread_matrix=eye(n_parameters)/(transpose(D_matrix)*A*D_matrix);
+      bread_matrix=eye(n_parameters-2)/(transpose(D_matrix)*A*D_matrix);
 
       %Computing the "jelly": \hat{D}'A\hat{V}A\hat{D}
       jelly_matrix=transpose(D_matrix)*A*V_matrix*A*D_matrix;

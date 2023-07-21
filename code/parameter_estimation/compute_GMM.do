@@ -289,6 +289,11 @@ global index_list   manual social routine abstract
         }
     }
 
+    *Here I account for the fact that the thetas for manual are the same no matter the education group
+    egen d1s_manual=rowtotal(d1s_manual*)
+    order d1s_manual, before(d1s_manual1)
+    drop d1s_manual1 d1s_manual2 d1s_manual3
+
 
     local var_counter=0
     di "Expanding equation 1 variables", as result
