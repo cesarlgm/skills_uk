@@ -63,6 +63,11 @@ variance_matrix=get_variance_matrix(z_matrix,v_estimate,data,size_vector,1,solut
 
 standard_errors=get_standard_errors(variance_matrix,n_obs);
 
+[sigma_estimates,sigma_se,sigma_t_one, sigma_t_zero]=get_sigma(solution,standard_errors,size_vector);
+
+%%
+
+
 [standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector);
 
 
