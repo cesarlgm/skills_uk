@@ -84,9 +84,11 @@ pi_key=renamevars(pi_key,'ln_alpha','code');
 
 beta_key=unique(data(data.equation==1,{'occupation'}));
 %%
+%%
 
 [theta_table,pi_table,sigma_table]=write_parameter_table(solution,size_vector,pi_key,beta_key,standard_errors);
-
+%%
+dlnA=get_dlnA(pi_table,sigma_table);
 
 %%
 writetable(pi_table,"data/output/pi_estimates_threeeq.xlsx")
