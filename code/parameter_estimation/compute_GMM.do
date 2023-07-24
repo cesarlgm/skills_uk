@@ -597,6 +597,7 @@ preserve
     save "data/additional_processing/GMM_occupation_filter", replace
 restore
 
+save  "data/additional_processing/gmm_example_dataset_winsor", replace 
 export delimited using  "data/additional_processing/gmm_example_dataset_winsor.csv", replace nolabel
 
 
