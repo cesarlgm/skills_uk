@@ -134,9 +134,10 @@ ivreg2 y_var (c.sums#ibn.occupation=e3jy_* e3jep_*) ibn.ee_group_id, nocons
 regsave
 split var, parse(".")
 keep if var3=="sums"
-replace var1="1121" if var1=="1121b"
+replace var1="1121" if var1=="1121b"|var1=="1121bn"
 destring var1, replace
 
+rename var1 occupation
 rename coef beta
 generate sigma=1/(1-beta)
 
@@ -147,7 +148,6 @@ rename stderr beta_se
 generate sigma_se=abs((1/(1-beta))*beta_se)
 
 
-drop beta beta_se
 
 generate sigma_t_one=(sigma-1)/sigma_se
 generate significant_one=sigma_t_one>1.644854
@@ -158,6 +158,9 @@ generate significant_zero=abs(sigma_t_zero)>1.644854
 
 summ sigma, d 
 
+keep occupation sigma sigma_se beta beta_se
+
+save "data/output/sigma_estimates_twoeq_same_inst", replace
 
 
 
