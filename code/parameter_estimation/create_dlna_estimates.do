@@ -11,7 +11,7 @@ drop t
 merge m:1 occupation using  "data/output/sigma_estimates_twoeq_same_inst", keep(3) nogen
 
 
-generate dlnA=pi/beta
+generate dlnA=pi*beta
 
 save "data/output/dlna_estimates_twoeq_same_inst", replace
 
