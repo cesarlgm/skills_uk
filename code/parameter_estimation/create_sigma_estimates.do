@@ -115,7 +115,7 @@
 preserve
 *Create sigma estimates with the same instruments
 {
-    use "data/additional_processing/gmm_example_dataset", clear
+    use "data/additional_processing/gmm_example_dataset_winsor", clear
     keep if equation==3
 
     keep occupation education education_d year e3jy_* e3jep_*
