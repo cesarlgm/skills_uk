@@ -91,6 +91,7 @@ beta_key=unique(data(data.equation==1,{'occupation'}));
 dlnA=get_dlnA(pi_table,sigma_table);
 
 %%
+writetable(pi_table,"data/output/dlnA_estimates_threeeq.xlsx")
 writetable(pi_table,"data/output/pi_estimates_threeeq.xlsx")
 writetable(theta_table,"data/output/theta_estimates_threeeq.xlsx")
 writetable(sigma_table,"data/output/sigma_estimates_threeeq.xlsx")
