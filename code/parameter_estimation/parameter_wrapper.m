@@ -34,13 +34,26 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix, ...
 
 
 
+%ADD RESTRICTIONS ON PI
+n_pi_rest=size_vector(2)/4;
+
 %I CONSTRAIN MANUAL COSTS TO BE THE SAME FOR ALL EDUCATION LEVELS
-A_rest=zeros(2,n_total_parameters);
-A_rest(:,1)=1;
+%The first two rows are the constraints on manual, the rest are the
+%constraints on pi
+A_rest=zeros(2+n_pi_rest,n_total_parameters);
+A_rest(1:2,1)=1;
 A_rest(1,5)=-1;
 A_rest(2,9)=-1;
-b_rest=zeros(2,1);
 
+%Fill up the pi restrictions
+for i=1:n_pi_rest
+    A_rest(2+i,13+4*(i-1))=1;
+end
+
+b_rest=zeros(2+n_pi_rest,1);
+
+
+%%
 
 [solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, [],[],options);
 
