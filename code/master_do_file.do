@@ -40,6 +40,8 @@ do "code/tables_figures/summaries.do"
 
 do "code/tables_figures/within_index_correlation.do"
 
+do "code/tables_figures/studying_abstract.do"
+
 do "code/tables_figures/get_top_jobs.do"
 
 do "code/tables_figures/create_occ_arrow_graph.do"
