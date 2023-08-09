@@ -11,19 +11,14 @@ This do file creates the dataset I need to execute the GMM code in matlab
 
 */
 
-global ref_skill_num    4
-global ref_skill_name   abstract
 
-global index_list   manual social routine abstract 
-*global index_list   manual social abstract 
-
-
+*`1' contains the definition of abstract that I am using
 
 *Final dataset touches
 {
    { 
         *Including only jobs I have observations for
-        use "data/additional_processing/gmm_skills_dataset", clear
+        use "data/additional_processing/gmm_skills_dataset`1'", clear
 
         cap drop temp
         *Filtering by number of education levels in the job
@@ -52,7 +47,7 @@ global index_list   manual social routine abstract
     }
 
     {
-        use "data/additional_processing/gmm_employment_dataset", clear
+        use "data/additional_processing/gmm_employment_dataset`1'", clear
 
         drop if missing(y_var)
         keep if equation==3
@@ -72,7 +67,7 @@ global index_list   manual social routine abstract
 
     *Files for instrument
     {
-        use "data/additional_processing/gmm_employment_dataset", clear
+        use "data/additional_processing/gmm_employment_dataset`1'", clear
         drop if missing(y_var)
             
         preserve
@@ -95,8 +90,8 @@ global index_list   manual social routine abstract
     }
 
 
-    use "data/additional_processing/gmm_skills_dataset", clear
-    append using "data/additional_processing/gmm_employment_dataset"
+    use "data/additional_processing/gmm_skills_dataset`1'", clear
+    append using "data/additional_processing/gmm_employment_dataset`1'"
 
     merge m:1 occupation year using `job_filter', keep(3) nogen
     merge m:1 occupation year using `employment_filter', keep(3) nogen 
@@ -566,9 +561,9 @@ global index_list   manual social routine abstract
 
     cap drop ezd_*_temp*
 
-save "data/additional_processing/gmm_example_dataset", replace
+save "data/additional_processing/gmm_example_dataset`1'", replace
 
-use "data/additional_processing/gmm_example_dataset", clear
+use "data/additional_processing/gmm_example_dataset`1'", clear
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
 cap drop __000000
@@ -597,7 +592,7 @@ preserve
     save "data/additional_processing/GMM_occupation_filter", replace
 restore
 
-save  "data/additional_processing/gmm_example_dataset_winsor", replace 
-export delimited using  "data/additional_processing/gmm_example_dataset_winsor.csv", replace nolabel
+save  "data/additional_processing/gmm_example_dataset_winsor`1'", replace 
+export delimited using  "data/additional_processing/gmm_example_dataset_winsor`1'.csv", replace nolabel
 
 
