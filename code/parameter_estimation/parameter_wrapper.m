@@ -62,9 +62,10 @@ b_rest=zeros(2+n_pi_rest,1);
 
 %%
 %Load the solution of needed
-load("code/parameter_estimation/current_solution_weighted.mat",'solution');
-
-
+%load("code/parameter_estimation/current_solution_weighted.mat",'solution');
+%load("code/parameter_estimation/current_solution_weighted_a1.mat",'solution');
+%load("code/parameter_estimation/current_solution_weighted_a2.mat",'solution');
+load("code/parameter_estimation/current_solution_weighted_a3.mat",'solution');
 %%
 %COMPUTE THE STANDARD ERRORS
 v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
