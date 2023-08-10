@@ -11,22 +11,12 @@ This do file creates the dataset I need to execute the GMM code in matlab
 
 */
 
-clear all
-set maxvar 10000
-
-global ref_skill_num    4
-global ref_skill_name   abstract
-
-global index_list   manual social routine abstract 
-*global index_list   manual social abstract 
-
-
 
 *Final dataset touches
 {
    { 
         *Including only jobs I have observations for
-        use "data/additional_processing/gmm_skills_dataset", clear
+        use "data/additional_processing/gmm_skills_dataset`1'", clear
 
         cap drop temp
         *Filtering by number of education levels in the job
@@ -55,7 +45,7 @@ global index_list   manual social routine abstract
     }
 
     {
-        use "data/additional_processing/gmm_employment_dataset", clear
+        use "data/additional_processing/gmm_employment_dataset`1'", clear
         drop if missing(y_var)
         keep if equation==3
 
@@ -68,7 +58,7 @@ global index_list   manual social routine abstract
 
     *Files for instrument
     {
-        use "data/additional_processing/gmm_employment_dataset", clear
+        use "data/additional_processing/gmm_employment_dataset`1'", clear
         drop if missing(y_var)
             
         preserve
@@ -91,9 +81,9 @@ global index_list   manual social routine abstract
     }
 
 
-    use "data/additional_processing/gmm_skills_dataset", clear
+    use "data/additional_processing/gmm_skills_dataset`1'", clear
 
-    append using "data/additional_processing/gmm_employment_dataset"
+    append using "data/additional_processing/gmm_employment_dataset`1'"
 
     merge m:1 occupation year using `job_filter', keep(3) nogen
     merge m:1 occupation year using `employment_filter', keep(3) nogen 
@@ -348,14 +338,14 @@ global index_list   manual social routine abstract
 
 order e1s_* i_* e2* ts_* d1s_* d2s_* de1s_*, last
 
-save "data/additional_processing/gmm_example_dataset_twoeq", replace
+save "data/additional_processing/gmm_example_dataset_twoeq`1'", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
 egen ln_alpha=group(occupation  year skill) if equation==1 //&skill!=$ref_skill_num
 order ln_alpha, after(equation)
 
-export delimited using  "data/additional_processing/gmm_example_dataset_twoeq.csv", replace nolabel
+export delimited using  "data/additional_processing/gmm_example_dataset_twoeq`1'.csv", replace nolabel
 
 
 

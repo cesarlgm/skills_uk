@@ -1,4 +1,7 @@
 
+global index_list manual social routine abstract`1'
+
+
 frames reset
 *Computing indexes
 {
@@ -98,5 +101,5 @@ generate temp=1 if equation==1
 egen in_eqn_1=max(temp), by(occupation)
 drop if missing(in_eqn_1)|in_eqn_1==0
 
-save "data/additional_processing/gmm_skills_dataset", replace
+save "data/additional_processing/gmm_skills_dataset`1'", replace
 

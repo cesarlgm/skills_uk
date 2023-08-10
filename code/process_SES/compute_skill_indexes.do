@@ -3,15 +3,10 @@ global social		cpeople  cteamwk clisten  cspeech cpersuad  cteach
 global routine		brepeat bme4 bvariety cplanme 
 global manual		chands cstrengt  cstamina
 
-global abstract_a1      cwritelg canalyse  ccalca cpercent 
-global social_a1		cpeople  cteamwk clisten
-global routine_a1		brepeat bme4 
-global manual_a1		chands   cstamina
+global abstract_a1      cwritelg	clong	cpercent	cstats	csolutn	canalyse 
+global abstract_a2      cwritelg	clong	cstats	canalyse cpercent 
+global abstract_a3      cwritelg	clong	cstats
 
-global abstract_a2      cstats cplanoth csolutn  clong
-global social_a2	    cspeech cpersuad  cteach
-global routine_a2		bvariety cplanme 
-global manual_a2		cstrengt   
 
 local alternatives  `1'
 
@@ -36,14 +31,18 @@ foreach index in $index_list {
     *This compute the inverse hyperbolic sine
     generate `index'_i=asinh(`index')
 }
+ 
+cap drop *_a1* 
+cap drop *_a2* 
+cap drop *_a3*
 
-if "`alternatives'"!="" { 
-    foreach index in $index_list {
-        egen `index'_a1=rowmean(${`index'_a1})
-        egen `index'_a2=rowmean(${`index'_a2})
-        generate `index'_i_a1=asinh(`index'_a1)
-        generate `index'_i_a2=asinh(`index'_a2)
-    }
-}
+
+egen abstract_a1=rowmean($abstract_a1)
+egen abstract_a2=rowmean($abstract_a2)
+egen abstract_a3=rowmean($abstract_a3)
+generate abstract_a1_i=asinh(abstract_a1)
+generate abstract_a2_i=asinh(abstract_a2)
+generate abstract_a3_i=asinh(abstract_a3)
+
 
 

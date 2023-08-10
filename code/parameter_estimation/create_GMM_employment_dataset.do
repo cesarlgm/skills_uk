@@ -2,7 +2,7 @@
 *I prepare skill part of the data
 {
     { 
-        use  "data/additional_processing/gmm_skills_dataset", clear
+        use  "data/additional_processing/gmm_skills_dataset`1'", clear
         keep if skill==1&equation==1
         drop equation y_var skill
         tempfile numerator
@@ -10,7 +10,7 @@
     }
 
     {
-        use  "data/additional_processing/gmm_skills_dataset", clear
+        use  "data/additional_processing/gmm_skills_dataset`1'", clear
         keep if skill==1&equation==1
         drop equation y_var skill
         rename education education_d
@@ -76,5 +76,5 @@
 
     drop n_pair
 
-    save "data/additional_processing/gmm_employment_dataset", replace
+    save "data/additional_processing/gmm_employment_dataset`1'", replace
 }

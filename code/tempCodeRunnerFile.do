@@ -1,20 +1,9 @@
-clear all
-clear matrix
-set more off, permanently
-set graphics off
-capture log close 
-graph set window fontface "Times New Roman"
+*This chunk of code creates datasets with alternative definitions of abstract
+foreach definition in _a1  _a2 _a3 {
+	qui do "code/parameter_estimation/create_GMM_skills_dataset.do" `definition'
 
-set maxvar 120000
-set scheme s1color, permanently
+	qui do "code/parameter_estimation/create_GMM_employment_dataset.do" `definition'
 
-cd "C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData"
-
-global education educ_3_low //educ_3_low
-global occupation bsoc00Agg
-global wage_cuts  10 90
-global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
-global index_list   manual social routine abstract 
-
-adopath + "code/parameter_estimation"
+	qui do "code/parameter_estimation/compute_GMM.do" `definition'
+}
 
