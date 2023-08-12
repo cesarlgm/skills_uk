@@ -47,7 +47,9 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 
 %%
 %Importing solution of the algorithm
-load("code/parameter_estimation/current_solution_twoeq_weighted.mat",'solution');
+%load("code/parameter_estimation/current_solution_twoeq_a1.mat",'solution');
+%load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
+load("code/parameter_estimation/current_solution_twoeq_a3.mat",'solution');
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
 
 
