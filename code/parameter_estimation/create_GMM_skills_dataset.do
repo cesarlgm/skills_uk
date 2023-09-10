@@ -1,5 +1,8 @@
 
-global index_list manual social routine abstract`1'
+global index_list manual social routine //abstract`1'
+global n_skills: word count $index_list
+
+
 
 frames reset
 *Computing indexes
@@ -67,7 +70,7 @@ frames change equation1
     }
 
     clear
-    forvalues i=1/4 {
+    forvalues i=1/$n_skills {
         append using `skill`i''
     }
     

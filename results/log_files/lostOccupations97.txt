@@ -1,9 +1,9 @@
----------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/lo
-> stOccupations97.txt
+       log:  C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantsh
+> ip\ukData\results/log_files/lostOccupations97.txt
   log type:  text
- opened on:   9 Sep 2021, 10:51:51
+ opened on:  10 Sep 2023, 12:02:57
 
 . *These are the occupations from 1997 that I am losing
 . table index dataset, c(count gwtall) format(%14.0fc) row
@@ -49,8 +49,8 @@ In 1997 only |             36
 
 . log close
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/lo
-> stOccupations97.txt
+       log:  C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantsh
+> ip\ukData\results/log_files/lostOccupations97.txt
   log type:  text
- closed on:   9 Sep 2021, 10:51:52
----------------------------------------------------------------------------------------------------------------------
+ closed on:  10 Sep 2023, 12:02:57
+------------------------------------------------------------------------------

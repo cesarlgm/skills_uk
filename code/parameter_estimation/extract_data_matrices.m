@@ -1,11 +1,11 @@
 function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     e1_dlna_index,e1_educ_index,e1_code,e1_occ_index,lower_bound, ... 
     upper_bound,e3_a_index,e3n_educ_index,e3d_educ_index, ...
-    e3_occ_index]=extract_data_matrices(data)
+    e3_occ_index,n_skills]=extract_data_matrices(data)
 
     %Defining number of parameters I need to compute:
     n_ln_A_effective=max(table2array(data(:,"ln_alpha")));
-    n_theta=12;
+    n_theta=3*n_skills;
     n_sigma=max(table2array(data(:,"occ_id")));
     n_comparison=max(table2array(data(:,"eey_group_id")));
     n_total_parameters=n_theta+n_ln_A_effective+n_sigma+n_comparison;

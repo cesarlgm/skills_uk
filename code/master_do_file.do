@@ -4,6 +4,14 @@
 *Description: this do file executes all the programs required for the paper
 *Author: César Garro-Marín
 *=====================================================================================
+/*
+	To add later
+	gtools
+	unique
+
+*/
+
+*=====================================================================================
 
 clear all
 clear matrix
@@ -15,13 +23,13 @@ graph set window fontface "Times New Roman"
 set maxvar 120000
 set scheme s1color, permanently
 
-cd "C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData"
+cd "C:\Users\thecs\Dropbox\\1_boston_university\8-Research Assistantship\ukData"
 
 global education educ_3_low //educ_3_low
 global occupation bsoc00Agg
 global wage_cuts  10 90
 global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
-global index_list   manual social routine abstract 
+global index_list   manual social abstract
 
 adopath + "code/parameter_estimation"
 
@@ -58,13 +66,15 @@ do "code/tables_figures/welch_index.do"
 *===============================================================================
 *ABSTRACT LAB 
 *===============================================================================
-foreach definition in _a1 _a2 _a3 {
-	qui do "code/parameter_estimation/create_GMM_skills_dataset.do" `definition'
+foreach definition in _a2  {
+	 do "code/parameter_estimation/create_GMM_skills_dataset.do" `definition'
 
-	qui do "code/parameter_estimation/create_GMM_employment_dataset.do" `definition'
+	 do "code/parameter_estimation/create_GMM_employment_dataset.do" `definition'
 
-	qui do "code/parameter_estimation/compute_GMM.do" `definition'
+	 do "code/parameter_estimation/compute_GMM.do" `definition'
 }
+
+
 
 *===============================================================================
 *ESTIMATE COSTS

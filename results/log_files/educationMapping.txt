@@ -1,30 +1,43 @@
----------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/ed
-> ucationMapping.txt
+       log:  C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantsh
+> ip\ukData\results/log_files/educationMapping.txt
   log type:  text
- opened on:   8 Sep 2021, 18:38:11
+ opened on:  10 Sep 2023, 12:02:55
 
 . 
 . tab edlevRec edlev
 
-Recovered educational |          Original educational classification
-       classification | No qualif  GCSE D-G   GCSE A le  GCE A* le  Profesion |     Total
-----------------------+-------------------------------------------------------+----------
-     No qualification |     2,051          0          0          0          0 |     2,051 
-      GCSE D-G levels |         0      1,705          3          0          2 |     1,710 
-        GCSE A levels |         0          0      3,704          0          3 |     3,707 
-GCE A* levels / trade |         0          0          0      4,295          1 |     4,296 
-Profesional degree /  |         0          0          0          0      6,957 |     6,957 
-----------------------+-------------------------------------------------------+----------
-                Total |     2,051      1,705      3,707      4,295      6,963 |    18,721 
+                      |       Original educational
+Recovered educational |          classification
+       classification | No qualif  GCSE D-G   GCSE A le |     Total
+----------------------+---------------------------------+----------
+     No qualification |     2,051          0          0 |     2,051 
+      GCSE D-G levels |         0      1,705          3 |     1,710 
+        GCSE A levels |         0          0      3,704 |     3,707 
+GCE A* levels / trade |         0          0          0 |     4,296 
+Profesional degree /  |         0          0          0 |     6,957 
+----------------------+---------------------------------+----------
+                Total |     2,051      1,705      3,707 |    18,721 
 
+
+                      | Original educational
+Recovered educational |    classification
+       classification | GCE A* le  Profesion |     Total
+----------------------+----------------------+----------
+     No qualification |         0          0 |     2,051 
+      GCSE D-G levels |         0          2 |     1,710 
+        GCSE A levels |         0          3 |     3,707 
+GCE A* levels / trade |     4,295          1 |     4,296 
+Profesional degree /  |         0      6,957 |     6,957 
+----------------------+----------------------+----------
+                Total |     4,295      6,963 |    18,721 
 
 . 
 . log close
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Personal)\boston_university\8-Research Assistantship\ukData\results/log_files/ed
-> ucationMapping.txt
+       log:  C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantsh
+> ip\ukData\results/log_files/educationMapping.txt
   log type:  text
- closed on:   8 Sep 2021, 18:38:11
----------------------------------------------------------------------------------------------------------------------
+ closed on:  10 Sep 2023, 12:02:55
+------------------------------------------------------------------------------
