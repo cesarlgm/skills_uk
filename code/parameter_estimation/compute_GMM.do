@@ -63,7 +63,7 @@ This do file creates the dataset I need to execute the GMM code in matlab
             
         preserve
             keep occupation education_d year indexd*
-            forvalues skill=1/4 {
+            forvalues skill=1/$n_skills {
                 rename indexd`skill' index`skill'
             }
             rename education_d education
@@ -72,7 +72,7 @@ This do file creates the dataset I need to execute the GMM code in matlab
             save `denominator'
         restore
 
-        keep occupation education index1-index4 year
+        keep occupation education index1-index$n_skills year
         append using `denominator'
 
         duplicates drop 
@@ -115,9 +115,6 @@ This do file creates the dataset I need to execute the GMM code in matlab
         global n_educ=`r(max)'
         di "$n_educ"
 
-        qui summ skill
-        global n_skills=`r(max)'
-        di "$n_skills"
     }
 
     keep if inlist(equation,1,2)
@@ -260,7 +257,7 @@ This do file creates the dataset I need to execute the GMM code in matlab
 
 
 
-    order occupation  year skill education manual social routine abstract z*_1 z*_2 zv*, first
+    order occupation  year skill education $index_list z*_1 z*_2 zv*, first
     sort equation skill  occupation year  education
 
 

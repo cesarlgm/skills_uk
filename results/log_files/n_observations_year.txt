@@ -1,3 +1,27 @@
 {smcl}
-{com}{sf}{ul off}{smcl}
-{com}{sf}{ul off}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}10 Sep 2023, 17:55:09
+{txt}
+{com}. table year
+
+{txt}{hline 10}{c TT}{hline 11}
+  Dataset {c |}      Freq.
+{hline 10}{c +}{hline 11}
+     1997 {c |}      {res}2,292
+     {txt}2001 {c |}      {res}4,238
+     {txt}2006 {c |}      {res}5,005
+     {txt}2012 {c |}      {res}2,354
+     {txt}2017 {c |}      {res}2,831
+{txt}{hline 10}{c BT}{hline 11}
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantship\ukData\results/log_files/n_observations_year.txt
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}10 Sep 2023, 17:55:09
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
