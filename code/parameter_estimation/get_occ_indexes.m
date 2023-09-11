@@ -1,6 +1,6 @@
 %This function identifies the ordering of the parameter vectors
 function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_theta_index,e3d_theta_index,e3_occ_index]=...
-    get_occ_indexes(data)
+    get_occ_indexes(data,n_skills)
     names=transpose(data.Properties.VariableNames);
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,9 +23,11 @@ function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_thet
     %%dlnA_index gives the indexes in the dlnA vector
     [~,~,e1_d_ln_a_index]=unique(e1_code);
 
-    %theta_code=[11;12;13;21;22;23;31;32;33];
-
-    theta_code=[11;12;13;14;21;22;23;24;31;32;33;34];
+    if n_skills==3 
+        theta_code=[11;12;13;21;22;23;31;32;33];
+    elseif n_skills==4
+        theta_code=[11;12;13;14;21;22;23;24;31;32;33;34];
+    end
 
     %This part fixes the issue with the theta indexes in e1 when the pi's
     %are restricted to be zero
@@ -54,12 +56,12 @@ function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_thet
     %Education indexes
     %Numerator indexes
     e3n_educ_index=str2double(splitted_e3(:,4));
-    [e3n_theta_index,~]=findgroups(e3n_educ_index*10+e3_skill_index);
-    e3n_theta_index=e3n_theta_index+4;
+    [e3n_theta_index,e3n_theta_id]=findgroups(e3n_educ_index*10+e3_skill_index);
+    e3n_theta_index=e3n_theta_index+n_skills;
 
     %Denominator indexes
     splitted_e3=split(eqn_3_indexes_d,"_");
     e3d_educ_index=str2double(splitted_e3(:,4));
-    [e3d_theta_index,~]=findgroups(e3d_educ_index*10+e3_skill_index);
+    [e3d_theta_index,e3d_theta_id]=findgroups(e3d_educ_index*10+e3_skill_index);
 
 end

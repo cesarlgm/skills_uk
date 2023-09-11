@@ -10,3 +10,4 @@ foreach definition in _a2  {
 	 do "code/parameter_estimation/compute_GMM.do" `definition'
 }
 
+

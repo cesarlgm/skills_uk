@@ -1,7 +1,7 @@
 function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     e1_dlna_index,e1_educ_index,e1_code,e1_occ_index,lower_bound, ... 
     upper_bound,e3_a_index,e3n_educ_index,e3d_educ_index, ...
-    e3_occ_index,n_skills]=extract_data_matrices(data)
+    e3_occ_index]=extract_data_matrices(data,n_skills)
 
     %Defining number of parameters I need to compute:
     n_ln_A_effective=max(table2array(data(:,"ln_alpha")));
@@ -25,5 +25,5 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
     s_matrix=get_s_matrix(data);
 
     %These are the eoccupation indexes form equations 1 and 3s
-    [e1_code,e1_dlna_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index,e3_occ_index]=get_occ_indexes(data);
+    [e1_code,e1_dlna_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index,e3_occ_index]=get_occ_indexes(data, n_skills);
 end
