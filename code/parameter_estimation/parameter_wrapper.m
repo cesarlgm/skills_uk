@@ -2,6 +2,9 @@
 
 %%
 clear;
+n_skills=3;
+
+%%
 
 %%READING DATA
 
@@ -9,10 +12,10 @@ options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunct
 
 
 
-cd 'C:/Users/thecs/Dropbox (Boston University)/1_boston_university/8-Research Assistantship/ukData';
+cd 'C:/Users/thecs/Dropbox/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
-data_path="data/additional_processing/gmm_example_dataset_twoeq.csv";
+data_path="data/additional_processing/gmm_example_dataset_twoeq_a2_noabstract.csv";
 
 
 data=readtable(data_path);
@@ -21,7 +24,7 @@ data=readtable(data_path);
 n_obs=size(data,1);
 
 [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_code, ...
-    lower_bound, upper_bound]= extract_data_matrices(data);
+    lower_bound, upper_bound]= extract_data_matrices(data,n_skills);
 
 %Constraining manual to be the same
 A_rest=zeros(2,n_total_parameters);
@@ -49,8 +52,12 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 %Importing solution of the algorithm
 %load("code/parameter_estimation/current_solution_twoeq_a1.mat",'solution');
 %load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
-load("code/parameter_estimation/current_solution_twoeq_a3.mat",'solution');
-[theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector);
+%load("code/parameter_estimation/current_solution_twoeq_a3.mat",'solution');
+
+%load("code/parameter_estimation/current_solution_twoeq_a2_noabstract.mat",'solution');
+load("code/parameter_estimation/current_solution_twoeq_a2_noroutine.mat",'solution');
+%%
+[theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector,n_skills);
 
 
 %%

@@ -1,9 +1,9 @@
 function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
-    e1_dlna_index,e1_educ_index,e1_code,lower_bound, upper_bound]=extract_data_matrices(data)
+    e1_dlna_index,e1_educ_index,e1_code,lower_bound, upper_bound]=extract_data_matrices(data,n_skills)
 
     %Defining number of parameters I need to compute:
     n_ln_A_effective=max(table2array(data(:,"ln_alpha")));
-    n_theta=12;
+    n_theta=3*n_skills;
     n_total_parameters=n_theta+n_ln_A_effective;
 
     %size vector gives the info necessary to split the parameter vector
@@ -22,5 +22,5 @@ function [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector, ...
 
 
     %These are the eoccupation indexes form equations 1 and 3s
-    [e1_code,e1_dlna_index,e1_educ_index]=get_occ_indexes(data);
+    [e1_code,e1_dlna_index,e1_educ_index]=get_occ_indexes(data,n_skills);
 end
