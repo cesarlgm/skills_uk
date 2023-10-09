@@ -67,7 +67,9 @@ b_rest=zeros(2+n_pi_rest,1);
 %load("code/parameter_estimation/current_solution_weighted_a1.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a2.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a3.mat",'solution');
-load("code/parameter_estimation/current_solution_weighted_a2_noroutine.mat",'solution');
+%load("code/parameter_estimation/current_solution_weighted_a2_noabstract.mat",'solution');
+%load("code/parameter_estimation/current_solution_weighted_a1_noroutine.mat",'solution');
+load("code/parameter_estimation/current_solution_weighted_a2_newstart.mat",'solution');
 
 
 %%
@@ -91,7 +93,7 @@ standard_errors=get_standard_errors(variance_matrix,n_obs);
 
 %%
 %EXTRACT THE PARAMETERS
-[theta_matrix,comp_advg,pi,inv_sigma]=extract_solution(solution,size_vector);
+[theta_matrix,comp_advg,pi,inv_sigma]=extract_solution(solution,size_vector,n_skills);
 
 
 
