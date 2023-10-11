@@ -7,7 +7,7 @@
 %Modification in progress: reflect the same manual restriction
 
 %It returns the \Xi matrix.
-function xi_matrix=get_xi_matrix(data, size_vector, vector)
+function xi_matrix=get_xi_matrix(data, size_vector, vector,n_skills)
     
     %Preliminary steps
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,7 +26,7 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
     theta=splitted_vector{1};
     d_ln_a=splitted_vector{2};  %Under current version, dlna are the pis
     beta=splitted_vector{3};
-    n_rep_pi=size_vector(2)/4;
+    n_rep_pi=size_vector(2)/n_skills;
 
     %Now I compute derviatives element by each parameter type
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,6 +96,9 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    %Finally, I compute S_kejt*\pi_ijet. This completes the theta
    %derivatives for equation 1. For equation 3, I still need to add beta. 
    temp_matrix=skill_temp.*pi_matrix_final;
+   %I replace the the first column of pis with actual zeros
+   temp_matrix(:,1)=zeros(size(temp_matrix,1),1);
+
 
    %This is what I do here: assign the betas to the derivatives. Firt I
    %multiply a job indicator by the beta vector. Then I get the correct
@@ -140,7 +143,7 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    dummy_matrix=table2array(data(:,startsWith(names,["i_"])));
 
    %Next, I assign the thetas
-   [~,~,e1_educ_index,~,e3_a_index,e3n_educ_index,e3d_educ_index]=get_occ_indexes(data);
+   [~,~,e1_educ_index,~,e3_a_index,e3n_educ_index,e3d_educ_index]=get_occ_indexes(data,n_skills);
    theta_temp=assign_thetas(theta,e1_educ_index);
 
    %add zeros to fix the size of theta.
@@ -185,6 +188,10 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    %Finally I replace the third equation derivatives for the appropriate
    %observations.
    xi_matrix_2(equation_index==3,:)=e3_pi_derivative(equation_index==3,:);
+
+   %Drop columns columns corresponding to derivatives with respect to pi
+   %manual
+   xi_matrix_2(:,1:4:end)=[];
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    %COMPUTE DERIVATIVES WITH RESPECT TO BETA
