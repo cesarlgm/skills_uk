@@ -12,7 +12,7 @@ cd 'C:/Users/thecs/Dropbox/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
 %GETTING THE DATA
-data_path="data/additional_processing/gmm_example_dataset_winsor_a1.csv";
+data_path="data/additional_processing/gmm_example_dataset_winsor_a3.csv";
 sol_path="data/additional_processing/initial_estimates.csv";
 
 data=readtable(data_path);
@@ -64,9 +64,9 @@ b_rest=zeros(2+n_pi_rest,1);
 %%
 %Load the solution of needed
 %load("code/parameter_estimation/current_solution_weighted.mat",'solution');
-load("code/parameter_estimation/current_solution_weighted_a1.mat",'solution');
+%load("code/parameter_estimation/current_solution_weighted_a1.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a2.mat",'solution');
-%load("code/parameter_estimation/current_solution_weighted_a3.mat",'solution');
+load("code/parameter_estimation/current_solution_weighted_a3.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a2_noabstract.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a1_noroutine.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a2_newstart.mat",'solution');

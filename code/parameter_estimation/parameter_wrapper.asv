@@ -12,7 +12,7 @@ cd 'C:/Users/thecs/Dropbox/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
 %GETTING THE DATA
-data_path="data/additional_processing/gmm_example_dataset_winsor_a1.csv";
+data_path="data/additional_processing/gmm_example_dataset_winsor_a2.csv";
 sol_path="data/additional_processing/initial_estimates.csv";
 
 data=readtable(data_path);
@@ -69,14 +69,7 @@ b_rest=zeros(2+n_pi_rest,1);
 %load("code/parameter_estimation/current_solution_weighted_a3.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a2_noabstract.mat",'solution');
 %load("code/parameter_estimation/current_solution_weighted_a1_noroutine.mat",'solution');
-load("code/parameter_estimation/current_solution_weighted_a2_newstart.mat",'solution');
-
-
-%%
-%COMPUTE THE STANDARD ERRORS
-v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
-    e1_dln_a_index, e1_educ_index,e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
-
+%load("code/parameter_estimation/current_solution_weighted_a2_newstart.mat",'solution');
 
 %%
 variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,...
@@ -92,12 +85,10 @@ standard_errors=get_standard_errors(variance_matrix,n_obs,size_vector,n_skills);
 [sigma_estimates,sigma_se,sigma_t_one, sigma_t_zero]=get_sigma(solution,standard_errors,size_vector);
 
 %%
-[standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector,n_skills);
-
-
-%%
 %EXTRACT THE PARAMETERS
 [theta_matrix,comp_advg,pi,inv_sigma]=extract_solution(solution,size_vector,n_skills);
+[standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector,n_skills);
+
 
 
 
