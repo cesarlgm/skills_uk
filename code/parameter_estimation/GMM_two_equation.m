@@ -1,12 +1,13 @@
 
-
-%%
 clear;
+
+%Setting the number of skills in the data
+
 n_skills=4;
 
-%%
 
-%%READING DATA
+
+%READING DATA
 
 options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',2000000);
 
@@ -15,7 +16,7 @@ options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunct
 cd 'C:/Users/thecs/Dropbox/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
-data_path="data/additional_processing/gmm_example_dataset_twoeq_a2.csv";
+data_path="data/additional_processing/gmm_example_dataset_twoeq_a3.csv";
 
 
 data=readtable(data_path);
@@ -23,15 +24,22 @@ data=readtable(data_path);
 
 n_obs=size(data,1);
 
+
+%Here I extract all the information that I need for the estimation
 [z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_code, ...
     lower_bound, upper_bound]= extract_data_matrices(data,n_skills);
 
-%Constraining manual to be the same
+
+%Creates the matrix of restrictions that constrains the costs of manual
+%skills to be the same
+
 A_rest=zeros(2,n_total_parameters);
 A_rest(:,1)=1;
 A_rest(1,5)=-1;
 A_rest(2,9)=-1;
 b_rest=zeros(2,1);
+
+
 
 %%
 %Importing solution from GMM equation
@@ -51,24 +59,26 @@ error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix,size_vector,e1_
 %%
 %Importing solution of the algorithm
 %load("code/parameter_estimation/current_solution_twoeq_a1.mat",'solution');
-load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
 %load("code/parameter_estimation/current_solution_twoeq_a3.mat",'solution');
+load("code/parameter_estimation/current_solution_twoeq_a3.mat",'solution');
 
 %load("code/parameter_estimation/current_solution_twoeq_a2_noabstract.mat",'solution');
 %load("code/parameter_estimation/current_solution_twoeq_a2_noroutine.mat",'solution');
+
 %%
+
+%Extracting information from all the parameters
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector,n_skills);
 
 
+variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data,...
+     size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index);
 %%
-v_estimate=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
-    e1_dln_a_index, e1_educ_index);
+standard_errors=get_standard_errors(variance_matrix,n_obs,size_vector,n_skills);
+
 
 %%
-variance_matrix=get_variance_matrix(z_matrix,v_estimate,data,size_vector,1,solution);
-%%
-standard_errors=get_standard_errors(variance_matrix,n_obs);
-[standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector);
+[standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector,n_skills);
 
 
 

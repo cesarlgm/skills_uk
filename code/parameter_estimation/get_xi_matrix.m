@@ -4,7 +4,7 @@
 
 %This function computes the matrix of derivatives of the errors \Xi.
 
-function xi_matrix=get_xi_matrix(data, size_vector, vector)
+function xi_matrix=get_xi_matrix(data, size_vector, vector,n_skills)
     %Preliminary steps
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %Get variable names
@@ -38,8 +38,8 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
     pi_names=startsWith(names,["d2s"]);
     pi_indicators=table2array(data(:,pi_names));
 
-   n_pi=size_vector(2);
-   n_theta=size_vector(1);
+    n_pi=size_vector(2);
+    n_theta=size_vector(1);
 
     
     %First, I extract the skills
@@ -97,9 +97,10 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    
 
    %Finally, I compute S_kejt*\pi_ijet. This completes the theta
-   %derivatives for equation 1. For equation 3, I still need to add beta. 
    temp_matrix=skill_temp.*pi_matrix_final;
-
+    
+   %I replace the the first column of pis with actual zeros
+   temp_matrix(:,1)=zeros(size(temp_matrix,1),1);
 
    %Replace the appropriate derivatives in the data matrix
    xi_matrix_1=-skill_temp;
@@ -116,7 +117,7 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    dummy_matrix=table2array(data(:,startsWith(names,["i_"])));
    
    %Next, I assign the thetas
-   [~,~,e1_educ_index]=get_occ_indexes(data);
+   [~,~,e1_educ_index]=get_occ_indexes(data,n_skills);
    theta_temp=assign_thetas(theta,e1_educ_index);
 
    %add zeros to fix the size of theta.
@@ -128,6 +129,11 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector)
    theta_matrix=repmat(full_theta,1,size(skill_matrix,2));
 
    xi_matrix_2=-theta_matrix.*skill_matrix-dummy_matrix;
+   
+   %Drop columns columns corresponding to derivatives with respect to pi
+   %manual
+   xi_matrix_2(:,1:4:end)=[];
+   
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    %PUTTING EVERYTHING TOGETHER
