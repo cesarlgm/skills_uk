@@ -8,7 +8,7 @@ graph set window fontface "Times New Roman"
 set maxvar 120000
 set scheme s1color, permanently
 
-cd "C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData"
+cd "C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantship\ukData"
 
 global education educ_3_low //educ_3_low
 global occupation bsoc00Agg
@@ -17,6 +17,8 @@ global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
 global index_list   manual social routine abstract 
 
 adopath + "code/parameter_estimation"
+
+
 
 *===============================================================================
 *ABSTRACT LAB

@@ -1,0 +1,42 @@
+function d_matrix=d_matrix_wrapper(data,parameter_vector,size_vector, ...
+         e1_educ_index,e1_dln_a_index)
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %Extracting the parameters
+    splitted_vector=assign_parameters(parameter_vector,size_vector);
+
+    theta=splitted_vector{1};
+    pi_vector=splitted_vector{2};
+
+    n_parameters=sum(size_vector);
+
+    
+    e1_full_pi=assign_thetas(pi_vector,e1_dln_a_index);
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %FIRST PART OF THE ERROR EQUATIO
+    %First I get the matrices I need for the derivatives matrix
+    [sd_matrix,z_indexes,i_indexes,sd2_matrix,num3s, ...
+        den3s,comparison,num_z,den_z,e3job_index]=extract_sd_matrix(data);
+
+
+    %First I compute the derivatives of the first error equation
+    de_eq1=get_de_eq1(sd_matrix,theta, ...
+        e1_educ_index,e1_dln_a_index,i_indexes,n_parameters,e1_full_pi);
+
+    d_matrix=de_eq1;
+
+    %Compute the derivatives of the second error equation
+    %de_eq2=get_de_eq1(sd2_matrix,n_parameters);
+
+    
+    %Compute the derivatives of the last error equation
+    %de_eq3=get_de_eq3(parameter_vector,num3s,den3s,comparison,e3_a_index,e3_occ_index,e3n_educ_index,e3d_educ_index,size_vector,e3job_index);
+
+    %I put everything together
+
+
+end
