@@ -20,6 +20,7 @@
 
 *FULL SET OF OCCUPATIONS
 *===========================================================================
+local def `1'
 
 eststo clear 
 *I set up filters to keep the number of occupations consistent across files
@@ -51,7 +52,7 @@ eststo clear
         save `SES_occs'
     restore
 
-    do "code/process_SES/compute_skill_indexes.do"
+    do "code/process_SES/compute_skill_indexes.do"  `def'
 
 
     eststo clear
@@ -60,14 +61,14 @@ eststo clear
 
     eststo clear
     foreach year in 2001 2017 {
-        foreach skill in $index_list {
+        foreach skill in $index_list abstract`def' {
         eststo `skill'`year': regress `skill' ibn.education if year==`year' [aw=gwtall], nocons
         }
     }
 
-    table education, c(mean manual mean social mean routine mean abstract)
+    table education, c(mean manual mean social mean routine mean abstract`def')
 
-    summ $index_list
+    summ $index_list  abstract`def'
 
 
 
@@ -80,7 +81,6 @@ eststo clear
 
     esttab abstract*, nostar not
 }
-
 
 *SUMMARY TABLES: EMPLOYMENT SHARES
 *===============================================================================

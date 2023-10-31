@@ -10,6 +10,8 @@
 */
 *===============================================================================
 *===============================================================================
+local def `1'
+
 
 global education educ_3_low
 
@@ -34,11 +36,11 @@ global education educ_3_low
     *merge m:1 occupation using `job_filter', keep(3) nogen 
     *merge m:1 occupation using `employment_filter', keep(3) nogen 
 
-    do "code/process_SES/compute_skill_indexes.do"
+    do "code/process_SES/compute_skill_indexes.do" `def'
 
 
     eststo clear
-    foreach index in $index_list {
+    foreach index in $index_list abstract`def' {
         eststo `index'r: reghdfe `index' i.education [aw=gwtall], absorb(year) vce(cl occupation)
         unique occupation
         estadd scalar n_occ=`r(unique)', replace
@@ -73,7 +75,7 @@ global education educ_3_low
         b(3) se(3) par  star(* .10 ** .05 *** .01) coeflabel(_cons "Baseline use") label nobase stat(n_occ N , label( "\midrule Number of occupations" "Observations") fmt(%9.3fc %9.3fc)) replace
 }
 
-
+/*
 *OCCUPATIONS FILTERED TO THETA ESTIMATES OCCUPATIONS
 {
     use "data/temporary/filtered_dems_SES", clear

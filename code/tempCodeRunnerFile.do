@@ -1,12 +1,21 @@
 
-*===============================================================================
-*ABSTRACT LAB 
-*===============================================================================
-foreach definition in _a2  {
-	 do "code/parameter_estimation/create_GMM_skills_dataset.do" `definition'
+clear all
+clear matrix
+set more off, permanently
+set graphics off
+capture log close 
+graph set window fontface "Times New Roman"
 
-	 do "code/parameter_estimation/create_GMM_employment_dataset.do" `definition'
+set maxvar 120000
+set scheme s1color, permanently
 
-	 do "code/parameter_estimation/compute_GMM.do" `definition'
-}
+cd "C:\Users\thecs\Dropbox\\1_boston_university\8-Research Assistantship\ukData"
+
+global education educ_3_low //educ_3_low
+global occupation bsoc00Agg
+global wage_cuts  10 90
+global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
+global index_list   manual social routine 
+
+adopath + "code/parameter_estimation"
 

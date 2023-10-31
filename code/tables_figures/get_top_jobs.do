@@ -2,6 +2,8 @@
 *GETTING TOP AND BOTTOM JOBS BY SKILL
 *========================================================
 
+local def `1'
+
 /*
 *I set up filters to keep the number of occupations consistent across files
 { 
@@ -77,14 +79,14 @@ rename bsoc00Agg occupation
 
 do "code/process_SES/compute_skill_indexes.do"
 
-gcollapse (mean) $index_list [fw=gwtall], by(occupation)
+gcollapse (mean) $index_list abstract`def' [fw=gwtall], by(occupation)
 
 *merge m:1 occupation using `job_filter', keep(3) nogen 
 *merge m:1 occupation using `employment_filter', keep(3) nogen 
 
 
 *Getting top and bottom jobs by skill
-foreach skill in $index_list {
+foreach skill in $index_list abstract`def'   {
     preserve
     gsort -`skill'
     keep if inrange(_n,1,5)|inrange(_n,_N-4,_N)

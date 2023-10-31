@@ -29,7 +29,7 @@ global education educ_3_low //educ_3_low
 global occupation bsoc00Agg
 global wage_cuts  10 90
 global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
-global index_list   manual social abstract
+global index_list   manual social routine 
 
 adopath + "code/parameter_estimation"
 
@@ -44,17 +44,19 @@ do "code/process_databases.do"
 *CREATE GRAPHS AND FIGURES
 *===============================================================================
 *Arrows graph
-do "code/tables_figures/summaries.do"
+do "code/tables_figures/summaries.do" _a2
 
 do "code/tables_figures/within_index_correlation.do"
 
-do "code/tables_figures/studying_abstract.do"
+do "code/tables_figures/studying_abstract.do" 
 
-do "code/tables_figures/get_top_jobs.do"
+
+do "code/tables_figures/get_top_jobs.do" _a2
+
 
 do "code/tables_figures/create_occ_arrow_graph.do"
 
-do "code/tables_figures/people_do_jobs_differently.do"
+do "code/tables_figures/people_do_jobs_differently.do" _a2
 
 do "code/tables_figures/create_skill_education_graphs.do"
 
