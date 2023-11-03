@@ -34,7 +34,7 @@
 
 
 
-    use "data/additional_processing/gmm_employment_dataset", clear
+    use "data/additional_processing/gmm_employment_dataset_a2", clear
 
     merge m:1 occupation year using `pi', keep(3) nogen
 
@@ -60,7 +60,7 @@
         xtitle("{&sum}(S{sub:eijt}-S{sub:e'ijt}){&pi}{sub:jt}") ///
         ytitle("ln(q{sub:ejt})-ln(q{sub:e'jt})") ///
         mcolor(ebblue%30)
-
+    
     *==========================================================================
     *Graph of the sums versus the residuals
     *==========================================================================
@@ -85,6 +85,13 @@
 
     rename coef beta
     generate sigma=1/(1-beta)
+
+    summ sigma, d
+
+    summ sigma if !inrange(sigma, -.5,.5)
+
+    hist sigma if inrange(sigma, -.5,.5), bin(25) fcolor(ebblue%60) lcolor(ebblue%70) xtitle({&sigma}{sub:J})
+    graph export "results/figures/sigma_estimates.png", replace
 
     generate bad_parameter=sigma>1
 
@@ -112,10 +119,25 @@
     restore
 }
 
+
+local figure_name   "results/figures/sigma_histogram.tex"
+local figure_path   "figures/"
+local figure_list   sigma_estimates
+local figure_title         "$\sigma_J$ estimates"
+local figure_notes  "The table shows estimates of $\sigma_J$. To improve readibility, the figure excludes 10 estimates that are outside -0.5 and 0.5 range."
+local figure_key    fig:sigma_estimates
+
+latexfigure using `figure_name', path(`figure_path') ///
+    figurelist(`figure_list') rowsize(1) title(`figure_title') ///
+    key(`figure_key') note(`figure_notes') nodate
+
+
+
+/*
 preserve
 *Create sigma estimates with the same instruments
 {
-    use "data/additional_processing/gmm_example_dataset_winsor", clear
+    use "data/additional_processing/gmm_example_dataset_winsor_a2", clear
     keep if equation==3
 
     keep occupation education education_d year e3jy_* e3jep_*

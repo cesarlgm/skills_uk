@@ -33,6 +33,16 @@ foreach definition in _a2 {
 }
 
 
+
+*===============================================================================
+*OUTPUT SUMMARY STATISTCS FOR SIGMA, PI, AND DLNA
+*===============================================================================
+
+do "code/parameter_estimation/create_sigma_estimates.do"
+
+do "code/parameter_estimation/summarize_pi_estimates.do"
+
+
 /*
 *===============================================================================
 *RECONSTRUCTING THE EDUCATIONAL CLASSIFICATION
