@@ -74,7 +74,7 @@ load("code/parameter_estimation/current_solution_twoeq_a2_diff_manual.mat",'solu
 
 
 variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data,...
-     size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index);
+     size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index,1);
 %%
 standard_errors=get_standard_errors(variance_matrix,n_obs,size_vector,n_skills);
 
