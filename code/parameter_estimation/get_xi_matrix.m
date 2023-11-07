@@ -2,7 +2,8 @@
 %Author: César Garro-Marín
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%This function computes the matrix of derivatives of the errors \Xi.
+%This function computes the matrix of derivatives of the errors \Xi, when
+%manual costs are not restricted
 
 function xi_matrix=get_xi_matrix(data, size_vector, vector,n_skills)
     %Preliminary steps
@@ -59,7 +60,7 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector,n_skills)
     %pi's in each column to compute the derivatives with respect to theta
     %for equations 1 and 3
 
-    %I need a Nx10 matrix.
+    %I need a Nx12 matrix.
 
     %These are the elements
     %pi_matrix: result matrix I want.
@@ -68,12 +69,12 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector,n_skills)
     %pi_temp: matrix of indicators that multplied by dlnA gives only the
     %pi's of a given skill.
 
-    pi_matrix=zeros(size(data,1),n_theta-2);
-    replace_index=zeros(size(data,1),n_theta-2);
+    pi_matrix=zeros(size(data,1),n_theta);
+    pi_matrix_final=zeros(size(data,1),n_theta);
+    replace_index=zeros(size(data,1),n_theta);
     col_counter=1;
 
-    %This is a Nx12 matrix. Note that I need a Nx10 matrix to reflect the
-    %same manual restriction.
+    %This is a Nx12 matrix. 
     for j=1:3
        for i=1:4
             pi_temp=zeros(n_pi,1);
@@ -85,37 +86,37 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector,n_skills)
             col_counter=col_counter+1;
        end
     end
-
-  
+   
+   
    %Here is where I fix the sizing issue
-   pi_matrix_final=zeros(size(pi_matrix,1),n_theta-2);
+   pi_matrix_final=zeros(size(pi_matrix,1),n_theta);
    %The first column corresponds to manual, while the rest are the non-manual columns
 
-   pi_matrix_final(:,1)=pi_matrix(:,1);
-   pi_matrix_final(:,2:n_theta-2)=pi_matrix(:,[2:4,6:8,10:12]);
-   replace_index_final=replace_index(:,[2:4,6:8,10:12]);
+  
+   pi_matrix_final(:,[2:4,6:8,10:12])=pi_matrix(:,[2:4,6:8,10:12]);
+   replace_index_final=replace_index;
+   
    
 
    %Finally, I compute S_kejt*\pi_ijet. This completes the theta
    temp_matrix=skill_temp.*pi_matrix_final;
-    
-   %I replace the the first column of pis with actual zeros
-   temp_matrix(:,1)=zeros(size(temp_matrix,1),1);
+   
+
 
    %Replace the appropriate derivatives in the data matrix
    xi_matrix_1=-skill_temp;
    xi_matrix_1(replace_index_final==1)=-temp_matrix(replace_index_final==1);
-   
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    %COMPUTE DERIVATIVES WITH RESPECT TO PI
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    %Again, I go equation by equation
-   
+
    %Equation 1
    %First I extract the skill and dummy matrices
    skill_matrix=table2array(data(:,startsWith(names,["de1s_"])));
    dummy_matrix=table2array(data(:,startsWith(names,["i_"])));
-   
+
    %Next, I assign the thetas
    [~,~,e1_educ_index]=get_occ_indexes(data,n_skills);
    theta_temp=assign_thetas(theta,e1_educ_index);
@@ -129,11 +130,11 @@ function xi_matrix=get_xi_matrix(data, size_vector, vector,n_skills)
    theta_matrix=repmat(full_theta,1,size(skill_matrix,2));
 
    xi_matrix_2=-theta_matrix.*skill_matrix-dummy_matrix;
-   
+
    %Drop columns columns corresponding to derivatives with respect to pi
    %manual
    xi_matrix_2(:,1:4:end)=[];
-   
+
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    %PUTTING EVERYTHING TOGETHER

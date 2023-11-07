@@ -10,6 +10,7 @@ function variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data, ..
       n_parameters=size(solution,1);
       n_obs=size(data,1);
       n_pi_dropped=size_vector(2)/n_skills;
+      n_theta_dropped=0;
 
       %I first set up the weighting matrix
       if weighting==1
@@ -23,13 +24,13 @@ function variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data, ..
     
       %And then comute \hat{D}
       D_matrix=(1/n_obs)*transpose(z_matrix)*xi_matrix;
-    
+     
+
       V_matrix=estimate_v(solution,z_matrix,y_matrix,s_matrix,size_vector,...
             e1_dln_a_index, e1_educ_index);
 
-
       %I compute "bread": the matrix (\hat{D}'A\hat{D})^-1
-      bread_matrix=eye(n_parameters-2-n_pi_dropped)/(transpose(D_matrix)*A*D_matrix);
+      bread_matrix=eye(n_parameters-n_theta_dropped-n_pi_dropped)/(transpose(D_matrix)*A*D_matrix);
 
       %Computing the "jelly": \hat{D}'A\hat{V}A\hat{D}
       jelly_matrix=transpose(D_matrix)*A*V_matrix*A*D_matrix;

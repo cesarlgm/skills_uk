@@ -16,7 +16,7 @@ options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunct
 cd 'C:/Users/thecs/Dropbox/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
-data_path="data/additional_processing/gmm_example_dataset_twoeq_a3.csv";
+data_path="data/additional_processing/gmm_example_dataset_twoeq_a2.csv";
 
 
 data=readtable(data_path);
@@ -74,7 +74,7 @@ load("code/parameter_estimation/current_solution_twoeq_a2_diff_manual.mat",'solu
 
 
 variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data,...
-     size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index,1);
+     size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index);
 %%
 standard_errors=get_standard_errors(variance_matrix,n_obs,size_vector,n_skills);
 
