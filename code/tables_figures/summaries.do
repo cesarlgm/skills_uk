@@ -128,9 +128,9 @@ eststo clear
     rename $education education
     rename bsoc00Agg occupation
 
-    merge m:1 occupation using  "data/additional_processing/GMM_occupation_filter", keep(3) nogen 
+    merge m:1 occupation using  "data/additional_processing/GMM_occupation_filter_two_equation", keep(3) nogen 
    
-/*
+
     do "code/process_SES/compute_skill_indexes.do"
 
 
@@ -145,7 +145,7 @@ eststo clear
         }
     }
 
-    table education, c(mean manual mean social mean routine mean abstract)
+    table education, c(mean manual mean social mean routine mean abstract`def')
 
     summ $index_list
 
@@ -159,9 +159,10 @@ eststo clear
     esttab routine*, nostar not
 
     esttab abstract*, nostar not
-    */
+ 
 }
-/*
+
+
 
 *SUMMARY TABLES: EMPLOYMENT SHARES
 *===============================================================================
@@ -171,7 +172,7 @@ do "code/process_LFS/create_education_variables.do"
 
 rename $occupation occupation 
 rename $education education
-merge m:1 occupation using  "data/additional_processing/GMM_occupation_filter", keep(3) nogen 
+merge m:1 occupation using  "data/additional_processing/GMM_occupation_filter_two_equation", keep(3) nogen 
 
 unique occupation
 

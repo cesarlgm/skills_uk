@@ -65,7 +65,7 @@ global education educ_3_low
     local table_notes "standard errors clustered at the occupation level in parenthesis"
 
     textablehead using `table_name', ncols(4) coltitles(`coltitles') title(`table_title')
-    leanesttab *n using `table_name', fmt(3) append star(* .10 ** .05 *** .01) coeflabel(_cons "Baseline use") nobase stat(n_occ N , label( "\midrule Number of occupations" "Observations") fmt(%9.0fc %9.0fc))
+    leanesttab *n using `table_name', format(3) append star(* .10 ** .05 *** .01) coeflabel(_cons "Baseline use") nobase stat(n_occ N , label( "\midrule Number of occupations" "Observations") fmt(%9.0fc %9.0fc))
     texspec using `table_name', spec(y y y y) label(Occupation f.e.)
     texspec using `table_name', spec(y y y y) label(Year f.e.)
     textablefoot using `table_name', notes(`table_notes')
@@ -75,7 +75,7 @@ global education educ_3_low
         b(3) se(3) par  star(* .10 ** .05 *** .01) coeflabel(_cons "Baseline use") label nobase stat(n_occ N , label( "\midrule Number of occupations" "Observations") fmt(%9.3fc %9.3fc)) replace
 }
 
-/*
+
 *OCCUPATIONS FILTERED TO THETA ESTIMATES OCCUPATIONS
 {
     use "data/temporary/filtered_dems_SES", clear
@@ -94,14 +94,14 @@ global education educ_3_low
     rename $education education
     rename bsoc00Agg occupation
 
-    merge m:1 occupation using "data/additional_processing/GMM_occupation_filter", keep(3)
+    merge m:1 occupation using "data/additional_processing/GMM_occupation_filter_two_equation", keep(3)
 
 
-    do "code/process_SES/compute_skill_indexes.do"
+    do "code/process_SES/compute_skill_indexes.do" `def'
 
 
     eststo clear
-    foreach index in $index_list {
+    foreach index in $index_list abstract`def'{
         eststo `index'r: reghdfe `index' i.education [aw=gwtall], absorb(year) vce(cl occupation)
         unique occupation
         estadd scalar n_occ=`r(unique)', replace
@@ -126,7 +126,7 @@ global education educ_3_low
     local table_notes "standard errors clustered at the occupation level in parenthesis"
 
     textablehead using `table_name', ncols(4) coltitles(`coltitles') title(`table_title')
-    leanesttab *n using `table_name', fmt(3) append star(* .10 ** .05 *** .01) coeflabel(_cons "Baseline use") nobase stat(n_occ N , label( "\midrule Number of occupations" "Observations") fmt(%9.0fc %9.0fc))
+    leanesttab *n using `table_name', format(3) append star(* .10 ** .05 *** .01) coeflabel(_cons "Baseline use") nobase stat(n_occ N , label( "\midrule Number of occupations" "Observations") fmt(%9.0fc %9.0fc))
     texspec using `table_name', spec(y y y y) label(Occupation f.e.)
     texspec using `table_name', spec(y y y y) label(Year f.e.)
     textablefoot using `table_name', notes(`table_notes')

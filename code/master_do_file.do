@@ -53,6 +53,8 @@ do "code/tables_figures/studying_abstract.do"
 
 do "code/tables_figures/get_top_jobs.do" _a2
 
+do "code/tables_figures/"
+
 
 do "code/tables_figures/create_occ_arrow_graph.do"
 

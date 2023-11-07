@@ -3,11 +3,29 @@
 *Author: César Garro-Marín
 *===============================================================================
 
+
+
+
 *Output dataset with employment shares
 {
     frames reset
     
     use "./data/temporary/LFS_industry_occ_file", clear
+
+    preserve
+        *Adding average for all people
+        gcollapse (sum) people, by(year $education)
+
+        egen total_people=sum(people), by(year )
+
+        generate empshare=people/total_people
+        
+        generate $occupation=9999
+
+        tempfile all_people
+        save    `all_people'
+    restore
+
     gcollapse (sum) people, by($occupation  year $education)
 
     egen total_people=sum(people), by(year $occupation)
@@ -15,6 +33,10 @@
     generate empshare=people/total_people
 
     keep $occupation $education year empshare 
+
+    append using `all_people'
+
+    drop people
 
     reshape wide empshare, i($occupation year) j($education)
 
@@ -41,8 +63,12 @@
     }
 
     frame change default
-    merge m:1 bsoc00Agg year using `SES_occs', keep(3) nogen
+    cap drop _merge
+    merge m:1 bsoc00Agg year using `SES_occs'
+    keep if _merge==3|$occupation==9999
 
+
+    drop _merge
 
     keep if inlist(year, 2001, 2017)
 
@@ -62,7 +88,6 @@
     generate survived=_merge==3
     cap drop _merge
 
-
     *generate deskilling=(d_empshare1*2-d_empshare2-d_empshare3)/(sqrt(d_empshare1^2+d_empshare2^2+d_empshare3^2)*sqrt(6))
 
     *generate angle=acos(deskilling)
@@ -79,6 +104,6 @@
     list bsoc00Agg empshare1 d_empshare1
     log close
 }
-/*
+
 *Creating the graph in R
 rscript using "code/process_SES/create_direction_graph.R"
