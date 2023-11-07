@@ -99,8 +99,6 @@ keep if inlist(year, 2001,2017)
 
 table $education year, c(mean emp_share)
 
-/*
-
 *=========================================================================================================
 
 *=========================================================================================================
@@ -132,7 +130,7 @@ eststo clear
 
     merge m:1 occupation using  "data/additional_processing/GMM_occupation_filter", keep(3) nogen 
    
-
+/*
     do "code/process_SES/compute_skill_indexes.do"
 
 
@@ -161,8 +159,9 @@ eststo clear
     esttab routine*, nostar not
 
     esttab abstract*, nostar not
+    */
 }
-
+/*
 
 *SUMMARY TABLES: EMPLOYMENT SHARES
 *===============================================================================
