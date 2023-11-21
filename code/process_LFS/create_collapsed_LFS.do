@@ -126,9 +126,6 @@ forvalues year=2000/2017{
 			if `collap'==1{
 				g	waveWeight=`weight'
 				
-				*Here I save the LFS database at the individual level
-				save "data/temporary/LFS`year'q`quarter'_indiv", replace
-				
 
 				gstats winsor grossWkPayMain, cut($wave_cuts)
 				gstats winsor grossPay, cut($wave_cuts)
@@ -142,6 +139,12 @@ forvalues year=2000/2017{
 				drop if missing(grossPay)|missing(grossWkPayMain)|missing(hourpay)
 
 				g observations=1/waveWeight
+
+				generate svy_weight=`weight'
+				generate occupation=`occupation'
+
+				*Here I save the LFS database at the individual level
+				save "data/temporary/LFS`year'q`quarter'_indiv", replace
 				
 
 				*This part collapses by quarter and the adequate occupation

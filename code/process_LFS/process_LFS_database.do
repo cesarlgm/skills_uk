@@ -20,7 +20,6 @@ do "code/process_LFS/create_collapsed_LFS.do"
 do "code/process_LFS/append_LFS.do"  
 
 
-
 /*
 *=======================================================================
 *Identifying polarizing jobs

@@ -1,8 +1,9 @@
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/deskilling_occupations.txt
+       log:  C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantship\ukData\results/log_files/de
+> skilling_occupations.txt
   log type:  text
- opened on:  20 Jun 2023, 14:48:11
+ opened on:   9 Nov 2023, 09:39:15
 .     unique $occupation
 Number of unique values of bsoc00Agg is  22
 Number of records is  22
@@ -40,7 +41,8 @@ Number of records is  22
      +------------------------------------------------------------------------------------+
 .     log close
       name:  <unnamed>
-       log:  C:\Users\thecs\Dropbox (Boston University)\1_boston_university\8-Research Assistantship\ukData\results/log_files/deskilling_occupations.txt
+       log:  C:\Users\thecs\Dropbox\1_boston_university\8-Research Assistantship\ukData\results/log_files/de
+> skilling_occupations.txt
   log type:  text
- closed on:  20 Jun 2023, 14:48:11
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:   9 Nov 2023, 09:39:15
+------------------------------------------------------------------------------------------------------------

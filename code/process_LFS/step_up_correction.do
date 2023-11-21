@@ -5,23 +5,28 @@
 {
     frames reset
 
+    *Append individual level dataset 2001, 2017
+    {
+        forvalues j=2/4 {
+            append using "data/temporary/LFS2001q`j'_indiv", force
+        }
 
-    use "./data/temporary/LFS_industry_occ_file", clear
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2017q`j'_indiv", force
+        }
 
+        keep occupation year edlevLFS svy_weight
 
-    tab $education year if inlist(year, 2001,2017) [aw=people], col nofreq
+        rename occupation bsoc2000
 
-    gcollapse (sum) people obs, by($occupation  year $education)
+        do "code/aggregate_SOC2000.do"
 
-    egen total_people=sum(people), by(year $occupation)
+        do "code/process_LFS/create_education_variables.do"
 
-    generate empshare=people/total_people
-    egen    occ_obs=sum(obs), by($occupation year)
-
-    keep $occupation $education year empshare  *obs obs
-
-    keep if inlist(year, 2001,2017)
-
+        rename $education education
+        
+        xi i.education, noomit
+    }
 
     *FILTERING OCCUPATIONS
     *The chunck of code below gets the occupations that are in SES
@@ -44,55 +49,46 @@
     frame change default
     merge m:1 $occupation year using `SES_occs', keep(3) nogen
 
-    replace observations=floor(observations)
-    
-    preserve
-    {
-        sort $occupation $education year
-        fillin $occupation $education year
-        
-        egen temp=sum(observations), by($occupation year)
-        generate in_year=temp>0
-        replace empshare=0 if in_year==1&missing(empshare)
-        by $occupation $education: generate d_empshare=empshare-empshare[_n-1]
+    rename $occupation occupation
 
-        keep if year==2017
-        
-        keep $occupation $education d_empshare
-        reshape wide d_empshare, i($occupation) j($education)
-
-        tempfile empshare_file
-        save `empshare_file'
-    }
-    restore
-    
-    cap drop p_value*
+    eststo clear
     foreach educ in 1 2 3 {
-        generate p_value`educ'=.
-        generate educ_level=$education==`educ'
-        levelsof $occupation 
-        foreach occupation in `r(levels)' {
-            di `occupation'
-            cap tab educ_level year if $occupation==`occupation' [fw=observation], chi
-            cap replace p_value`educ'=`r(p)' if $occupation==`occupation'
-        }
-        cap drop educ_level
-    }
-    
-   
-    keep $occupation p_value*
-    duplicates drop 
+        preserve 
+        eststo educ`educ': regress _Ieducation_`educ' ibn.occupation i.year#ibn.occupation [pw=svy_weight], nocons  vce(r)
+        regsave 
+        split var, parse(. #)
+        keep if var1=="2017" & var2=="year"
 
-    merge m:1 $occupation using `empshare_file', keepusing(d_empshare*)
-    
-    duplicates  drop $occupation, force
-    
+        generate t_stat=coef/stderr
+        generate p_value`educ'=1-normal(t_stat)
+
+        replace var3="1112" if  var3=="1112bn"
+
+        destring var3, g(occupation)
+        keep coef t_stat p_value* occupation
+
+        rename coef coef`educ'
+        rename t_stat t_stat`educ'
+
+        tempfile educ`educ'
+        save `educ`educ''
+        restore
+    }
+
+    use  `educ1', clear
+    merge m:1 occupation using `educ1', nogen 
+    merge m:1 occupation using `educ2', nogen 
+    merge m:1 occupation using `educ3', nogen
+
+
     forvalues educ=1/3 {
         gsort p_value`educ'
-        generate threshold`educ'=.20*_n/_N
+        summ p_value`educ'
+        generate threshold`educ'=.2*_n/`r(N)'
         generate reject`educ'=p_value`educ'<threshold`educ'
     }
     
+    /*
     log using "results/log_files/t_stats_1.txt", text replace
     list bsoc00Agg d_empshare1 d_empshare2 d_empshare3  threshold1 p_value1  if reject1&d_empshare1>0
     log close
@@ -134,6 +130,7 @@
     keep bsoc00Agg
     duplicates drop
     save "data/additional_processing/increase_low_occupations", replace
+    */
 }
 
 /*
@@ -209,7 +206,7 @@
     textablefoot using `table_name'
  
 }
-*/
+
 *How do these occupations look in the skill space
 {
     do "code/process_SES/save_file_for_minimization.do"

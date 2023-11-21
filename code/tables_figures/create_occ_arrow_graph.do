@@ -88,11 +88,14 @@
     generate survived=_merge==3
     cap drop _merge
 
+    merge m:1 $occupation using "data/additional_processing/survived_BKY", nogen
+
+    
     *generate deskilling=(d_empshare1*2-d_empshare2-d_empshare3)/(sqrt(d_empshare1^2+d_empshare2^2+d_empshare3^2)*sqrt(6))
 
     *generate angle=acos(deskilling)
     
-
+    
     export delimited using "data/additional_processing/empshares_graphs.csv", replace
 
     bysort $occupation: keep if _n==1
@@ -106,4 +109,4 @@
 }
 
 *Creating the graph in R
-rscript using "code/process_SES/create_direction_graph.R"
+*rscript using "code/process_SES/create_direction_graph.R"
