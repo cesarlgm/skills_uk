@@ -16,6 +16,8 @@
 ****	Please use the "do" button rather than the "run" button to run this file (if you use "run", you will miss the instructions at the prompts)
 
 *Preparing dataset for the testing
+
+/*
 {
     frames reset
 
@@ -79,6 +81,9 @@
         save `empshare_file'
     }
     restore
+
+    
+
     
     cap drop p_value*
     foreach educ in 1 2 3 {
@@ -102,6 +107,8 @@
     duplicates  drop $occupation, force
 
 }
+*/
+use "data/additional_processing/t_tests", clear
 
 *I rename the p_values I want to test as:
 rename p_value1 pval
@@ -182,9 +189,9 @@ version 10
 rename pval p_value1
 
 cap drop survived_BKY
-generate survived_BKY=bky06_qval<.2&d_empshare1>0
+generate survived_BKY=bky06_qval<.2&coef1>0
 
-keep $occupation survived_BKY
-save "data/additional_processing/survived_BKY", replace 
+*keep occupation survived_BKY
+*save "data/additional_processing/survived_BKY", replace 
 
 

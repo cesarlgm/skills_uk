@@ -10,12 +10,29 @@
         forvalues j=2/4 {
             append using "data/temporary/LFS2001q`j'_indiv", force
         }
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2002q`j'_indiv", force
+        }
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2003q`j'_indiv", force
+        }
 
+
+
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2015q`j'_indiv", force
+        }
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2016q`j'_indiv", force
+        }
         forvalues j=1/4 {
             append using "data/temporary/LFS2017q`j'_indiv", force
         }
 
         keep occupation year edlevLFS svy_weight
+        replace year=2001 if inlist(year,2002,2003)
+        replace year=2017 if inlist(year,2016,2015)
+
 
         rename occupation bsoc2000
 
@@ -27,6 +44,8 @@
         
         xi i.education, noomit
     }
+
+    
 
     *FILTERING OCCUPATIONS
     *The chunck of code below gets the occupations that are in SES
@@ -51,43 +70,97 @@
 
     rename $occupation occupation
 
+    preserve
+
+    levelsof occupation
+    local occupation_list `r(levels)'
+    /*
     eststo clear
-    foreach educ in 1 2 3 {
-        preserve 
-        eststo educ`educ': regress _Ieducation_`educ' ibn.occupation i.year#ibn.occupation [pw=svy_weight], nocons  vce(r)
-        regsave 
-        split var, parse(. #)
-        keep if var1=="2017" & var2=="year"
+    foreach occu in `occupation_list' {
+        foreach educ in 1 2 3 {
+            qui regress _Ieducation_`educ'  i.year [pw=svy_weight] if occupation==`occu'
+            preserve
+            regsave
+            qui split var, parse(. #)
+            qui keep if var1=="2017" & var2=="year"
 
-        generate t_stat=coef/stderr
-        generate p_value`educ'=1-normal(t_stat)
+            qui generate occupation=`occu'
+            qui generate t_stat=coef/stderr
+            qui generate p_value`educ'=1-normal(t_stat)
 
-        replace var3="1112" if  var3=="1112bn"
+            rename coef coef`educ'
+            rename t_stat t_stat`educ'
 
-        destring var3, g(occupation)
-        keep coef t_stat p_value* occupation
+            keep coef t_stat p_value* occupation
+            
+            qui save "data/additional_processing/share_changes/t_`occu'_`educ'", replace
+            restore
+            /*
+            preserve 
+            eststo educ`educ': regress _Ieducation_`educ' ibn.occupation i.year#ibn.occupation [pw=svy_weight], nocons 
+            regsave 
+            split var, parse(. #)
+            keep if var1=="2017" & var2=="year"
 
-        rename coef coef`educ'
-        rename t_stat t_stat`educ'
+            generate t_stat=coef/stderr
+            generate p_value`educ'=1-normal(t_stat)
 
-        tempfile educ`educ'
-        save `educ`educ''
-        restore
+            replace var3="1112" if  var3=="1112bn"
+
+            destring var3, g(occupation)
+            keep coef t_stat p_value* occupation
+
+            rename coef coef`educ'
+            rename t_stat t_stat`educ'
+
+            tempfile educ`educ'
+            save `educ`educ''
+            restore
+            */
+        }
     }
 
-    use  `educ1', clear
-    merge m:1 occupation using `educ1', nogen 
-    merge m:1 occupation using `educ2', nogen 
-    merge m:1 occupation using `educ3', nogen
+    */
+    clear
+    foreach educ in 1 2 3 {
+        use  "data/additional_processing/share_changes/t_1112_`educ'", clear
+        foreach occu in `occupation_list' {
+            append using "data/additional_processing/share_changes/t_`occu'_`educ'"
+        }
 
+        duplicates drop 
+        save "data/additional_processing/share_changes/t_`educ'", replace
+    }
 
+    use  "data/additional_processing/share_changes/t_1", clear 
+    merge 1:1 occupation  using   "data/additional_processing/share_changes/t_2", nogen
+    merge 1:1 occupation  using   "data/additional_processing/share_changes/t_3", nogen
+
+    local alpha=.2
     forvalues educ=1/3 {
         gsort p_value`educ'
         summ p_value`educ'
-        generate threshold`educ'=.2*_n/`r(N)'
+        generate threshold`educ'=`alpha'*_n/`r(N)'
         generate reject`educ'=p_value`educ'<threshold`educ'
+
+        generate simple_reject`educ'=p_value`educ'<=`alpha'
     }
-    
+
+    tempfile t_tests
+    save `t_tests'
+
+    restore 
+
+    gcollapse (mean) _I*, by(occupation year)
+
+    merge m:1  occupation using `t_tests', nogen
+
+    rename _Ieducation_1 empshare_1 
+    rename _Ieducation_2 empshare_2 
+    rename _Ieducation_3 empshare_3
+
+    save "data/additional_processing/t_tests", replace
+
     /*
     log using "results/log_files/t_stats_1.txt", text replace
     list bsoc00Agg d_empshare1 d_empshare2 d_empshare3  threshold1 p_value1  if reject1&d_empshare1>0
