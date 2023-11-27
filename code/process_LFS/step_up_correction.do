@@ -45,6 +45,14 @@
         xi i.education, noomit
     }
 
+    regres _Ieducation_1 i.year 
+    global d_1=_b[2017.year]
+
+    regres _Ieducation_2 i.year 
+    global d_2=_b[2017.year]
+
+    regres _Ieducation_3 i.year 
+    global d_3=_b[2017.year]
     
 
     *FILTERING OCCUPATIONS
@@ -70,11 +78,12 @@
 
     rename $occupation occupation
 
-    preserve
-
     levelsof occupation
     local occupation_list `r(levels)'
-    /*
+
+    tempfile occupations
+    save `occupations'
+
     eststo clear
     foreach occu in `occupation_list' {
         foreach educ in 1 2 3 {
@@ -88,10 +97,13 @@
             qui generate t_stat=coef/stderr
             qui generate p_value`educ'=1-normal(t_stat)
 
+            qui generate t_stat_mean=(coef-${d_`educ'})/stderr
+            qui generate p_value`educ'_mean=1-normal(t_stat_mean)
+
             rename coef coef`educ'
             rename t_stat t_stat`educ'
 
-            keep coef t_stat p_value* occupation
+            keep coef t_stat* p_value* occupation
             
             qui save "data/additional_processing/share_changes/t_`occu'_`educ'", replace
             restore
@@ -144,12 +156,20 @@
         generate reject`educ'=p_value`educ'<threshold`educ'
 
         generate simple_reject`educ'=p_value`educ'<=`alpha'
+
+        gsort p_value`educ'_mean
+        summ p_value`educ'_mean
+        generate threshold`educ'_mean=`alpha'*_n/`r(N)'
+        generate reject`educ'_mean=p_value`educ'_mean<threshold`educ'
+
+        generate simple_reject`educ'_mean=p_value`educ'_mean<=`alpha'
     }
 
     tempfile t_tests
     save `t_tests'
 
-    restore 
+    use `occupations', clear
+
 
     gcollapse (mean) _I*, by(occupation year)
 
