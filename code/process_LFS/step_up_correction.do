@@ -148,7 +148,7 @@
     merge 1:1 occupation  using   "data/additional_processing/share_changes/t_2", nogen
     merge 1:1 occupation  using   "data/additional_processing/share_changes/t_3", nogen
 
-    local alpha=.2
+    local alpha=.1
     forvalues educ=1/3 {
         gsort p_value`educ'
         summ p_value`educ'

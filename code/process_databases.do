@@ -20,5 +20,7 @@ do "code/process_LFS/process_LFS_database.do"
 do "code/process_SES/process_SES_database.do" 
 
 
+*Clean the UK census
+do "code/process_census/clean_censuses.do"
 
 
