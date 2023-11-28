@@ -21,6 +21,6 @@ do "code/process_SES/process_SES_database.do"
 
 
 *Clean the UK census
-do "code/process_census/clean_censuses.do"
+do "code/process_census/master_clean_censuses.do"
 
 
