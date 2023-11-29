@@ -12,3 +12,5 @@ do "code/process_census/clean_2011_census.do"
 do "code/process_census/clean_2021_census.do"
 
 do "code/process_census/append_censuses.do"
+
+do "code/process_census/check_occupational_codes.do"
