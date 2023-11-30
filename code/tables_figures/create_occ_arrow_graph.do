@@ -40,3 +40,40 @@
 
 *Creating the graph in R
 *rscript using "code/process_SES/create_direction_graph.R"
+
+
+
+*Output dataset with employment shares
+{
+    frames reset
+    
+    use "data/additional_processing/t_tests_census", clear
+
+    merge m:1 occupation year using  "data/additional_processing/survived_BKY_census", keep(1 3)
+    
+    
+    generate deskilled=coef1>0
+    cap drop _merge
+
+
+    
+    *generate deskilling=(d_empshare1*2-d_empshare2-d_empshare3)/(sqrt(d_empshare1^2+d_empshare2^2+d_empshare3^2)*sqrt(6))
+
+    *generate angle=acos(deskilling)
+    
+    export delimited using "data/additional_processing/empshares_graphs_census.csv", replace
+
+    /*
+    bysort $occupation: keep if _n==1
+    keep if deskilled>0
+    gsort d_empshare1
+
+    log using "results/log_files/deskilling_occupations.txt", replace text
+    unique $occupation
+    list bsoc00Agg empshare1 d_empshare1
+    log close
+    */
+}
+
+*Creating the graph in R
+*rscript using "code/process_SES/create_direction_graph.R"
