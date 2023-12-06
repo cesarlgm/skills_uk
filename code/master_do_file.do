@@ -53,7 +53,11 @@ do "code/tables_figures/studying_abstract.do"
 
 do "code/tables_figures/get_top_jobs.do" _a2
 
+do "code/tables_figures/education_classification_shares.do" 
+
 *Add step up correction from the LFS
+
+do "code/tables_figures/step_up_correction.do"
 
 do "code/tables_figures/step_up_correction_census.do"
 

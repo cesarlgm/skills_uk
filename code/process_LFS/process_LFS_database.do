@@ -15,9 +15,9 @@
 do "code/process_LFS/import_CPI.do"
 
 *Create and append LFS datasets
-do "code/process_LFS/create_collapsed_LFS.do"
+qui do "code/process_LFS/create_collapsed_LFS.do"
 
-do "code/process_LFS/append_LFS.do"  
+qui do "code/process_LFS/append_LFS.do"  
 
 
 /*

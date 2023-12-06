@@ -102,4 +102,40 @@ pdf_name <- "./results/figures/direction_triangle_BKY.png"
 ggsave(pdf_name,direction_graph,dpi = 700,width=10,height=10)  
 
 
+################################################################################
+#Census graphs
+################################################################################
+dataset <- read.csv("./data/additional_processing/empshares_graphs_census.csv")
+
+#Distinguishing the average arrow
+dataset$deskilled[dataset$occupation==9999]<- -1
+#Distinguishing the average arrow
+dataset$survived[dataset$occupation==9999]<- -1
+dataset$survived_BKY[dataset$occupation==9999]<- -1
+
+directions <- dataset$deskilled
+
+
+colors <- case_when(sign(directions) == 1 ~ "red3",
+                    sign(directions) == 0 ~ "gray80",
+                    sign(directions)==-1 ~ "deepskyblue3")
+
+sizes <- case_when(sign(directions) == 1 ~ 1,
+                   sign(directions) == 0 ~ .5,
+                   sign(directions)==-1 ~ 2.5)
+
+direction_graph <- ggtern(dataset, aes(x=empshare_1, y=empshare_2, z=empshare_3)) + 
+  geom_path(arrow=arrow(length=unit(0.2,"cm")),aes(group=occupation),color=colors,linewidth=sizes)+
+  theme_bw() +
+  theme_showarrows() +
+  labs(x="", y="", z="", xarrow="Higher GCSE or less share", yarrow="Higher A-levels share", zarrow="Higher Bacherlor+ share")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(legend.position = "bottom")+
+  theme(panel.grid.major = element_line(color = "black",
+                                        linewidth = 0.5,
+                                        linetype = 2))+
+  theme_hidegrid_minor()
+
+pdf_name <- "./results/figures/direction_triangle.png"
+ggsave(pdf_name,direction_graph,dpi = 700,width=10,height=10)  
 

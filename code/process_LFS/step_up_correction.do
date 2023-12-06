@@ -16,6 +16,12 @@
         forvalues j=1/4 {
             append using "data/temporary/LFS2003q`j'_indiv", force
         }
+        forvalues j=2/4 {
+            append using "data/temporary/LFS2004q`j'_indiv", force
+        }
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2005q`j'_indiv", force
+        }
 
 
 
@@ -28,10 +34,16 @@
         forvalues j=1/4 {
             append using "data/temporary/LFS2017q`j'_indiv", force
         }
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2018q`j'_indiv", force
+        }
+        forvalues j=1/4 {
+            append using "data/temporary/LFS2019q`j'_indiv", force
+        }
 
         keep occupation year edlevLFS svy_weight
-        replace year=2001 if inlist(year,2002,2003)
-        replace year=2017 if inlist(year,2016,2015)
+        replace year=2001 if inrange(year,2001,2005)
+        replace year=2017 if inrange(year,2015,2023)
 
 
         rename occupation bsoc2000
@@ -43,6 +55,8 @@
         rename $education education
         
         xi i.education, noomit
+
+        drop if bsoc00Agg==-9
     }
 
     regres _Ieducation_1 i.year 
@@ -84,6 +98,7 @@
     tempfile occupations
     save `occupations'
 
+    
     eststo clear
     foreach occu in `occupation_list' {
         foreach educ in 1 2 3 {
@@ -132,12 +147,12 @@
         }
     }
 
-    */
+    
     clear
     foreach educ in 1 2 3 {
         use  "data/additional_processing/share_changes/t_1112_`educ'", clear
         foreach occu in `occupation_list' {
-            append using "data/additional_processing/share_changes/t_`occu'_`educ'"
+            cap append using "data/additional_processing/share_changes/t_`occu'_`educ'"
         }
 
         duplicates drop 

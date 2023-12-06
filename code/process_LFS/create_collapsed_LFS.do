@@ -3,7 +3,7 @@
 *===============================================================================
 
 
-forvalues year=2000/2017{
+forvalues year=2000/2020{
 	if `year'>2008 {
 		local industry_cw in0792dm
 		local industry indd07m
@@ -70,7 +70,7 @@ forvalues year=2000/2017{
 				replace edlevLFS=1 if inrange(hiqual11,58,78)
 				replace edlevLFS=0 if inlist(hiqual11,79)
 			}
-			else if inrange(`year',2015,2017) {
+			else if inrange(`year',2015,2023) {
 				replace edlevLFS=4 if inrange(hiqual15,1,29)
 				replace edlevLFS=3 if inrange(hiqual15,30,47)
 				replace edlevLFS=2 if inrange(hiqual15,48,59)
@@ -111,18 +111,21 @@ forvalues year=2000/2017{
 					local weight pwt14
 				}
 			}
-			else if inrange(`year',2011,2017){
+			else if inrange(`year',2011,2023){
 				rename sc102km bsoc2000
 				local occupation bsoc2000
 				local collap=1
 				if `year'==2011 & `quarter'<=2 {
 					local weight 	pwt14
 				}
-				else {
+				else if `year'<=2019 {
 					local weight 	pwt18
 				}
+				else {
+					local weight 	pwt22
+				}
 			}
-			
+	
 			if `collap'==1{
 				g	waveWeight=`weight'
 				

@@ -3,7 +3,7 @@
 *================================================================================
 clear
 
-forvalues year=1997/2017 {
+forvalues year=1997/2020 {
 	forvalues quarter=1/4 {
 		if !((`year'==2001&`quarter'==1)|(`quarter'==1&`year'==2004)){
 			append using "data/temporary/LFS`year'q`quarter'_collapsed"
@@ -21,6 +21,8 @@ generate l_hourpay=log(hourpay)
 generate l_wkpay=log(grossWkPayMain)
 generate l_gpay=log(grossPay)
 
+drop if bsoc00Agg==-9
+
 save "data/temporary/appended_LFS_occ_level", replace
 
 *Here, if I want it I aggregate the SOC2000 further
@@ -36,7 +38,7 @@ collapse (mean)  $continuous_list l_*  (sum) people [pw=weight], ///
 	by(edlevLFS `occupation' industry_cw year) 
 
 
-keep if inrange(year,2001,2017)
+keep if inrange(year,2001,2020)
 
 *Note Apr 6: the averages here look fine.
 save "data/temporary/LFS_agg_database", replace
@@ -45,7 +47,7 @@ save "data/temporary/LFS_agg_database", replace
 clear
 *Here, I aggregate files for the employment share regressions
 *=======================================================
-forvalues year=2001/2017 {
+forvalues year=2001/2020 {
 	forvalues quarter=1/4 {
 		if !((`year'==2001&`quarter'==1)|(`quarter'==1&`year'==2004)){
 			append using "data/temporary/LFS`year'q`quarter'_industry_cw"
