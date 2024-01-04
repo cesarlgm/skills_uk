@@ -59,15 +59,21 @@
         drop if bsoc00Agg==-9
     }
 
-    regres _Ieducation_1 i.year 
-    global d_1=_b[2017.year]
+    regres _Ieducation_1 ibn.year, nocons 
+    global d1_2001=_b[2001.year]
+    global d1_2017=_b[2017.year]
 
-    regres _Ieducation_2 i.year 
-    global d_2=_b[2017.year]
+    regres _Ieducation_2 ibn.year, nocons 
+    global d2_2001=_b[2001.year]
+    global d2_2017=_b[2017.year]
 
-    regres _Ieducation_3 i.year 
-    global d_3=_b[2017.year]
+    regres _Ieducation_3 ibn.year, nocons 
+    global d3_2001=_b[2001.year]
+    global d3_2017=_b[2017.year]
     
+
+
+
 
     *FILTERING OCCUPATIONS
     *The chunck of code below gets the occupations that are in SES
@@ -193,6 +199,23 @@
     rename _Ieducation_1 empshare_1 
     rename _Ieducation_2 empshare_2 
     rename _Ieducation_3 empshare_3
+
+    local new_obs = _N + 2
+    set obs `new_obs'
+
+    replace occupation=9999 if missing(occupation)
+
+    replace year=2001 if _n==_N-1
+    replace year=2017 if _n==_N
+
+    foreach year in 2001 2017 {
+        foreach educ in 1 2 3 {
+            replace empshare_`educ'=${d`educ'_`year'} if occupation==9999&year==`year'
+        }
+    }
+
+    *Selecting occupations in the top quadrant of the triangle
+    tab occupation  if inrange(empshare_1,.25,.50)&empshare_2>.40&year==2001
 
     save "data/additional_processing/t_tests", replace
 
