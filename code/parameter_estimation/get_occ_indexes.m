@@ -1,5 +1,5 @@
 %This function identifies the ordering of the parameter vectors
-function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_theta_index,e3d_theta_index,e3_occ_index]=...
+function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index]=...
     get_occ_indexes(data,n_skills)
     names=transpose(data.Properties.VariableNames);
 
@@ -32,36 +32,4 @@ function [e1_code,e1_d_ln_a_index,e1_educ_index,e1_occ_index,e3_a_index,e3n_thet
     %This part fixes the issue with the theta indexes in e1 when the pi's
     %are restricted to be zero
     [~,e1_educ_index]=ismember(e1_theta_code,theta_code);
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %Equation 3 indexes
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-    eqn_3_indexes_n=names(startsWith(names,"en_"));
-    eqn_3_indexes_d=names(startsWith(names,"ed_"));
-
-    %Creating index vectors for equation 2
-    splitted_e3=split(eqn_3_indexes_n,"_");
-
-    %Job indexes
-    e3_year_index=str2double(splitted_e3(:,6));
-    e3_occ_index=str2double(splitted_e3(:,5));
-    e3_skill_index=str2double(splitted_e3(:,3));
-
-    e3_code=e3_occ_index*100000+e3_year_index*10+e3_skill_index;
-
-    %Here I search the indexes of e3 into the dlnA indexes
-    [~,e3_a_index]=ismember(e3_code,e1_code);
-
-    %Education indexes
-    %Numerator indexes
-    e3n_educ_index=str2double(splitted_e3(:,4));
-    [e3n_theta_index,e3n_theta_id]=findgroups(e3n_educ_index*10+e3_skill_index);
-    e3n_theta_index=e3n_theta_index+n_skills;
-
-    %Denominator indexes
-    splitted_e3=split(eqn_3_indexes_d,"_");
-    e3d_educ_index=str2double(splitted_e3(:,4));
-    [e3d_theta_index,e3d_theta_id]=findgroups(e3d_educ_index*10+e3_skill_index);
-
 end

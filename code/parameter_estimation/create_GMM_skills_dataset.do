@@ -28,28 +28,6 @@ pwcorr $abstract
 gcollapse (mean) $index_list *_i (count) obs=chands [fw=gwtall], by(occupation year education)
     
 
-*Uncomment this to do long differences
-*keep if  inlist(year,2001,2017)
-
-*Setting panel dataset
-{
-    egen group_id=group(occupation education)
-    egen time=group(year)
-
-    xtset group_id time
-}
-
-*Creating log and dlog of skills
-foreach index in $index_list {
-    rename `index'_i l_`index'
-    generate d_l_`index'=d.l_`index'
-}
-
-foreach index in $index_list {
-    label var l_`index' "Average log(`index')"
-    label var `index'   "Average `index'"
-}
-
 
 frames copy default equation1
 frames change equation1
@@ -60,8 +38,8 @@ frames change equation1
     local counter=1
     foreach index in $index_list {
         preserve  
-        keep year education occupation d_l_`index' $index_list obs
-        rename d_l_`index' y_var
+        keep year education occupation `index' $index_list obs
+        generate  y_var=`index'
         generate skill=`counter'
         tempfile skill`counter'
         save `skill`counter''
@@ -87,8 +65,6 @@ frames change equation1
 clear 
 append using `equation1'
 
-drop if year==2001
-
 preserve 
     replace y_var=1
     replace equation=2
@@ -104,6 +80,8 @@ label values equation equation
 generate temp=1 if equation==1
 egen in_eqn_1=max(temp), by(occupation)
 drop if missing(in_eqn_1)|in_eqn_1==0
+
+drop temp
 
 save "data/additional_processing/gmm_skills_dataset`1'", replace
 
