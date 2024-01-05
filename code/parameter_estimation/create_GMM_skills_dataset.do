@@ -38,8 +38,8 @@ frames change equation1
     local counter=1
     foreach index in $index_list {
         preserve  
-        keep year education occupation `index' $index_list obs
-        generate  y_var=`index'
+        keep year education occupation `index' $index_list *_i  obs
+        generate  y_var=`index'_i
         generate skill=`counter'
         tempfile skill`counter'
         save `skill`counter''

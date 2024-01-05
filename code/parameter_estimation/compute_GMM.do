@@ -91,8 +91,6 @@ This do file creates the dataset I need to execute the GMM code in matlab
 }
 
 
-
-
 *drop if equation==1
 
 *Now I expand the dataset with all the variables I need to create the GMM errors
@@ -107,7 +105,7 @@ This do file creates the dataset I need to execute the GMM code in matlab
                     foreach index in $index_list {
                         if `r(N)'!=0  /* & "`index'"!="$ref_skill_name" */   {
                             qui generate e1s_`index_counter'_`education'_`job'_`year'=0
-                            qui replace e1s_`index_counter'_`education'_`job'_`year'= `index' if occ_id==`job'&year_id==`year'&equation==1&education==`education'
+                            qui replace e1s_`index_counter'_`education'_`job'_`year'= 1 if occ_id==`job'&year_id==`year'&equation==1&education==`education'
                             local ++var_counter
                         }
                         local ++index_counter
@@ -141,7 +139,7 @@ This do file creates the dataset I need to execute the GMM code in matlab
     }
     }
 
-
+    
 
     order occupation  year skill education $index_list , first
     sort equation skill  occupation year  education
@@ -152,14 +150,16 @@ This do file creates the dataset I need to execute the GMM code in matlab
 
 
 
-order e2* ts_*, last
+order e1s* e2* ts_*, last
 
 save "data/additional_processing/gmm_example_dataset_eq6`1'", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
+egen theta_code=group(education skill) if equation==1
+egen job_index=group(occupation) if equation==1
 egen ln_alpha=group(occupation  year skill) if equation==1 //&skill!=$ref_skill_num
-order ln_alpha, after(equation)
+order ln_alpha job_index theta_code, after(equation)
 
 preserve
     keep occupation

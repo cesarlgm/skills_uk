@@ -1,117 +1,116 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Author: César Garro-Marín
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%% 
 
 clear;
+
+%Setting the number of skills in the data
+
 n_skills=4;
 
-%SETTING THE PATHS
-options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',500000,'OptimalityTolerance',1e-6);
+
+
+%READING DATA
+
+options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',2000000);
+
+
 
 cd 'C:/Users/thecs/Dropbox/1_boston_university/8-Research Assistantship/ukData';
 addpath('code/parameter_estimation/','data');
 
-%GETTING THE DATA
-data_path="data/additional_processing/gmm_example_dataset_winsor_a3.csv";
-sol_path="data/additional_processing/initial_estimates.csv";
+data_path="data/additional_processing/gmm_example_dataset_eq6_a2.csv";
+
 
 data=readtable(data_path);
 
+
 n_obs=size(data,1);
 
-%EXTRACTING DATA FOR THE CALCULATIONS
-[z_matrix,y_matrix,s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_code,e1_occ_index, ...
-    lower_bound, upper_bound, e3_a_index,e3n_educ_index,e3d_educ_index, ...
-    e3_occ_index]= extract_data_matrices(data,n_skills);
 
 %%
-%SETTING UP INITIAL VALUES
-%load("code/parameter_estimation/current_state_three_eq.mat",'solution');
-
-
-%I annonymize the function
-error_solve=@(p)get_quadratic_form(p, z_matrix,y_matrix,s_matrix, ...
-    size_vector,e1_dln_a_index,e1_educ_index,e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
+%Here I extract all the information that I need for the estimation
+[y_matrix,ones_matrix,e2s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_theta_code, ...
+    e1_occ_index,lower_bound, upper_bound]= extract_data_matrices(data,n_skills);
 
 
 
-%ADD RESTRICTIONS ON PI
-n_pi_rest=size_vector(2)/4;
+%%
+n_a_rest=size_vector(2)/4;
 
-%I CONSTRAIN MANUAL COSTS TO BE THE SAME FOR ALL EDUCATION LEVELS
-%The first two rows are the constraints on manual, the rest are the
-%constraints on pi
-A_rest=zeros(2+n_pi_rest,n_total_parameters);
-A_rest(1:2,1)=1;
-A_rest(1,5)=-1;
-A_rest(2,9)=-1;
+%Creates the matrix of restrictions that constrains the costs of manual
+%skills to be the same
+%A_rest=zeros(2+n_a_rest,n_total_parameters);
+%A_rest(1:2,1)=1;
+%A_rest(1,5)=-1;
+%A_rest(2,9)=-1;
+
+A_rest=zeros(n_a_rest,n_total_parameters);
 
 %Fill up the pi restrictions
-for i=1:n_pi_rest
-    A_rest(2+i,13+4*(i-1))=1;
+for i=1:n_a_rest
+    A_rest(i,13+4*(i-1))=1;
 end
 
-b_rest=zeros(2+n_pi_rest,1);
+b_rest=ones(n_a_rest,1);
+
+
+%%
+initial_sol=ones(n_total_parameters,1);
+initial_sol(1:12)=0.25;
+initial_sol(1489:end,1)=0;
 
 
 %%
 
-[solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, [],[],options);
-
-%[solution,MSE]=fmincon(error_solve,solution,[],[],[],[],lower_bound, [],[],options);
+error_solve=@(p)get_quadratic_form(p,y_matrix,ones_matrix,e2s_matrix,size_vector,e1_dln_a_index,e1_educ_index,e1_occ_index);
 
 
-%%
-%Load the solution of needed
-%load("code/parameter_estimation/current_solution_weighted.mat",'solution');
-%load("code/parameter_estimation/current_solution_weighted_a1.mat",'solution');
-%load("code/parameter_estimation/current_solution_weighted_a2.mat",'solution');
-load("code/parameter_estimation/current_solution_weighted_a3.mat",'solution');
-%load("code/parameter_estimation/current_solution_weighted_a2_noabstract.mat",'solution');
-%load("code/parameter_estimation/current_solution_weighted_a1_noroutine.mat",'solution');
-%load("code/parameter_estimation/current_solution_weighted_a2_newstart.mat",'solution');
+[solution,MSE]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
 
 %%
-variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,...
-    data,size_vector,1,solution, n_skills,e1_dln_a_index,e1_educ_index,...
-      e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index);
+a=create_moment_error(solution,y_matrix,ones_matrix,e2s_matrix,...
+    size_vector,e1_dln_a_index,e1_theta_code,e1_occ_index)
+
+%%
+%Importing solution of the algorithm
+%load("code/parameter_estimation/current_solution_twoeq_a1.mat",'solution');
+%load("code/parameter_estimation/current_solution_twoeq_a3.mat",'solution');
+load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
+%load("code/parameter_estimation/current_solution_twoeq_a2_diff_manual.mat",'solution');
 
 
+%load("code/parameter_estimation/current_solution_twoeq_a2_noabstract.mat",'solution');
+%load("code/parameter_estimation/current_solution_twoeq_a2_noroutine.mat",'solution');
+
+%%
+
+%Extracting information from all the parameters
+[theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector,n_skills);
+
+
+variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data,...
+     size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index);
 %%
 standard_errors=get_standard_errors(variance_matrix,n_obs,size_vector,n_skills);
 
 
 %%
-[sigma_estimates,sigma_se,sigma_t_one, sigma_t_zero]=get_sigma(solution,standard_errors,size_vector);
-
-%%
-%EXTRACT THE PARAMETERS
-[theta_matrix,comp_advg,pi,inv_sigma]=extract_solution(solution,size_vector,n_skills);
 [standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector,n_skills);
 
 
 
-
-
 %%
+%%Finally I create theta and pi tables to handle in Stata
 pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
 pi_key=renamevars(pi_key,'ln_alpha','code');
 
-beta_key=unique(data(data.equation==1,{'occupation'}));
-%%
-%%
-
-[theta_table,pi_table,sigma_table]=write_parameter_table(solution,size_vector,pi_key,beta_key,standard_errors);
-%%
-dlnA=get_dlnA(pi_table,sigma_table);
+[theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key,standard_errors);
 
 %%
-writetable(pi_table,"data/output/dlnA_estimates_threeeq.xlsx")
-writetable(pi_table,"data/output/pi_estimates_threeeq.xlsx")
-writetable(theta_table,"data/output/theta_estimates_threeeq.xlsx")
-writetable(sigma_table,"data/output/sigma_estimates_threeeq.xlsx")
-
-
+writetable(pi_table,"data/output/pi_estimates_twoeq.xlsx")
+writetable(theta_table,"data/output/theta_estimates_twoeq.xlsx")
 
 %%
-
