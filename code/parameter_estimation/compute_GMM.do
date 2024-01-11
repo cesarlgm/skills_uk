@@ -90,7 +90,7 @@ This do file creates the dataset I need to execute the GMM code in matlab
 
 }
 
-
+/*
 *drop if equation==1
 
 *Now I expand the dataset with all the variables I need to create the GMM errors
@@ -113,7 +113,7 @@ This do file creates the dataset I need to execute the GMM code in matlab
             }
         }
     }
-    
+    */
 
 
     cap drop e2_index_*
@@ -150,16 +150,20 @@ This do file creates the dataset I need to execute the GMM code in matlab
 
 
 
-order e1s* e2* ts_*, last
+order e2* ts_*, last
 
 save "data/additional_processing/gmm_example_dataset_eq6`1'", replace
 
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
 egen theta_code=group(education skill) if equation==1
+generate temp=theta_code if skill==1 & equation==1
+
+egen theta_code_den=max(temp) if equation==1, by(occupation education year)
+
 egen job_index=group(occupation) if equation==1
 egen ln_alpha=group(occupation  year skill) if equation==1 //&skill!=$ref_skill_num
-order ln_alpha job_index theta_code, after(equation)
+order ln_alpha job_index theta_code theta_code_den, after(year)
 
 preserve
     keep occupation
@@ -167,6 +171,14 @@ preserve
     save "data/additional_processing/GMM_occupation_filter_two_equation", replace
 restore
 
+
+order y_var, after(education)
+
+
+sort equation occupation education year skill
+by equation occupation education year: replace y_var=y_var-y_var[1] if equation==1
+
+drop if skill==1
 
 export delimited using  "data/additional_processing/gmm_example_dataset_eq6`1'.csv", replace nolabel
 

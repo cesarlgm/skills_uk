@@ -1,8 +1,5 @@
-function [ones_matrix,s_matrix]=get_s_matrix(data)
+function s_matrix=get_s_matrix(data)
     names=transpose(data.Properties.VariableNames);
-    s_names=startsWith(names,["e1s_"]);
-        
-    ones_matrix=table2array(data(data.equation==1,s_names));
 
 
     s_names=startsWith(names,["e2_"]);

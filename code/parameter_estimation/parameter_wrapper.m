@@ -32,7 +32,7 @@ n_obs=size(data,1);
 
 %%
 %Here I extract all the information that I need for the estimation
-[y_matrix,ones_matrix,e2s_matrix,n_total_parameters,size_vector,e1_dln_a_index,e1_educ_index, e1_theta_code, ...
+[y_matrix,e2s_matrix,n_total_parameters,size_vector,e1_dln_a_index, e1_theta_code, e1_theta_code_den, ...
     e1_occ_index,lower_bound, upper_bound]= extract_data_matrices(data,n_skills);
 
 
@@ -54,7 +54,7 @@ for i=1:n_a_rest
     A_rest(i,13+4*(i-1))=1;
 end
 
-b_rest=ones(n_a_rest,1);
+b_rest=zeros(n_a_rest,1);
 
 
 %%
@@ -65,7 +65,7 @@ initial_sol(1489:end,1)=0;
 
 %%
 
-error_solve=@(p)get_quadratic_form(p,y_matrix,ones_matrix,e2s_matrix,size_vector,e1_dln_a_index,e1_educ_index,e1_occ_index);
+error_solve=@(p)get_quadratic_form(p,y_matrix,e2s_matrix,size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
 
 
 [solution,MSE]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
