@@ -180,6 +180,9 @@ by equation occupation education year: replace y_var=y_var-y_var[1] if equation=
 
 drop if skill==1
 
+cap drop ln_alpha 
+egen ln_alpha=group(occupation  year skill) if equation==1
+
 export delimited using  "data/additional_processing/gmm_example_dataset_eq6`1'.csv", replace nolabel
 
 

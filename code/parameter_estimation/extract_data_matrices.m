@@ -11,7 +11,7 @@ function [y_matrix,e2s_matrix,n_total_parameters,size_vector, ...
     %into parts
     size_vector=[n_theta;n_ln_A_effective;n_sigma];
 
-    lower_bound=vertcat(zeros(n_theta,1),zeros(n_ln_A_effective,1),-Inf*ones(n_sigma,1));
+    lower_bound=vertcat(zeros(n_theta,1),-Inf*ones(n_ln_A_effective,1),-Inf*ones(n_sigma,1));
     upper_bound=vertcat(Inf*ones(n_theta,1),Inf*ones(n_ln_A_effective,1),ones(n_sigma,1));
 
     %I get the data matrices
