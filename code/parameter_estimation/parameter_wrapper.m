@@ -69,6 +69,8 @@ error_solve=@(p)get_quadratic_form(p,y_matrix,ones_matrix,e2s_matrix,size_vector
 
 
 [solution,MSE]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
+%%
+%[solution,MSE]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
 
 %%
 a=create_moment_error(solution,y_matrix,ones_matrix,e2s_matrix,...
@@ -90,7 +92,7 @@ load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
 %Extracting information from all the parameters
 [theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector,n_skills);
 
-
+%%
 variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data,...
      size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index);
 %%

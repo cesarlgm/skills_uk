@@ -25,16 +25,16 @@ function errors=create_moment_error(parameter_vector,y_var,ones_matrix,e2s_matri
     a_power=-full_sigma_vector./(full_sigma_vector-1);
     theta_power=ones(size(full_sigma_vector,1),1)./(full_sigma_vector-1);
 
-    numerator=(full_dlna_vector.^a_power).*(full_theta_vector.^theta_power);
+    numerator=(full_dlna_vector).*(full_theta_vector.^theta_power);
 
 
     %Step 2: compute the denominator
     theta_power_den=-a_power;
 
-    tem_den=(full_dlna_vector.^a_power).*(full_theta_vector.^theta_power_den);
+    tem_den=(full_dlna_vector).*(full_theta_vector.^theta_power_den);
     denominator=ones_matrix*tem_den;
     
-    e1_rhs=log(numerator)-log(denominator);
+    e1_rhs=numerator./denominator;
 
     %Step 2: Compute rhs for the second equation
     e2_rhs=e2s_matrix*theta;

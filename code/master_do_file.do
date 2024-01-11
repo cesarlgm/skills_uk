@@ -81,6 +81,15 @@ foreach definition in _a2  {
 	 do "code/parameter_estimation/compute_GMM.do" `definition'
 }
 
+
+*===============================================================================
+*Estimate equation 2
+*===============================================================================
+
+do "code/parameter_estimation/estimate_eq2.do"
+
+
+
 /*
 
 
