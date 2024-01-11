@@ -178,7 +178,7 @@ order y_var, after(education)
 sort equation occupation education year skill
 by equation occupation education year: replace y_var=y_var-y_var[1] if equation==1
 
-drop if skill==1
+drop if skill==1&equation==1
 
 cap drop ln_alpha 
 egen ln_alpha=group(occupation  year skill) if equation==1

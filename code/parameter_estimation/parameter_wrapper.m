@@ -58,7 +58,7 @@ n_obs=size(data,1);
 
 
 %%
-initial_sol=ones(n_total_parameters,1);
+initial_sol=zeros(n_total_parameters,1);
 initial_sol(1:12)=0.25;
 initial_sol(1489:end,1)=0;
 
@@ -68,6 +68,7 @@ initial_sol(1489:end,1)=0;
 error_solve=@(p)get_quadratic_form(p,y_matrix,e2s_matrix,size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
 
 
+%%
 [solution,MSE]=fmincon(error_solve,initial_sol,[],[],[],[],lower_bound, upper_bound,[],options);
 
 %%
