@@ -80,7 +80,8 @@ a=create_moment_error(solution,y_matrix,ones_matrix,e2s_matrix,...
 %Importing solution of the algorithm
 %load("code/parameter_estimation/current_solution_twoeq_a1.mat",'solution');
 %load("code/parameter_estimation/current_solution_twoeq_a3.mat",'solution');
-load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
+%load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
+load("code/parameter_estimation/current_solution_eq6.mat",'solution');
 %load("code/parameter_estimation/current_solution_twoeq_a2_diff_manual.mat",'solution');
 
 
