@@ -8,13 +8,13 @@ clear;
 
 %Setting the number of skills in the data
 
-n_skills=4;
+n_skills=3;
 
 
 
 %READING DATA
 
-options = optimoptions('fmincon','Display','iter','MaxIterations',5,'MaxFunctionEvaluations',2000000);
+options = optimoptions('fmincon','Display','iter','MaxIterations',1000,'MaxFunctionEvaluations',2000000);
 
 
 
@@ -38,7 +38,7 @@ n_obs=size(data,1);
 
 
 %%
-n_a_rest=size_vector(2)/4;
+n_a_rest=size_vector(2)/n_skills;
 
 %Creates the matrix of restrictions that constrains the costs of manual
 %skills to be the same
@@ -51,7 +51,7 @@ A_rest=zeros(n_a_rest,n_total_parameters);
 
 %Fill up the pi restrictions
 for i=1:n_a_rest
-    A_rest(i,13+4*(i-1))=1;
+    A_rest(i,n_skills*3+n_skills*(i-1))=1;
 end
 
 b_rest=ones(n_a_rest,1);
