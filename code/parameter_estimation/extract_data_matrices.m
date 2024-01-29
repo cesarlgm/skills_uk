@@ -1,4 +1,4 @@
-function [y_matrix,e2s_matrix,n_total_parameters,size_vector, ...
+function [y_matrix,n_total_parameters,size_vector, ...
     e1_dlna_index,e1_theta_index,e1_theta_den_index,e1_occ_index,lower_bound, ... 
     upper_bound]=extract_data_matrices(data,n_skills)
 
@@ -18,7 +18,6 @@ function [y_matrix,e2s_matrix,n_total_parameters,size_vector, ...
     y_matrix=get_y_var(data);
     
     %s is the matrix I use for multiplying with the parameters
-    e2s_matrix=get_s_matrix(data);
 
     %Getting the indexes
     e1_theta_index=table2array(data(data.equation==1,"theta_code"));

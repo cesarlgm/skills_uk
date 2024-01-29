@@ -32,29 +32,29 @@ n_obs=size(data,1);
 
 %%
 %Here I extract all the information that I need for the estimation
-[y_matrix,e2s_matrix,n_total_parameters,size_vector,e1_dln_a_index, e1_theta_code, e1_theta_code_den, ...
+[y_matrix,n_total_parameters,size_vector,e1_dln_a_index, e1_theta_code, e1_theta_code_den, ...
     e1_occ_index,lower_bound, upper_bound]= extract_data_matrices(data,n_skills);
 
 
 
 %%
-% n_a_rest=size_vector(2)/4;
+n_a_rest=size_vector(2)/n_skills;
 % 
 % %Creates the matrix of restrictions that constrains the costs of manual
 % %skills to be the same
-% %A_rest=zeros(2+n_a_rest,n_total_parameters);
-% %A_rest(1:2,1)=1;
-% %A_rest(1,5)=-1;
-% %A_rest(2,9)=-1;
+A_rest=zeros(3+n_a_rest,n_total_parameters);
+A_rest(1,1)=1;
+A_rest(2,n_skills+1)=1;
+A_rest(3,2*n_skills+1)=1;
 % 
 % A_rest=zeros(n_a_rest,n_total_parameters);
 % 
-% %Fill up the pi restrictions
-% for i=1:n_a_rest
-%     A_rest(i,13+4*(i-1))=1;
-% end
+%Fill up the pi restrictions
+for i=1:n_a_rest
+    A_rest(i,3*n_skills+n_skills*(i-1))=1;
+end
 % 
-% b_rest=zeros(n_a_rest,1);
+b_rest=vertcat(.25*ones(3,1),zeros(n_a_rest,1));
 
 
 %%
@@ -65,14 +65,14 @@ initial_sol(1489:end,1)=0;
 
 %%
 
-error_solve=@(p)get_quadratic_form(p,y_matrix,e2s_matrix,size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
+error_solve=@(p)get_quadratic_form(p,y_matrix,size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
 
 
 %%
-[solution,MSE]=fmincon(error_solve,initial_sol,[],[],[],[],lower_bound, upper_bound,[],options);
+[solution,MSE]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
 
 %%
-a=create_moment_error(solution,y_matrix,ones_matrix,e2s_matrix,...
+a=create_moment_error(solution,y_matrix,ones_matrix,...
     size_vector,e1_dln_a_index,e1_theta_code,e1_occ_index)
 
 %%

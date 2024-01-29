@@ -7,7 +7,7 @@
 % -	assign_thetas
 
 
-function errors=create_moment_error(parameter_vector,y_var,e2s_matrix,...
+function errors=create_moment_error(parameter_vector,y_var,...
     size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index)
     %Step 0: assign parameters
     splitted_vector=assign_parameters(parameter_vector,size_vector);
@@ -31,9 +31,10 @@ function errors=create_moment_error(parameter_vector,y_var,e2s_matrix,...
     e1_rhs=a_power.*full_dlna_vector+theta_power.*(log(full_theta_vector)-log(full_theta_vector_den));
 
     %Step 2: Compute rhs for the second equation
-    e2_rhs=e2s_matrix*theta;
+    %e2_rhs=e2s_matrix*theta;
 
-    rhs=vertcat(e1_rhs,e2_rhs);
+    %rhs=vertcat(e1_rhs,e2_rhs);
+    rhs=e1_rhs;
 
     errors=y_var-rhs;
 end

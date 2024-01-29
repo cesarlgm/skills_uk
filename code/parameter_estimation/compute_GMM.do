@@ -178,10 +178,12 @@ order y_var, after(education)
 sort equation occupation education year skill
 by equation occupation education year: replace y_var=y_var-y_var[1] if equation==1
 
-drop if skill==1&equation==1
+*drop if skill==4&equation==1
 
 cap drop ln_alpha 
 egen ln_alpha=group(occupation  year skill) if equation==1
+
+drop if equation==2
 
 export delimited using  "data/additional_processing/gmm_example_dataset_eq6`1'.csv", replace nolabel
 
