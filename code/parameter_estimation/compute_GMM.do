@@ -175,15 +175,19 @@ restore
 order y_var, after(education)
 
 
-sort equation occupation education year skill
-by equation occupation education year: replace y_var=y_var-y_var[1] if equation==1
+sort equation education occupation  year skill
+by equation education occupation year: generate new_y_var=y_var-y_var[1] if equation==1
+order new_y_var, after(y_var)
 
-*drop if skill==4&equation==1
+drop if skill==1&equation==1
 
 cap drop ln_alpha 
 egen ln_alpha=group(occupation  year skill) if equation==1
 
 drop if equation==2
+
+drop y_var
+rename new_y_var y_var
 
 export delimited using  "data/additional_processing/gmm_example_dataset_eq6`1'.csv", replace nolabel
 

@@ -22,13 +22,8 @@ function errors=create_moment_error(parameter_vector,y_var,...
     full_dlna_vector=assign_thetas(d_ln_a,e1_dln_a_index);
     full_sigma_vector=assign_thetas(sigma,e1_occ_index);
 
-    %Step 1: compute the numerator of the ratio.
-    a_power=-full_sigma_vector./(full_sigma_vector-1);
-   
-    theta_power=ones(size(full_sigma_vector,1),1)./(full_sigma_vector-1);
-
-    
-    e1_rhs=a_power.*full_dlna_vector+theta_power.*(log(full_theta_vector)-log(full_theta_vector_den));
+    %Step 1: compute the numerator of the ration
+    e1_rhs=full_dlna_vector+full_sigma_vector.*(log(full_theta_vector)-log(full_theta_vector_den));
 
     %Step 2: Compute rhs for the second equation
     %e2_rhs=e2s_matrix*theta;

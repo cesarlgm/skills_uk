@@ -3,7 +3,7 @@
 
 
 %% 
-
+    
 clear;
 
 %Setting the number of skills in the data
@@ -38,29 +38,19 @@ n_obs=size(data,1);
 
 
 %%
-n_a_rest=size_vector(2)/n_skills;
-% 
-% %Creates the matrix of restrictions that constrains the costs of manual
-% %skills to be the same
-A_rest=zeros(3+n_a_rest,n_total_parameters);
+
+A_rest=zeros(3,n_total_parameters);
 A_rest(1,1)=1;
 A_rest(2,n_skills+1)=1;
 A_rest(3,2*n_skills+1)=1;
 % 
-% A_rest=zeros(n_a_rest,n_total_parameters);
-% 
-%Fill up the pi restrictions
-for i=1:n_a_rest
-    A_rest(i,3*n_skills+n_skills*(i-1))=1;
-end
-% 
-b_rest=vertcat(.25*ones(3,1),zeros(n_a_rest,1));
+b_rest=ones(3,1);
 
 
 %%
 initial_sol=zeros(n_total_parameters,1);
-initial_sol(1:12)=0.25;
-initial_sol(1489:end,1)=0;
+initial_sol(1:12)=1;
+initial_sol(1107:end,1)=-1;
 
 
 %%
@@ -89,7 +79,7 @@ load("code/parameter_estimation/current_solution_twoeq_a2.mat",'solution');
 %%
 
 %Extracting information from all the parameters
-[theta_matrix,comp_advg,pi]=extract_solution(solution,size_vector,n_skills);
+[theta_matrix,comp_advg,pi,sigma]=extract_solution(solution,size_vector,n_skills);
 
 
 variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data,...

@@ -29,7 +29,7 @@ global education educ_3_low //educ_3_low
 global occupation bsoc00Agg
 global wage_cuts  10 90
 global continuous_list grossPay grossWkPayMain hourpay al_wkpay al_hourpay
-global index_list   manual social routine 
+global index_list   manual social routine abstract
 
 adopath + "code/parameter_estimation"
 
