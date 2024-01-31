@@ -59,11 +59,10 @@ function v_matrix=estimate_v(parameter,gradient_matrix,size_vector,y_var,e1_dln_
     gradient_matrix=error_matrix.*derivatives;
 
     %Finally I compute the variance matrix by summing across observations.
-    %This yields a kxk matrix
+    %This 
     v_matrix=transpose(gradient_matrix(1,:))*gradient_matrix(1,:);
     for i=2:n_obs
         new=transpose(gradient_matrix(i,:))*gradient_matrix(i,:);
         v_matrix=v_matrix+new;
     end
-    v_matrix=2*v_matrix;
 end

@@ -189,6 +189,12 @@ drop if equation==2
 drop y_var
 rename new_y_var y_var
 
+xi i.theta_code, noomit pref(g1)
+
+xi i.ln_alpha, noomit pref(g2)
+
+xi i.job_index, noomit pref(g3)
+
 export delimited using  "data/additional_processing/gmm_example_dataset_eq6`1'.csv", replace nolabel
 
 

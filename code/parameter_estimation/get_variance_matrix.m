@@ -5,19 +5,13 @@
 %This function computes variance matrix \bar{V}
 
 function variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data, ...
-      size_vector,weighting,solution, n_skills,e1_dln_a_index,e1_educ_index,...
+      size_vector,solution, n_skills,e1_dln_a_index,e1_educ_index,...
       e3_occ_index,e3_a_index,e3n_educ_index,e3d_educ_index)
       n_instruments=size(z_matrix,2);
       n_parameters=size(solution,1);
       n_obs=size(data,1);
       n_pi_dropped=size_vector(2)/n_skills;
 
-      %I first set up the weighting matrix
-      if weighting==1
-         A=  eye(n_instruments)/(transpose(z_matrix)*z_matrix);
-      else
-         A=eye(n_instruments);
-      end
 
       %Next compute the \Xi matrix
       xi_matrix=get_xi_matrix(data,size_vector,solution,n_skills);
