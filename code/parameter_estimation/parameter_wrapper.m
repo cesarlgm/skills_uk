@@ -80,17 +80,27 @@ save('./code/parameter_estimation/hail_mary_solution.mat','solution')
 load('./code/parameter_estimation/hail_mary_solution.mat','solution')
 
 %%
+%Computation of standard errors
+variance_matrix=get_variance_matrix(solution, size_vector, y_matrix,e1_dln_a_index,e1_occ_index,e1_theta_code,e1_theta_code_den,gradient_matrix);
 
+%%
+standard_errors=get_standard_errors(variance_matrix,size_vector);
+
+%%
 %Extracting information from all the parameters
 [theta_matrix,comp_advg,pi,sigma]=extract_solution(solution,size_vector,n_skills);
 
-%%
-gradient=compute_gradient(solution,gradient_matrix,size_vector,y_matrix,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
+[standard_error_matrix,~,~,~]=extract_solution(standard_errors,size_vector,n_skills);
+
 
 %%
-%Computation of standard errors
-variance_matrix=get_variance_matrix(z_matrix,y_matrix,s_matrix,data,...
-     size_vector,1,solution,n_skills,e1_dln_a_index,e1_educ_index);
+[n_positive_bs,significant_positive,positive_bs,t_stat_bs]=get_n_positive_bs(solution,standard_errors,size_vector);
+
+
+%%
+%Checking number of bs that significantly positive
+
+%%
 
 %%
 pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
@@ -102,15 +112,15 @@ pi_key=renamevars(pi_key,'ln_alpha','code');
 %%
 
 %%
-standard_errors=get_standard_errors(variance_matrix,n_obs,size_vector,n_skills);
+
 
 
 %%
 [standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector,n_skills);
 
 %%
-a=estimate_v(solution,y_matrix,...
-    size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
+a=estimate_v(solution,gradient_matrix,size_vector,y_matrix,...
+    e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
 
 %%
 %%Finally I create theta and pi tables to handle in Stata
