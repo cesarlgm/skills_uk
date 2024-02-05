@@ -1,21 +1,13 @@
 
-
-
-
-%% 
-    
 clear;
 
 %Setting the number of skills in the data
-
 n_skills=4;
-
 
 
 %READING DATA
 
 options = optimoptions('fmincon','Display','iter','MaxIterations',3000,'MaxFunctionEvaluations',2000000);
-
 
 
 cd 'C:/Users/thecs/Dropbox/1_boston_university/8-Research Assistantship/ukData';
@@ -40,18 +32,20 @@ gradient_matrix=extract_se_data(data);
 
 %%
 
-A_rest=zeros(3,n_total_parameters);
+A_rest=zeros(4,n_total_parameters);
 A_rest(1,1)=1;
 A_rest(2,n_skills+1)=1;
 A_rest(3,2*n_skills+1)=1;
+A_rest(4,size_vector(1)+size_vector(2)+1)=1;
 % 
-b_rest=ones(3,1);
+b_rest=ones(4,1);
+b_rest(4,1)=-1;
 
 
 %%
 initial_sol=zeros(n_total_parameters,1);
 initial_sol(1:12)=1;
-initial_sol(1107:end,1)=-1;
+initial_sol(1120:end,1)=-1;
 
 
 %%
