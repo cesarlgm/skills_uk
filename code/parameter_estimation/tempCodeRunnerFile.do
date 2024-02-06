@@ -1,1 +1,6 @@
-xi i.theta_code, noomit pref(th_)
+
+
+cap drop n_education
+gegen n_education=nunique(education), by(occupation year) 
+
+

@@ -154,6 +154,17 @@ order e2* ts_*, last
 
 save "data/additional_processing/gmm_example_dataset_eq6`1'", replace
 
+*cap drop n_years
+*egen n_years=nunique(year), by(occupation skill)
+
+*drop if n_years==1
+
+
+*cap drop n_education
+*gegen n_education=nunique(education), by(occupation year) 
+
+
+
 *This creates the ln vector in the right order; first it goes through skills, next through years and finally through jobs.
 cap drop ln_alpha
 egen theta_code=group(education skill) if equation==1
@@ -194,6 +205,9 @@ xi i.theta_code, noomit pref(g1)
 xi i.ln_alpha, noomit pref(g2)
 
 xi i.job_index, noomit pref(g3)
+
+*I drop the indicator that I normalized
+drop g3job_index_1
 
 export delimited using  "data/additional_processing/gmm_example_dataset_eq6`1'.csv", replace nolabel
 

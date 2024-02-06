@@ -30,6 +30,8 @@ n_obs=size(data,1);
 %Here I extract information necessary to compute the standard errors
 gradient_matrix=extract_se_data(data);
 
+
+
 %%
 
 A_rest=zeros(4,n_total_parameters);
@@ -45,7 +47,7 @@ b_rest(4,1)=-1;
 %%
 initial_sol=zeros(n_total_parameters,1);
 initial_sol(1:12)=1;
-initial_sol(1120:end,1)=-1;
+initial_sol(size_vector(1)+size_vector(2)+1:end,1)=-1;
 
 
 %%
@@ -54,7 +56,10 @@ error_solve=@(p)get_quadratic_form(p,y_matrix,size_vector,e1_dln_a_index,e1_thet
 
 
 %%
-[solution,MSE]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
+[solution,MSE,~,~,lambda,a_grad,a_hessian]=fmincon(error_solve,initial_sol,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
+
+%%
+[solution,MSE,~,~,lambda,a_grad,a_hessian]=fmincon(error_solve,solution,[],[],A_rest,b_rest,lower_bound, upper_bound,[],options);
 
 
 %%
@@ -72,6 +77,25 @@ save('./code/parameter_estimation/hail_mary_solution.mat','solution')
 %load("code/parameter_estimation/current_solution_twoeq_a2_noabstract.mat",'solution');
 %load("code/parameter_estimation/current_solution_twoeq_a2_noroutine.mat",'solution');
 load('./code/parameter_estimation/hail_mary_solution.mat','solution')
+
+
+%%
+a_gradient=approximate_gradient(error_solve,solution,0.000000001);
+
+%%
+
+f_gradient=get_gradient(solution,gradient_matrix,size_vector,y_matrix,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
+
+%%
+gradient=@(p)get_gradient(p,gradient_matrix,size_vector,y_matrix,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
+a_hessian=approximate_hessian(gradient,solution,0.00001);
+
+%%
+
+[a_matrix,exact_gradient]=estimate_v(solution,gradient_matrix,size_vector,y_matrix,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
+
+%%
+exact_hessian=get_hessian(solution, size_vector, y_matrix,e1_dln_a_index,e1_occ_index,e1_theta_code,e1_theta_code_den);
 
 %%
 %Computation of standard errors

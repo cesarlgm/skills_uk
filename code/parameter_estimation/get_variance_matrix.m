@@ -14,5 +14,5 @@ function variance_matrix=get_variance_matrix(parameter_vector, size_vector, y_va
     
     inv_hessian=eye(size(hessian))/hessian;
     
-    variance_matrix=(1/n_obs)*inv_hessian*v_matrix*inv_hessian;
+    variance_matrix=inv_hessian*v_matrix*inv_hessian;
 end

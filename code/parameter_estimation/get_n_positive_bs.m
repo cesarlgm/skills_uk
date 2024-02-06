@@ -10,7 +10,7 @@ function [n_positive_bs,significant_positive,positive_bs,t_stat_bs]=get_n_positi
     critical_value=norminv(.95);
     
     positive_bs=bs(bs>0);
-    t_stat_bs=bs_se(bs>0);
+    t_stat_bs=t_stat(bs>0);
 
     is_positive_bs=t_stat>critical_value;
 
