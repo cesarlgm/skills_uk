@@ -25,7 +25,7 @@ n_obs=size(data,1);
 %%
 %Here I extract all the information that I need for the estimation
 [y_matrix,n_total_parameters,size_vector,e1_dln_a_index, e1_theta_code, e1_theta_code_den, ...
-    e1_occ_index,lower_bound, upper_bound]= extract_data_matrices(data,n_skills);
+    e1_occ_index,lower_bound, upper_bound,aweight_matrix]= extract_data_matrices(data,n_skills);
 
 %Here I extract information necessary to compute the standard errors
 gradient_matrix=extract_se_data(data);
@@ -52,7 +52,7 @@ initial_sol(size_vector(1)+size_vector(2)+1:end,1)=-1;
 
 %%
 
-error_solve=@(p)get_quadratic_form(p,y_matrix,size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
+error_solve=@(p)get_quadratic_form(p,y_matrix,size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index,aweight_matrix,1);
 
 
 %%

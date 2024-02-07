@@ -1,6 +1,6 @@
 function [y_matrix,n_total_parameters,size_vector, ...
     e1_dlna_index,e1_theta_index,e1_theta_den_index,e1_occ_index,lower_bound, ... 
-    upper_bound]=extract_data_matrices(data,n_skills)
+    upper_bound,aweight_matrix]=extract_data_matrices(data,n_skills)
 
     %Defining number of parameters I need to compute:
     n_ln_A_effective=max(table2array(data(:,"ln_alpha")));
@@ -26,4 +26,7 @@ function [y_matrix,n_total_parameters,size_vector, ...
     e1_occ_index=table2array(data(data.equation==1,"occ_id"));
     e1_dlna_index=table2array(data(data.equation==1,"ln_alpha"));
     
+    aweight=table2array(data(data.equation==1,"obs"));
+
+    aweight_matrix=diag(aweight);
 end

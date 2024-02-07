@@ -24,8 +24,9 @@ drop if year==1997
 
 pwcorr $abstract
 
+generate people=1/gwtall
 *Collapsing at the occupation-education-year level
-gcollapse (mean) $index_list *_i (count) obs=chands [fw=gwtall], by(occupation year education)
+gcollapse (mean) $index_list *_i (sum) obs=people [fw=gwtall], by(occupation year education)
     
 
 
