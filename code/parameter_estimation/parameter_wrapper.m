@@ -97,19 +97,21 @@ standard_errors=get_standard_errors(variance_matrix,size_vector);
 
 
 %%
+%Checking number of bs that significantly positive
 [n_positive_bs,significant_positive,positive_bs,t_stat_bs]=get_n_positive_bs(solution,standard_errors,size_vector);
 
 
 %%
-%Checking number of bs that significantly positive
+%Identifying estimates
+
+dlna_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
+dlna_key=renamevars(dlna_key,'ln_alpha','code');
+
+b_key=unique(data(data.equation==1,{'occupation','job_index'}));
+
 
 %%
-
-%%
-pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
-pi_key=renamevars(pi_key,'ln_alpha','code');
-
-[theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key,standard_errors);
+[theta_table,dlna_table,b_table]=write_parameter_table(solution,size_vector,dlna_key,b_key,standard_errors);
 
 
 %%

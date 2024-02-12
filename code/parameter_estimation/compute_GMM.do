@@ -212,6 +212,7 @@ drop g3job_index_1
 export delimited using  "data/additional_processing/gmm_example_dataset_eq6`1'.csv", replace nolabel
 
 
+br if inlist(occupation, 3422, 1134, 8213, 5431, 8139, 9225,7113,2421,1137,9231,3229,6221,9223,6211,8149,9224,9211)
 
 *y_var is appropriate set to 1 for equatip¡on 2
 

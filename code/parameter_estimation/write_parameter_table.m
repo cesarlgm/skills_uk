@@ -29,7 +29,8 @@ function [theta_table,pi_table,sigma_table]=write_parameter_table(solution,size_
     theta_table.se=theta_se;
 
     %Step 4: create the table with sigma estimates
-    sigma=1./(1-beta);
     sigma_table=beta_key;
-    sigma_table.estimate=sigma;
+    sigma_table.estimate=beta;
+    sigma_table.se=beta_se;
+    sigma_table=sortrows(sigma_table,'estimate','descend');
 end
