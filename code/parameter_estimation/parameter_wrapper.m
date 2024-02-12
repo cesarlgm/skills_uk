@@ -91,8 +91,6 @@ standard_errors=get_standard_errors(variance_matrix,size_vector);
 %Extracting information from all the parameters
 [theta_matrix,comp_advg,pi,sigma]=extract_solution(solution,size_vector,n_skills);
 
-
-%%
 [standard_error_matrix,~,~,~]=extract_solution(standard_errors,size_vector,n_skills);
 
 
@@ -102,40 +100,17 @@ standard_errors=get_standard_errors(variance_matrix,size_vector);
 
 
 %%
-%Identifying estimates
+%Identifying and writing estimates
 
 dlna_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
 dlna_key=renamevars(dlna_key,'ln_alpha','code');
 
 b_key=unique(data(data.equation==1,{'occupation','job_index'}));
 
-
-%%
 [theta_table,dlna_table,b_table]=write_parameter_table(solution,size_vector,dlna_key,b_key,standard_errors);
 
 
-%%
+writetable(dlna_table,"data/output/dlna_estimates_eq6.xlsx")
+writetable(b_table,"data/output/b_estimates_eq6.xlsx")
+writetable(theta_table,"data/output/theta_estimates_eq6.xlsx")
 
-%%
-
-
-
-%%
-[standard_errors_matrix,~,~]=extract_solution(standard_errors,size_vector,n_skills);
-
-%%
-a=estimate_v(solution,gradient_matrix,size_vector,y_matrix,...
-    e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
-
-%%
-%%Finally I create theta and pi tables to handle in Stata
-pi_key=unique(data(data.equation==1,{'occupation','year','skill','ln_alpha'}));
-pi_key=renamevars(pi_key,'ln_alpha','code');
-
-[theta_table,pi_table]=write_parameter_table(solution,size_vector,pi_key,standard_errors);
-
-%%
-writetable(pi_table,"data/output/pi_estimates_twoeq.xlsx")
-writetable(theta_table,"data/output/theta_estimates_twoeq.xlsx")
-
-%%
