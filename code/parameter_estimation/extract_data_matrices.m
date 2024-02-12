@@ -28,5 +28,5 @@ function [y_matrix,n_total_parameters,size_vector, ...
     
     aweight=table2array(data(data.equation==1,"obs"));
 
-    aweight_matrix=diag(aweight);
+    aweight_matrix=aweight;
 end

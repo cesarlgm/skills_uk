@@ -32,4 +32,5 @@ function errors=create_moment_error(parameter_vector,y_var,...
     rhs=e1_rhs;
 
     errors=y_var-rhs;
+
 end

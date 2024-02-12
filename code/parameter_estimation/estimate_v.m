@@ -1,5 +1,5 @@
 %I drop the n's because there is a scaling problem
-function v_matrix=estimate_v(parameter,gradient_matrix,size_vector,y_var,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index)
+function v_matrix=estimate_v(parameter,gradient_matrix,size_vector,y_var,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index,aweight)
     
     %Computing number of observations
     n_obs=size(gradient_matrix,1);
@@ -73,9 +73,17 @@ function v_matrix=estimate_v(parameter,gradient_matrix,size_vector,y_var,e1_dln_
 
     %Finally I compute the variance matrix by summing across observations.
     %This yields a kxk matrix
-    v_matrix=transpose(gradient_matrix(1,:))*gradient_matrix(1,:);
+    if aweight==0
+        v_matrix=transpose(gradient_matrix(1,:))*gradient_matrix(1,:);
+    else
+        v_matrix=aweight(1)*transpose(gradient_matrix(1,:))*gradient_matrix(1,:);
+    end
     for i=2:n_obs
-        new=transpose(gradient_matrix(i,:))*gradient_matrix(i,:);
+        if aweight==0
+            new=transpose(gradient_matrix(i,:))*gradient_matrix(i,:);
+        else
+            new=aweight(i)*transpose(gradient_matrix(i,:))*gradient_matrix(i,:);
+        end
         v_matrix=v_matrix+new;
     end
 end

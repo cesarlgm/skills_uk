@@ -1,4 +1,4 @@
-function hessian=get_hessian(parameter_vector,size_vector,y_var,e1_dln_a_index,e1_occ_index,e1_theta_code,e1_theta_code_den)
+function hessian=get_hessian(parameter_vector,size_vector,y_var,e1_dln_a_index,e1_occ_index,e1_theta_code,e1_theta_code_den,aweight)
     
     errors=create_moment_error(parameter_vector,y_var,size_vector,e1_dln_a_index,e1_theta_code,e1_theta_code_den,e1_occ_index);
 
@@ -8,8 +8,10 @@ function hessian=get_hessian(parameter_vector,size_vector,y_var,e1_dln_a_index,e
     hessian=zeros(n_total_parameters,n_total_parameters);
     for obs=1:n_obs
         hessian_obs=get_hessian_obs(parameter_vector,size_vector,e1_dln_a_index,e1_occ_index,e1_theta_code,obs,errors);
+        if aweight~=0
+            hessian_obs=hessian_obs*aweight(obs);
+        end
         hessian=hessian+hessian_obs;
     end
-
-    hessian=hessian;
+    %hessian=1/n_obs*hessian
 end
