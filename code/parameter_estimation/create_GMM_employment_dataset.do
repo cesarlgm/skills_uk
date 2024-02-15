@@ -50,6 +50,7 @@
 
     generate y_var=log(people/people_d)
 
+
     rename denominator education_d
 
     order occupation education education_d year
