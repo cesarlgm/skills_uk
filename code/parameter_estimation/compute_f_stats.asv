@@ -1,0 +1,25 @@
+function [f_stat,p_value]=compute_f_stats(solution,variance_matrix)
+
+    %F stat for abstract coefficients
+    R_matrix=zeros(2,size(solution,1));
+    b_matrix=zeros(2,1);
+
+    R_matrix(1,4)=1;
+    R_matrix(1,12)=-1;
+
+    R_matrix(2,4)=1;
+    R_matrix(2,8)=-1;
+    
+    RV_matrix=zeros(2,size(variance_matrix,1));
+   
+    R_matrix(1,3)=1;
+    R_matrix(1,9)=-1;
+
+    R_matrix(2,3)=1;
+    R_matrix(2,6)=-1;
+
+    r_vector=R_matrix*solution-b_matrix;
+
+    f_stat=transpose(r_vector)/(RV_matrix*variance_matrix*transpose(RV_matrix))*r_vector;
+    p_value=f_stat;
+end

@@ -99,6 +99,11 @@ standard_errors=get_standard_errors(variance_matrix,size_vector);
 [n_positive_bs,significant_positive,positive_bs,t_stat_bs]=get_n_positive_bs(solution,standard_errors,size_vector);
 
 
+
+%%
+%Estimate whether the \thetas are different across education groups
+[f_stats,p_values]=compute_f_stats(solution,variance_matrix);
+
 %%
 %Identifying and writing estimates
 
