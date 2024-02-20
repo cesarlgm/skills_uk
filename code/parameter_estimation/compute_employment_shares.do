@@ -67,7 +67,6 @@ generate net_dlnq=dlnq-temp
 grscheme, palette(tableau) ncolor(7)
 binscatter dlnq rhs, msymbol(oh) xtitle("Sum of skills*dlna") ytitle("")  ytitle("Change in employment")
 
-
 binscatter net_dlnq rhs, msymbol(oh) xtitle("Sum of skills*dlna")  ytitle("Change in employment")
 
 tw (scatter net_dlnq rhs) (lfit net_dlnq rhs), xtitle("Sum of skills*dlna")  ytitle("Change in employment") legend(off)

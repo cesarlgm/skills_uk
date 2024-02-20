@@ -80,7 +80,10 @@ save('./code/parameter_estimation/hail_mary_solution.mat','solution')
 %%
 load('./code/parameter_estimation/current_solution_eq6.mat','solution')
 
+%%
+load('./code/parameter_estimation/current_solution_eq6_bad_norm.mat','solution')
 
+%%
 %Computation of standard errors
 variance_matrix=get_variance_matrix(solution, size_vector, y_matrix,e1_dln_a_index,e1_occ_index,e1_theta_code,e1_theta_code_den,gradient_matrix,aweight_matrix);
 
