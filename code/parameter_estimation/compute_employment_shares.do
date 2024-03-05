@@ -35,6 +35,8 @@ save `dlna'
 
 use "data/additional_processing/gmm_employment_dataset`1'", clear
 
+
+
 egen period=group(year)
 egen id=group(occupation education education_d)
 
@@ -42,6 +44,17 @@ xtset id period
 
 generate dlnq=f.y_var-y_var
 generate n_year=f.year
+
+
+egen occ_obs=sum(obs), by(year occupation)
+
+generate adj_obs=obs+f.obs+obs_d+f.obs_d
+
+forvalues skill=1/4 {
+    generate avg_index`skill'=0.5*(index`skill'+f.index`skill')
+    generate avg_indexd`skill'=0.5*(indexd`skill'+f.indexd`skill')
+}
+
 
 
 drop year 
@@ -52,7 +65,7 @@ merge m:1 education_d using `theta_d', keep(3) nogen
 merge m:1 occupation year using `dlna', keep(3) nogen 
 
 forvalues skill=2/4 {
-    generate temp`skill'=(theta`skill'*index`skill'-theta_d`skill'*indexd`skill')*dlna`skill'
+    generate temp`skill'=(theta`skill'*index`skill'-theta_d`skill'*index`skill')*dlna`skill'
 }
 
 egen rhs=rowtotal(temp*)
@@ -64,6 +77,22 @@ egen pair_d=group(education education_d year)
 egen temp=mean(dlnq), by(pair_d)
 generate net_dlnq=dlnq-temp
 
+gstats winsor net_dlnq, cut(5 95) replace
+gstats winsor rhs, cut(5 95) replace
+
+cap drop max_weight
+cap drop max_weight_lfs
+egen max_weight=rowtotal(sobs dobs)
+egen max_weight_lfs=rowtotal(obs obs_d)
+
+eststo est1: regress net_dlnq rhs, vce(r) 
+eststo est2: regress net_dlnq rhs [aw=adj_obs], vce(r)
+eststo est3:  regress net_dlnq rhs [aw=obs], vce(r)
+
+esttab est1 est2 est3, se
+
+
+/*
 grscheme, palette(tableau) ncolor(7)
 binscatter dlnq rhs, msymbol(oh) xtitle("Sum of skills*dlna") ytitle("")  ytitle("Change in employment")
 

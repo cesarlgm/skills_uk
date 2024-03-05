@@ -12,7 +12,7 @@ function e_squared=get_quadratic_form(parameter,y_var,size_vector,e1_dln_a_index
     if weighted==0
         e_squared=transpose(e_vector)*e_vector;
     elseif weighted==1
-        e_squared=transpose(e_vector)*aweight_matrix*e_vector;
+        e_squared=transpose(e_vector)*(aweight_matrix.*e_vector);
     end
     e_squared=e_squared/size(e_vector,1);
 end

@@ -3,6 +3,7 @@
 {
     { 
         use  "data/additional_processing/gmm_skills_dataset`1'", clear
+        rename obs sobs
         keep if skill==1&equation==1
         drop equation y_var skill
         tempfile numerator
@@ -11,6 +12,7 @@
 
     {
         use  "data/additional_processing/gmm_skills_dataset`1'", clear
+        rename obs dobs
         keep if skill==1&equation==1
         drop equation y_var skill
         rename education education_d
@@ -29,11 +31,14 @@
 
     rename $occupation occupation
     rename $education education 
-    gcollapse (sum) people (count) obs=people, by(occupation  year education)
+
+    gcollapse (sum) people (sum) obs=observations, by(occupation  year education)
+
+    egen obs_occ=sum(obs), by(occupation year)
 
     preserve
-    drop obs 
     rename people people_d
+    rename obs obs_d
     rename education denominator
     tempfile denominator
     save `denominator'
@@ -54,7 +59,7 @@
     rename denominator education_d
 
     order occupation education education_d year
-    keep occupation education education_d year y_var
+    keep occupation education education_d year y_var obs obs_d obs_occ
 
     generate equation=3
 
@@ -77,6 +82,8 @@
     drop if education==1&education_d==3&n_pair==3
 
     drop n_pair
+
+    generate obs_final=obs+obs_d
 
     save "data/additional_processing/gmm_employment_dataset`1'", replace
 }

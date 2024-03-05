@@ -1,3 +1,3 @@
 
-do "code/parameter_estimation/studying_bad_bjs.do" _a2
+do "code/parameter_estimation/compute_employment_shares.do" _a2
 
