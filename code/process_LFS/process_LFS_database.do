@@ -19,6 +19,11 @@ qui do "code/process_LFS/create_collapsed_LFS.do"
 
 qui do "code/process_LFS/append_LFS.do"  
 
+*Create and append LFS datasets
+qui do "code/process_LFS/create_wage_file_LFS.do"
+
+qui do "code/process_LFS/append_wage_LFS.do"  
+
 
 /*
 *=======================================================================

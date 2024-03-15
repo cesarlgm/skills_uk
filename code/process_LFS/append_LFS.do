@@ -17,9 +17,9 @@ cap drop l_hourpay
 cap drop l_wkpay
 cap drop l_gpay
 
-generate l_hourpay=log(hourpay)
-generate l_wkpay=log(grossWkPayMain)
-generate l_gpay=log(grossPay)
+cap generate l_hourpay=log(hourpay)
+cap generate l_wkpay=log(grossWkPayMain)
+cap generate l_gpay=log(grossPay)
 
 drop if bsoc00Agg==-9
 
@@ -34,7 +34,7 @@ rename people weight
 
 generate people=1
 
-collapse (mean)  $continuous_list l_*  (sum) people [pw=weight], ///
+collapse  (sum) people [pw=weight], ///
 	by(edlevLFS `occupation' industry_cw year) 
 
 

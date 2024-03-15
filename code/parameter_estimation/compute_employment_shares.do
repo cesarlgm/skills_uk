@@ -85,11 +85,11 @@ cap drop max_weight_lfs
 egen max_weight=rowtotal(sobs dobs)
 egen max_weight_lfs=rowtotal(obs obs_d)
 
-eststo est1: regress net_dlnq rhs, vce(r) 
-eststo est2: regress net_dlnq rhs [aw=adj_obs], vce(r)
-eststo est3:  regress net_dlnq rhs [aw=obs], vce(r)
+eststo est1: regress net_dlnq rhs [aw=obs_final], vce(r) 
+eststo est2: regress net_dlnq rhs [aw=obs_occ], vce(r)
+eststo est3: regress net_dlnq rhs [aw=obs], vce(r)
 
-esttab est1 est2 est3, se
+esttab est1 est2 est3, se star(* .1 ** .05 *** .01)
 
 
 /*

@@ -3,8 +3,8 @@
 *===============================================================================
 
 
-forvalues year=2000/2020{
-	if `year'>2008 {
+forvalues year=2001/2020{
+    if `year'>2008 {
 		local industry_cw in0792dm
 		local industry indd07m
 	}
@@ -13,6 +13,7 @@ forvalues year=2000/2020{
 		local industry indd92m
 	}
 	forvalues quarter=1/4 {
+        if !(`year'==2000&`quarter'==1) {
 		if `year'!=2004 | `quarter'!=1 {
 			use "./data/raw/LFS/`year'q`quarter'", clear
 			
@@ -130,69 +131,35 @@ forvalues year=2000/2020{
 				g	waveWeight=`weight'
 				
 
-				gstats winsor grossWkPayMain, cut($wave_cuts)
-				gstats winsor grossPay, cut($wave_cuts)
-				gstats winsor hourpay, cut($wave_cuts)
+				gstats winsor grossWkPayMain, cut(5 95)
+				gstats winsor grossPay, cut(5 95)
+				gstats winsor hourpay, cut(5 95)
 				
 				generate al_wkpay=log(grossWkPayMain)
 				generate al_hourpay=log(hourpay)
-				
+
+			
 				*Pay measures are available only for people in government schemes or who are employees
 				drop if missing(grossPay)|missing(grossWkPayMain)|missing(hourpay)
-
 
 				g observations=1/waveWeight
 
 				generate svy_weight=`weight'
-				generate occupation=`occupation'
 
-				*Here I save the LFS database at the individual level
-				save "data/temporary/LFS`year'q`quarter'_indiv", replace
-				
 
 				*This part collapses by quarter and the adequate occupation
 				*classification of the year
 				
 				gcollapse (sum) observations (count) people=age  ///
 					(mean) $continuous_list [fw=waveWeight], ///
-					by(year quarter edlevLFS `occupation' `industry_cw') fast
-				
-				*Check this cross walks
-
-				
-				*Here I fix with the cross walk that is  wrong at the moment
-				if inrange(`year',1997,2000) {
-					joinby `occupation' using "data/temporary/crossWalk9000"
-				}
-				
-				
-				*Then I collage at the appropriate bsoc2000 level
-				foreach variable in observations people  {
-					cap replace `variable'=	`variable'*cwWeight
-				}
-				
-				preserve
-					gcollapse (sum) people observations, ///
-						by(bsoc2000 year quarter edlevLFS `industry_cw')
-						
-					rename `industry_cw' industry_cw	
-					*Here everything is averages by category
-					save "data/temporary/LFS`year'q`quarter'_collapsed", replace
-				restore
-				
-				*Saving files for employment share computation
-				{
-					preserve
-						gcollapse (sum) people observations $continuous_list, ///
-							by(bsoc2000 `industry_cw'  year quarter edlevLFS)
-							
-						rename `industry_cw' industry_cw
-						*Here everything is averages by category
-						save "data/temporary/LFS`year'q`quarter'_industry_cw", replace
-					restore
-				}
+					by(year quarter edlevLFS bsoc2000) fast
+                        
+                *Here everything is averages by category
+                save "data/temporary/LFS`year'q`quarter'_wage_collapsed", replace
 			}
+        }
 			
 		}
 	}
+
 }

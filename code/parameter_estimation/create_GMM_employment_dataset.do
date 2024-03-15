@@ -63,6 +63,7 @@
 
     generate equation=3
 
+
     *Now I add skill information
     merge 1:1 occupation year education  using `numerator', nogen keep(3)
 

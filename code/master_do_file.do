@@ -86,11 +86,14 @@ foreach definition in _a2  {
 
 do "code/parameter_estimation/compute_employment_shares.do" _a2
 
+do "code/parameter_estimation/wage_regressions.do" _a2
+
 
 
 do "code/parameter_estimation/compute_q_values_bs.do"
 
 do "code/parameter_estimation/studying_bad_bjs.do" _a2
+
 
 /*
 
