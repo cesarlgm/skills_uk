@@ -12,7 +12,7 @@ egen id=group(occupation education)
 
 xtset id time
 
-keep occupation year education index* id time obs 
+keep occupation year education index* id time *obs* 
 
 
 forvalues skill=1/4 {
@@ -26,6 +26,7 @@ forvalues skill=1/4 {
 generate n_obs=l.obs 
 drop obs
 rename n_obs obs
+
 
 keep if year>2001
 
@@ -110,7 +111,32 @@ egen aw_skill=rowtotal(atemp2 atemp3 atemp4)
 egen rid=group(occupation year)
 
 eststo clear
-eststo: reghdfe d_al_hourpay w_skill, absorb(rid) vce(cl occupation)
+
+qui {
+eststo est1: reghdfe d_al_hourpay w_skill,  absorb(rid) vce(r)
+eststo est2: fgls_skills d_al_hourpay w_skill,  absorb(rid) 
+eststo est3: reghdfe d_al_hourpay w_skill [aw=obs],  absorb(rid) vce(r)
+eststo est4: fgls_skills d_al_hourpay w_skill [aw=obs],  absorb(rid) 
+}
+
+esttab est*, se
+
+eststo clear
+
+qui {
+eststo est5: reghdfe d_al_wkpay w_skill,  absorb(rid) vce(r)
+eststo est6: fgls_skills d_al_wkpay w_skill,  absorb(rid) 
+eststo est7: reghdfe d_al_wkpay w_skill [aw=obs],  absorb(rid) vce(r)
+eststo est8: fgls_skills d_al_wkpay w_skill [aw=obs],  absorb(rid) 
+}
+
+esttab est*, se 
+
+
+*eststo est2: fgls_skills d_al_wkpay w_skill,  absorb(rid) 
+
+
+/*
 eststo: reghdfe d_al_hourpay w_skill [aw=obs], absorb(rid) vce(cl occupation)
 eststo: reghdfe d_al_hourpay aw_skill, absorb(rid) vce(cl occupation)
 eststo: reghdfe d_al_hourpay aw_skill [aw=a_obs], absorb(rid) vce(cl occupation)
